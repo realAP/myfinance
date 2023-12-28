@@ -1,4 +1,4 @@
-package at.devp.myfinance.createspending;
+package at.devp.myfinance.services.createspending;
 
 import at.devp.myfinance.dto.SpendingDto;
 import at.devp.myfinance.entity.Rule;

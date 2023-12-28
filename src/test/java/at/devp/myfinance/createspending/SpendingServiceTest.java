@@ -5,6 +5,7 @@ import at.devp.myfinance.dto.SpendingDto;
 import at.devp.myfinance.dto.TransferDto;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
+import at.devp.myfinance.services.createspending.SpendingService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,11 @@ class SpendingServiceTest {
 
 
     final var spendingDto = new SpendingDto();
-    spendingDto.setId(1L);
     spendingDto.setAmount(10D);
     spendingDto.setDescription("Spotify");
 
     final var ruleDto = new RuleDto();
 
-    ruleDto.setId(2L);
     ruleDto.setDescription("entertainment");
 
     spendingDto.setRuleDto(ruleDto);
@@ -43,7 +42,6 @@ class SpendingServiceTest {
 
 
     final var transferDto = new TransferDto();
-    transferDto.setId(3L);
     transferDto.setDescription("Spotify / Entertainment");
 
     spendingDto.setTransferDto(transferDto);

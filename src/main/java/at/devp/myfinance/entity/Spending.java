@@ -1,5 +1,6 @@
 package at.devp.myfinance.entity;
 
+import at.devp.myfinance.types.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,9 @@ public class Spending {
 
   @Column
   private String description;
+
+  @Column
+  private Category category;
 
   @Column
   private Double amount;

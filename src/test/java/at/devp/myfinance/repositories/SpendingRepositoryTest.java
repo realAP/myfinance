@@ -60,4 +60,11 @@ class SpendingRepositoryTest {
     assertEquals(2, result.size());
     assertTrue(result.containsAll(List.of(spending1, spending2)));
   }
+
+  @Test
+  void testfindBySpendingAmount() {
+
+
+
+  }
 }
