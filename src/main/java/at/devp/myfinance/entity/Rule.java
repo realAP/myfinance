@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -33,7 +34,17 @@ public class Rule {
   @Column
   private Double amount;
 
+  @Column
+  private Double oldAmount;
+
+  @Column
+  private boolean isChange;
+
   public Double calculateAmount() {
     return spendings.stream().mapToDouble(Spending::getAmount).sum();
+  }
+
+  public void calculateHasChange() {
+    this.isChange = !Objects.equals(oldAmount, amount);
   }
 }

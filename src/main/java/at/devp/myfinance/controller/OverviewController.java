@@ -34,6 +34,8 @@ public class OverviewController {
     model.addAttribute("spendingOverviewDto", new SpendingOverviewDto());
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
 
+    final var sumOfSpendings = overviewService.calculateSum();
+    model.addAttribute("sumOfSpendings", sumOfSpendings);
 
 
     final var ruleDropDownDtos = ruleService.createRuleDropDownDto();
@@ -47,6 +49,8 @@ public class OverviewController {
   public String addData(@ModelAttribute SpendingCreationDto spendingCreationDto, Model model) {
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
     spendingCreatorService.createSpending(spendingCreationDto);
+    ruleService.createAmount(spendingCreationDto.getRuleId());
+    ruleService.checkForChanges(spendingCreationDto.getRuleId());
     return "redirect:/overview";
   }
 

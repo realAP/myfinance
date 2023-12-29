@@ -25,9 +25,19 @@
         <td th:text="${ruleOverviewDto.getAmount()}">Amount</td>
         <!-- Weitere Datenspalten hier -->
         <td>
-            <form th:action="@{/removerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
-                <input type="submit" value="Löschen"/>
-            </form>
+            <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
+                <span th:text="${ruleOverviewDto.getOldAmount()}"></span>
+
+                <form th:action="@{/confirmchange/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                    <input type="submit" value="Confirm"/>
+                </form>
+            </span>
+            <span th:unless="${ruleOverviewDto.isChange()}" style="background-color: green;">
+                <form th:action="@{/removerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+
+            </span>
         </td>
     </tr>
     </tbody>

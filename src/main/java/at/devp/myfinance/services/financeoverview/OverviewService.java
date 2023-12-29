@@ -2,6 +2,7 @@ package at.devp.myfinance.services.financeoverview;
 
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.dto.SpendingOverviewDto;
+import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.SpendingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,7 @@ public class OverviewService {
   }
 
 
+  public Double calculateSum() {
+    return spendingRepository.findAll().stream().mapToDouble(Spending::getAmount).sum();
+  }
 }

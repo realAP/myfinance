@@ -9,5 +9,6 @@ public class RuleOverviewDto {
   private String from;
   private String to;
   private Double amount;
-  private boolean hasChange;
+  private Double oldAmount;
+  private boolean isChange;
 }

@@ -24,15 +24,21 @@
         <td th:text="${spendingOverviewDto.description}">Description</td>
         <td th:text="${spendingOverviewDto.amount}">Amount</td>
         <td th:text="${spendingOverviewDto.getRuleDescription()}">Rule</td>
-<!--
-        <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
--->
+        <!--
+                <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
+        -->
         <!-- Weitere Datenspalten hier -->
         <td>
             <form th:action="@{/delete/{id}(id=${spendingOverviewDto.id})}" method="post">
                 <input type="submit" value="Löschen"/>
             </form>
         </td>
+    </tr>
+    <tr>
+        <td>Summe</td>
+        <td></td>
+        <td></td>
+        <td th:text="${sumOfSpendings}"></td>
     </tr>
     </tbody>
 </table>
@@ -58,9 +64,9 @@
         </option>
     </select>
 
-<!--
-    <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
--->
+    <!--
+        <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
+    -->
 
     <button type="submit">Save</button>
 </form>

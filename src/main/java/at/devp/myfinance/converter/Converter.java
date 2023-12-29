@@ -38,10 +38,13 @@ public class Converter {
 
   public RuleOverviewDto convert2RuleOverviewDto(final Rule rule) {
     final var ruleDto = new RuleOverviewDto();
+    ruleDto.setId(rule.getId());
     ruleDto.setDescription(rule.getDescription());
-    ruleDto.setAmount(rule.calculateAmount());
+    ruleDto.setAmount(rule.getAmount());
+    ruleDto.setOldAmount(rule.getOldAmount());
     ruleDto.setFrom(rule.getFrom());
     ruleDto.setTo(rule.getTo());
+    ruleDto.setChange(rule.isChange());
     return ruleDto;
   }
 
