@@ -18,16 +18,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="spendingDto : ${spendingDtos}">
-        <td th:text="${spendingDto.id}">ID</td>
-        <td th:text="${spendingDto.category}">Category</td>
-        <td th:text="${spendingDto.description}">Description</td>
-        <td th:text="${spendingDto.amount}">Amount</td>
-        <td th:text="${spendingDto.getRuleDto().getDescription()}">Rule</td>
-        <td th:text="${spendingDto.getTransferDto().getDescription()}">Transfer</td>
+    <tr th:each="spendingOverviewDto : ${spendingDtos}">
+        <td th:text="${spendingOverviewDto.id}">ID</td>
+        <td th:text="${spendingOverviewDto.category}">Category</td>
+        <td th:text="${spendingOverviewDto.description}">Description</td>
+        <td th:text="${spendingOverviewDto.amount}">Amount</td>
+        <td th:text="${spendingOverviewDto.getRuleDescription()}">Rule</td>
+<!--
+        <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
+-->
         <!-- Weitere Datenspalten hier -->
         <td>
-            <form th:action="@{/delete/{id}(id=${spendingDto.id})}" method="post">
+            <form th:action="@{/delete/{id}(id=${spendingOverviewDto.id})}" method="post">
                 <input type="submit" value="Löschen"/>
             </form>
         </td>
@@ -37,7 +39,7 @@
 <!--
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
 -->
-<form action="#" th:action="@{/newspending}" th:object="${spendingDto}" method="post">
+<form action="#" th:action="@{/newspending}" th:object="${spendingCreationDto}" method="post">
     <select th:field="*{category}">
         <option th:each="category : ${categoryDtos}"
                 th:value="${category.getCategorie()}"
@@ -47,11 +49,21 @@
     </select>
     <input type="text" th:field="*{description}" placeholder="Description"/>
     <input type="text" th:field="*{amount}" placeholder="Amount"/>
-    <input type="text" th:field="*{ruleDto.description}" placeholder="Rule Description"/>
+
+    <select th:field="*{ruleId}">
+        <option th:each="ruleDropDownDto : ${ruleDropDownDtos}"
+                th:value="${ruleDropDownDto.getId()}"
+                th:text="${ruleDropDownDto.getDescription()}">
+            Option
+        </option>
+    </select>
+
+<!--
     <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
+-->
 
     <button type="submit">Save</button>
 </form>
-
+<a th:href="@{/rules}">rules</a>
 </body>
 </html>

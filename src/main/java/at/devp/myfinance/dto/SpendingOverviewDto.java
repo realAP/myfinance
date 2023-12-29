@@ -4,11 +4,11 @@ import at.devp.myfinance.types.Category;
 import lombok.Data;
 
 @Data
-public class SpendingDto {
-  private Long Id;
+public class SpendingOverviewDto {
+  private Long id;
   private Category category;
   private String description;
   private Double amount;
-  private RuleDto ruleDto;
+  private String ruleDescription;
   private TransferDto transferDto;
 }

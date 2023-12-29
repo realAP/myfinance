@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Rule {
 
   @Id
@@ -25,4 +23,17 @@ public class Rule {
 
   @OneToMany(mappedBy = "rule")
   private List<Spending> spendings = new ArrayList<>();
+
+  @Column
+  private String from;
+
+  @Column
+  private String to;
+
+  @Column
+  private Double amount;
+
+  public Double calculateAmount() {
+    return spendings.stream().mapToDouble(Spending::getAmount).sum();
+  }
 }

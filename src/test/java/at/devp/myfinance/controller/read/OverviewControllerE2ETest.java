@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestEntityManager
-class FinanceOverviewControllerE2ETest {
+class OverviewControllerE2ETest {
 
   @Autowired
   private MockMvc mockMvc;

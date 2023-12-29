@@ -1,12 +1,8 @@
 package at.devp.myfinance;
 
-import at.devp.myfinance.entity.Rule;
-import at.devp.myfinance.entity.Spending;
-import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.types.Category;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
@@ -30,6 +26,7 @@ public class DataLoader implements ApplicationRunner {
   @Transactional
   public void run(ApplicationArguments args) {
 
+/*
     final var spending = new Spending();
     spending.setDescription("Netflix");
     spending.setAmount(10.00);
@@ -41,7 +38,10 @@ public class DataLoader implements ApplicationRunner {
 
 
     final var rule = new Rule();
-    rule.setDescription("From Space1 to Space2");
+    rule.setDescription("main1");
+    rule.setFrom("Einnahmen");
+    rule.setTo("Main");
+    rule.setAmount(10.0);
     ruleRepository.save(rule);
 
 
@@ -50,5 +50,6 @@ public class DataLoader implements ApplicationRunner {
 
     // Save item
     spendingRepository.save(spending);
+*/
   }
 }
