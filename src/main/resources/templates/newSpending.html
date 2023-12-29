@@ -1,0 +1,17 @@
+<div th:fragment="newSpending">
+<form action="#" th:action="@{/newspending}" th:object="${spendingDto}" method="post">
+    <select th:field="*{category}">
+        <option th:each="category : ${categoryDtos}"
+                th:value="${category.getCategorie()}"
+                th:text="${category.getCategorie()}">
+            Option
+        </option>
+    </select>
+    <input type="text" th:field="*{description}" placeholder="Description"/>
+    <input type="text" th:field="*{amount}" placeholder="Amount"/>
+    <input type="text" th:field="*{ruleDto.description}" placeholder="Rule Description"/>
+    <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
+
+    <button type="submit">Save</button>
+</form>
+</div>

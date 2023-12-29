@@ -1,5 +1,6 @@
 package at.devp.myfinance.services.createspending;
 
+import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.dto.SpendingDto;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
@@ -10,16 +11,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SpendingService {
+public class SpendingCreatorSerivce {
 
   private final SpendingRepository spendingRepository;
+  private final Converter converter;
 
 
-  public Spending createSpending(final SpendingDto spendingDto) {
+  public SpendingDto createSpending(final SpendingDto spendingDto) {
 
     final var spending = new Spending();
     spending.setDescription(spendingDto.getDescription());
     spending.setAmount(spendingDto.getAmount());
+    spending.setCategory(spendingDto.getCategory());
 
 
     final var transfer = new Transfer();
@@ -32,7 +35,12 @@ public class SpendingService {
 
     spending.setRule(rule);
 
-    return spendingRepository.save(spending);
+    final var createdSpending = spendingRepository.save(spending);
+    return converter.convert2SpendingDto(createdSpending);
+  }
+
+  public void deleteSpending(final Long spendingId) {
+    spendingRepository.deleteById(spendingId);
   }
 
 

@@ -5,14 +5,14 @@ import at.devp.myfinance.dto.SpendingDto;
 import at.devp.myfinance.dto.TransferDto;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.services.createspending.SpendingService;
+import at.devp.myfinance.services.createspending.SpendingCreatorSerivce;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpendingServiceTest {
+class SpendingCreatorSerivceTest {
 
   @Autowired
   private SpendingRepository spendingRepository;
@@ -21,7 +21,7 @@ class SpendingServiceTest {
   private RuleRepository ruleRepository;
 
   @Autowired
-  private SpendingService underTest;
+  private SpendingCreatorSerivce underTest;
 
 
   @Test

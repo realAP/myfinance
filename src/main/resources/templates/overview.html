@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Overview</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Rule</th>
+        <th>Transfer</th>
+        <!-- Weitere Spaltenköpfe hier -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="spendingDto : ${spendingDtos}">
+        <td th:text="${spendingDto.id}">ID</td>
+        <td th:text="${spendingDto.category}">Category</td>
+        <td th:text="${spendingDto.description}">Description</td>
+        <td th:text="${spendingDto.amount}">Amount</td>
+        <td th:text="${spendingDto.getRuleDto().getDescription()}">Rule</td>
+        <td th:text="${spendingDto.getTransferDto().getDescription()}">Transfer</td>
+        <!-- Weitere Datenspalten hier -->
+        <td>
+            <form th:action="@{/delete/{id}(id=${spendingDto.id})}" method="post">
+                <input type="submit" value="Löschen"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--
+&lt;!&ndash; Form to Add New Data &ndash;&gt;
+-->
+<form action="#" th:action="@{/newspending}" th:object="${spendingDto}" method="post">
+    <select th:field="*{category}">
+        <option th:each="category : ${categoryDtos}"
+                th:value="${category.getCategorie()}"
+                th:text="${category.getCategorie()}">
+            Option
+        </option>
+    </select>
+    <input type="text" th:field="*{description}" placeholder="Description"/>
+    <input type="text" th:field="*{amount}" placeholder="Amount"/>
+    <input type="text" th:field="*{ruleDto.description}" placeholder="Rule Description"/>
+    <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
+
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

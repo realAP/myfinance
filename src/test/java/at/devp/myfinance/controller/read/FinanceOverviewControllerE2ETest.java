@@ -85,6 +85,6 @@ class FinanceOverviewControllerE2ETest {
         ]
                             """;
 
-    mockMvc.perform(get("/api/v1/financeoverview").contentType(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(expectedJsonResponse));
+    mockMvc.perform(get("/api/v1/read/financeoverview").contentType(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(expectedJsonResponse));
   }
 }

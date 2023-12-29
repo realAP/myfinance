@@ -25,6 +25,7 @@ public class DataLoader implements ApplicationRunner {
 
   private final RuleRepository ruleRepository;
 
+
   @Override
   @Transactional
   public void run(ApplicationArguments args) {
