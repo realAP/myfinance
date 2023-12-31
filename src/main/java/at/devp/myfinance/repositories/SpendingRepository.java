@@ -14,10 +14,10 @@ public interface SpendingRepository extends JpaRepository<Spending, Long> {
          "join spending.rule rule")
   Rule findRuleBySpendingId(final Long id);
 
-  @Query("select spending.rule.id from Spending spending " +
+  @Query("select distinct(spending.rule.id) from Spending spending " +
          "join spending.rule rule")
   Long findRuleIdBySpendingId(final Long id);
-  @Query("select spending.transfer.id from Spending spending " +
+  @Query("select distinct(spending.transfer.id) from Spending spending " +
          "join spending.transfer transfer")
   Long findTransferIdBySpendingId(final Long id);
 
