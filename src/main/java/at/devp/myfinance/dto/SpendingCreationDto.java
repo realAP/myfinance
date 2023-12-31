@@ -10,5 +10,5 @@ public class SpendingCreationDto {
   private String description;
   private Double amount;
   private Long ruleId;
-  //private TransferDto transferDto;
+  private Long transferId;
 }

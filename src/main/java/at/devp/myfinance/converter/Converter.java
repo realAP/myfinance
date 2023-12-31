@@ -1,9 +1,6 @@
 package at.devp.myfinance.converter;
 
-import at.devp.myfinance.dto.RuleDropDownDto;
-import at.devp.myfinance.dto.RuleOverviewDto;
-import at.devp.myfinance.dto.SpendingOverviewDto;
-import at.devp.myfinance.dto.TransferDto;
+import at.devp.myfinance.dto.*;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
@@ -21,6 +18,10 @@ public class Converter {
 
   public List<RuleOverviewDto> convert2RuleOverviewDtos(final List<Rule> rules) {
     return rules.stream().map(this::convert2RuleOverviewDto).toList();
+  }
+
+  public List<TransferOverviewDto> convert2TransferOverviewDtos(final List<Transfer> rules) {
+    return rules.stream().map(this::convert2TransferOverviewDto).toList();
   }
 
   public SpendingOverviewDto convert2SpendingOverviewDto(Spending spending) {
@@ -48,6 +49,18 @@ public class Converter {
     return ruleDto;
   }
 
+  public TransferOverviewDto convert2TransferOverviewDto(final Transfer transfer) {
+    final var transferOverviewDto = new TransferOverviewDto();
+    transferOverviewDto.setId(transfer.getId());
+    transferOverviewDto.setDescription(transfer.getDescription());
+    transferOverviewDto.setAmount(transfer.getAmount());
+    transferOverviewDto.setOldAmount(transfer.getOldAmount());
+    transferOverviewDto.setFrom(transfer.getFrom());
+    transferOverviewDto.setTo(transfer.getTo());
+    transferOverviewDto.setChange(transfer.isChange());
+    return transferOverviewDto;
+  }
+
   public TransferDto createTransferDto(final Transfer transfer) {
     final var transferDto = new TransferDto();
     transferDto.setDescription(transfer.getDescription());
@@ -64,6 +77,19 @@ public class Converter {
     final var ruleDropDownDto = new RuleDropDownDto();
     ruleDropDownDto.setDescription(rule.getDescription());
     ruleDropDownDto.setId(rule.getId());
+    return ruleDropDownDto;
+  }
+
+  public List<TransferDropDownDto> convert2TransferDropDownDtos(List<Transfer> transfers) {
+    return transfers.stream()
+        .map(this::convert2TransferDropDownDto)
+        .toList();
+  }
+
+  private TransferDropDownDto convert2TransferDropDownDto(final Transfer transfer) {
+    final var ruleDropDownDto = new TransferDropDownDto();
+    ruleDropDownDto.setDescription(transfer.getDescription());
+    ruleDropDownDto.setId(transfer.getId());
     return ruleDropDownDto;
   }
 }

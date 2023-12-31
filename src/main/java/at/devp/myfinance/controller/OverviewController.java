@@ -1,10 +1,12 @@
 package at.devp.myfinance.controller;
 
+import at.devp.myfinance.converter.TransferDropDownDto;
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingOverviewDto;
 import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.SpendingDeletionService;
+import at.devp.myfinance.services.TransferDropDownService;
 import at.devp.myfinance.services.createspending.SpendingCreatorService;
 import at.devp.myfinance.services.financeoverview.OverviewService;
 import at.devp.myfinance.services.ruleservice.RuleService;
@@ -25,6 +27,7 @@ public class OverviewController {
   private final CategoryService categoryService;
   private final RuleService ruleService;
   private final SpendingDeletionService spendingDeletionService;
+  private final TransferDropDownService transferDropDownService;
 
 
   @GetMapping("/overview")
@@ -43,6 +46,10 @@ public class OverviewController {
     final var ruleDropDownDtos = ruleService.createRuleDropDownDto();
     model.addAttribute("ruleDropDownDtos", ruleDropDownDtos);
     model.addAttribute("ruleDropDownDto", new RuleDropDownDto());
+
+    final var transferDropDownDtos = transferDropDownService.createDropDownDtos();
+    model.addAttribute("transferDropDownDtos", transferDropDownDtos);
+    model.addAttribute("transferDropDownDto", new TransferDropDownDto());
 
     return "overview";
   }

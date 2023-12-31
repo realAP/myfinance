@@ -68,6 +68,15 @@
             Option
         </option>
     </select>
+    <br>
+    <br>
+    <select th:field="*{transferId}">
+        <option th:each="transferDropDownDto : ${transferDropDownDtos}"
+                th:value="${transferDropDownDto.getId()}"
+                th:text="${transferDropDownDto.getDescription()}">
+            Option
+        </option>
+    </select>
 
     <!--
         <input type="text" th:field="*{transferDto.description}" placeholder="Transfer Description"/>
@@ -79,6 +88,9 @@
 <br>
 <div style="display: flex; justify-content: center; height: 40vh; align-items: flex-start;">
     <a th:href="@{/rules}" class="button-link">Rules</a>
+</div>
+<div style="display: flex; justify-content: center; height: 40vh; align-items: flex-start;">
+    <a th:href="@{/transfers}" class="button-link">Transfers</a>
 </div>
 
 </html>

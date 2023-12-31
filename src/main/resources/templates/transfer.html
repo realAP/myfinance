@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transfers</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+        <!-- Weitere Spaltenköpfe hier -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transferOverviewDto : ${transferDtos}">
+        <td th:text="${transferOverviewDto.getId()}">ID</td>
+        <td th:text="${transferOverviewDto.getDescription()}">Description</td>
+        <td th:text="${transferOverviewDto.getFrom()}">From</td>
+        <td th:text="${transferOverviewDto.getTo()}">To</td>
+        <td th:text="${transferOverviewDto.getAmount()}">Amount</td>
+        <!-- Weitere Datenspalten hier -->
+        <td>
+            <span th:if="${transferOverviewDto.isChange()}" style="background-color: red;">
+                <span th:text="${transferOverviewDto.getOldAmount()}"></span>
+
+                <form th:action="@{/confirmchangetransfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
+                    <input type="submit" value="Confirm"/>
+                </form>
+            </span>
+            <span th:unless="${transferOverviewDto.isChange()}" style="background-color: green;">
+                <form th:action="@{/removetransfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--
+&lt;!&ndash; Form to Add New Data &ndash;&gt;
+-->
+<form action="#" th:action="@{/newtransfer}" th:object="${transferCreationDto}" method="post">
+    <input type="text" th:field="*{description}" placeholder="Description"/>
+    <input type="text" th:field="*{from}" placeholder="From"/>
+    <input type="text" th:field="*{to}" placeholder="to"/>
+
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<br>
+
+<div style="display: flex; justify-content: center; height: 40vh; align-items: flex-start;">
+    <a th:href="@{/overview}" class="button-link">Overview</a>
+</div>
+</body>
+</html>
