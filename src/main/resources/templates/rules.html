@@ -28,7 +28,7 @@
             <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
                 <span th:text="${ruleOverviewDto.getOldAmount()}"></span>
 
-                <form th:action="@{/confirmchange/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                <form th:action="@{/confirmchangerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
             </span>
@@ -59,6 +59,9 @@
 
 <br>
 <br>
-<a th:href="@{/overview}" class="button-link">Overview</a>
+
+<div style="display: flex; justify-content: center; height: 40vh; align-items: flex-start;">
+    <a th:href="@{/overview}" class="button-link">Overview</a>
+</div>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class RulesController {
     return "redirect:/rules";
   }
 
-  @PostMapping("/confirmchange/{id}")
+  @PostMapping("/confirmchangerule/{id}")
   public String confirmChange(@PathVariable("id") Long id) {
     ruleService.confirmChange(id);
     return "redirect:/rules";

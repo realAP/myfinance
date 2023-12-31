@@ -56,7 +56,7 @@ public class OverviewController {
 
   @PostMapping("/delete/{id}")
   public String deleteData(@PathVariable("id") Long id) {
-    spendingDeletionService.deleteSpending(id);
+    spendingDeletionService.deleteById(id);
     return "redirect:/overview";
   }
 

@@ -13,7 +13,7 @@ public class SpendingDeletionService {
   private final RuleStatusService ruleStatusService;
 
   @Transactional
-  public void deleteSpending(final Long spendingId) {
+  public void deleteById(final Long spendingId) {
     final var ruleId = spendingRepository.findRuleIdBySpendingId(spendingId);
     spendingRepository.deleteById(spendingId);
     spendingRepository.flush();
