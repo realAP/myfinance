@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class RulesController {
 
-
   private final RuleService ruleService;
 
   @GetMapping("/rules")
@@ -25,6 +24,9 @@ public class RulesController {
     model.addAttribute("ruleOverviewDtos", ruleDtos);
     model.addAttribute("ruleOverviewDto", new RuleOverviewDto());
     model.addAttribute("ruleCreationDto", new RuleCreationDto());
+
+    final var sumOfAllRules = ruleService.calculateSumOfAllRules();
+    model.addAttribute("sumOfAllRules", sumOfAllRules);
 
     return "rules";
   }

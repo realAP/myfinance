@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,10 @@ public class RuleService {
   public List<RuleDropDownDto> createRuleDropDownDto() {
     final var rules = ruleRepository.findAll();
     return converter.convert2RuleDropDownDtos(rules);
+  }
+
+  public Double calculateSumOfAllRules() {
+    return ruleRepository.findAll().stream().map(Rule::getAmount).filter(Objects::nonNull).mapToDouble(Double::doubleValue).sum();
   }
 
   public void createRule(final RuleCreationDto ruleCreationDto) {
