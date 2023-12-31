@@ -10,5 +10,5 @@ public class SpendingOverviewDto {
   private String description;
   private Double amount;
   private String ruleDescription;
-  private TransferDto transferDto;
+  private String transferDescription;
 }

@@ -14,6 +14,7 @@
         <th>Amount</th>
         <th>Rule</th>
         <th>Transfer</th>
+        <th>Action</th>
         <!-- Weitere Spaltenköpfe hier -->
     </tr>
     </thead>
@@ -24,6 +25,7 @@
         <td th:text="${spendingOverviewDto.description}">Description</td>
         <td th:text="${spendingOverviewDto.amount}">Amount</td>
         <td th:text="${spendingOverviewDto.getRuleDescription()}">Rule</td>
+        <td th:text="${spendingOverviewDto.getTransferDescription()}">Rule</td>
         <!--
                 <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
         -->

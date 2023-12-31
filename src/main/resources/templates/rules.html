@@ -13,6 +13,8 @@
         <th>From</th>
         <th>To</th>
         <th>Amount</th>
+        <th>Status</th>
+        <th>Action</th>
         <!-- Weitere Spaltenköpfe hier -->
     </tr>
     </thead>
@@ -24,20 +26,23 @@
         <td th:text="${ruleOverviewDto.getTo()}">To</td>
         <td th:text="${ruleOverviewDto.getAmount()}">Amount</td>
         <!-- Weitere Datenspalten hier -->
-        <td>
-            <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
+        <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
+            <td bgcolor="orange">
                 <span th:text="${ruleOverviewDto.getOldAmount()}"></span>
-
                 <form th:action="@{/confirmchangerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
-            </span>
-            <span th:unless="${ruleOverviewDto.isChange()}" style="background-color: green;">
-                <form th:action="@{/removerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
-                    <input type="submit" value="Delete"/>
-                </form>
-
-            </span>
+            </td>
+        </span>
+        <span th:unless="${ruleOverviewDto.isChange()}">
+        <td bgcolor="#77fb89">
+            OK
+        </td>
+        </span>
+        <td>
+            <form th:action="@{/removerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
         </td>
     </tr>
     </tbody>

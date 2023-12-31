@@ -32,7 +32,7 @@ public class Converter {
     spendingDto.setCategory(spending.getCategory());
 
     spendingDto.setRuleDescription(spending.getRule().getDescription());
-    //spendingDto.setTransferDto(createTransferDto(spending.getTransfer()));
+    spendingDto.setTransferDescription(spending.getTransfer().getDescription());
 
     return spendingDto;
   }
