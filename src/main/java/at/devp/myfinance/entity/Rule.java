@@ -47,4 +47,9 @@ public class Rule {
   public void calculateHasChange() {
     this.isChange = !Objects.equals(oldAmount, amount);
   }
+
+  public void updateStatus() {
+    this.amount = calculateAmount();
+    calculateHasChange();
+  }
 }

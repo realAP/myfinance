@@ -4,6 +4,7 @@ import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingOverviewDto;
 import at.devp.myfinance.services.CategoryService;
+import at.devp.myfinance.services.SpendingDeletionService;
 import at.devp.myfinance.services.createspending.SpendingCreatorService;
 import at.devp.myfinance.services.financeoverview.OverviewService;
 import at.devp.myfinance.services.ruleservice.RuleService;
@@ -23,6 +24,7 @@ public class OverviewController {
   private final SpendingCreatorService spendingCreatorService;
   private final CategoryService categoryService;
   private final RuleService ruleService;
+  private final SpendingDeletionService spendingDeletionService;
 
 
   @GetMapping("/overview")
@@ -49,14 +51,12 @@ public class OverviewController {
   public String addData(@ModelAttribute SpendingCreationDto spendingCreationDto, Model model) {
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
     spendingCreatorService.createSpending(spendingCreationDto);
-    ruleService.createAmount(spendingCreationDto.getRuleId());
-    ruleService.checkForChanges(spendingCreationDto.getRuleId());
     return "redirect:/overview";
   }
 
   @PostMapping("/delete/{id}")
   public String deleteData(@PathVariable("id") Long id) {
-    spendingCreatorService.deleteSpending(id);
+    spendingDeletionService.deleteSpending(id);
     return "redirect:/overview";
   }
 

@@ -53,9 +53,14 @@
             Option
         </option>
     </select>
+    <br>
+    <br>
     <input type="text" th:field="*{description}" placeholder="Description"/>
+    <br>
+    <br>
     <input type="text" th:field="*{amount}" placeholder="Amount"/>
-
+    <br>
+    <br>
     <select th:field="*{ruleId}">
         <option th:each="ruleDropDownDto : ${ruleDropDownDtos}"
                 th:value="${ruleDropDownDto.getId()}"
@@ -70,6 +75,8 @@
 
     <button type="submit">Save</button>
 </form>
-<a th:href="@{/rules}">rules</a>
+<br>
+<br>
+<a th:href="@{/rules}" class="button-link">Rules</a>
 </body>
 </html>

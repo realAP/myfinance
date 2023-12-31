@@ -53,13 +53,6 @@ public class RuleService {
     ruleRepository.save(rule);
   }
 
-  public void checkForChanges(final Long id) {
-    final var rule = ruleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Rule not found"));
-    rule.calculateHasChange();
-    ruleRepository.save(rule);
-
-  }
-
   @Transactional
   public void updateAllRules() {
     final var rules = ruleRepository.findAll();
@@ -71,9 +64,4 @@ public class RuleService {
     ruleRepository.saveAll(rules);
   }
 
-  public void createAmount(Long ruleId) {
-    final Rule rule = ruleRepository.findById(ruleId).orElseThrow(() -> new IllegalArgumentException("Rule not found"));
-    rule.setAmount(rule.calculateAmount());
-    ruleRepository.save(rule);
-  }
 }
