@@ -1,15 +1,16 @@
 package at.devp.myfinance.controller;
 
-import at.devp.myfinance.converter.TransferDropDownDto;
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingOverviewDto;
+import at.devp.myfinance.dto.TransferDropDownDto;
 import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.SpendingDeletionService;
-import at.devp.myfinance.services.TransferDropDownService;
-import at.devp.myfinance.services.createspending.SpendingCreatorService;
 import at.devp.myfinance.services.financeoverview.OverviewService;
 import at.devp.myfinance.services.ruleservice.RuleService;
+import at.devp.myfinance.services.spending.SpendingUpdateService;
+import at.devp.myfinance.services.spending.createspending.SpendingCreatorService;
+import at.devp.myfinance.services.transfer.TransferDropDownService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +23,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class OverviewController {
 
-  private final OverviewService overviewService;
-  private final SpendingCreatorService spendingCreatorService;
   private final CategoryService categoryService;
+  private final OverviewService overviewService;
   private final RuleService ruleService;
+  private final SpendingCreatorService spendingCreatorService;
   private final SpendingDeletionService spendingDeletionService;
   private final TransferDropDownService transferDropDownService;
+  private final SpendingUpdateService spendingUpdateService;
 
 
   @GetMapping("/overview")
@@ -61,10 +63,27 @@ public class OverviewController {
     return "redirect:/overview";
   }
 
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public String deleteData(@PathVariable("id") Long id) {
     spendingDeletionService.deleteById(id);
     return "redirect:/overview";
   }
 
+  @GetMapping("spendings/edit/{id}")
+  public String editStudentButton(@PathVariable("id") Long id, Model model) {
+    final var spendingCreationDto = spendingUpdateService.getSpendingCreationDtoById(id);
+    model.addAttribute("spendingCreationDto", spendingCreationDto);
+    final var categoryDtos = categoryService.createCategories();
+    model.addAttribute("categoryDtos", categoryDtos);
+
+    final var ruleDropDownDtos = ruleService.createRuleDropDownDto();
+    model.addAttribute("ruleDropDownDtos", ruleDropDownDtos);
+    model.addAttribute("ruleDropDownDto", new RuleDropDownDto());
+
+    final var transferDropDownDtos = transferDropDownService.createDropDownDtos();
+    model.addAttribute("transferDropDownDtos", transferDropDownDtos);
+    model.addAttribute("transferDropDownDto", new TransferDropDownDto());
+
+    return "editstudent";
+  }
 }

@@ -1,4 +1,4 @@
-package at.devp.myfinance.services;
+package at.devp.myfinance.services.ruleservice;
 
 import at.devp.myfinance.repositories.RuleRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package at.devp.myfinance.converter;
+package at.devp.myfinance.dto;
 
 import lombok.Data;
 

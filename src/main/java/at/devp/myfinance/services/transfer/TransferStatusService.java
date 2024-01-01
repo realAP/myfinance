@@ -1,4 +1,4 @@
-package at.devp.myfinance.services;
+package at.devp.myfinance.services.transfer;
 
 import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;

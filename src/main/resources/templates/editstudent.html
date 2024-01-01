@@ -5,52 +5,8 @@
     <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>Rule</th>
-        <th>Transfer</th>
-        <th>Action</th>
-        <!-- Weitere Spaltenköpfe hier -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="spendingOverviewDto : ${spendingDtos}">
-        <td th:text="${spendingOverviewDto.id}">ID</td>
-        <td th:text="${spendingOverviewDto.category}">Category</td>
-        <td th:text="${spendingOverviewDto.description}">Description</td>
-        <td th:text="${spendingOverviewDto.amount}">Amount</td>
-        <td th:text="${spendingOverviewDto.getRuleDescription()}">Rule</td>
-        <td th:text="${spendingOverviewDto.getTransferDescription()}">Rule</td>
-        <!--
-                <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
-        -->
-        <!-- Weitere Datenspalten hier -->
-        <td>
-            <form th:action="@{/delete/{id}(id=${spendingOverviewDto.id})}" method="get">
-                <input type="submit" value="Delete"/>
-            </form>
-            <form th:action="@{/spendings/edit/{id}(id=${spendingOverviewDto.id})}" method="get">
-                <input type="submit" value="Edit"/>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td>Summe</td>
-        <td></td>
-        <td></td>
-        <td th:text="${sumOfSpendings}"></td>
-    </tr>
-    </tbody>
-</table>
-<!--
-&lt;!&ndash; Form to Add New Data &ndash;&gt;
--->
-<form action="#" th:action="@{/newspending}" th:object="${spendingCreationDto}" method="post">
+
+<form action="#" th:action="@{/spending/edit}" th:object="${spendingCreationDto}" method="post">
     <select th:field="*{category}">
         <option th:each="category : ${categoryDtos}"
                 th:value="${category.getCategorie()}"
@@ -58,6 +14,7 @@
             Option
         </option>
     </select>
+    <input type="hidden" th:field="*{id}"/>
     <br>
     <br>
     <input type="text" th:field="*{description}" placeholder="Description"/>

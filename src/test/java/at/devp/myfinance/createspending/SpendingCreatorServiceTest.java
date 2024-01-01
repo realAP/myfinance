@@ -2,7 +2,7 @@ package at.devp.myfinance.createspending;
 
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.services.createspending.SpendingCreatorService;
+import at.devp.myfinance.services.spending.createspending.SpendingCreatorService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

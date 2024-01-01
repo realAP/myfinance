@@ -1,6 +1,8 @@
 package at.devp.myfinance.services;
 
 import at.devp.myfinance.repositories.SpendingRepository;
+import at.devp.myfinance.services.ruleservice.RuleService;
+import at.devp.myfinance.services.transfer.TransferStatusService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class SpendingDeletionService {
 
   private final SpendingRepository spendingRepository;
-  private final RuleStatusService ruleStatusService;
+  private final RuleService ruleService;
   private final TransferStatusService transferStatusService;
 
   @Transactional
@@ -19,7 +21,7 @@ public class SpendingDeletionService {
     final var transferId = spendingRepository.findTransferIdBySpendingId(spendingId);
     spendingRepository.deleteById(spendingId);
     spendingRepository.flush();
-    ruleStatusService.updateStatus(ruleId);
+    ruleService.updateStatus(ruleId);
     transferStatusService.updateStatus(transferId);
   }
 }
