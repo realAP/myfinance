@@ -55,14 +55,6 @@ public class SpendingUpdateService {
     transferStatusService.updateStatus(spendingCreationDto.getTransferId());
   }
 
-  private void updateOldRuleAndTransfer() {
-
-  }
-
-  private void updateCurrentRuleAndTransfer() {
-
-  }
-
   public SpendingCreationDto getSpendingCreationDtoById(final Long id) {
 
     return spendingRepository.findById(id)
