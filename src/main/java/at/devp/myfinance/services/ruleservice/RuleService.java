@@ -63,7 +63,7 @@ public class RuleService {
     final var rules = ruleRepository.findAll();
     rules.forEach(rule -> {
       rule.setAmount(rule.calculateAmount());
-      rule.calculateHasChange();
+      rule.setChange(rule.calculateHasChange());
     });
 
     ruleRepository.saveAll(rules);

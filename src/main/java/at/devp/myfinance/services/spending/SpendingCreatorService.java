@@ -40,14 +40,10 @@ public class SpendingCreatorService {
         .orElseThrow(() -> new IllegalArgumentException("Rule not found with id: "
                                                         + spendingCreationDto.getRuleId()));
 
-    spending.setTransfer(transfer);
-    spending.setRule(rule);
+    spending.setTransferAndUpdateStatus(transfer);
+    spending.setRuleAndUpdateStatus(rule);
 
     final var createdSpending = spendingRepository.save(spending);
-
-    ruleService.updateStatus(spendingCreationDto.getRuleId());
-    transferStatusService.updateStatus(spendingCreationDto.getTransferId());
-
     return converter.convert2SpendingOverviewDto(createdSpending);
   }
 }

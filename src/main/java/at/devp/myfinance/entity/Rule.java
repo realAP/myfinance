@@ -1,6 +1,7 @@
 package at.devp.myfinance.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static jakarta.transaction.Transactional.TxType.MANDATORY;
 
 @Entity
 @Getter
@@ -32,24 +35,25 @@ public class Rule {
   private String to;
 
   @Column
-  private Double amount;
+  private Double amount = 0.0;
 
   @Column
-  private Double oldAmount;
+  private Double oldAmount = 0.0;
 
   @Column
   private boolean isChange;
 
   public Double calculateAmount() {
-    return spendings.stream().mapToDouble(Spending::getAmount).sum();
+    return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).mapToDouble(Double::doubleValue).sum();
   }
 
-  public void calculateHasChange() {
-    this.isChange = !Objects.equals(oldAmount, amount);
+  public boolean calculateHasChange() {
+    return !Objects.equals(oldAmount, amount);
   }
 
+  @Transactional(value = MANDATORY)
   public void updateStatus() {
     this.amount = calculateAmount();
-    calculateHasChange();
+    this.isChange = calculateHasChange();
   }
 }

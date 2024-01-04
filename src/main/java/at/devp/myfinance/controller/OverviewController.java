@@ -8,7 +8,7 @@ import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.SpendingDeletionService;
 import at.devp.myfinance.services.financeoverview.OverviewService;
 import at.devp.myfinance.services.ruleservice.RuleService;
-import at.devp.myfinance.services.spending.SpendingUpdateService;
+import at.devp.myfinance.services.spending.SpendingEditService;
 import at.devp.myfinance.services.spending.createspending.SpendingCreatorService;
 import at.devp.myfinance.services.transfer.TransferDropDownService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class OverviewController {
   private final SpendingCreatorService spendingCreatorService;
   private final SpendingDeletionService spendingDeletionService;
   private final TransferDropDownService transferDropDownService;
-  private final SpendingUpdateService spendingUpdateService;
+  private final SpendingEditService spendingEditService;
 
 
   @GetMapping("/overview")
@@ -71,7 +71,7 @@ public class OverviewController {
 
   @GetMapping("spendings/edit/{id}")
   public String editStudentButton(@PathVariable("id") Long id, Model model) {
-    final var spendingCreationDto = spendingUpdateService.getSpendingCreationDtoById(id);
+    final var spendingCreationDto = spendingEditService.getSpendingCreationDtoById(id);
     model.addAttribute("spendingCreationDto", spendingCreationDto);
     final var categoryDtos = categoryService.createCategories();
     model.addAttribute("categoryDtos", categoryDtos);
