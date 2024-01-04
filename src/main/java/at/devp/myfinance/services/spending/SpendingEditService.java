@@ -6,6 +6,7 @@ import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
 import at.devp.myfinance.services.ruleservice.RuleUpdateService;
+import at.devp.myfinance.services.transfer.TransferEditService;
 import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class SpendingEditService {
   private final TransferRepository transferRepository;
   private final RuleUpdateService ruleUpdateService;
   private final TransferUpdateService transferUpdateService;
+  private final TransferEditService transferEditService;
 
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
@@ -41,7 +43,7 @@ public class SpendingEditService {
       final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
       final var oldTransfer = spending.getTransfer();
       spending.setTransfer(selectedTransfer);
-      transferUpdateService.editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
+      transferEditService.editTransferAndUpdate(oldTransfer, spending);
     }
 
     spendingRepository.save(spending);

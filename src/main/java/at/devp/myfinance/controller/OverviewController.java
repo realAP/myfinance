@@ -5,7 +5,7 @@ import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingOverviewDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
 import at.devp.myfinance.services.CategoryService;
-import at.devp.myfinance.services.SpendingDeletionService;
+import at.devp.myfinance.services.spending.SpendingDeletionService;
 import at.devp.myfinance.services.financeoverview.OverviewService;
 import at.devp.myfinance.services.ruleservice.RuleService;
 import at.devp.myfinance.services.spending.SpendingEditService;

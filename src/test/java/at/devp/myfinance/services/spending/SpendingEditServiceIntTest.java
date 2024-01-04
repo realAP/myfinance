@@ -68,6 +68,7 @@ class SpendingEditServiceIntTest {
     final var ruleId2 = testEntityManager.persistAndGetId(new Rule());
 
     testEntityManager.flush();
+    testEntityManager.clear();
     // end preperation
 
     final var editedSpendingCreationDto = new SpendingCreationDto();
