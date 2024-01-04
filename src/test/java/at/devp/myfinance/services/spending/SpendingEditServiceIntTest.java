@@ -99,12 +99,12 @@ class SpendingEditServiceIntTest {
     assertThat(result.getTransfer().getId(), is(transferId2));
 
     final var resultRule2 = ruleRepository.findById((Long) ruleId2).get();
-    assertThat(resultRule2.getSpendings(),contains(result));
-    assertThat(resultRule2.getAmount(),is(200d));
+    assertThat(resultRule2.getSpendings(), contains(result));
+    assertThat(resultRule2.getAmount(), is(200d));
 
     final var resultTransfer2 = transferRepository.findById((Long) transferId2).get();
-    assertThat(resultTransfer2.getSpendings(),contains(result));
-    assertThat(resultTransfer2.getAmount(),is(200d));
+    assertThat(resultTransfer2.getSpendings(), contains(result));
+    assertThat(resultTransfer2.getAmount(), is(200d));
 
     final var resultRule1 = ruleRepository.findById((Long) ruleId1).get();
     assertThat(resultRule1.getSpendings().isEmpty(), is(true));

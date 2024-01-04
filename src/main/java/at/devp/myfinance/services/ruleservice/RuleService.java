@@ -50,7 +50,7 @@ public class RuleService {
   }
 
   public void confirmChange(final Long id) {
-    final Rule rule = ruleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Rule not found"));
+    final var rule = ruleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Rule not found"));
     rule.setAmount(rule.calculateAmount());
     rule.setOldAmount(rule.calculateAmount());
     rule.setChange(false);

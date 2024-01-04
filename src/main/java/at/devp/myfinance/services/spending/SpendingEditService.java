@@ -20,7 +20,12 @@ public class SpendingEditService {
 
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
-    final var spending = updateSpendingAttributes(spendingCreationDto);
+    final var spending = spendingRepository.findById(spendingCreationDto.getId())
+        .orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
+    spending.setAmount(spendingCreationDto.getAmount());
+    spending.setDescription(spendingCreationDto.getDescription());
+    spending.setCategory(spendingCreationDto.getCategory());
+
 
     if (checkForRuleChange(spending, spendingCreationDto)) {
       final var selectedRule = ruleRepository.findById(spendingCreationDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingCreationDto.getRuleId() + " not found"));
