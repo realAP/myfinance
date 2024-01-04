@@ -71,7 +71,7 @@ public class RuleService {
 
   public void updateStatus(final Long ruleId) {
     final var rule = ruleRepository.findById(ruleId).orElseThrow(() -> new RuntimeException("Rule not found"));
-    rule.updateStatus();
+    rule.updateAmountAndChange();
     ruleRepository.save(rule);
   }
 

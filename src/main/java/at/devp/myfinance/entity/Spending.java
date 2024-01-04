@@ -38,17 +38,24 @@ public class Spending {
   @Setter(AccessLevel.NONE)
   private Transfer transfer;
 
+  public void setTransfer(final Transfer transfer) {
+    this.transfer = transfer;
+  }
 
   @Transactional(value = MANDATORY)
   public void setTransferAndUpdateStatus(final Transfer transfer) {
     final var oldTransfer = this.transfer;
     if (oldTransfer != null) {
       oldTransfer.getSpendings().remove(this);
-      oldTransfer.updateStatus();
+      oldTransfer.updateAmountAndChange();
     }
     transfer.getSpendings().add(this);
     this.transfer = transfer;
-    this.transfer.updateStatus();
+    this.transfer.updateAmountAndChange();
+  }
+
+  public void setRule(final Rule rule) {
+    this.rule = rule;
   }
 
   @Transactional(value = MANDATORY)
@@ -56,11 +63,11 @@ public class Spending {
     final var oldRule = this.rule;
     if (oldRule != null) {
       oldRule.getSpendings().remove(this);
-      oldRule.updateStatus();
+      oldRule.updateAmountAndChange();
     }
     rule.getSpendings().add(this);
     this.rule = rule;
-    this.rule.updateStatus();
+    this.rule.updateAmountAndChange();
   }
 
   @Transactional(value = MANDATORY)
@@ -68,7 +75,7 @@ public class Spending {
     final var oldRule = this.rule;
     if (oldRule != null) {
       oldRule.getSpendings().remove(this);
-      oldRule.updateStatus();
+      oldRule.updateAmountAndChange();
     }
     this.rule = null;
   }
@@ -78,7 +85,7 @@ public class Spending {
     final var oldTransfer = this.transfer;
     if (oldTransfer != null) {
       oldTransfer.getSpendings().remove(this);
-      oldTransfer.updateStatus();
+      oldTransfer.updateAmountAndChange();
     }
     this.transfer = null;
   }

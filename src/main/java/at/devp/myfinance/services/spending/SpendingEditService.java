@@ -5,6 +5,8 @@ import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
+import at.devp.myfinance.services.ruleservice.RuleUpdateService;
+import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,12 @@ public class SpendingEditService {
   private final SpendingRepository spendingRepository;
   private final RuleRepository ruleRepository;
   private final TransferRepository transferRepository;
+  private final RuleUpdateService ruleUpdateService;
+  private final TransferUpdateService transferUpdateService;
 
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
-    final var spending = spendingRepository.findById(spendingCreationDto.getId())
-        .orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
+    final var spending = spendingRepository.findById(spendingCreationDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
     spending.setAmount(spendingCreationDto.getAmount());
     spending.setDescription(spendingCreationDto.getDescription());
     spending.setCategory(spendingCreationDto.getCategory());
@@ -29,12 +32,16 @@ public class SpendingEditService {
 
     if (checkForRuleChange(spending, spendingCreationDto)) {
       final var selectedRule = ruleRepository.findById(spendingCreationDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingCreationDto.getRuleId() + " not found"));
-      spending.setRuleAndUpdateStatus(selectedRule);
+      final var oldRule = spending.getRule();
+      spending.setRule(selectedRule);
+      ruleUpdateService.editRuleAndUpdate(oldRule, selectedRule, spending);
     }
 
     if (checkForTransferChange(spending, spendingCreationDto)) {
       final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
-      spending.setTransferAndUpdateStatus(selectedTransfer);
+      final var oldTransfer = spending.getTransfer();
+      spending.setTransfer(selectedTransfer);
+      transferUpdateService.editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
     }
 
     spendingRepository.save(spending);
@@ -73,18 +80,16 @@ public class SpendingEditService {
 
   public SpendingCreationDto getSpendingCreationDtoById(final Long id) {
 
-    return spendingRepository.findById(id)
-        .map(spending -> {
-          SpendingCreationDto dto = new SpendingCreationDto();
-          dto.setId(spending.getId());
-          dto.setAmount(spending.getAmount());
-          dto.setDescription(spending.getDescription());
-          dto.setCategory(spending.getCategory());
-          dto.setRuleId(spendingRepository.findRuleIdBySpendingId(spending.getId()));
-          dto.setTransferId(spendingRepository.findTransferIdBySpendingId(spending.getId()));
-          return dto;
-        })
-        .orElseThrow(() -> new IllegalArgumentException("Spending with id " + id + " not found"));
+    return spendingRepository.findById(id).map(spending -> {
+      SpendingCreationDto dto = new SpendingCreationDto();
+      dto.setId(spending.getId());
+      dto.setAmount(spending.getAmount());
+      dto.setDescription(spending.getDescription());
+      dto.setCategory(spending.getCategory());
+      dto.setRuleId(spendingRepository.findRuleIdBySpendingId(spending.getId()));
+      dto.setTransferId(spendingRepository.findTransferIdBySpendingId(spending.getId()));
+      return dto;
+    }).orElseThrow(() -> new IllegalArgumentException("Spending with id " + id + " not found"));
 
   }
 

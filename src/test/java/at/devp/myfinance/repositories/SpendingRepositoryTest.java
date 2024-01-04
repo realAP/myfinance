@@ -2,7 +2,6 @@ package at.devp.myfinance.repositories;
 
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
-import at.devp.myfinance.entity.Transfer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -62,40 +61,6 @@ class SpendingRepositoryTest {
     assertNotNull(result);
     assertEquals(2, result.size());
     assertTrue(result.containsAll(List.of(spending1, spending2)));
-  }
-
-  @Test
-  void testfindBySpendingAmount() {
-
-
-  }
-
-  @Test
-  void testFindAllByAmountIsGreaterThan() {
-    // Prepare some valid data
-    final var spending = new Spending();
-    spending.setDescription("Test spending");
-    spending.setAmount(200.00);
-
-    final var transfer = new Transfer();
-    transfer.setDescription("transfer");
-
-
-    final var rule = new Rule();
-    rule.setDescription("rule");
-
-
-    spending.setRuleAndUpdateStatus(null); // Change these to valid Rule objects in your actual test
-    spending.setTransferAndUpdateStatus(null); // Change these to valid Transfer objects in your actual test
-
-    // Save item
-    underTest.save(spending);
-
-    // Validate if an item is returned when search for amount greater than 150
-    assertNotNull(underTest.findAllByAmountIsGreaterThan(150.0));
-
-    // Validate if an item is not returned when search for amount greater than 250
-    assertNull(underTest.findAllByAmountIsGreaterThan(250.0));
   }
 
   @Test

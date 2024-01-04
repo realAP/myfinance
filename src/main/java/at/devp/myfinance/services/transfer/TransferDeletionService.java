@@ -1,7 +1,8 @@
 package at.devp.myfinance.services.transfer;
 
+import at.devp.myfinance.entity.Spending;
+import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.TransferRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,15 @@ public class TransferDeletionService {
 
   private final TransferRepository transferRepository;
 
-  @Transactional
   public void deleteById(final Long transferId) {
     transferRepository.deleteById(transferId);
+  }
+
+  public void removeSpendingAndUpdate(final Transfer transfer, final Spending spending) {
+    transfer.getSpendings().remove(spending);
+    transfer.updateAmount();
+    transfer.updateChange();
+
+    transferRepository.save(transfer);
   }
 }

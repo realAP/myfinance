@@ -8,7 +8,8 @@ import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
 import at.devp.myfinance.services.ruleservice.RuleService;
-import at.devp.myfinance.services.transfer.TransferStatusService;
+import at.devp.myfinance.services.ruleservice.RuleUpdateService;
+import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ public class SpendingCreatorService {
   private final TransferRepository transferRepository;
   private final Converter converter;
   private final RuleService ruleService;
-  private final TransferStatusService transferStatusService;
+  private final TransferUpdateService transferUpdateService;
+  private final RuleUpdateService ruleUpdateService;
 
 
   @Transactional
@@ -40,8 +42,11 @@ public class SpendingCreatorService {
         .orElseThrow(() -> new IllegalArgumentException("Rule not found with id: "
                                                         + spendingCreationDto.getRuleId()));
 
-    spending.setTransferAndUpdateStatus(transfer);
-    spending.setRuleAndUpdateStatus(rule);
+    spending.setRule(rule);
+    spending.setTransfer(transfer);
+
+    transferUpdateService.addSpendingAndUpdate(spending);
+    ruleUpdateService.addSpendingAndUpdate(spending);
 
     final var createdSpending = spendingRepository.save(spending);
     return converter.convert2SpendingOverviewDto(createdSpending);

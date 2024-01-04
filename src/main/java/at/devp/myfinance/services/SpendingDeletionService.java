@@ -1,6 +1,7 @@
 package at.devp.myfinance.services;
 
 import at.devp.myfinance.repositories.SpendingRepository;
+import at.devp.myfinance.services.transfer.TransferDeletionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,22 @@ import org.springframework.stereotype.Service;
 public class SpendingDeletionService {
 
   private final SpendingRepository spendingRepository;
+  private final TransferDeletionService transferDeletionService;
+  private final RuleDeletionService ruleDeletionService;
 
   @Transactional
   public void deleteById(final Long spendingId) {
     final var spending = spendingRepository.findById(spendingId).orElseThrow(() -> new RuntimeException("Spending not found"));
-    spending.removeRuleAndUpdateStatus();
-    spending.removeTransferAndUpdateStatus();
     spendingRepository.deleteById(spendingId);
+
+    final var transfer = spending.getTransfer();
+    if (transfer != null) {
+      transferDeletionService.removeSpendingAndUpdate(transfer, spending);
+    }
+
+    final var rule = spending.getRule();
+    if (rule != null) {
+      ruleDeletionService.removeSpendingAndUpdateStatus(rule, spending);
+    }
   }
 }
