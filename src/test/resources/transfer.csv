@@ -1,0 +1,5 @@
+amount,is_change,old_amount,id,description,from,to
+11,false,11,5,Bitcoin,Main,Volksbank
+12,false,12,6,GCE,Main,Scalable Capital
+136.84,false,136.84,4,ETF,Main,ING
+100.01,false,100.01,7,Lebensversicherung,Main,VOBA
