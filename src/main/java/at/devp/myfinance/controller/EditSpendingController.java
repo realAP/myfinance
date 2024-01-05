@@ -18,7 +18,7 @@ public class EditSpendingController {
 
 
   @PostMapping("/spending/edit")
-  public String updateSpending(@ModelAttribute SpendingCreationDto spendingCreationDto, Model model) {
+  public String editSpending(@ModelAttribute SpendingCreationDto spendingCreationDto, Model model) {
     spendingEditService.editSpending(spendingCreationDto);
     final var categoryDtos = categoryService.createCategories();
     model.addAttribute("categoryDtos", categoryDtos);

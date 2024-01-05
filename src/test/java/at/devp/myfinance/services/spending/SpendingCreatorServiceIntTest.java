@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.spending.createspending;
+package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.entity.Rule;
@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class SpendingCreatorServiceTest {
+class SpendingCreatorServiceIntTest {
 
   @Autowired
   private at.devp.myfinance.services.spending.createspending.SpendingCreatorService underTest;
@@ -33,7 +33,7 @@ class SpendingCreatorServiceTest {
   private TransferRepository transferRepository;
 
   @Test
-  void createSpending_whenTransferAndRuleBothExist() {
+  void whenCreateSpendingGivenTransferAndRuleBothExistThenCreateNewSpending() {
     final var transfer = transferRepository.save(new Transfer());
     final var rule = ruleRepository.save(new Rule());
 

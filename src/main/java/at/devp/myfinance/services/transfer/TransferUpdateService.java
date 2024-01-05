@@ -1,8 +1,10 @@
 package at.devp.myfinance.services.transfer;
 
 import at.devp.myfinance.entity.Spending;
+import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +29,19 @@ public class TransferUpdateService {
   }
 
 
+  public void updateStatus(final Transfer transfer) {
+    transfer.updateAmountAndChange();
+    transferRepository.save(transfer);
+
+  }
+
+  @Transactional
+  public void updateAll() {
+    final var transfers = transferRepository.findAll();
+    transfers.forEach(transfer -> {
+      transfer.setAmount(transfer.calculateAmount());
+      transfer.setChange(transfer.calculateHasChange());
+    });
+    transferRepository.saveAll(transfers);
+  }
 }

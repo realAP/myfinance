@@ -19,10 +19,19 @@ public class RuleUpdateService {
     ruleRepository.save(rule);
   }
 
+  public void updateStatus(final Rule rule) {
+    rule.updateAmountAndChange();
+    ruleRepository.save(rule);
+  }
+
   public void addSpendingAndUpdate(final Spending spending) {
     final var rule = spending.getRule();
     rule.getSpendings().add(spending);
-    rule.updateAmountAndChange();
+
+    final var sumOfSpendings = rule.getSpendings().stream().mapToDouble(Spending::getAmount).sum();
+    rule.setAmount(sumOfSpendings);
+    rule.setChange(sumOfSpendings != rule.getOldAmount());
+
     ruleRepository.save(rule);
   }
 
@@ -41,4 +50,16 @@ public class RuleUpdateService {
   public void editRuleAndUpdate(final Long spendingId, final Rule selectedRule) {
 
   }
+
+  @Transactional
+  public void updateAll() {
+    final var rules = ruleRepository.findAll();
+    rules.forEach(rule -> {
+      rule.setAmount(rule.calculateAmount());
+      rule.setChange(rule.calculateHasChange());
+    });
+
+    ruleRepository.saveAll(rules);
+  }
+
 }

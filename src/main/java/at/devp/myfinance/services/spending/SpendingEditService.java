@@ -27,7 +27,13 @@ public class SpendingEditService {
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
     final var spending = spendingRepository.findById(spendingCreationDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
-    spending.setAmount(spendingCreationDto.getAmount());
+
+    if (spending.getAmount() != spendingCreationDto.getAmount()) {
+      spending.setAmount(spendingCreationDto.getAmount());
+      ruleUpdateService.updateStatus(spending.getRule());
+      transferUpdateService.updateStatus(spending.getTransfer());
+    }
+
     spending.setDescription(spendingCreationDto.getDescription());
     spending.setCategory(spendingCreationDto.getCategory());
 
@@ -47,6 +53,27 @@ public class SpendingEditService {
     }
 
     spendingRepository.save(spending);
+  }
+
+  @Transactional
+  public void editSpending2(final SpendingCreationDto spendingCreationDto) {
+    final var spending = spendingRepository.findById(spendingCreationDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
+    spending.setAmount(spendingCreationDto.getAmount());
+    spending.setDescription(spendingCreationDto.getDescription());
+    spending.setCategory(spendingCreationDto.getCategory());
+
+    final var selectedRule = ruleRepository.findById(spendingCreationDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingCreationDto.getRuleId() + " not found"));
+    spending.setRule(selectedRule);
+
+    final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
+    spending.setTransfer(selectedTransfer);
+
+    spendingRepository.save(spending);
+    spendingRepository.flush();
+
+    ruleUpdateService.updateAll();
+    transferUpdateService.updateAll();
+
   }
 
   private Spending updateSpendingAttributes(SpendingCreationDto spendingCreationDto) {

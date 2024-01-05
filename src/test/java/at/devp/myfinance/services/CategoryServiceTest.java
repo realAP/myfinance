@@ -26,6 +26,10 @@ class CategoryServiceTest {
     final var thirdResult = resultIterator.next();
     assertThat(thirdResult.getCategorie(), is("BANK"));
     assertThat(thirdResult.getId(), is(2));
+
+    final var fourthResult = resultIterator.next();
+    assertThat(fourthResult.getCategorie(), is("INVESTITIONEN"));
+    assertThat(fourthResult.getId(), is(3));
   }
 
 }
