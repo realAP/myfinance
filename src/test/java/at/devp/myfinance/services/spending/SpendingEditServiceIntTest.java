@@ -23,6 +23,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -78,14 +80,14 @@ class SpendingEditServiceIntTest {
     netflixSpendingCreationDto.setTransferId(movieTransfer);
     netflixSpendingCreationDto.setRuleId(movieRule);
     netflixSpendingCreationDto.setDescription("netflix");
-    netflixSpendingCreationDto.setAmount(9.12);
+    netflixSpendingCreationDto.setAmount(BigDecimal.valueOf(9.12));
     netflixSpendingCreationDto.setCategory(Category.VERGNUEGEN);
 
     spotifySpendingCreationDto = new SpendingCreationDto();
     spotifySpendingCreationDto.setTransferId(movieTransfer);
     spotifySpendingCreationDto.setRuleId(movieRule);
     spotifySpendingCreationDto.setDescription("Test description");
-    spotifySpendingCreationDto.setAmount(100D);
+    spotifySpendingCreationDto.setAmount(BigDecimal.valueOf(100D));
     spotifySpendingCreationDto.setCategory(Category.VERGNUEGEN);
 
     createdSpendingOverviewDto = spendingCreatorService.createSpending(spotifySpendingCreationDto);
@@ -111,7 +113,7 @@ class SpendingEditServiceIntTest {
     editedSpendingCreationDto.setTransferId(transferId2);
     editedSpendingCreationDto.setRuleId(ruleId2);
     editedSpendingCreationDto.setDescription("Edited description");
-    editedSpendingCreationDto.setAmount(200D);
+    editedSpendingCreationDto.setAmount(new BigDecimal("200.00"));
     editedSpendingCreationDto.setCategory(Category.SPORT);
 
     underTest.editSpending(editedSpendingCreationDto);
@@ -136,20 +138,21 @@ class SpendingEditServiceIntTest {
 
     final var resultRule2 = ruleRepository.findById((Long) ruleId2).get();
     assertThat(resultRule2.getSpendings(), contains(result));
-    assertThat(resultRule2.getAmount(), is(200d));
+    assertThat(resultRule2.getAmount(), is(editedSpendingCreationDto.getAmount()));
 
     final var resultTransfer2 = transferRepository.findById((Long) transferId2).get();
     assertThat(resultTransfer2.getSpendings(), contains(result));
-    assertThat(resultTransfer2.getAmount(), is(200d));
+    assertThat(resultTransfer2.getAmount(), is(editedSpendingCreationDto.getAmount()));
 
     final var resultRule1 = ruleRepository.findById((Long) movieRule).get();
     assertThat(resultRule1.getSpendings().isEmpty(), is(true));
-    assertThat(resultRule1.getAmount(), is(0.0));
+    assertThat(resultRule1.getAmount(), is(new BigDecimal("0.00")));
+    assertThat(resultRule1.getOldAmount(),is(new BigDecimal("0.00")));
     assertThat(resultRule1.isChange(), is(false));
 
     final var resultTransfer1 = transferRepository.findById((Long) movieTransfer).get();
     assertThat(resultTransfer1.getSpendings().isEmpty(), is(true));
-    assertThat(resultTransfer1.getAmount(), is(0.0));
+    assertThat(resultTransfer1.getAmount(), is(new BigDecimal("0.00")));
     assertThat(resultTransfer1.isChange(), is(false));
   }
 
@@ -162,7 +165,7 @@ class SpendingEditServiceIntTest {
     editedSpendingCreationDto.setRuleId(spotifySpendingCreationDto.getRuleId());
     editedSpendingCreationDto.setDescription(spotifySpendingCreationDto.getDescription());
     editedSpendingCreationDto.setCategory(spotifySpendingCreationDto.getCategory());
-    editedSpendingCreationDto.setAmount(1337.12);
+    editedSpendingCreationDto.setAmount(new BigDecimal("1337.12"));
 
     underTest.editSpending(editedSpendingCreationDto);
     testEntityManager.flush();

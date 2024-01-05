@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,8 +37,8 @@ public class RuleService {
     return converter.convert2RuleDropDownDtos(rules);
   }
 
-  public Double calculateSumOfAllRules() {
-    return ruleRepository.findAll().stream().map(Rule::getAmount).filter(Objects::nonNull).mapToDouble(Double::doubleValue).sum();
+  public BigDecimal calculateSumOfAllRules() {
+    return ruleRepository.findAll().stream().map(Rule::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 
   public void createRule(final RuleCreationDto ruleCreationDto) {

@@ -12,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -31,7 +33,7 @@ class SpendingDeletionServiceTest {
     final var transfer1 = testEntityManager.persist(new Transfer());
 
     final var spending = new Spending();
-    spending.setAmount(10.0);
+    spending.setAmount(BigDecimal.valueOf(10.0));
     spending.setRuleAndUpdateStatus(rule1);
     spending.setTransferAndUpdateStatus(transfer1);
 

@@ -6,6 +6,7 @@ import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Service
@@ -20,7 +21,7 @@ public class TransferDeletionService {
 
   public void removeSpendingAndUpdate(final Transfer transfer, final Spending spending) {
     transfer.getSpendings().remove(spending);
-    final var sumOfSpendings = transfer.getSpendings().stream().filter(Objects::nonNull).mapToDouble(Spending::getAmount).sum();
+    final var sumOfSpendings = transfer.getSpendings().stream().filter(Objects::nonNull).map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
     transfer.setAmount(sumOfSpendings);
     transfer.setChange(sumOfSpendings != transfer.getOldAmount());
 

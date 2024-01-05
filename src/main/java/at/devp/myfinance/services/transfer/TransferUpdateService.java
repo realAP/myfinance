@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class TransferUpdateService {
@@ -20,7 +22,7 @@ public class TransferUpdateService {
     final var transfer = spending.getTransfer();
     transfer.getSpendings().add(spending);
 
-    final var sumOfSpendings = transfer.getSpendings().stream().mapToDouble(Spending::getAmount).sum();
+    final var sumOfSpendings = transfer.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
     transfer.setAmount(sumOfSpendings);
 
     transfer.setChange(sumOfSpendings != transfer.getOldAmount());

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -41,7 +43,7 @@ class SpendingCreatorServiceIntTest {
     spendingCreationDto.setTransferId(transfer.getId());
     spendingCreationDto.setRuleId(rule.getId());
     spendingCreationDto.setDescription("Test description");
-    spendingCreationDto.setAmount(100D);
+    spendingCreationDto.setAmount(new BigDecimal("100.00"));
     spendingCreationDto.setCategory(Category.VERGNUEGEN);
 
     final var createdSpendingOverviewDto = underTest.createSpending(spendingCreationDto);

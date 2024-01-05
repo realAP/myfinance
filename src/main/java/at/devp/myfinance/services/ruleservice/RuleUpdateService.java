@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class RuleUpdateService {
@@ -28,7 +30,7 @@ public class RuleUpdateService {
     final var rule = spending.getRule();
     rule.getSpendings().add(spending);
 
-    final var sumOfSpendings = rule.getSpendings().stream().mapToDouble(Spending::getAmount).sum();
+    final var sumOfSpendings = rule.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
     rule.setAmount(sumOfSpendings);
     rule.setChange(sumOfSpendings != rule.getOldAmount());
 

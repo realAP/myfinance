@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class OverviewService {
   }
 
 
-  public Double calculateSum() {
-    return spendingRepository.findAll().stream().mapToDouble(Spending::getAmount).sum();
+  public BigDecimal calculateSum() {
+    return spendingRepository.findAll().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 }

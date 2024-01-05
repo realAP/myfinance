@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 import static jakarta.transaction.Transactional.TxType.MANDATORY;
 
 
@@ -26,7 +28,7 @@ public class Spending {
   private Category category;
 
   @Column
-  private Double amount;
+  private BigDecimal amount;
 
   @ManyToOne
   @JoinColumn(name = "rule_id")

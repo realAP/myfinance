@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,10 +35,10 @@ public class Transfer {
   private String to;
 
   @Column
-  private Double amount = 0.0;
+  private BigDecimal amount = new BigDecimal("0.00");
 
   @Column
-  private Double oldAmount = 0.0;
+  private BigDecimal oldAmount = new BigDecimal("0.00");
 
   @Column
   private boolean isChange;
@@ -52,8 +53,8 @@ public class Transfer {
     updateAmountAndChange();
   }
 
-  public Double calculateAmount() {
-    return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).mapToDouble(Double::doubleValue).sum();
+  public BigDecimal calculateAmount() {
+    return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 
   public void updateAmount() {

@@ -18,6 +18,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -72,22 +74,22 @@ class SpendingEditServiceIntTest2 {
     editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
     editedMsciWorldSpending.setRuleId(msciWorldSpending.getRule().getId());
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
-    editedMsciWorldSpending.setAmount(200D);
+    editedMsciWorldSpending.setAmount(new BigDecimal("200.00"));
 
     underTest.editSpending(editedMsciWorldSpending);
 
     final var result = spendingRepository.findById(msciWorldSpending.getId()).orElse(null);
-    assertThat(result.getAmount(), is(200D));
+    assertThat(result.getAmount(), is(editedMsciWorldSpending.getAmount()));
 
-    final var deltaAmount = editedMsciWorldSpending.getAmount() - msciWorldSpending.getAmount();
+    final var deltaAmount = editedMsciWorldSpending.getAmount().subtract(msciWorldSpending.getAmount());
 
-    final var transferAmount = etfTransfer.getAmount() + deltaAmount;
+    final var transferAmount = etfTransfer.getAmount().add(deltaAmount);
     final var transferResult = result.getTransfer();
     assertThat(transferResult.getAmount(), is(transferAmount));
     assertThat(transferResult.isChange(), is(true));
 
 
-    final var ruleAmount = langzeitinvest1Rule.getAmount() + deltaAmount;
+    final var ruleAmount = langzeitinvest1Rule.getAmount().add(deltaAmount);
     final var ruleResult = result.getRule();
     assertThat(ruleResult.getAmount(), is(ruleAmount));
     assertThat(ruleResult.isChange(), is(true));
@@ -109,11 +111,13 @@ class SpendingEditServiceIntTest2 {
     assertThat(result.getTransfer().getId(), is(bitcoinTransfer.getId()));
 
     final var resultBitcoinTransfer = result.getTransfer();
-    assertThat(resultBitcoinTransfer.getAmount(), is(bitcoinTransfer.getAmount() + msciWorldSpending.getAmount()));
+    assertThat(resultBitcoinTransfer.getAmount(), is(bitcoinTransfer.getAmount().add(msciWorldSpending.getAmount())));
+    assertThat(resultBitcoinTransfer.isChange(), is(true));
 
     final var resultEtfTransfer = transferRepository.findById(etfTransfer.getId()).get();
-    final var resultEtfTransferAmount = etfTransfer.getAmount() - msciWorldSpending.getAmount();
+    final var resultEtfTransferAmount = etfTransfer.getAmount().subtract(msciWorldSpending.getAmount());
     assertThat(resultEtfTransfer.getAmount(), is(resultEtfTransferAmount));
+    assertThat(resultEtfTransfer.isChange(), is(true));
   }
 
   @Test
@@ -132,10 +136,12 @@ class SpendingEditServiceIntTest2 {
     assertThat(result.getRule().getId(), is(zockenRule.getId()));
 
     final var resultZockenRule = result.getRule();
-    assertThat(resultZockenRule.getAmount(), is(zockenRule.getAmount() + msciWorldSpending.getAmount()));
+    assertThat(resultZockenRule.getAmount(), is(zockenRule.getAmount().add(msciWorldSpending.getAmount())));
+    assertThat(resultZockenRule.isChange(), is(true));
 
     final var resultLangzeitinvest1Rule = ruleRepository.findById(langzeitinvest1Rule.getId()).get();
-    assertThat(resultLangzeitinvest1Rule.getAmount(), is(langzeitinvest1Rule.getAmount() - msciWorldSpending.getAmount()));
+    assertThat(resultLangzeitinvest1Rule.getAmount(), is(langzeitinvest1Rule.getAmount().subtract(msciWorldSpending.getAmount())));
+    assertThat(resultLangzeitinvest1Rule.isChange(), is(true));
   }
 
   @Test
