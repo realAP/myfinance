@@ -1,7 +1,7 @@
 package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.services.RuleDeletionService;
+import at.devp.myfinance.services.rule.RuleDeletionService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

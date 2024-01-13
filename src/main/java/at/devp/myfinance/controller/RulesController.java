@@ -2,8 +2,7 @@ package at.devp.myfinance.controller;
 
 import at.devp.myfinance.dto.RuleCreationDto;
 import at.devp.myfinance.dto.RuleOverviewDto;
-import at.devp.myfinance.services.rule.RuleOverviewService;
-import at.devp.myfinance.services.rule.RuleService;
+import at.devp.myfinance.services.rule.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class RulesController {
 
-  private final RuleService ruleService;
+  private final RuleChangeService ruleChangeService;
+  private final RuleCreatorService ruleCreatorService;
+  private final RuleDeletionService ruleDeletionService;
   private final RuleOverviewService ruleOverviewService;
 
   @GetMapping("/rules")
@@ -27,7 +28,7 @@ public class RulesController {
     model.addAttribute("ruleOverviewDto", new RuleOverviewDto());
     model.addAttribute("ruleCreationDto", new RuleCreationDto());
 
-    final var sumOfAllRules = ruleService.calculateSumOfAllRules();
+    final var sumOfAllRules = ruleOverviewService.calculateSumOfAllRules();
     model.addAttribute("sumOfAllRules", sumOfAllRules);
 
     return "rules";
@@ -35,19 +36,19 @@ public class RulesController {
 
   @PostMapping("/newrule")
   public String newRule(@ModelAttribute RuleCreationDto ruleCreationDto, Model model) {
-    ruleService.createRule(ruleCreationDto);
+    ruleCreatorService.createRule(ruleCreationDto);
     return "redirect:/rules";
   }
 
   @PostMapping("/removerule/{id}")
   public String deleteRule(@PathVariable("id") Long id) {
-    ruleService.deleteRule(id);
+    ruleDeletionService.deleteRule(id);
     return "redirect:/rules";
   }
 
   @PostMapping("/confirmchangerule/{id}")
   public String confirmChange(@PathVariable("id") Long id) {
-    ruleService.confirmChange(id);
+    ruleChangeService.confirmAmountChangeForRule(id);
     return "redirect:/rules";
   }
 

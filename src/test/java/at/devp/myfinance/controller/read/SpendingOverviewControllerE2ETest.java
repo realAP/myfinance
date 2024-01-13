@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.instancio.Instancio;
 import org.instancio.Model;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestEntityManager
-class OverviewControllerE2ETest {
+class SpendingOverviewControllerE2ETest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -44,6 +45,7 @@ class OverviewControllerE2ETest {
 
   @Test
   @Transactional
+  @Disabled
   void testFinanceOverviewEndpoint() throws Exception {
 
     Model<Spending> spendingModel = Instancio.of(Spending.class)

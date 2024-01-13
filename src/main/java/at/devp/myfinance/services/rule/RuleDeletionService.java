@@ -1,4 +1,4 @@
-package at.devp.myfinance.services;
+package at.devp.myfinance.services.rule;
 
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
@@ -15,5 +15,8 @@ public class RuleDeletionService {
     rule.getSpendings().remove(spending);
     rule.updateAmountAndChange();
     ruleRepository.save(rule);
+  }
+  public void deleteRule(final Long id) {
+    ruleRepository.deleteById(id);
   }
 }

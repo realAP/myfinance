@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OverviewService {
+public class SpendingOverviewService {
 
   private final SpendingRepository spendingRepository;
   private final Converter converter;
@@ -23,7 +23,6 @@ public class OverviewService {
     final var spendings = spendingRepository.findAll();
     return converter.convert2SpendingDtos(spendings);
   }
-
 
   public BigDecimal calculateSum() {
     return spendingRepository.findAll().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
