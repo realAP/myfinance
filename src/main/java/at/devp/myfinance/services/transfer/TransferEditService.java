@@ -14,8 +14,8 @@ public class TransferEditService {
   private final TransferUpdateService transferUpdateService;
 
   @Transactional
-  public void editTransferAndUpdate(final Transfer oldTransfer, final Spending spending) {
+  public void editTransferAndUpdate(final Transfer oldTransfer, final Transfer selectedTransfer, final Spending spending) {
     transferDeletionService.removeSpendingAndUpdate(oldTransfer, spending);
-    transferUpdateService.addSpendingAndUpdate(spending);
+    transferUpdateService.addSpendingAndUpdate(selectedTransfer, spending);
   }
 }

@@ -27,7 +27,7 @@ public class SpendingDeletionService {
 
     final var rule = spending.getRule();
     if (rule != null) {
-      ruleDeletionService.removeSpendingAndUpdateStatus(rule, spending);
+      ruleDeletionService.removeSpendingAndUpdate(rule, spending);
     }
   }
 }

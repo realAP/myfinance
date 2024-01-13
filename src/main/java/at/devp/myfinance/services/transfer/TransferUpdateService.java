@@ -2,7 +2,6 @@ package at.devp.myfinance.services.transfer;
 
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
-import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,18 +15,16 @@ public class TransferUpdateService {
 
   private final TransferRepository transferRepository;
 
-  private final SpendingRepository spendingRepository;
 
-  public void addSpendingAndUpdate(final Spending spending) {
-    final var transfer = spending.getTransfer();
-    transfer.getSpendings().add(spending);
+  public void addSpendingAndUpdate(final Transfer selectedTransfer, final Spending spending) {
+    selectedTransfer.getSpendings().add(spending);
 
-    final var sumOfSpendings = transfer.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-    transfer.setAmount(sumOfSpendings);
+    final var sumOfSpendings = selectedTransfer.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+    selectedTransfer.setAmount(sumOfSpendings);
 
-    transfer.setChange(sumOfSpendings != transfer.getOldAmount());
+    selectedTransfer.setChange(sumOfSpendings != selectedTransfer.getOldAmount());
 
-    transferRepository.save(transfer);
+    transferRepository.save(selectedTransfer);
   }
 
 

@@ -41,10 +41,10 @@ public class SpendingCreatorService {
                                                         + spendingCreationDto.getRuleId()));
 
     spending.setRule(rule);
-    spending.setTransfer(transfer);
+    transferUpdateService.addSpendingAndUpdate(transfer, spending);
 
-    transferUpdateService.addSpendingAndUpdate(spending);
-    ruleUpdateService.addSpendingAndUpdate(spending);
+    spending.setTransfer(transfer);
+    ruleUpdateService.addSpendingAndUpdate(rule, spending);
 
     final var createdSpending = spendingRepository.save(spending);
     return converter.convert2SpendingOverviewDto(createdSpending);

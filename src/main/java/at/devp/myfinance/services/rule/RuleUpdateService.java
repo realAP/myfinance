@@ -26,15 +26,14 @@ public class RuleUpdateService {
     ruleRepository.save(rule);
   }
 
-  public void addSpendingAndUpdate(final Spending spending) {
-    final var rule = spending.getRule();
-    rule.getSpendings().add(spending);
+  public void addSpendingAndUpdate(final Rule selectedRule, final Spending spending) {
+    selectedRule.getSpendings().add(spending);
 
-    final var sumOfSpendings = rule.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-    rule.setAmount(sumOfSpendings);
-    rule.setChange(sumOfSpendings != rule.getOldAmount());
+    final var sumOfSpendings = selectedRule.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+    selectedRule.setAmount(sumOfSpendings);
+    selectedRule.setChange(sumOfSpendings != selectedRule.getOldAmount());
 
-    ruleRepository.save(rule);
+    ruleRepository.save(selectedRule);
   }
 
 

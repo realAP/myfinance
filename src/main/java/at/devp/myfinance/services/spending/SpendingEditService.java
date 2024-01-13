@@ -5,6 +5,7 @@ import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
+import at.devp.myfinance.services.rule.RuleEditService;
 import at.devp.myfinance.services.rule.RuleUpdateService;
 import at.devp.myfinance.services.transfer.TransferEditService;
 import at.devp.myfinance.services.transfer.TransferUpdateService;
@@ -23,6 +24,7 @@ public class SpendingEditService {
   private final TransferEditService transferEditService;
   private final TransferRepository transferRepository;
   private final TransferUpdateService transferUpdateService;
+  private final RuleEditService ruleEditService;
 
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
@@ -41,14 +43,14 @@ public class SpendingEditService {
       final var selectedRule = ruleRepository.findById(spendingCreationDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingCreationDto.getRuleId() + " not found"));
       final var oldRule = spending.getRule();
       spending.setRule(selectedRule);
-      ruleUpdateService.editRuleAndUpdate(oldRule, selectedRule, spending);
+      ruleEditService.editRuleAndUpdate(oldRule, selectedRule, spending);
     }
 
     if (checkForTransferChange(spending, spendingCreationDto)) {
       final var oldTransfer = spending.getTransfer();
       final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
       spending.setTransfer(selectedTransfer);
-      transferEditService.editTransferAndUpdate(oldTransfer, spending);
+      transferEditService.editTransferAndUpdate(oldTransfer,selectedTransfer, spending);
     }
 
     spendingRepository.save(spending);

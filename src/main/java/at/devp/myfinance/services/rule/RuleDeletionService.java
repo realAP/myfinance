@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RuleDeletionService {
   private final RuleRepository ruleRepository;
 
-  public void removeSpendingAndUpdateStatus(final Rule rule, final Spending spending) {
+  public void removeSpendingAndUpdate(final Rule rule, final Spending spending) {
     rule.getSpendings().remove(spending);
     rule.updateAmountAndChange();
     ruleRepository.save(rule);
