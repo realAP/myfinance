@@ -7,8 +7,7 @@ import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.ruleservice.RuleService;
-import at.devp.myfinance.services.ruleservice.RuleUpdateService;
+import at.devp.myfinance.services.rule.RuleUpdateService;
 import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ public class SpendingCreatorService {
   private final RuleRepository ruleRepository;
   private final TransferRepository transferRepository;
   private final Converter converter;
-  private final RuleService ruleService;
   private final TransferUpdateService transferUpdateService;
   private final RuleUpdateService ruleUpdateService;
 

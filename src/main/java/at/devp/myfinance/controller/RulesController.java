@@ -2,7 +2,8 @@ package at.devp.myfinance.controller;
 
 import at.devp.myfinance.dto.RuleCreationDto;
 import at.devp.myfinance.dto.RuleOverviewDto;
-import at.devp.myfinance.services.ruleservice.RuleService;
+import at.devp.myfinance.services.rule.RuleOverviewService;
+import at.devp.myfinance.services.rule.RuleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RulesController {
 
   private final RuleService ruleService;
+  private final RuleOverviewService ruleOverviewService;
 
   @GetMapping("/rules")
   public String getRules(Model model) {
-    final var ruleDtos = ruleService.createRuleOverview();
+    final var ruleDtos = ruleOverviewService.createRuleOverview();
 
     model.addAttribute("ruleOverviewDtos", ruleDtos);
     model.addAttribute("ruleOverviewDto", new RuleOverviewDto());

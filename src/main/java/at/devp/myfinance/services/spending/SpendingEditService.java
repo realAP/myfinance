@@ -5,7 +5,7 @@ import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.ruleservice.RuleUpdateService;
+import at.devp.myfinance.services.rule.RuleUpdateService;
 import at.devp.myfinance.services.transfer.TransferEditService;
 import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;

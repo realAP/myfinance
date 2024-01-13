@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.ruleservice;
+package at.devp.myfinance.services.rule;
 
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
