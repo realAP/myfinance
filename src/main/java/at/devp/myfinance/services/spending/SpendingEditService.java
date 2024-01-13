@@ -17,26 +17,25 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class SpendingEditService {
-  private final SpendingRepository spendingRepository;
   private final RuleRepository ruleRepository;
-  private final TransferRepository transferRepository;
   private final RuleUpdateService ruleUpdateService;
-  private final TransferUpdateService transferUpdateService;
+  private final SpendingRepository spendingRepository;
   private final TransferEditService transferEditService;
+  private final TransferRepository transferRepository;
+  private final TransferUpdateService transferUpdateService;
 
   @Transactional
   public void editSpending(final SpendingCreationDto spendingCreationDto) {
     final var spending = spendingRepository.findById(spendingCreationDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingCreationDto.getId() + " not found"));
+
+    spending.setDescription(spendingCreationDto.getDescription());
+    spending.setCategory(spendingCreationDto.getCategory());
 
     if (spending.getAmount() != spendingCreationDto.getAmount()) {
       spending.setAmount(spendingCreationDto.getAmount());
       ruleUpdateService.updateStatus(spending.getRule());
       transferUpdateService.updateStatus(spending.getTransfer());
     }
-
-    spending.setDescription(spendingCreationDto.getDescription());
-    spending.setCategory(spendingCreationDto.getCategory());
-
 
     if (checkForRuleChange(spending, spendingCreationDto)) {
       final var selectedRule = ruleRepository.findById(spendingCreationDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingCreationDto.getRuleId() + " not found"));

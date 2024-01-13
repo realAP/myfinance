@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SpendingCreatorService {
 
-  private final SpendingRepository spendingRepository;
-  private final RuleRepository ruleRepository;
-  private final TransferRepository transferRepository;
   private final Converter converter;
-  private final TransferUpdateService transferUpdateService;
+  private final RuleRepository ruleRepository;
   private final RuleUpdateService ruleUpdateService;
+  private final SpendingRepository spendingRepository;
+  private final TransferRepository transferRepository;
+  private final TransferUpdateService transferUpdateService;
 
 
   @Transactional

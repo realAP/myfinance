@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SpendingDeletionService {
 
+  private final RuleDeletionService ruleDeletionService;
   private final SpendingRepository spendingRepository;
   private final TransferDeletionService transferDeletionService;
-  private final RuleDeletionService ruleDeletionService;
 
   @Transactional
   public void deleteById(final Long spendingId) {
