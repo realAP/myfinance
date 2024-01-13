@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface SpendingRepository extends JpaRepository<Spending, Long> {
 
-  Spending findAllByAmountIsGreaterThan(final Double amount);
-
   @Query("select spending.rule.id from Spending spending " +
          "where spending.id = :spendingId")
   Long findRuleIdBySpendingId(final Long spendingId);
@@ -22,9 +20,5 @@ public interface SpendingRepository extends JpaRepository<Spending, Long> {
   @Query("select spending from Spending spending " +
          "join spending.rule rule where rule.id = :ruleId ")
   List<Spending> findAllSpendingsByRuleId(@Param("ruleId") Long ruleId);
-
-  @Query("select spending from Spending spending " +
-         "join spending.transfer transfer where transfer.id = :transferId ")
-  List<Spending> findAllSpendingsByTransferId(@Param("transferId") Long transferId);
 
 }

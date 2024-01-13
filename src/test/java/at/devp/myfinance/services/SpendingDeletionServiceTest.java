@@ -22,8 +22,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
 @SpringBootTest
-@AutoConfigureTestEntityManager
 @ActiveProfiles("test")
+@AutoConfigureTestEntityManager
 @Sql("classpath:data_test.sql")
 class SpendingDeletionServiceTest {
   @Autowired

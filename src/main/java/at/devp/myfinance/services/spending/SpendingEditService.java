@@ -46,8 +46,8 @@ public class SpendingEditService {
     }
 
     if (checkForTransferChange(spending, spendingCreationDto)) {
-      final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
       final var oldTransfer = spending.getTransfer();
+      final var selectedTransfer = transferRepository.findById(spendingCreationDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingCreationDto.getTransferId() + " not found"));
       spending.setTransfer(selectedTransfer);
       transferEditService.editTransferAndUpdate(oldTransfer, spending);
     }
