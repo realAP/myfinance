@@ -32,33 +32,12 @@ public class Spending {
 
   @ManyToOne
   @JoinColumn(name = "rule_id")
-  @Setter(AccessLevel.NONE)
   private Rule rule;
 
   @ManyToOne
   @JoinColumn(name = "transfer_id")
-  @Setter(AccessLevel.NONE)
   private Transfer transfer;
 
-  public void setTransfer(final Transfer transfer) {
-    this.transfer = transfer;
-  }
-
-  @Transactional(value = MANDATORY)
-  public void setTransferAndUpdateStatus(final Transfer transfer) {
-    final var oldTransfer = this.transfer;
-    if (oldTransfer != null) {
-      oldTransfer.getSpendings().remove(this);
-      oldTransfer.updateAmountAndChange();
-    }
-    transfer.getSpendings().add(this);
-    this.transfer = transfer;
-    this.transfer.updateAmountAndChange();
-  }
-
-  public void setRule(final Rule rule) {
-    this.rule = rule;
-  }
 
   @Transactional(value = MANDATORY)
   public void setRuleAndUpdateStatus(final Rule rule) {
@@ -70,25 +49,5 @@ public class Spending {
     rule.getSpendings().add(this);
     this.rule = rule;
     this.rule.updateAmountAndChange();
-  }
-
-  @Transactional(value = MANDATORY)
-  public void removeRuleAndUpdateStatus() {
-    final var oldRule = this.rule;
-    if (oldRule != null) {
-      oldRule.getSpendings().remove(this);
-      oldRule.updateAmountAndChange();
-    }
-    this.rule = null;
-  }
-
-  @Transactional(value = MANDATORY)
-  public void removeTransferAndUpdateStatus() {
-    final var oldTransfer = this.transfer;
-    if (oldTransfer != null) {
-      oldTransfer.getSpendings().remove(this);
-      oldTransfer.updateAmountAndChange();
-    }
-    this.transfer = null;
   }
 }

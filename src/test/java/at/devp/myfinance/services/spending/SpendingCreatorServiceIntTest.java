@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.notNullValue;
 class SpendingCreatorServiceIntTest {
 
   @Autowired
-  private at.devp.myfinance.services.spending.createspending.SpendingCreatorService underTest;
+  private SpendingCreatorService underTest;
 
   @Autowired
   private SpendingRepository spendingRepository;

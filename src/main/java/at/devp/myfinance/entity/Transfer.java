@@ -43,30 +43,8 @@ public class Transfer {
   @Column
   private boolean isChange;
 
-  public void addSpendingAndUpdate(final Spending spending) {
-    spendings.add(spending);
-    updateAmountAndChange();
-  }
-
-  public void removeSpendingAndUpdate(final Spending spending) {
-    spendings.remove(spending);
-    updateAmountAndChange();
-  }
-
   public BigDecimal calculateAmount() {
     return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
-  }
-
-  public void updateAmount() {
-    this.amount = calculateAmount();
-  }
-
-  public void updateOldAmount() {
-    this.oldAmount = calculateAmount();
-  }
-
-  public void updateChange() {
-    this.isChange = calculateHasChange();
   }
 
   public boolean calculateHasChange() {

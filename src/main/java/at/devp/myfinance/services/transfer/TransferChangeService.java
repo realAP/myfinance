@@ -1,9 +1,7 @@
 package at.devp.myfinance.services.transfer;
 
-import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,12 +17,4 @@ public class TransferChangeService {
     transfer.setChange(false);
     transferRepository.save(transfer);
   }
-
-  public Boolean checkForTransferChange(@NonNull final Transfer transfer) {
-    final var oldAmount = transfer.getOldAmount();
-    final var amount = transfer.getAmount();
-    return !amount.equals(oldAmount);
-  }
-
-
 }

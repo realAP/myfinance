@@ -19,6 +19,4 @@ public class TransferDropDownService {
     final var transfers = transferRepository.findAll();
     return converter.convert2TransferDropDownDtos(transfers);
   }
-
-
 }

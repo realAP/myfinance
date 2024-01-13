@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.spending.createspending;
+package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.dto.SpendingCreationDto;
