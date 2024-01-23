@@ -31,10 +31,10 @@
         -->
         <!-- Weitere Datenspalten hier -->
         <td>
-            <form th:action="@{/delete/{id}(id=${spendingOverviewDto.id})}" method="get">
+            <form th:action="@{/spendings/{id}/delete(id=${spendingOverviewDto.id})}" method="get">
                 <input type="submit" value="Delete"/>
             </form>
-            <form th:action="@{/spendings/edit/{id}(id=${spendingOverviewDto.id})}" method="get">
+            <form th:action="@{/spendings/{id}/edit(id=${spendingOverviewDto.id})}" method="get">
                 <input type="submit" value="Edit"/>
             </form>
         </td>
@@ -50,7 +50,7 @@
 <!--
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
 -->
-<form action="#" th:action="@{/newspending}" th:object="${spendingCreationDto}" method="post">
+<form action="#" th:action="@{/spendings}" th:object="${spendingCreationDto}" method="post">
     <select th:field="*{category}">
         <option th:each="category : ${categoryDtos}"
                 th:value="${category.getCategorie()}"

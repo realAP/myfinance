@@ -18,7 +18,7 @@ public class RulesController {
   private final RuleService ruleService;
 
   @GetMapping("/rules")
-  public String getRules(Model model) {
+  public String getRulesPage(Model model) {
     final var ruleDtos = ruleService.createRuleOverview();
 
     model.addAttribute("ruleOverviewDtos", ruleDtos);
@@ -32,7 +32,7 @@ public class RulesController {
   }
 
   @PostMapping("/newrule")
-  public String newRule(@ModelAttribute RuleCreationDto ruleCreationDto, Model model) {
+  public String newRule(@ModelAttribute RuleCreationDto ruleCreationDto) {
     ruleService.createRule(ruleCreationDto);
     return "redirect:/rules";
   }
@@ -40,12 +40,6 @@ public class RulesController {
   @PostMapping("/removerule/{id}")
   public String deleteRule(@PathVariable("id") Long id) {
     ruleService.deleteRule(id);
-    return "redirect:/rules";
-  }
-
-  @PostMapping("/confirmchangerule/{id}")
-  public String confirmChange(@PathVariable("id") Long id) {
-    ruleService.confirmChange(id);
     return "redirect:/rules";
   }
 
