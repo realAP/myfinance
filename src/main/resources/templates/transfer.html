@@ -29,7 +29,7 @@
        <span th:if="${transferOverviewDto.isChange()}" style="background-color: red;">
             <td bgcolor="orange">
                 <span th:text="${transferOverviewDto.getOldAmount()}"></span>
-                <form th:action="@{/confirmchangetransfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
+                <form th:action="@{/confirmchange/transfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
             </td>

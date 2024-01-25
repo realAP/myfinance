@@ -29,7 +29,7 @@
         <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
             <td bgcolor="orange">
                 <span th:text="${ruleOverviewDto.getOldAmount()}"></span>
-                <form th:action="@{/confirmchangerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                <form th:action="@{/confirmchange/rule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
             </td>

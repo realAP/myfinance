@@ -21,7 +21,7 @@ public class RulesController {
   private final RuleOverviewService ruleOverviewService;
 
   @GetMapping("/rules")
-  public String getRules(Model model) {
+  public String getRulesPage(Model model) {
     final var ruleDtos = ruleOverviewService.createRuleOverview();
 
     model.addAttribute("ruleOverviewDtos", ruleDtos);

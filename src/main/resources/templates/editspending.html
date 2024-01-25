@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/spending/edit}" th:object="${spendingCreationDto}" method="post">
+<form action="#" th:action="@{/spendings/edit}" th:object="${spendingEditDto}" method="post">
     <select th:field="*{category}">
         <option th:each="category : ${categoryDtos}"
                 th:value="${category.getCategorie()}"

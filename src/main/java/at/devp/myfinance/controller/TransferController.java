@@ -45,10 +45,4 @@ public class TransferController {
     return "redirect:/transfers";
   }
 
-  @PostMapping("/confirmchangetransfer/{id}")
-  public String confirmChange(@PathVariable("id") Long id) {
-    transferChangeService.confirmAmountChangeForTransfer(id);
-    return "redirect:/transfers";
-  }
-
 }

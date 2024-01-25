@@ -1,6 +1,6 @@
 package at.devp.myfinance.services.spending;
 
-import at.devp.myfinance.dto.SpendingCreationDto;
+import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
@@ -68,7 +68,7 @@ class SpendingEditServiceIntTest {
 
   @Test
   void whenEditSpendingGivenMsciWorldSpendingAndChangeAmountThenRuleAndTransferShouldUpdated() {
-    final var editedMsciWorldSpending = new SpendingCreationDto();
+    final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
     editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
@@ -97,7 +97,7 @@ class SpendingEditServiceIntTest {
 
   @Test
   void whenEditSpendingGivenMsciWorldSpendingAndChangeTransferThenTransferShouldBeUpdated() {
-    final var editedMsciWorldSpending = new SpendingCreationDto();
+    final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
     editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
@@ -122,7 +122,7 @@ class SpendingEditServiceIntTest {
 
   @Test
   void whenEditSpendingGivenMsciWorldSpendingAndChangeRuleThenRuleShouldBeUpdated() {
-    final var editedMsciWorldSpending = new SpendingCreationDto();
+    final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
     editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
@@ -146,7 +146,7 @@ class SpendingEditServiceIntTest {
 
   @Test
   void whenEditSpendingGivenMsciWorldSpendingAndChangeDetailsThenSaveIt() {
-    final var editedMsciWorldSpending = new SpendingCreationDto();
+    final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setAmount(msciWorldSpending.getAmount());
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
