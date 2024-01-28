@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequiredArgsConstructor
-public class EditSpendingController {
+public class SpendingEditController {
   private final SpendingEditService spendingEditService;
   private final CategoryService categoryService;
   private final RuleDropDownService ruleDropDownService;
