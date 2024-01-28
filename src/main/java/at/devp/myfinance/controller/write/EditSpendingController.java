@@ -1,4 +1,4 @@
-package at.devp.myfinance.controller.read;
+package at.devp.myfinance.controller.write;
 
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.TransferDropDownDto;

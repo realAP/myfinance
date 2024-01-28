@@ -2,7 +2,6 @@ package at.devp.myfinance.controller;
 
 import at.devp.myfinance.dto.TransferCreationDto;
 import at.devp.myfinance.dto.TransferDto;
-import at.devp.myfinance.services.transfer.TransferChangeService;
 import at.devp.myfinance.services.transfer.TransferCreatorService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;
 import at.devp.myfinance.services.transfer.TransferOverviewService;
@@ -20,7 +19,6 @@ public class TransferController {
   private final TransferOverviewService transferOverviewService;
   private final TransferCreatorService transferCreatorService;
   private final TransferDeletionService transferDeletionService;
-  private final TransferChangeService transferChangeService;
 
   @GetMapping("/transfers")
   public String getTransfers(Model model) {

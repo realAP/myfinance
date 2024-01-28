@@ -1,41 +1,24 @@
-package at.devp.myfinance.controller;
+package at.devp.myfinance.controller.write;
 
 import at.devp.myfinance.dto.RuleCreationDto;
-import at.devp.myfinance.dto.RuleOverviewDto;
-import at.devp.myfinance.services.rule.*;
+import at.devp.myfinance.services.rule.RuleChangeService;
+import at.devp.myfinance.services.rule.RuleCreatorService;
+import at.devp.myfinance.services.rule.RuleDeletionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class RulesController {
-
+public class RuleWritingController {
   private final RuleChangeService ruleChangeService;
   private final RuleCreatorService ruleCreatorService;
   private final RuleDeletionService ruleDeletionService;
-  private final RuleOverviewService ruleOverviewService;
-
-  @GetMapping("/rules")
-  public String getRulesPage(Model model) {
-    final var ruleDtos = ruleOverviewService.createRuleOverview();
-
-    model.addAttribute("ruleOverviewDtos", ruleDtos);
-    model.addAttribute("ruleOverviewDto", new RuleOverviewDto());
-    model.addAttribute("ruleCreationDto", new RuleCreationDto());
-
-    final var sumOfAllRules = ruleOverviewService.calculateSumOfAllRules();
-    model.addAttribute("sumOfAllRules", sumOfAllRules);
-
-    return "rules";
-  }
 
   @PostMapping("/newrule")
-  public String newRule(@ModelAttribute RuleCreationDto ruleCreationDto, Model model) {
+  public String newRule(@ModelAttribute RuleCreationDto ruleCreationDto) {
     ruleCreatorService.createRule(ruleCreationDto);
     return "redirect:/rules";
   }
