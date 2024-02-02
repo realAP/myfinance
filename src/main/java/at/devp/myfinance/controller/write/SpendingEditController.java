@@ -21,7 +21,7 @@ public class SpendingEditController {
   private final TransferDropDownService transferDropDownService;
 
 
-  @GetMapping("spendings/{id}/edit")
+  @GetMapping("/spendings/{id}/edit")
   public String getEditSpendingPage(@PathVariable("id") Long id, Model model) {
     final var spendingEditDto = spendingEditService.getSpendingEditDtoById(id);
     model.addAttribute("spendingEditDto", spendingEditDto);
