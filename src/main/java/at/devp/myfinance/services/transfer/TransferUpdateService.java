@@ -6,8 +6,6 @@ import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
 @RequiredArgsConstructor
 public class TransferUpdateService {
@@ -16,12 +14,7 @@ public class TransferUpdateService {
 
   public void addSpendingAndUpdate(final Transfer selectedTransfer, final Spending spending) {
     selectedTransfer.getSpendings().add(spending);
-
-    final var sumOfSpendings = selectedTransfer.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-    selectedTransfer.setAmount(sumOfSpendings);
-
-    selectedTransfer.setChange(sumOfSpendings != selectedTransfer.getOldAmount());
-
+    selectedTransfer.updateAmountAndChange();
     transferRepository.save(selectedTransfer);
   }
 

@@ -38,7 +38,7 @@ public class SpendingEditManagerService {
     }
 
     if (checkForTransferChange(spending, spendingEditDto)) {
-      spendingTransferService.editSpendingTransfer(spendingEditDto, spending);
+      spendingTransferService.setTransfer(spendingEditDto, spending);
     }
 
     spendingRepository.save(spending);

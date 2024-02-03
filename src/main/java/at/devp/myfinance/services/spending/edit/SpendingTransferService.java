@@ -15,9 +15,9 @@ public class SpendingTransferService {
   private final TransferEditService transferEditService;
 
   @Transactional
-  public void editSpendingTransfer(SpendingEditDto spendingEditDto, Spending spending) {
-    final var oldTransfer = spending.getTransfer();
+  public void setTransfer(SpendingEditDto spendingEditDto, Spending spending) {
     final var selectedTransfer = transferRepository.findById(spendingEditDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingEditDto.getTransferId() + " not found"));
+    final var oldTransfer = spending.getTransfer();
     spending.setTransfer(selectedTransfer);
     transferEditService.editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
   }

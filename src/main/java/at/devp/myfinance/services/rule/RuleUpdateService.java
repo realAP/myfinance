@@ -6,8 +6,6 @@ import at.devp.myfinance.repositories.RuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
 @RequiredArgsConstructor
 public class RuleUpdateService {
@@ -21,11 +19,7 @@ public class RuleUpdateService {
 
   public void addSpendingAndUpdate(final Rule selectedRule, final Spending spending) {
     selectedRule.getSpendings().add(spending);
-
-    final var sumOfSpendings = selectedRule.getSpendings().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-    selectedRule.setAmount(sumOfSpendings);
-    selectedRule.setChange(sumOfSpendings != selectedRule.getOldAmount());
-
+    selectedRule.updateAmountAndChange();
     ruleRepository.save(selectedRule);
   }
 }
