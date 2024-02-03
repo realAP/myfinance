@@ -2,10 +2,11 @@ package at.devp.myfinance.services.rule;
 
 import at.devp.myfinance.dto.RuleCreationDto;
 import at.devp.myfinance.repositories.RuleRepository;
-import jakarta.transaction.Transactional;
+import at.devp.myfinance.repositories.SpendingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class RuleCreatorServiceIntTest {
 
   @Autowired
@@ -22,9 +24,11 @@ class RuleCreatorServiceIntTest {
   @Autowired
   private RuleRepository ruleRepository;
 
+  @Autowired
+  private SpendingRepository spendingRepository;
+
 
   @Test
-  @Transactional //Danger, i don't like this in tests
   void whenCreateRuleGivenRuleCreationDtoThenReturnCreatedRule() {
     assertThat(ruleRepository.findAll(), hasSize(0));
 
@@ -43,7 +47,7 @@ class RuleCreatorServiceIntTest {
     assertThat(result.get(0).getAmount().toString(), is("0.00"));
     assertThat(result.get(0).getOldAmount().toString(), is("0.00"));
     assertThat(result.get(0).isChange(), is(false));
-    assertThat(result.get(0).getSpendings(), hasSize(0));
+    assertThat(spendingRepository.findAll(), hasSize(0));
   }
 
 }
