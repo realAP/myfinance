@@ -1,14 +1,8 @@
-package at.devp.myfinance.services.spending;
+package at.devp.myfinance.services.spending.edit;
 
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.entity.Spending;
-import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.rule.RuleEditService;
-import at.devp.myfinance.services.rule.RuleUpdateService;
-import at.devp.myfinance.services.transfer.TransferEditService;
-import at.devp.myfinance.services.transfer.TransferUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,42 +12,48 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class SpendingEditService {
-  private final RuleRepository ruleRepository;
-  private final RuleUpdateService ruleUpdateService;
-  private final RuleEditService ruleEditService;
   private final SpendingRepository spendingRepository;
-  private final TransferEditService transferEditService;
-  private final TransferUpdateService transferUpdateService;
-  private final TransferRepository transferRepository;
+  private final SpendingAmountService spendingAmountService;
+  private final SpendingRuleService spendingRuleService;
+  private final SpendingTransferService spendingTransferService;
 
   @Transactional
   public void editSpending(final SpendingEditDto spendingEditDto) {
     final var spending = spendingRepository.findById(spendingEditDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingEditDto.getId() + " not found"));
 
-    spending.setDescription(spendingEditDto.getDescription());
-    spending.setCategory(spendingEditDto.getCategory());
+    if (checkForDescriptionChange(spendingEditDto, spending)) {
+      spending.setDescription(spendingEditDto.getDescription());
+    }
 
-    if (spending.getAmount() != spendingEditDto.getAmount()) {
-      spending.setAmount(spendingEditDto.getAmount());
-      ruleUpdateService.updateStatus(spending.getRule());
-      transferUpdateService.updateStatus(spending.getTransfer());
+    if (checkForCategoryChange(spendingEditDto, spending)) {
+      spending.setCategory(spendingEditDto.getCategory());
+    }
+
+    if (checkForAmountChange(spendingEditDto, spending)) {
+      spendingAmountService.setAmount(spendingEditDto, spending);
     }
 
     if (checkForRuleChange(spending, spendingEditDto)) {
-      final var selectedRule = ruleRepository.findById(spendingEditDto.getRuleId()).orElseThrow(() -> new IllegalArgumentException("Rule with id " + spendingEditDto.getRuleId() + " not found"));
-      final var oldRule = spending.getRule();
-      spending.setRule(selectedRule);
-      ruleEditService.editRuleAndUpdate(oldRule, selectedRule, spending);
+      spendingRuleService.setRule(spendingEditDto, spending);
     }
 
     if (checkForTransferChange(spending, spendingEditDto)) {
-      final var oldTransfer = spending.getTransfer();
-      final var selectedTransfer = transferRepository.findById(spendingEditDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingEditDto.getTransferId() + " not found"));
-      spending.setTransfer(selectedTransfer);
-      transferEditService.editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
+      spendingTransferService.editSpendingTransfer(spendingEditDto, spending);
     }
 
     spendingRepository.save(spending);
+  }
+
+  private boolean checkForCategoryChange(SpendingEditDto spendingEditDto, Spending spending) {
+    return !Objects.equals(spending.getCategory(), spendingEditDto.getCategory());
+  }
+
+  private boolean checkForDescriptionChange(SpendingEditDto spendingEditDto, Spending spending) {
+    return !Objects.equals(spending.getDescription(), spendingEditDto.getDescription());
+  }
+
+  private boolean checkForAmountChange(SpendingEditDto spendingEditDto, Spending spending) {
+    return spending.getAmount() != spendingEditDto.getAmount();
   }
 
   private boolean checkForRuleChange(final Spending spending, final SpendingEditDto spendingEditDto) {

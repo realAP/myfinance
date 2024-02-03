@@ -4,7 +4,7 @@ import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
 import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.rule.RuleDropDownService;
-import at.devp.myfinance.services.spending.SpendingEditService;
+import at.devp.myfinance.services.spending.edit.SpendingEditService;
 import at.devp.myfinance.services.transfer.TransferDropDownService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

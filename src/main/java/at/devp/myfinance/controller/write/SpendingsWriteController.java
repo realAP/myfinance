@@ -4,7 +4,7 @@ import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.services.spending.SpendingCreatorService;
 import at.devp.myfinance.services.spending.SpendingDeletionService;
-import at.devp.myfinance.services.spending.SpendingEditService;
+import at.devp.myfinance.services.spending.edit.SpendingEditService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
