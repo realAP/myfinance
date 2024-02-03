@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class SpendingEditService {
+public class SpendingEditManagerService {
   private final SpendingRepository spendingRepository;
   private final SpendingAmountService spendingAmountService;
   private final SpendingRuleService spendingRuleService;

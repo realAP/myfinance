@@ -4,7 +4,7 @@ import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.services.spending.SpendingCreatorService;
 import at.devp.myfinance.services.spending.SpendingDeletionService;
-import at.devp.myfinance.services.spending.edit.SpendingEditService;
+import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SpendingsWriteController {
     private final SpendingCreatorService spendingCreatorService;
     private final SpendingDeletionService spendingDeletionService;
-    private final SpendingEditService spendingEditService;
+    private final SpendingEditManagerService spendingEditManagerService;
 
     @PostMapping("/spendings")
     public String createSpending(@ModelAttribute SpendingCreationDto spendingCreationDto){
@@ -33,7 +33,7 @@ public class SpendingsWriteController {
 
     @PostMapping("/spendings/edit")
     public String editSpending(@ModelAttribute SpendingEditDto spendingEditDto) {
-        spendingEditService.editSpending(spendingEditDto);
+        spendingEditManagerService.editSpending(spendingEditDto);
         return "redirect:/overview";
     }
 

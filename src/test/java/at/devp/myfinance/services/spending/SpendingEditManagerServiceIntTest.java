@@ -7,7 +7,7 @@ import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.spending.edit.SpendingEditService;
+import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
 import at.devp.myfinance.types.Category;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,10 @@ import static org.hamcrest.Matchers.is;
 @Sql("classpath:data_test.sql")
 @AutoConfigureTestEntityManager
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class SpendingEditServiceIntTest {
+class SpendingEditManagerServiceIntTest {
 
   @Autowired
-  private SpendingEditService underTest;
+  private SpendingEditManagerService underTest;
 
   @Autowired
   private SpendingRepository spendingRepository;
