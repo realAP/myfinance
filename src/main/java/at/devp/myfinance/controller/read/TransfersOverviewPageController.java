@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class TransfersOverviewController {
+public class TransfersOverviewPageController {
   private final TransferOverviewService transferOverviewService;
 
   @GetMapping("/transfers")

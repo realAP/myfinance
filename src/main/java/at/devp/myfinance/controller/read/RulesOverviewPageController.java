@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class RulesOverviewController {
+public class RulesOverviewPageController {
 
   private final RuleOverviewService ruleOverviewService;
 

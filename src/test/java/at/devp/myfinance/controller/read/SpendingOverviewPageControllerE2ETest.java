@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestEntityManager
-class OverviewControllerE2ETest {
+class SpendingOverviewPageControllerE2ETest {
 
   @Autowired
   private MockMvc mockMvc;

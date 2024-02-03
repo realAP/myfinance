@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class OverviewController {
+public class SpendingOverviewPageController {
 
   private final CategoryService categoryService;
   private final RuleDropDownService ruleDropDownService;
