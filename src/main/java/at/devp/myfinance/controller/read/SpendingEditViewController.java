@@ -1,4 +1,4 @@
-package at.devp.myfinance.controller.write;
+package at.devp.myfinance.controller.read;
 
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequiredArgsConstructor
-public class SpendingEditController {
+public class SpendingEditViewController {
   private final SpendingEditManagerService spendingEditManagerService;
   private final CategoryService categoryService;
   private final RuleDropDownService ruleDropDownService;
@@ -38,5 +38,4 @@ public class SpendingEditController {
 
     return "editspending";
   }
-
 }

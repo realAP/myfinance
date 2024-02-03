@@ -7,31 +7,29 @@ import at.devp.myfinance.services.spending.SpendingDeletionService;
 import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/spendings")
 public class SpendingsWriteController {
     private final SpendingCreatorService spendingCreatorService;
     private final SpendingDeletionService spendingDeletionService;
     private final SpendingEditManagerService spendingEditManagerService;
 
-    @PostMapping("/spendings")
+    @PostMapping
     public String createSpending(@ModelAttribute SpendingCreationDto spendingCreationDto){
         spendingCreatorService.createSpending(spendingCreationDto);
         return "redirect:/overview";
     }
 
-    @GetMapping("/spendings/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteSpending(@PathVariable("id") Long id) {
         spendingDeletionService.deleteById(id);
         return "redirect:/overview";
     }
 
-    @PostMapping("/spendings/edit")
+    @PostMapping("/edit")
     public String editSpending(@ModelAttribute SpendingEditDto spendingEditDto) {
         spendingEditManagerService.editSpending(spendingEditDto);
         return "redirect:/overview";

@@ -29,7 +29,7 @@
         <span th:if="${ruleOverviewDto.isChange()}" style="background-color: red;">
             <td bgcolor="orange">
                 <span th:text="${ruleOverviewDto.getOldAmount()}"></span>
-                <form th:action="@{/confirmchange/rule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+                <form th:action="@{/rules/{id}/confirmchange(id=${ruleOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
             </td>
@@ -40,7 +40,7 @@
         </td>
         </span>
         <td>
-            <form th:action="@{/removerule/{id}(id=${ruleOverviewDto.getId()})}" method="post">
+            <form th:action="@{/rules/{id}/delete(id=${ruleOverviewDto.getId()})}" method="post">
                 <input type="submit" value="Delete"/>
             </form>
         </td>
@@ -56,7 +56,7 @@
 <!--
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
 -->
-<form action="#" th:action="@{/newrule}" th:object="${ruleCreationDto}" method="post">
+<form action="#" th:action="@{/rules}" th:object="${ruleCreationDto}" method="post">
     <input type="text" th:field="*{description}" placeholder="Description"/>
     <input type="text" th:field="*{from}" placeholder="From"/>
     <input type="text" th:field="*{to}" placeholder="to"/>

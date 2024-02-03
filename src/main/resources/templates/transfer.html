@@ -29,7 +29,7 @@
        <span th:if="${transferOverviewDto.isChange()}" style="background-color: red;">
             <td bgcolor="orange">
                 <span th:text="${transferOverviewDto.getOldAmount()}"></span>
-                <form th:action="@{/confirmchange/transfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
+                <form th:action="@{/transfers/{id}/confirmchange(id=${transferOverviewDto.getId()})}" method="post">
                     <input type="submit" value="Confirm"/>
                 </form>
             </td>
@@ -40,7 +40,7 @@
         </td>
         </span>
         <td>
-            <form th:action="@{/removetransfer/{id}(id=${transferOverviewDto.getId()})}" method="post">
+            <form th:action="@{/transfers/{id}/delete(id=${transferOverviewDto.getId()})}" method="post">
                 <input type="submit" value="Delete"/>
             </form>
         </td>
@@ -50,7 +50,7 @@
 <!--
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
 -->
-<form action="#" th:action="@{/newtransfer}" th:object="${transferCreationDto}" method="post">
+<form action="#" th:action="@{/transfers}" th:object="${transferCreationDto}" method="post">
     <input type="text" th:field="*{description}" placeholder="Description"/>
     <input type="text" th:field="*{from}" placeholder="From"/>
     <input type="text" th:field="*{to}" placeholder="to"/>
