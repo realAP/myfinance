@@ -40,7 +40,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
+      run: mvn install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=realAP_myfinance
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+     
