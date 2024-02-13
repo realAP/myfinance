@@ -20,7 +20,7 @@ jobs:
       - name: Tests
         run: |
           mvn test
-          mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance
+          mvn sonar:sonar -Pcoverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
@@ -50,7 +50,7 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: SonarCloud Scan
-      run: mvn install -DskipTests org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=realAP_myfinance
+      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
