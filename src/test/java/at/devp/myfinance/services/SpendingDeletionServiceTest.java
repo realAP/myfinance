@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -25,6 +26,7 @@ import static org.hamcrest.Matchers.nullValue;
 @ActiveProfiles("test")
 @AutoConfigureTestEntityManager
 @Sql("classpath:data_test.sql")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class SpendingDeletionServiceTest {
   @Autowired
   private SpendingDeletionService underTest;
