@@ -76,4 +76,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ env.DOCKER_USERNAME }}/myfinance:latest
+          tags: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:latest
