@@ -100,3 +100,11 @@ jobs:
           docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:latest
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
+
+      - name: Update Dockerhub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance
+          readme-filepath: ./README.md
