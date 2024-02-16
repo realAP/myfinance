@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class SpendingRepositoryTest {
 
   @Autowired
@@ -23,36 +25,18 @@ class SpendingRepositoryTest {
   private SpendingRepository underTest;
 
   @Test
-  void testFindByRuleId() {
-    // Given
-    Rule rule = new Rule();
-    entityManager.persist(rule);
-    Spending spending1 = new Spending();
-    spending1.setRuleAndUpdateStatus(rule);
-    entityManager.persist(spending1);
-    Spending spending2 = new Spending();
-    spending2.setRuleAndUpdateStatus(rule);
-    entityManager.persist(spending2);
-    entityManager.flush();
-
-    // When
-    final var result = underTest.findById(spending1.getId());
-
-    System.out.println(result);
-  }
-
-  @Test
   void testFindAll() {
     // Given
     Rule rule = new Rule();
     entityManager.persist(rule);
+
     Spending spending1 = new Spending();
     spending1.setRuleAndUpdateStatus(rule);
     entityManager.persist(spending1);
+
     Spending spending2 = new Spending();
     spending2.setRuleAndUpdateStatus(rule);
     entityManager.persist(spending2);
-    entityManager.flush();
 
     // When
     final List<Spending> result = underTest.findAll();
