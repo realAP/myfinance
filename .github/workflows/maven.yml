@@ -61,6 +61,9 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
           cache: maven
+      - name: Build
+        run: mvn package -DskipTests
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
