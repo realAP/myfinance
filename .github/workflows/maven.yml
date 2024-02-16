@@ -14,14 +14,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'corretto'
           cache: maven
+
       - name: Tests
         run: |
-          mvn test sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io 
+          mvn test 
+
+      - name: SonarCloud
+        run: |
+          mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
@@ -30,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
