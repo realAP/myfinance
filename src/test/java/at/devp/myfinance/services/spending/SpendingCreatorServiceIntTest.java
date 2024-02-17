@@ -48,9 +48,9 @@ class SpendingCreatorServiceIntTest {
     spendingCreationDto.setAmount(new BigDecimal("100.00"));
     spendingCreationDto.setCategory(Category.VERGNUEGEN);
 
-    final var createdSpendingOverviewDto = underTest.createSpending(spendingCreationDto);
+    underTest.createSpending(spendingCreationDto);
 
-    final var result = spendingRepository.findById(createdSpendingOverviewDto.getId()).orElse(null);
+    final var result = spendingRepository.findAll().stream().findFirst().orElse(null);
 
     assertThat(result, is(notNullValue()));
     assertThat(result.getDescription(), is(spendingCreationDto.getDescription()));

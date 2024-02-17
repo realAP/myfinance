@@ -2,10 +2,11 @@ package at.devp.myfinance.controller.read;
 
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.SpendingCreationDto;
-import at.devp.myfinance.dto.SpendingOverviewDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
 import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.financeoverview.SpendingOverviewService;
+import at.devp.myfinance.services.financeoverview.SpendingRowDto;
+import at.devp.myfinance.services.financeoverview.SpendingCategoryBlockDto;
 import at.devp.myfinance.services.rule.RuleDropDownService;
 import at.devp.myfinance.services.transfer.TransferDropDownService;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,12 @@ public class SpendingOverviewPageController {
 
   @GetMapping("/overview")
   public String getfinanceOverview(Model model) {
-    final var spendingDtos = spendingOverviewService.createOverview();
-    model.addAttribute("spendingDtos", spendingDtos);
+    final var spendingCategoryBlockDtos = spendingOverviewService.createOverview();
+    model.addAttribute("spendingCategoryBlockDtos", spendingCategoryBlockDtos);
+    model.addAttribute("spendingCategoryBlockDto", new SpendingCategoryBlockDto());
+    model.addAttribute("spendingRowDto", new SpendingRowDto());
     final var categoryDtos = categoryService.createCategories();
     model.addAttribute("categoryDtos", categoryDtos);
-    model.addAttribute("spendingOverviewDto", new SpendingOverviewDto());
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
 
     final var sumOfSpendings = spendingOverviewService.calculateSum();

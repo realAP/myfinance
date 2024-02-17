@@ -2,7 +2,6 @@ package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.dto.SpendingCreationDto;
-import at.devp.myfinance.dto.SpendingOverviewDto;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
@@ -26,7 +25,7 @@ public class SpendingCreatorService {
 
 
   @Transactional
-  public SpendingOverviewDto createSpending(final SpendingCreationDto spendingCreationDto) {
+  public void createSpending(final SpendingCreationDto spendingCreationDto) {
     final var spending = new Spending();
     spending.setDescription(spendingCreationDto.getDescription());
     spending.setAmount(spendingCreationDto.getAmount());
@@ -46,7 +45,6 @@ public class SpendingCreatorService {
     spending.setTransfer(transfer);
     ruleUpdateService.addSpendingAndUpdate(rule, spending);
 
-    final var createdSpending = spendingRepository.save(spending);
-    return converter.convert2SpendingOverviewDto(createdSpending);
+    spendingRepository.save(spending);
   }
 }
