@@ -19,10 +19,11 @@
     </tr>
     </thead>
     <tbody>
-    <th th:each="spendingCategoryBlockDto : ${spendingCategoryBlockDtos}">
+    <div th:each="spendingCategoryBlockDto : ${spendingCategoryBlockDtos}">
         <tr th:each="spendingRowDto : ${spendingCategoryBlockDto.getSpendingRowDtos()}">
             <td th:text="${spendingRowDto.id}">ID</td>
-            <td th:text="${spendingRowDto.category}">Category</td>
+<!--            <td th:text="${spendingRowDto.category}">Category</td>-->
+            <td></td>
             <td th:text="${spendingRowDto.description}">Description</td>
             <td th:text="${spendingRowDto.amount}">Amount</td>
             <td th:text="${spendingRowDto.getRuleDescription()}">Rule</td>
@@ -39,10 +40,16 @@
         </tr>
 
         <tr>
+            <td></td>
             <td th:text="${spendingCategoryBlockDto.category}">Category</td>
+            <td>Summe:</td>
             <td th:text="${spendingCategoryBlockDto.spendingSumPerCategory}">Summe</td>
         </tr>
-    </th>
+
+        <tr>
+            <td></td>
+        </tr>
+    </div>
     <tr>
         <td>Summe</td>
         <td></td>

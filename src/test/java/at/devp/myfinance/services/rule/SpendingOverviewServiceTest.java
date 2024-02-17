@@ -115,11 +115,15 @@ class SpendingOverviewServiceTest {
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getAmount(), is(new BigDecimal("100.00")));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getDescription(), is("MSCI World"));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getCategory(), is(Category.INVESTITIONEN.toString()));
+    assertThat(resultInvestment.getSpendingRowDtos().get(0).getRuleDescription(), is("Rule1"));
+    assertThat(resultInvestment.getSpendingRowDtos().get(0).getTransferDescription(), is("Transfer1"));
 
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getId(), is(2L));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getAmount(), is(new BigDecimal("200.00")));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getDescription(), is("MSCI EM"));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getCategory(), is(Category.INVESTITIONEN.toString()));
+    assertThat(resultInvestment.getSpendingRowDtos().get(1).getRuleDescription(), is("Rule1"));
+    assertThat(resultInvestment.getSpendingRowDtos().get(1).getTransferDescription(), is("Transfer1"));
 
     final var resultVergnuegen = findSpendingTableDtoByCategory(result, Category.VERGNUEGEN);
     assertThat(resultVergnuegen.getSpendingRowDtos().size(), is(2));
@@ -127,11 +131,13 @@ class SpendingOverviewServiceTest {
     assertThat(resultVergnuegen.getSpendingRowDtos().get(0).getAmount(), is(new BigDecimal("10.00")));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(0).getDescription(), is("Kino"));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(0).getCategory(), is(Category.VERGNUEGEN.toString()));
+    assertThat(resultVergnuegen.getSpendingRowDtos().get(0).getRuleDescription(), is("Rule1"));
 
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getId(), is(4L));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getAmount(), is(new BigDecimal("20.00")));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getDescription(), is("Konzert"));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getCategory(), is(Category.VERGNUEGEN.toString()));
+    assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getRuleDescription(), is("Rule1"));
   }
 
   private SpendingCategoryBlockDto findSpendingTableDtoByCategory(List<SpendingCategoryBlockDto> spendingCategoryBlockDtos, Category category) {

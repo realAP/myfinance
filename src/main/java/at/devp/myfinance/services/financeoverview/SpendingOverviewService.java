@@ -42,6 +42,8 @@ public class SpendingOverviewService {
     spendingRowDto.setAmount(spending.getAmount());
     spendingRowDto.setDescription(spending.getDescription());
     spendingRowDto.setCategory(spending.getCategory().toString());
+    spendingRowDto.setRuleDescription(spending.getRule().getDescription());
+    spendingRowDto.setTransferDescription(spending.getTransfer().getDescription());
     return spendingRowDto;
   }
 
