@@ -19,26 +19,30 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="spendingOverviewDto : ${spendingDtos}">
-        <td th:text="${spendingOverviewDto.id}">ID</td>
-        <td th:text="${spendingOverviewDto.category}">Category</td>
-        <td th:text="${spendingOverviewDto.description}">Description</td>
-        <td th:text="${spendingOverviewDto.amount}">Amount</td>
-        <td th:text="${spendingOverviewDto.getRuleDescription()}">Rule</td>
-        <td th:text="${spendingOverviewDto.getTransferDescription()}">Rule</td>
-        <!--
-                <td th:text="${spendingOverviewDto.getTransferDto().getDescription()}">Transfer</td>
-        -->
-        <!-- Weitere Datenspalten hier -->
-        <td>
-            <form th:action="@{/spendings/{id}/delete(id=${spendingOverviewDto.id})}" method="get">
-                <input type="submit" value="Delete"/>
-            </form>
-            <form th:action="@{/spendings/{id}/edit(id=${spendingOverviewDto.id})}" method="get">
-                <input type="submit" value="Edit"/>
-            </form>
-        </td>
-    </tr>
+    <th th:each="spendingCategoryBlockDto : ${spendingCategoryBlockDtos}">
+        <tr th:each="spendingRowDto : ${spendingCategoryBlockDto.getSpendingRowDtos()}">
+            <td th:text="${spendingRowDto.id}">ID</td>
+            <td th:text="${spendingRowDto.category}">Category</td>
+            <td th:text="${spendingRowDto.description}">Description</td>
+            <td th:text="${spendingRowDto.amount}">Amount</td>
+            <td th:text="${spendingRowDto.getRuleDescription()}">Rule</td>
+            <td th:text="${spendingRowDto.getTransferDescription()}">Transfer</td>
+
+            <td>
+                <form th:action="@{/spendings/{id}/delete(id=${spendingRowDto.id})}" method="get">
+                    <input type="submit" value="Delete"/>
+                </form>
+                <form th:action="@{/spendings/{id}/edit(id=${spendingRowDto.id})}" method="get">
+                    <input type="submit" value="Edit"/>
+                </form>
+            </td>
+        </tr>
+
+        <tr>
+            <td th:text="${spendingCategoryBlockDto.category}">Category</td>
+            <td th:text="${spendingCategoryBlockDto.spendingSumPerCategory}">Summe</td>
+        </tr>
+    </th>
     <tr>
         <td>Summe</td>
         <td></td>
