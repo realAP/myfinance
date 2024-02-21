@@ -6,3 +6,4 @@
 ## How to run the project
 1. Clone the repository ```git clone https://github.com/realAP/myfinance.git```
 1. Run ```docker compose up -d```
+1. go to http://localhost:8080/overview
