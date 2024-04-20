@@ -21,10 +21,10 @@
         <td th:text="${earningDto.description}">Description</td>
         <td th:text="${earningDto.amount}">Amount</td>
         <td>
-            <form th:action="@{/earning/{id}/delete(id=${earningDto.id})}" method="get">
+            <form th:action="@{/earnings/{id}/delete(id=${earningDto.id})}" method="get">
                 <input type="submit" value="Delete"/>
             </form>
-            <form th:action="@{/earning/{id}/edit(id=${earningDto.id})}" method="get">
+            <form th:action="@{/earnings/{id}/edit(id=${earningDto.id})}" method="get">
                 <input type="submit" value="Edit"/>
             </form>
         </td>
