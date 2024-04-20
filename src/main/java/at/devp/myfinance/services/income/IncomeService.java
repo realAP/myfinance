@@ -1,7 +1,7 @@
 package at.devp.myfinance.services.income;
 
 import at.devp.myfinance.entity.Earning;
-import at.devp.myfinance.repositories.IncomeRepository;
+import at.devp.myfinance.repositories.EarningRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class IncomeService {
 
-  private final IncomeRepository incomeRepository;
+  private final EarningRepository incomeRepository;
 
   @NonNull
   public IncomeDto createIncomeOverview() {

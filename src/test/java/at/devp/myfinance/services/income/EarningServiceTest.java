@@ -1,7 +1,7 @@
 package at.devp.myfinance.services.income;
 
 import at.devp.myfinance.entity.Earning;
-import at.devp.myfinance.repositories.IncomeRepository;
+import at.devp.myfinance.repositories.EarningRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class EarningServiceTest {
 
   @Mock
-  private IncomeRepository incomeRepository;
+  private EarningRepository incomeRepository;
   @InjectMocks
   private IncomeService underTest;
 
