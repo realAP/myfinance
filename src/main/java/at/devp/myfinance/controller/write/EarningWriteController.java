@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class EarningWriteController {
   private final EarningCreationService earningCreationService;
   private final EarningDeletionService earningDeletionService;
-  //private final SpendingDeletionService spendingDeletionService;
-  //private final SpendingEditManagerService spendingEditManagerService;
 
   @PostMapping
   public String createEarning(@ModelAttribute EarningCreationDto earningCreationDto) {
@@ -27,11 +25,5 @@ public class EarningWriteController {
     earningDeletionService.deleteById(id);
     return "redirect:/income";
   }
-
-  //@PostMapping("/edit")
-  //public String editSpending(@ModelAttribute SpendingEditDto spendingEditDto) {
-  //    spendingEditManagerService.editSpending(spendingEditDto);
-  //    return "redirect:/overview";
-  //}
 
 }
