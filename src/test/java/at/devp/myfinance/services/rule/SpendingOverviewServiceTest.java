@@ -39,9 +39,9 @@ class SpendingOverviewServiceTest {
   private Spending vergnuegenSpending1 = new Spending();
   private Spending vergnuegenSpending2 = new Spending();
 
-  private Rule rule1 = new Rule();
+  private final Rule rule1 = new Rule();
 
-  private Transfer transfer1 = new Transfer();
+  private final Transfer transfer1 = new Transfer();
 
   @BeforeEach
   void setUp() {
