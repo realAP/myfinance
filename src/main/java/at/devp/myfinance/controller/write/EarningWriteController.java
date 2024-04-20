@@ -21,7 +21,7 @@ public class EarningWriteController {
   }
 
   @GetMapping("/{id}/delete")
-  public String deleteSpending(@PathVariable("id") Long id) {
+  public String deleteEarning(@PathVariable("id") Long id) {
     earningDeletionService.deleteById(id);
     return "redirect:/income";
   }
