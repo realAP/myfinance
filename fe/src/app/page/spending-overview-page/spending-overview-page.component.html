@@ -1,0 +1,70 @@
+<p>spending-overview-page works!</p>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Overview</title>
+  <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Rule</th>
+    <th>Transfer</th>
+    <th>Action</th>
+    <!-- Weitere Spaltenköpfe hier -->
+  </tr>
+  </thead>
+  <tbody>
+
+    @for (spendingCategoryBlockDto of spendingCategoryBlockDtos; track spendingCategoryBlockDto) {
+      @for (spendingRowDto of spendingCategoryBlockDto.spendingRowDtos; track spendingRowDto) {
+
+        <td>{{ spendingRowDto.id }}</td>
+        <!--            <td th:text="${spendingRowDto.category}">Category</td>-->
+        <td></td>
+        <td>{{ spendingRowDto.category }}</td>
+        <td>{{ spendingRowDto.amount }}</td>
+        <td>{{ spendingRowDto.ruleDescription }}</td>
+        <td>{{ spendingRowDto.transferDescription }}</td>
+
+        <td>
+          <form th:action="@{/spendings/{id}/delete(id=${spendingRowDto.id})}" method="get">
+            <input type="submit" value="Delete"/>
+          </form>
+          <form th:action="@{/spendings/{id}/edit(id=${spendingRowDto.id})}" method="get">
+            <input type="submit" value="Edit"/>
+          </form>
+        </td>
+      }
+      <tr>
+        <td></td>
+        <td th:text="${spendingCategoryBlockDto.category}">Category</td>
+        <td>Summe:</td>
+        <td th:text="${spendingCategoryBlockDto.spendingSumPerCategory}">Summe</td>
+      </tr>
+
+      <tr>
+        <td></td>
+      </tr>
+    }
+  <tr>
+    <td>Summe</td>
+    <td></td>
+    <td></td>
+    <td th:text="${sumOfSpendings}"></td>
+  </tr>
+  </tbody>
+</table>
+<!--
+&lt;!&ndash; Form to Add New Data &ndash;&gt;
+-->
+</body>
+</html>
+
+
