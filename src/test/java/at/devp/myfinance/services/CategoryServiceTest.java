@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.is;
 
 class CategoryServiceTest {
 
-  private CategoryService underTest = new CategoryService();
+  private final CategoryService underTest = new CategoryService();
 
   @Test
   void whenGivenCategoryEnumsThenReturnAListOfAllCategoriesWithItsCorrespondingId() {
