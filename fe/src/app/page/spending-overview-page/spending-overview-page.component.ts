@@ -9,14 +9,16 @@ import {SpendingCategoryBlockDto} from "../../model/backend";
   templateUrl: './spending-overview-page.component.html',
   styleUrl: './spending-overview-page.component.scss'
 })
-export class SpendingOverviewPageComponent {
+export class SpendingOverviewPageComponent implements OnInit {
 
   spendingCategoryBlockDtos: SpendingCategoryBlockDto[] = [];
 
   constructor(private backendService: BackendService) {
-    backendService.getSpendingOverviewDto().subscribe((res ) => {
+  }
+
+  ngOnInit(): void {
+    this.backendService.getSpendingCategoryBlockDto().subscribe((res) => {
       this.spendingCategoryBlockDtos = res;
-      console.log(res);
     })
   }
 

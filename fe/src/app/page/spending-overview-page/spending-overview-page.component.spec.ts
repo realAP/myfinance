@@ -1,23 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SpendingOverviewPageComponent } from './spending-overview-page.component';
+import {SpendingOverviewPageComponent} from "./spending-overview-page.component";
+import {Mock, mock} from 'ts-jest-mocker';
+import {BackendService} from "../../service/backend.service";
+import {of} from "rxjs";
+import {Category, SpendingCategoryBlockDto} from "../../model/backend";
 
 describe('SpendingOverviewPageComponent', () => {
-  let component: SpendingOverviewPageComponent;
-  let fixture: ComponentFixture<SpendingOverviewPageComponent>;
+  let underTest: SpendingOverviewPageComponent;
+  let backendService: Mock<BackendService>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SpendingOverviewPageComponent]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    backendService = mock(BackendService);
+    underTest = new SpendingOverviewPageComponent(backendService);
+  })
 
-    fixture = TestBed.createComponent(SpendingOverviewPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('onInit should take data from backend and store it into spendingCategoryBlockDtos', () => {
+    backendService.getSpendingCategoryBlockDto.mockReturnValue(of([
+      {
+        category: Category.BANK,
+        spendingRowDtos: [{ }],
+        spendingSumPerCategory: 100
+      }
+    ] as SpendingCategoryBlockDto[]));
+
+    underTest.ngOnInit();
+
+    expect(underTest.spendingCategoryBlockDtos.length).toBe(1);
+    expect(underTest.spendingCategoryBlockDtos[0].category).toBe(Category.BANK);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
