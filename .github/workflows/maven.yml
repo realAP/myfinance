@@ -22,6 +22,11 @@ jobs:
           cd fe
           npm ci
 
+      - name: build
+        run: |
+          cd fe
+          npm run build
+
       - name: Test frontend
         run: |
           cd fe
