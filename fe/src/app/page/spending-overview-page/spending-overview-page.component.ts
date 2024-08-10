@@ -1,11 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../../service/backend.service";
 import {SpendingCategoryBlockDto} from "../../model/backend";
+import {TableModule} from "primeng/table";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-spending-overview-page',
   standalone: true,
-  imports: [],
+  imports: [
+    TableModule,
+    NgForOf
+  ],
   templateUrl: './spending-overview-page.component.html',
   styleUrl: './spending-overview-page.component.scss'
 })

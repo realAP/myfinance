@@ -1,3 +1,63 @@
+<div class="card">
+  <p-table
+    [value]="spendingCategoryBlockDtos"
+    sortField="category"
+    sortMode="single"
+    [scrollable]="true"
+    rowGroupMode="subheader"
+    groupRowsBy="category"
+    >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Kategorie</th>
+        <th>Name</th>
+        <th>Betrag</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="groupheader" let-spendingCategoryBlockDto>
+      <tr pRowGroupHeader>
+        <td colspan="3">
+          <span class="font-bold ml-2">{{ spendingCategoryBlockDto.category }}</span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="groupfooter" let-spendingCategoryBlockDto>
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="3" class="text-right font-bold pr-6">
+          Summe: {{ spendingCategoryBlockDto.spendingSumPerCategory }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-spendingCategoryBlockDto let-rowIndex="rowIndex">
+      @for (spendingRow of spendingCategoryBlockDto.spendingRowDtos; track spendingRow.id) {
+        <tr>
+          <td>
+
+          </td>
+          <td>
+            {{ spendingRow.description }}
+          </td>
+          <td>
+            <!--
+                      <img
+                        src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                        [class]="'flag-' + customer.country.code"
+                        style="width: 20px">
+            -->
+            <span class="ml-1 vertical-align-middle">
+            {{ spendingRow.amount }}
+          </span>
+          </td>
+        </tr>
+      }
+    </ng-template>
+  </p-table>
+</div>
+
+
+<!--
 <p>spending-overview-page works!</p>
 
 <!DOCTYPE html>
@@ -17,7 +77,7 @@
     <th>Rule</th>
     <th>Transfer</th>
     <th>Action</th>
-    <!-- Weitere Spaltenköpfe hier -->
+    &lt;!&ndash; Weitere Spaltenköpfe hier &ndash;&gt;
   </tr>
   </thead>
   <tbody>
@@ -26,7 +86,7 @@
       @for (spendingRowDto of spendingCategoryBlockDto.spendingRowDtos; track spendingRowDto) {
 
         <td>{{ spendingRowDto.id }}</td>
-        <!--            <td th:text="${spendingRowDto.category}">Category</td>-->
+        &lt;!&ndash;            <td th:text="${spendingRowDto.category}">Category</td>&ndash;&gt;
         <td></td>
         <td>{{ spendingRowDto.category }}</td>
         <td>{{ spendingRowDto.amount }}</td>
@@ -61,10 +121,11 @@
   </tr>
   </tbody>
 </table>
-<!--
+&lt;!&ndash;
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
--->
+&ndash;&gt;
 </body>
 </html>
 
 
+-->

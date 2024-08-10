@@ -1,4 +1,8 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 /* You can add global styles to this file, and also import other style files */
+/*
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -71,7 +75,7 @@ button:hover, .button-like:hover {
   background-color: #0056b3;
 }
 
-/* Enhanced link styling */
+!* Enhanced link styling *!
 a {
   color: #007bff;
   text-decoration: none;
@@ -90,19 +94,19 @@ a:visited {
   color: #5a5a5a;
 }
 
-/* Responsive design for smaller screens */
+!* Responsive design for smaller screens *!
 @media screen and (max-width: 768px) {
   table {
     width: 100%;
   }
 }
 
-/* Additional styles for better readability and consistency */
+!* Additional styles for better readability and consistency *!
 p, li {
   line-height: 1.6;
 }
 
-/* Improved navigation bar styling */
+!* Improved navigation bar styling *!
 .navbar {
   background-color: #333;
   overflow: hidden;
@@ -122,13 +126,13 @@ p, li {
   color: black;
 }
 
-/* Accessibility improvements */
+!* Accessibility improvements *!
 :focus {
   outline: 3px solid #ffbf47;
   outline-offset: 2px;
 }
 
-/* Style for hyperlink as a button */
+!* Style for hyperlink as a button *!
 a.button-link {
   display: inline-block;
   padding: 10px 15px;
@@ -143,36 +147,37 @@ a.button-link {
   margin: 1rem;
 }
 
-/* Hover effect */
+!* Hover effect *!
 a.button-link:hover {
   background-color: #0056b3;
   color: #fff;
 }
 
-/* Active state effect */
+!* Active state effect *!
 a.button-link:active {
   background-color: #004080;
 }
 
 
-/* Stil für Dropdown-Menü */
+!* Stil für Dropdown-Menü *!
 select {
-  width: 100%; /* Volle Breite für bessere Sichtbarkeit */
-  padding: 10px; /* Zusätzlicher Innenabstand für eine größere Erscheinung */
-  border: 1px solid #ddd; /* Feine Grenzlinie ähnlich wie bei Eingabefeldern */
-  border-radius: 4px; /* Abgerundete Ecken für modernen Look */
-  background-color: white; /* Hintergrundfarbe */
-  font-size: 16px; /* Größere Schriftart für bessere Lesbarkeit */
-  color: #333; /* Textfarbe */
-  -webkit-appearance: none; /* Entfernt den Standardbrowserstil bei WebKit-Browsern */
-  -moz-appearance: none; /* Entfernt den Standardbrowserstil bei Mozilla-Browsern */
-  appearance: none; /* Standardbrowserstil entfernen */
-  cursor: pointer; /* Cursor als Zeiger, um die Klickbarkeit anzuzeigen */
+  width: 100%; !* Volle Breite für bessere Sichtbarkeit *!
+  padding: 10px; !* Zusätzlicher Innenabstand für eine größere Erscheinung *!
+  border: 1px solid #ddd; !* Feine Grenzlinie ähnlich wie bei Eingabefeldern *!
+  border-radius: 4px; !* Abgerundete Ecken für modernen Look *!
+  background-color: white; !* Hintergrundfarbe *!
+  font-size: 16px; !* Größere Schriftart für bessere Lesbarkeit *!
+  color: #333; !* Textfarbe *!
+  -webkit-appearance: none; !* Entfernt den Standardbrowserstil bei WebKit-Browsern *!
+  -moz-appearance: none; !* Entfernt den Standardbrowserstil bei Mozilla-Browsern *!
+  appearance: none; !* Standardbrowserstil entfernen *!
+  cursor: pointer; !* Cursor als Zeiger, um die Klickbarkeit anzuzeigen *!
 }
 
-/* Stil für das Pfeilsymbol (optional) */
+!* Stil für das Pfeilsymbol (optional) *!
 select::-ms-expand {
-  display: none; /* Entfernt das standardmäßige Pfeilsymbol in IE/Edge */
+  display: none; !* Entfernt das standardmäßige Pfeilsymbol in IE/Edge *!
 }
 
-/* Fügen Sie gegebenenfalls weitere browser-spezifische Stile hinzu */
+!* Fügen Sie gegebenenfalls weitere browser-spezifische Stile hinzu *!
+*/
