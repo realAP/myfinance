@@ -39,7 +39,9 @@ class SpendingCreatorServiceIntTest {
 
   @Test
   void whenCreateSpendingGivenTransferAndRuleBothExistThenCreateNewSpending() {
-    final var transfer = transferRepository.save(new Transfer());
+    final var transferToSave = new Transfer();
+    transferToSave.setDateOfExecution(LocalDate.of(2024, 8, 24));
+    final var transfer = transferRepository.save(transferToSave);
 
     final var ruleToSave = new Rule();
     ruleToSave.setDateOfExecution(LocalDate.of(2024, 8, 24));

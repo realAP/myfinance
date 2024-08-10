@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
@@ -38,6 +39,7 @@ class TransferCreatorServiceIntTest {
     transferCreationDto.setDescription("Spotify");
     transferCreationDto.setFrom("Main");
     transferCreationDto.setTo("Volksbank");
+    transferCreationDto.setDateOfExecution(LocalDate.of(2024, 8, 24));
 
     underTest.createTransfer(transferCreationDto);
     final var result = transferRepository.findAll();
@@ -50,6 +52,7 @@ class TransferCreatorServiceIntTest {
     assertThat(resultTransfer.getAmount(), is(new BigDecimal("0.00")));
     assertThat(resultTransfer.getOldAmount(), is(new BigDecimal("0.00")));
     assertThat(resultTransfer.isChange(), is(false));
+    assertThat(resultTransfer.getDateOfExecution(), is(LocalDate.of(2024, 8, 24)));
     assertThat(spendingRepository.findAll(), hasSize(0));
   }
 

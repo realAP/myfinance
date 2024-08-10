@@ -16,6 +16,7 @@ public class TransferCreatorService {
     transfer.setTo(transferCreationDto.getTo());
     transfer.setFrom(transferCreationDto.getFrom());
     transfer.setDescription(transferCreationDto.getDescription());
+    transfer.setDateOfExecution(transferCreationDto.getDateOfExecution());
 
     transferRepository.save(transfer);
   }
