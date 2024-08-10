@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,7 +28,8 @@ class SpendingRepositoryTest {
   @Test
   void testFindAll() {
     // Given
-    Rule rule = new Rule();
+    final var rule = new Rule();
+    rule.setDateOfExecution(LocalDate.of(2022, 1, 1));
     entityManager.persist(rule);
 
     Spending spending1 = new Spending();
@@ -49,7 +51,9 @@ class SpendingRepositoryTest {
 
   @Test
   void whenFindAllSpendingsByRuleIdGivenThreeSpendingsWithSameRuleThenReturnThreeSpendings() {
-    final var rule = entityManager.persist(new Rule());
+    final var ruleToSave = new Rule();
+    ruleToSave.setDateOfExecution(LocalDate.of(2022, 1, 1));
+    final var rule = entityManager.persist(ruleToSave);
 
     final var spending1 = new Spending();
     spending1.setRuleAndUpdateStatus(rule);

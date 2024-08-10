@@ -16,6 +16,7 @@ public class RuleCreatorService {
     rule.setTo(ruleCreationDto.getTo());
     rule.setFrom(ruleCreationDto.getFrom());
     rule.setDescription(ruleCreationDto.getDescription());
+    rule.setDateOfExecution(ruleCreationDto.getDateOfExecution());
 
     ruleRepository.save(rule);
   }

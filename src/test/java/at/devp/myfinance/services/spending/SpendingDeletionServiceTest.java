@@ -1,4 +1,4 @@
-package at.devp.myfinance.services;
+package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
@@ -6,7 +6,6 @@ import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.spending.SpendingDeletionService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

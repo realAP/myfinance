@@ -1,3 +1,3 @@
-amount,is_change,old_amount,id,description,from,to
-236.85,false,236.85,5,langzeitinvest1,Einnahmen,Main
-23,false,23,9,zocken,Einnahmen,Main
+amount,date_of_execution,is_change,old_amount,id,description,from,to
+236.85,2024-08-24,false,236.85,5,langzeitinvest1,Einnahmen,Main
+23,2024-08-01,false,23,9,zocken,Einnahmen,Main

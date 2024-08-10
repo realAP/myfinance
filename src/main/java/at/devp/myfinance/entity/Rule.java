@@ -24,7 +24,7 @@ public class Rule {
   private Long id;
 
   // See: https://stackoverflow.com/a/32443004 why to use LocalDate
-  @Column
+  @Column(nullable = false)
   private LocalDate dateOfExecution;
 
   @Column

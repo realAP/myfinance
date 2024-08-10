@@ -14,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -39,7 +40,10 @@ class SpendingCreatorServiceIntTest {
   @Test
   void whenCreateSpendingGivenTransferAndRuleBothExistThenCreateNewSpending() {
     final var transfer = transferRepository.save(new Transfer());
-    final var rule = ruleRepository.save(new Rule());
+
+    final var ruleToSave = new Rule();
+    ruleToSave.setDateOfExecution(LocalDate.of(2024, 8, 24));
+    final var rule = ruleRepository.save(ruleToSave);
 
     final var spendingCreationDto = new SpendingCreationDto();
     spendingCreationDto.setTransferId(transfer.getId());
