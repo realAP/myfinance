@@ -27,5 +27,13 @@ export const routes: Routes = [
     path: 'banks',
     loadComponent: () => import('./component/bank-creation/bank-creation.component').then(m => m.BankCreationComponent)
   },
+  {
+    path: 'spaces',
+    loadComponent: () => import('./component/space-creation/space-creation.component').then(m => m.SpaceCreationComponent)
+  },
+  {
+    path: 'categories',
+    loadComponent: () => import('./component/category-creation/category-creation.component').then(m => m.CategoryCreationComponent)
+  }
 
 ];
