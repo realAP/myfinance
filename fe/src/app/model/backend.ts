@@ -19,3 +19,7 @@ export interface SpendingRowDto {
   amount: number; // Use appropriate numeric type (e.g., number, BigDecimal, etc.)
   category: string;
 }
+
+export interface SpaceCreationDto {
+  name: string;
+}

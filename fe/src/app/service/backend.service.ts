@@ -1,7 +1,7 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {SpendingCategoryBlockDto} from "../model/backend";
+import {SpaceCreationDto, SpendingCategoryBlockDto} from "../model/backend";
 
 
 @Injectable({
@@ -18,6 +18,13 @@ export class BackendService {
 
   getSpendingCategoryBlockDto(): Observable<SpendingCategoryBlockDto[]> {
     return this.httpClient.get<SpendingCategoryBlockDto[]>(this.TARGET + this.BASE_API + "/overview");
+  }
+
+
+  createSpace(name: string): void {
+    const spaceCreationDto: SpaceCreationDto = {name: name};
+    this.httpClient.post(this.TARGET + this.BASE_API + "/write/spaces", spaceCreationDto).subscribe(() => console.log("Space created"));
+    ;
   }
 
 }

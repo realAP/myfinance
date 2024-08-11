@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class SpendingOverviewControllerFe {
 
     private final SpendingOverviewService spendingOverviewService;
 
     @GetMapping("/fe/overview")
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<SpendingCategoryBlockDto> getFinanceOverview() {
         return spendingOverviewService.createOverview();
     }
