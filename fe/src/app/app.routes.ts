@@ -12,7 +12,16 @@ export const routes: Routes = [
     loadComponent: () => import('./page/spending-overview-page/spending-overview-page.component').then(m => m.SpendingOverviewPageComponent)
   },
   {
-    path: 'spending',
+    path: 'spendings',
     loadComponent: () => import('./component/spending-creation/spending-creation.component').then(m => m.SpendingCreationComponent)
-  }
+  },
+  {
+    path: 'rules',
+    loadComponent: () => import('./component/rule-creation/rule-creation.component').then(m => m.RuleCreationComponent)
+  },
+  {
+    path: 'transfers',
+    loadComponent: () => import('./component/transfer-creation/transfer-creation.component').then(m => m.TransferCreationComponent)
+  },
+
 ];

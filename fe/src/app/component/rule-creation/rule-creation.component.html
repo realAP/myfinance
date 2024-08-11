@@ -1,0 +1,42 @@
+<p>rule-creation works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText/>
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
+      <label for="date">Datum</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="from-space"
+        [options]="spaces"
+        [(ngModel)]="selectedFromSpace"/>
+      <label for="from-space">Von Space</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="target-space"
+        [options]="spaces"
+        [(ngModel)]="selectedTargetSpace"/>
+      <label for="target-space">Nach Space</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Submit"/>
+  </div>
+
+</div>
