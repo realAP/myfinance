@@ -12,10 +12,10 @@ import {FloatLabelModule} from "primeng/floatlabel";
   selector: 'app-spending-creation-page',
   standalone: true,
   imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, CalendarModule, DropdownModule, InputNumberModule, FloatLabelModule],
-  templateUrl: './spending-creation-page.component.html',
-  styleUrl: './spending-creation-page.component.scss'
+  templateUrl: './spending-creation.component.html',
+  styleUrl: './spending-creation.component.scss'
 })
-export class SpendingCreationPageComponent implements OnInit {
+export class SpendingCreationComponent implements OnInit {
   date: any;
   categories: string[] = [];
   selectedCategory: string = "";

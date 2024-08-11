@@ -13,6 +13,6 @@ export const routes: Routes = [
   },
   {
     path: 'spending',
-    loadComponent: () => import('./page/spending-creation-page/spending-creation-page.component').then(m => m.SpendingCreationPageComponent)
+    loadComponent: () => import('./component/spending-creation/spending-creation.component').then(m => m.SpendingCreationComponent)
   }
 ];
