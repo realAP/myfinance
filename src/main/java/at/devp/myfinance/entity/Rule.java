@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,41 +17,45 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Rule {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column
-  private String description;
+    // See: https://stackoverflow.com/a/32443004 why to use LocalDate
+    @Column(nullable = false)
+    private LocalDate dateOfExecution;
 
-  @OneToMany(mappedBy = "rule")
-  private List<Spending> spendings = new ArrayList<>();
+    @Column
+    private String description;
 
-  @Column
-  private String from;
+    @OneToMany(mappedBy = "rule")
+    private List<Spending> spendings = new ArrayList<>();
 
-  @Column
-  private String to;
+    @Column
+    private String from;
 
-  @Column
-  private BigDecimal amount = new BigDecimal("0.00");
+    @Column
+    private String to;
 
-  @Column
-  private BigDecimal oldAmount = new BigDecimal("0.00");
+    @Column
+    private BigDecimal amount = new BigDecimal("0.00");
 
-  @Column
-  private boolean isChange;
+    @Column
+    private BigDecimal oldAmount = new BigDecimal("0.00");
 
-  public BigDecimal calculateAmount() {
-    return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
-  }
+    @Column
+    private boolean isChange;
 
-  public boolean calculateHasChange() {
-    return !Objects.equals(oldAmount, amount);
-  }
+    public BigDecimal calculateAmount() {
+        return spendings.stream().map(Spending::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
-  public void updateAmountAndChange() {
-    this.amount = calculateAmount();
-    this.isChange = calculateHasChange();
-  }
+    public boolean calculateHasChange() {
+        return !Objects.equals(oldAmount, amount);
+    }
+
+    public void updateAmountAndChange() {
+        this.amount = calculateAmount();
+        this.isChange = calculateHasChange();
+    }
 }

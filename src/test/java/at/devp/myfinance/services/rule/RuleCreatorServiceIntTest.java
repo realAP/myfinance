@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDate;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -36,6 +38,7 @@ class RuleCreatorServiceIntTest {
     ruleCreationDto.setDescription("Spotify");
     ruleCreationDto.setFrom("Main");
     ruleCreationDto.setTo("Volksbank");
+    ruleCreationDto.setDateOfExecution(LocalDate.of(2024, 8, 24));
 
     underTest.createRule(ruleCreationDto);
     final var result = ruleRepository.findAll();
@@ -47,6 +50,7 @@ class RuleCreatorServiceIntTest {
     assertThat(result.get(0).getAmount().toString(), is("0.00"));
     assertThat(result.get(0).getOldAmount().toString(), is("0.00"));
     assertThat(result.get(0).isChange(), is(false));
+    assertThat(result.get(0).getDateOfExecution(), is(LocalDate.of(2024, 8, 24)));
     assertThat(spendingRepository.findAll(), hasSize(0));
   }
 
