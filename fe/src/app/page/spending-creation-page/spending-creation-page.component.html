@@ -1,0 +1,69 @@
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText/>
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-inputGroup>
+      <p-floatLabel>
+        <p-inputNumber
+          [(ngModel)]="amount"
+          id="minmaxfraction"
+          mode="decimal"
+          [allowEmpty]="true"
+          [minFractionDigits]="2"
+        />
+        <label for="minmaxfraction">Betrag</label>
+      </p-floatLabel>
+      <p-inputGroupAddon>€</p-inputGroupAddon>
+    </p-inputGroup>
+  </div>
+
+<!--
+  <div class="input-group">
+    <p-floatLabel>
+      <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
+      <label for="date">Datum</label>
+    </p-floatLabel>
+  </div>
+-->
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="category"
+        [options]="categories"
+        [(ngModel)]="selectedCategory"/>
+      <label for="category">Kategorie</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="transfer"
+        [options]="transfers"
+        [(ngModel)]="selectedTransfer"/>
+      <label for="transfer">Transfer</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="rule"
+        [options]="rules"
+        [(ngModel)]="selectedRule"/>
+      <label for="rule">Rule</label>
+    </p-floatLabel>
+  </div>
+
+
+  <div class="input-group">
+    <p-button label="Submit"/>
+  </div>
+
+</div>
