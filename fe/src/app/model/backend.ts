@@ -23,3 +23,8 @@ export interface SpendingRowDto {
 export interface SpaceCreationDto {
   name: string;
 }
+
+export interface SpaceDto {
+  id: number;
+  name: string;
+}
