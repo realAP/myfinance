@@ -34,6 +34,10 @@ export const routes: Routes = [
   {
     path: 'categories',
     loadComponent: () => import('./component/category-creation/category-creation.component').then(m => m.CategoryCreationComponent)
+  },
+  {
+    path: 'backoffice',
+    loadComponent: () => import('./page/back-office-page/backoffice-page/backoffice-page.component').then(m => m.BackofficePageComponent)
   }
 
 ];

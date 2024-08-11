@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import {BankCreationComponent} from "../../../component/bank-creation/bank-creation.component";
+import {CategoryCreationComponent} from "../../../component/category-creation/category-creation.component";
+import {RuleCreationComponent} from "../../../component/rule-creation/rule-creation.component";
+import {TransferCreationComponent} from "../../../component/transfer-creation/transfer-creation.component";
+import {SpaceCreationComponent} from "../../../component/space-creation/space-creation.component";
+import {SpendingCreationComponent} from "../../../component/spending-creation/spending-creation.component";
+
+@Component({
+  selector: 'app-backoffice-page',
+  standalone: true,
+  imports: [
+    BankCreationComponent,
+    CategoryCreationComponent,
+    RuleCreationComponent,
+    TransferCreationComponent,
+    SpaceCreationComponent,
+    SpendingCreationComponent
+  ],
+  templateUrl: './backoffice-page.component.html',
+  styleUrl: './backoffice-page.component.scss'
+})
+export class BackofficePageComponent {
+
+}
