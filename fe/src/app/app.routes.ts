@@ -23,5 +23,9 @@ export const routes: Routes = [
     path: 'transfers',
     loadComponent: () => import('./component/transfer-creation/transfer-creation.component').then(m => m.TransferCreationComponent)
   },
+  {
+    path: 'banks',
+    loadComponent: () => import('./component/bank-creation/bank-creation.component').then(m => m.BankCreationComponent)
+  },
 
 ];
