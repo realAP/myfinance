@@ -24,14 +24,14 @@ export class SpendingCreationComponent implements OnInit {
   selectedTransfer: string = "";
 
   rules: string[] = [];
-  selectedRule: string = "";
+  selectedRule: string = "empty";
 
 
   amount: number | null = null;
 
   ngOnInit(): void {
-    this.categories = ["VERGNUEGEN", "SPORT", "BANK", "INVESTITIONEN"];
-    this.transfers = ["Einzahlung", "Auszahlung"];
-    this.rules = ["Regel 1", "Regel 2", "Regel 3"];
+    this.categories = ["Vergnuegen", "Sport", "Bank", "Investitionen"];
+    this.transfers = ["Spotify","Netflix","Amazon Prime","Disney+"];
+    this.rules = ["Einnahmen -> main (24)", "Einnahmen -> main (01)", ""];
   }
 }

@@ -5,6 +5,8 @@ import {RuleCreationComponent} from "../../../component/rule-creation/rule-creat
 import {TransferCreationComponent} from "../../../component/transfer-creation/transfer-creation.component";
 import {SpaceCreationComponent} from "../../../component/space-creation/space-creation.component";
 import {SpendingCreationComponent} from "../../../component/spending-creation/spending-creation.component";
+import {CardModule} from "primeng/card";
+import {ConnectedSquaresComponent} from "../../../component/connected-squares/connected-squares.component";
 
 @Component({
   selector: 'app-backoffice-page',
@@ -15,7 +17,9 @@ import {SpendingCreationComponent} from "../../../component/spending-creation/sp
     RuleCreationComponent,
     TransferCreationComponent,
     SpaceCreationComponent,
-    SpendingCreationComponent
+    SpendingCreationComponent,
+    CardModule,
+    ConnectedSquaresComponent
   ],
   templateUrl: './backoffice-page.component.html',
   styleUrl: './backoffice-page.component.scss'

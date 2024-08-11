@@ -10,7 +10,7 @@ import {SpendingCategoryBlockDto} from "../model/backend";
 export class BackendService {
 
   private BASE_API = "/fe"
-  private TARGET = "http://localhost:8081"
+  private TARGET = "http://localhost:8080"
 
 
   constructor(private httpClient: HttpClient) {

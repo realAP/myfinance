@@ -33,7 +33,7 @@ export class RuleCreationComponent implements OnInit {
   selectedTargetSpace="";
 
   ngOnInit(): void {
-    this.spaces = ["Main", "Buffer", "Einnahmen","KFZ"]
+    this.spaces = ["main", "Haushalt", "buffer","Dauerspaß","Urlaub","Apple Watch","KFZ Fix","Einnahmen","Versicherung","iPhone","do not touch"]
   }
 
 }
