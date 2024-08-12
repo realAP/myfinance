@@ -1,7 +1,7 @@
 package at.devp.myfinance.controller_fe.read;
 
-import at.devp.myfinance.services.space.read.SpaceDto;
-import at.devp.myfinance.services.space.read.SpaceReadService;
+import at.devp.myfinance.services.bank.read.BankDto;
+import at.devp.myfinance.services.bank.read.BankReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +12,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
-public class SpaceReadController {
+public class BankReadController {
 
-    private final SpaceReadService spaceReadService;
+    private final BankReadService bankReadService;
 
-    @GetMapping("/fe/read/spaces")
-    public List<SpaceDto> getSpaces() {
-        return spaceReadService.getSpaces();
+    @GetMapping("/fe/read/banks")
+    public List<BankDto> getBankDtos() {
+        return bankReadService.getBanks();
     }
 }
