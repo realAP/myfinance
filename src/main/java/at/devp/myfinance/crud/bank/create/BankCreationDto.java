@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.bank.create;
+package at.devp.myfinance.crud.bank.create;
 
 import lombok.Data;
 

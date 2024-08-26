@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.bank.create;
+package at.devp.myfinance.crud.bank.create;
 
 import at.devp.myfinance.entity.Bank;
 import at.devp.myfinance.repositories.BankRepository;

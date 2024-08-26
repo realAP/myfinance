@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.bank.read;
+package at.devp.myfinance.crud.bank.read;
 
 import at.devp.myfinance.repositories.BankRepository;
 import lombok.RequiredArgsConstructor;

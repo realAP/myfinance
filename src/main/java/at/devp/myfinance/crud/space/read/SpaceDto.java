@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.space.read;
+package at.devp.myfinance.crud.space.read;
 
 import lombok.Data;
 
