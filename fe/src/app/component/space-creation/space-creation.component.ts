@@ -25,7 +25,7 @@ export class SpaceCreationComponent {
   }
 
   onCreateSpace() {
-    console.log("Creating space: " + this.name);
     this.backendService.createSpace(this.name);
+    this.name = "";
   }
 }

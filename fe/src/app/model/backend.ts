@@ -28,3 +28,12 @@ export interface SpaceDto {
   id: number;
   name: string;
 }
+
+export interface BankCreationDto {
+  name: string;
+}
+
+export interface BankDto {
+  id: number;
+  name: string;
+}

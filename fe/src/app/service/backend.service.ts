@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {SpaceCreationDto, SpaceDto, SpendingCategoryBlockDto} from "../model/backend";
+import {BankCreationDto, BankDto, SpaceCreationDto, SpaceDto, SpendingCategoryBlockDto} from "../model/backend";
 
 
 @Injectable({
@@ -23,12 +23,20 @@ export class BackendService {
 
   createSpace(name: string): void {
     const spaceCreationDto: SpaceCreationDto = {name: name};
-    this.httpClient.post(this.TARGET + this.BASE_API + "/write/spaces", spaceCreationDto).subscribe(() => console.log("Space created"));
-    ;
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spaces", spaceCreationDto).subscribe();
   }
 
   getSpaces(): Observable<SpaceDto[]> {
-    return this.httpClient.get<SpaceDto[]>(this.TARGET + this.BASE_API + "/read/spaces");
+    return this.httpClient.get<SpaceDto[]>(this.TARGET + this.BASE_API + "/crud/spaces");
+  }
+
+  createBank(name: string): void {
+    const bankCreationDto: BankCreationDto = {name: name};
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/banks", bankCreationDto).subscribe();
+  }
+
+  getBanks(): Observable<BankDto[]> {
+    return this.httpClient.get<BankDto[]>(this.TARGET + this.BASE_API + "/crud/banks");
   }
 
 }
