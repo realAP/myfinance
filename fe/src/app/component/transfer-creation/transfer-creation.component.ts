@@ -5,6 +5,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
+import {BackendService} from "../../service/backend.service";
+import {BankDto} from "../../model/backend";
 
 @Component({
   selector: 'app-transfer-creation',
@@ -22,11 +24,17 @@ import {FormsModule} from "@angular/forms";
 })
 export class TransferCreationComponent implements OnInit {
   date: any;
-  banks: string[] = [];
+  banks: BankDto[] = [];
   selectedFromBank = "";
   selectedTargetBank = "";
 
+  constructor(private backendService: BackendService) {
+  }
+
   ngOnInit(): void {
-    this.banks = ['N26', 'Volksbank', 'ING'];
+    this.backendService.getBanks().subscribe(bankDtos => {
+      this.banks = bankDtos;
+    })
+
   }
 }

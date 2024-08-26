@@ -39,8 +39,8 @@ export class RuleCreationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.backendService.getSpaces().subscribe(data => {
-      this.spaces = data;
+    this.backendService.getSpaces().subscribe(spaceDtos => {
+      this.spaces = spaceDtos;
     })
   }
 

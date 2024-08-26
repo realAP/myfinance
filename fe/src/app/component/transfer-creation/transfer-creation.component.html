@@ -20,7 +20,9 @@
       <p-dropdown
         id="from-space"
         [options]="banks"
-        [(ngModel)]="selectedFromBank"/>
+        [(ngModel)]="selectedFromBank"
+        optionLabel="name"
+      />
       <label for="from-space">Von Bank</label>
     </p-floatLabel>
   </div>
@@ -30,7 +32,9 @@
       <p-dropdown
         id="target-space"
         [options]="banks"
-        [(ngModel)]="selectedTargetBank"/>
+        [(ngModel)]="selectedTargetBank"
+        optionLabel="name"
+      />
       <label for="target-space">Nach Bank</label>
     </p-floatLabel>
   </div>

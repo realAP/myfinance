@@ -1,7 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {BankCreationDto, BankDto, SpaceCreationDto, SpaceDto, SpendingCategoryBlockDto} from "../model/backend";
+import {
+  BankCreationDto,
+  BankDto,
+  CategoryCreationDto, CategoryDto,
+  SpaceCreationDto,
+  SpaceDto,
+  SpendingCategoryBlockDto
+} from "../model/backend";
+
 
 
 @Injectable({
@@ -39,4 +47,12 @@ export class BackendService {
     return this.httpClient.get<BankDto[]>(this.TARGET + this.BASE_API + "/crud/banks");
   }
 
+  createCategory(name: string) {
+    const categoryCreationDto: CategoryCreationDto = {name: name};
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/categories", categoryCreationDto).subscribe();
+  }
+
+  getCategories(): Observable<CategoryDto[]> {
+    return this.httpClient.get<CategoryDto[]>(this.TARGET + this.BASE_API + "/crud/categories");
+  }
 }

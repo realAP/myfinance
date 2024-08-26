@@ -4,6 +4,15 @@ export interface SpendingCategoryBlockDto {
   spendingSumPerCategory: number; // Use appropriate numeric type (e.g., number, BigDecimal, etc.)
 }
 
+export interface CategoryCreationDto {
+  name: string;
+}
+
+export interface CategoryDto {
+  id: number;
+  name: string;
+}
+
 export enum Category {
   VERGNUEGEN = 'VERGNUEGEN',
   SPORT = 'SPORT',
