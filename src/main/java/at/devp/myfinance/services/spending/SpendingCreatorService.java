@@ -3,6 +3,7 @@ package at.devp.myfinance.services.spending;
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.entity.Spending;
+import at.devp.myfinance.repositories.CategoryRepository;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
@@ -16,35 +17,41 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SpendingCreatorService {
 
-  private final Converter converter;
-  private final RuleRepository ruleRepository;
-  private final RuleUpdateService ruleUpdateService;
-  private final SpendingRepository spendingRepository;
-  private final TransferRepository transferRepository;
-  private final TransferUpdateService transferUpdateService;
+    private final Converter converter;
+    private final RuleRepository ruleRepository;
+    private final RuleUpdateService ruleUpdateService;
+    private final SpendingRepository spendingRepository;
+    private final TransferRepository transferRepository;
+    private final TransferUpdateService transferUpdateService;
+    private final CategoryRepository categoryRepository;
 
 
-  @Transactional
-  public void createSpending(final SpendingCreationDto spendingCreationDto) {
-    final var spending = new Spending();
-    spending.setDescription(spendingCreationDto.getDescription());
-    spending.setAmount(spendingCreationDto.getAmount());
-    spending.setCategory(spendingCreationDto.getCategory());
+    @Transactional
+    public void createSpending(final SpendingCreationDto spendingCreationDto) {
+        final var spending = new Spending();
+        spending.setDescription(spendingCreationDto.getDescription());
+        spending.setAmount(spendingCreationDto.getAmount());
 
-    final var transfer = transferRepository.findById(spendingCreationDto.getTransferId())
-        .orElseThrow(() -> new IllegalArgumentException("Transfer not found with id: "
-                                                        + spendingCreationDto.getTransferId()));
+        final var category = categoryRepository.findById(spendingCreationDto.getCategoryId())
+                .orElseThrow(() -> new IllegalArgumentException("Category not found with id: "
+                        + spendingCreationDto.getCategoryId()));
+        spending.setCategory(category);
 
-    final var rule = ruleRepository.findById(spendingCreationDto.getRuleId())
-        .orElseThrow(() -> new IllegalArgumentException("Rule not found with id: "
-                                                        + spendingCreationDto.getRuleId()));
 
-    spending.setRule(rule);
-    transferUpdateService.addSpendingAndUpdate(transfer, spending);
+        final var transfer = transferRepository.findById(spendingCreationDto.getTransferId())
+                .orElseThrow(() -> new IllegalArgumentException("Transfer not found with id: "
+                        + spendingCreationDto.getTransferId()));
 
-    spending.setTransfer(transfer);
-    ruleUpdateService.addSpendingAndUpdate(rule, spending);
+        final var rule = ruleRepository.findById(spendingCreationDto.getRuleId())
+                .orElseThrow(() -> new IllegalArgumentException("Rule not found with id: "
+                        + spendingCreationDto.getRuleId()));
 
-    spendingRepository.save(spending);
-  }
+        spending.setRule(rule);
+        transferUpdateService.addSpendingAndUpdate(transfer, spending);
+
+        spending.setTransfer(transfer);
+        ruleUpdateService.addSpendingAndUpdate(rule, spending);
+
+        spendingRepository.save(spending);
+    }
 }

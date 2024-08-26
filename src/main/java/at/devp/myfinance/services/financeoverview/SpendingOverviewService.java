@@ -25,7 +25,7 @@ public class SpendingOverviewService {
     final var spendingsByCategory = spendings.stream().collect(Collectors.groupingBy(Spending::getCategory, Collectors.toList()));
     return spendingsByCategory.entrySet().stream().map(entry -> {
       final var spendingTableDto = new SpendingCategoryBlockDto();
-      spendingTableDto.setCategory(entry.getKey());
+      spendingTableDto.setCategory(entry.getKey().getName());
       spendingTableDto.setSpendingRowDtos(convert2SpendingRowDtos(entry.getValue()));
       spendingTableDto.setSpendingSumPerCategory(entry.getValue().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
       return spendingTableDto;

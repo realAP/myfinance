@@ -1,14 +1,15 @@
 package at.devp.myfinance.services.spending;
 
 import at.devp.myfinance.dto.SpendingEditDto;
+import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
+import at.devp.myfinance.repositories.CategoryRepository;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
 import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
-import at.devp.myfinance.types.CategoryEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,9 @@ class SpendingEditManagerServiceIntTest {
   private TransferRepository transferRepository;
 
   @Autowired
+  private CategoryRepository categoryRepository;
+
+  @Autowired
   private TestEntityManager testEntityManager;
 
   private Spending msciWorldSpending;
@@ -56,6 +60,8 @@ class SpendingEditManagerServiceIntTest {
 
   private Rule zockenRule;
 
+  private Category sportCategory;
+
   @BeforeEach
   void setUp() {
     final var spendings = spendingRepository.findAll();
@@ -64,6 +70,7 @@ class SpendingEditManagerServiceIntTest {
     etfTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("ETF")).findFirst().get();
     bitcoinTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("Bitcoin")).findFirst().get();
     zockenRule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("zocken")).findFirst().get();
+    sportCategory = categoryRepository.findAll().stream().filter(c -> c.getName().equalsIgnoreCase("sport")).findFirst().get();
   }
 
 
@@ -72,7 +79,7 @@ class SpendingEditManagerServiceIntTest {
     final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
-    editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
+    editedMsciWorldSpending.setCategoryId(msciWorldSpending.getCategory().getId());
     editedMsciWorldSpending.setRuleId(msciWorldSpending.getRule().getId());
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
     editedMsciWorldSpending.setAmount(new BigDecimal("200.00"));
@@ -101,7 +108,7 @@ class SpendingEditManagerServiceIntTest {
     final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
-    editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
+    editedMsciWorldSpending.setCategoryId(msciWorldSpending.getCategory().getId());
     editedMsciWorldSpending.setRuleId(msciWorldSpending.getRule().getId());
     editedMsciWorldSpending.setAmount(msciWorldSpending.getAmount());
     editedMsciWorldSpending.setTransferId(bitcoinTransfer.getId()); // change transfer
@@ -126,7 +133,7 @@ class SpendingEditManagerServiceIntTest {
     final var editedMsciWorldSpending = new SpendingEditDto();
     editedMsciWorldSpending.setId(msciWorldSpending.getId());
     editedMsciWorldSpending.setDescription(msciWorldSpending.getDescription());
-    editedMsciWorldSpending.setCategory(msciWorldSpending.getCategory());
+    editedMsciWorldSpending.setCategoryId(msciWorldSpending.getCategory().getId());
     editedMsciWorldSpending.setAmount(msciWorldSpending.getAmount());
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
     editedMsciWorldSpending.setRuleId(zockenRule.getId()); // change rule
@@ -153,13 +160,13 @@ class SpendingEditManagerServiceIntTest {
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
     editedMsciWorldSpending.setRuleId(zockenRule.getId());
     editedMsciWorldSpending.setDescription("MSCI World edited"); // change description
-    editedMsciWorldSpending.setCategory(CategoryEnum.SPORT); // change category
+    editedMsciWorldSpending.setCategoryId(sportCategory.getId()); // change category
 
     underTest.editSpending(editedMsciWorldSpending);
 
     final var result = spendingRepository.findById(msciWorldSpending.getId()).orElse(null);
 
     assertThat(result.getDescription(), is("MSCI World edited"));
-    assertThat(result.getCategory(), is(CategoryEnum.SPORT));
+    assertThat(result.getCategory().getId(), is(sportCategory.getId()));
   }
 }

@@ -30,7 +30,7 @@ public class Converter {
     spendingDto.setId(spending.getId());
     spendingDto.setAmount(spending.getAmount());
     spendingDto.setDescription(spending.getDescription());
-    spendingDto.setCategory(spending.getCategory());
+    spendingDto.setCategoryDescription(spending.getCategory().getName());
 
     spendingDto.setRuleDescription(spending.getRule().getDescription());
     spendingDto.setTransferDescription(spending.getTransfer().getDescription());

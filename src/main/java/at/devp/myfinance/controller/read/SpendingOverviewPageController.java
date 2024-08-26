@@ -3,7 +3,6 @@ package at.devp.myfinance.controller.read;
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
-import at.devp.myfinance.services.CategoryService;
 import at.devp.myfinance.services.financeoverview.SpendingOverviewService;
 import at.devp.myfinance.services.financeoverview.SpendingRowDto;
 import at.devp.myfinance.services.financeoverview.SpendingCategoryBlockDto;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class SpendingOverviewPageController {
 
-  private final CategoryService categoryService;
   private final RuleDropDownService ruleDropDownService;
   private final SpendingOverviewService spendingOverviewService;
   private final TransferDropDownService transferDropDownService;
@@ -30,8 +28,6 @@ public class SpendingOverviewPageController {
     model.addAttribute("spendingCategoryBlockDtos", spendingCategoryBlockDtos);
     model.addAttribute("spendingCategoryBlockDto", new SpendingCategoryBlockDto());
     model.addAttribute("spendingRowDto", new SpendingRowDto());
-    final var categoryDtos = categoryService.createCategories();
-    model.addAttribute("categoryDtos", categoryDtos);
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
 
     final var sumOfSpendings = spendingOverviewService.calculateSum();
