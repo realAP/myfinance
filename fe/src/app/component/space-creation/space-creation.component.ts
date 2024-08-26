@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Button} from "primeng/button";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {BackendService} from "../../service/backend.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-space-creation',
@@ -21,11 +22,13 @@ export class SpaceCreationComponent {
 
   name: string = "";
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,
+              private messageService: MessageService) {
   }
 
   onCreateSpace() {
     this.backendService.createSpace(this.name);
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Space: ' + this.name + ' created!'});
     this.name = "";
   }
 }
