@@ -20,14 +20,14 @@ public class BankController {
     private final BankCreationService bankCreationService;
     private final BankReadService bankReadService;
 
-    @GetMapping()
-    public List<BankDto> getBankDtos() {
-        return bankReadService.getBanks();
-    }
-
     @PostMapping()
     public ResponseEntity<?> createBank(@RequestBody final BankCreationDto bankCreationDto) {
         bankCreationService.createBank(bankCreationDto);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+    @GetMapping()
+    public List<BankDto> getBankDtos() {
+        return bankReadService.getBanks();
     }
 }

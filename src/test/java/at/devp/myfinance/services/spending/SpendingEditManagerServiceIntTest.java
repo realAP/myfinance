@@ -8,7 +8,7 @@ import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
 import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
-import at.devp.myfinance.types.Category;
+import at.devp.myfinance.types.CategoryEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,13 +153,13 @@ class SpendingEditManagerServiceIntTest {
     editedMsciWorldSpending.setTransferId(msciWorldSpending.getTransfer().getId());
     editedMsciWorldSpending.setRuleId(zockenRule.getId());
     editedMsciWorldSpending.setDescription("MSCI World edited"); // change description
-    editedMsciWorldSpending.setCategory(Category.SPORT); // change category
+    editedMsciWorldSpending.setCategory(CategoryEnum.SPORT); // change category
 
     underTest.editSpending(editedMsciWorldSpending);
 
     final var result = spendingRepository.findById(msciWorldSpending.getId()).orElse(null);
 
     assertThat(result.getDescription(), is("MSCI World edited"));
-    assertThat(result.getCategory(), is(Category.SPORT));
+    assertThat(result.getCategory(), is(CategoryEnum.SPORT));
   }
 }

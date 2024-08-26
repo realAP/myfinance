@@ -1,5 +1,5 @@
 package at.devp.myfinance.types;
 
-public enum Category {
+public enum CategoryEnum {
   VERGNUEGEN, SPORT, BANK, INVESTITIONEN
 }

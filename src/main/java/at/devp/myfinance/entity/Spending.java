@@ -1,6 +1,6 @@
 package at.devp.myfinance.entity;
 
-import at.devp.myfinance.types.Category;
+import at.devp.myfinance.types.CategoryEnum;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
@@ -25,7 +25,7 @@ public class Spending {
   private String description;
 
   @Column
-  private Category category;
+  private CategoryEnum category;
 
   @Column
   private BigDecimal amount;

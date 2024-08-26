@@ -6,7 +6,7 @@ import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.types.Category;
+import at.devp.myfinance.types.CategoryEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,7 +52,7 @@ class SpendingCreatorServiceIntTest {
     spendingCreationDto.setRuleId(rule.getId());
     spendingCreationDto.setDescription("Test description");
     spendingCreationDto.setAmount(new BigDecimal("100.00"));
-    spendingCreationDto.setCategory(Category.VERGNUEGEN);
+    spendingCreationDto.setCategory(CategoryEnum.VERGNUEGEN);
 
     underTest.createSpending(spendingCreationDto);
 
