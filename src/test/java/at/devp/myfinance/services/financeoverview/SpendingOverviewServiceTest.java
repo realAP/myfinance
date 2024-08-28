@@ -5,6 +5,8 @@ import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
+import at.devp.myfinance.feature.financeoverview.SpendingCategoryBlockDto;
+import at.devp.myfinance.feature.financeoverview.SpendingOverviewService;
 import at.devp.myfinance.repositories.SpendingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

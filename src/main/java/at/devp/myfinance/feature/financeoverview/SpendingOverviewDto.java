@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.financeoverview;
+package at.devp.myfinance.feature.financeoverview;
 
 import lombok.Data;
 

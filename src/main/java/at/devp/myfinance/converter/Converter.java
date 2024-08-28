@@ -4,7 +4,7 @@ import at.devp.myfinance.dto.*;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
-import at.devp.myfinance.services.financeoverview.SpendingOverviewDto;
+import at.devp.myfinance.feature.financeoverview.SpendingOverviewDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

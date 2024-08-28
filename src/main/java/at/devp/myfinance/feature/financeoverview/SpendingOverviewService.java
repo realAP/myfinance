@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.financeoverview;
+package at.devp.myfinance.feature.financeoverview;
 
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.entity.Spending;

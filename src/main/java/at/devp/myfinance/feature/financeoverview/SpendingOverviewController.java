@@ -1,7 +1,5 @@
-package at.devp.myfinance.controller_fe.read;
+package at.devp.myfinance.feature.financeoverview;
 
-import at.devp.myfinance.services.financeoverview.SpendingCategoryBlockDto;
-import at.devp.myfinance.services.financeoverview.SpendingOverviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
-public class SpendingOverviewControllerFe {
+public class SpendingOverviewController {
 
     private final SpendingOverviewService spendingOverviewService;
 
