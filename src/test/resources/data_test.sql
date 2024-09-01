@@ -1,3 +1,5 @@
+INSERT INTO public."bank" SELECT * FROM CSVREAD('classpath:bank.csv');
+COMMIT;
 INSERT INTO public."space" SELECT * FROM CSVREAD('classpath:space.csv');
 COMMIT;
 INSERT INTO public."category" SELECT * FROM CSVREAD('classpath:category.csv');

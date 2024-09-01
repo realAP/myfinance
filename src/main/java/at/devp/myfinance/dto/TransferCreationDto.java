@@ -8,6 +8,6 @@ import java.time.LocalDate;
 public class TransferCreationDto {
   private String description;
   private LocalDate dateOfExecution;
-  private String from;
-  private String to;
+  private Long fromBankId;
+  private Long toBankId;
 }

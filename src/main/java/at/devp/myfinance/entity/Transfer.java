@@ -33,11 +33,13 @@ public class Transfer {
     @OneToMany(mappedBy = "transfer")
     private List<Spending> spendings = new ArrayList<>();
 
-    @Column
-    private String from;
+    @ManyToOne
+    @JoinColumn(name = "from_bank_id")
+    private Bank fromBank;
 
-    @Column
-    private String to;
+    @ManyToOne
+    @JoinColumn(name = "to_bank_id")
+    private Bank toBank;
 
     @Column
     private BigDecimal amount = new BigDecimal("0.00");

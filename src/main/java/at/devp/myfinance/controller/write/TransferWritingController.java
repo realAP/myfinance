@@ -2,7 +2,7 @@ package at.devp.myfinance.controller.write;
 
 import at.devp.myfinance.dto.TransferCreationDto;
 import at.devp.myfinance.services.transfer.TransferChangeService;
-import at.devp.myfinance.services.transfer.TransferCreatorService;
+import at.devp.myfinance.crud.transfer.create.TransferCreationService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/transfers")
 public class TransferWritingController {
-  private final TransferCreatorService transferCreatorService;
+  private final TransferCreationService transferCreationService;
   private final TransferDeletionService transferDeletionService;
   private final TransferChangeService transferChangeService;
 
   @PostMapping
   public String createTransfer(@ModelAttribute TransferCreationDto transferCreationDto) {
-    transferCreatorService.createTransfer(transferCreationDto);
+    transferCreationService.createTransfer(transferCreationDto);
     return "redirect:/transfers";
   }
 

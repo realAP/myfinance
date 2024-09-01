@@ -1,8 +1,12 @@
 package at.devp.myfinance.services.transfer;
 
+import at.devp.myfinance.crud.transfer.create.TransferCreationService;
 import at.devp.myfinance.dto.TransferCreationDto;
+import at.devp.myfinance.entity.Bank;
+import at.devp.myfinance.repositories.BankRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,16 +23,31 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-class TransferCreatorServiceIntTest {
+class TransferCreationServiceIntTest {
 
   @Autowired
-  private TransferCreatorService underTest;
+  private TransferCreationService underTest;
 
   @Autowired
   private TransferRepository transferRepository;
 
   @Autowired
   private SpendingRepository spendingRepository;
+
+  @Autowired
+  private BankRepository bankRepository;
+
+  private final Bank volksbank = new Bank();
+
+  private final Bank n26 = new Bank();
+
+  @BeforeEach
+  void setUp() {
+    volksbank.setName("Volksbank");
+    n26.setName("N26");
+    bankRepository.save(volksbank);
+    bankRepository.save(n26);
+  }
 
 
   @Test
@@ -37,8 +56,8 @@ class TransferCreatorServiceIntTest {
 
     final var transferCreationDto = new TransferCreationDto();
     transferCreationDto.setDescription("Spotify");
-    transferCreationDto.setFrom("Main");
-    transferCreationDto.setTo("Volksbank");
+    transferCreationDto.setFromBankId(n26.getId());
+    transferCreationDto.setToBankId(volksbank.getId());
     transferCreationDto.setDateOfExecution(LocalDate.of(2024, 8, 24));
 
     underTest.createTransfer(transferCreationDto);
@@ -47,8 +66,8 @@ class TransferCreatorServiceIntTest {
     assertThat(result, hasSize(1));
     final var resultTransfer = result.get(0);
     assertThat(resultTransfer.getDescription(), is(transferCreationDto.getDescription()));
-    assertThat(resultTransfer.getFrom(), is(transferCreationDto.getFrom()));
-    assertThat(resultTransfer.getTo(), is(transferCreationDto.getTo()));
+    assertThat(resultTransfer.getFromBank().getName(), is("N26"));
+    assertThat(resultTransfer.getToBank().getName(), is("Volksbank"));
     assertThat(resultTransfer.getAmount(), is(new BigDecimal("0.00")));
     assertThat(resultTransfer.getOldAmount(), is(new BigDecimal("0.00")));
     assertThat(resultTransfer.isChange(), is(false));

@@ -4,7 +4,7 @@ import at.devp.myfinance.crud.transfer.read.TransferReadService;
 import at.devp.myfinance.dto.TransferCreationDto;
 import at.devp.myfinance.dto.TransferDto;
 import at.devp.myfinance.services.transfer.TransferChangeService;
-import at.devp.myfinance.services.transfer.TransferCreatorService;
+import at.devp.myfinance.crud.transfer.create.TransferCreationService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,14 +18,14 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/fe/crud/transfers")
 public class TransferController {
-  private final TransferCreatorService transferCreatorService;
+  private final TransferCreationService transferCreationService;
   private final TransferDeletionService transferDeletionService;
   private final TransferChangeService transferChangeService;
   private final TransferReadService transferReadService;
 
   @PostMapping
   public ResponseEntity<?> createTransfer(@RequestBody TransferCreationDto transferCreationDto) {
-    transferCreatorService.createTransfer(transferCreationDto);
+    transferCreationService.createTransfer(transferCreationDto);
     return new ResponseEntity<>(null, HttpStatus.CREATED);
   }
 
