@@ -7,10 +7,12 @@ import {
   CategoryCreationDto,
   CategoryDto,
   RuleCreationDto,
+  RuleDto,
   SpaceCreationDto,
   SpaceDto,
-  SpendingCategoryBlockDto,
-  TransferCreationDto
+  SpendingCategoryBlockDto, SpendingCreationDto,
+  TransferCreationDto,
+  TransferDto
 } from "../model/backend";
 
 
@@ -65,7 +67,19 @@ export class BackendService {
     return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules", ruleCreationDto);
   }
 
+  getRules(): Observable<RuleDto[]> {
+    return this.httpClient.get<RuleDto[]>(this.TARGET + this.BASE_API + "/crud/rules");
+  }
+
   createTransfer(transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
     return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers", transferCreationDto);
+  }
+
+  getTransfers(): Observable<TransferDto[]> {
+    return this.httpClient.get<TransferDto[]>(this.TARGET + this.BASE_API + "/crud/transfers");
+  }
+
+  createSpending(spendingCreationDto: SpendingCreationDto) {
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).subscribe();
   }
 }

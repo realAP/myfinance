@@ -8,7 +8,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {BackendService} from "../../service/backend.service";
-import {CategoryDto} from "../../model/backend";
+import {CategoryDto, RuleDto, SpendingCreationDto, TransferDto} from "../../model/backend";
 
 @Component({
   selector: 'app-spending-creation-page',
@@ -18,26 +18,46 @@ import {CategoryDto} from "../../model/backend";
   styleUrl: './spending-creation.component.scss'
 })
 export class SpendingCreationComponent implements OnInit {
-  date: any;
-
-  transfers: string[] = [];
-  selectedTransfer: string = "";
-
-  rules: string[] = [];
-  selectedRule: string = "empty";
-
-  amount: number | null = null;
+  name: string = "";
+  amount: number | undefined;
 
   categories: CategoryDto[] = [];
   selectedCategory: CategoryDto | undefined;
+
+  transfers: TransferDto[] = [];
+  selectedTransfer: TransferDto | undefined;
+
+  rules: RuleDto[] = [];
+  selectedRule: RuleDto | undefined;
 
   constructor(private backendService: BackendService) {
   }
 
   ngOnInit(): void {
-    this.backendService.getCategories().subscribe((categories) => { this.categories = categories;
+    this.backendService.getCategories().subscribe((categories) => {
+      this.categories = categories
     });
-    this.transfers = ["Spotify", "Netflix", "Amazon Prime", "Disney+"];
-    this.rules = ["Einnahmen -> main (24)", "Einnahmen -> main (01)", ""];
+    this.backendService.getTransfers().subscribe((transfers) => {
+      this.transfers = transfers
+    })
+    this.backendService.getRules().subscribe((rules) => {
+      this.rules = rules
+    })
+  }
+
+  onCreateSpending() {
+    if (this.name && this.amount && this.selectedCategory && this.selectedTransfer && this.selectedRule) {
+      const spendingCreationDto: SpendingCreationDto = {
+        description: this.name,
+        amount: this.amount,
+        categoryId: this.selectedCategory.id,
+        transferId: this.selectedTransfer.id,
+        ruleId: this.selectedRule.id
+      };
+      this.backendService.createSpending(spendingCreationDto);
+    } else {
+      console.error("All fields are required.");
+    }
+
   }
 }

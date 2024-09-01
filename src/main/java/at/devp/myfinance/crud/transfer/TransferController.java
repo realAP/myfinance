@@ -2,7 +2,7 @@ package at.devp.myfinance.crud.transfer;
 
 import at.devp.myfinance.crud.transfer.read.TransferReadService;
 import at.devp.myfinance.dto.TransferCreationDto;
-import at.devp.myfinance.dto.TransferDto;
+import at.devp.myfinance.crud.transfer.read.TransferDto;
 import at.devp.myfinance.services.transfer.TransferChangeService;
 import at.devp.myfinance.crud.transfer.create.TransferCreationService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;

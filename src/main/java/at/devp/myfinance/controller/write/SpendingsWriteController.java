@@ -13,15 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/spendings")
 public class SpendingsWriteController {
-    private final SpendingCreatorService spendingCreatorService;
     private final SpendingDeletionService spendingDeletionService;
     private final SpendingEditManagerService spendingEditManagerService;
 
-    @PostMapping
-    public String createSpending(@ModelAttribute SpendingCreationDto spendingCreationDto){
-        spendingCreatorService.createSpending(spendingCreationDto);
-        return "redirect:/overview";
-    }
+
 
     @GetMapping("/{id}/delete")
     public String deleteSpending(@PathVariable("id") Long id) {

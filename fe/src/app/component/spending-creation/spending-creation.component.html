@@ -3,7 +3,9 @@
 <div class="card flex flex-column md:flex-row gap-3">
   <div class="input-group">
     <p-floatLabel>
-      <input id="name" type="text" pInputText/>
+      <input id="name" type="text" pInputText
+             [(ngModel)]="name"
+      />
       <label for="name">Name</label>
     </p-floatLabel>
   </div>
@@ -24,14 +26,14 @@
     </p-inputGroup>
   </div>
 
-<!--
-  <div class="input-group">
-    <p-floatLabel>
-      <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
-      <label for="date">Datum</label>
-    </p-floatLabel>
-  </div>
--->
+  <!--
+    <div class="input-group">
+      <p-floatLabel>
+        <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
+        <label for="date">Datum</label>
+      </p-floatLabel>
+    </div>
+  -->
 
   <div class="input-group">
     <p-floatLabel>
@@ -50,7 +52,10 @@
       <p-dropdown
         id="transfer"
         [options]="transfers"
-        [(ngModel)]="selectedTransfer"/>
+        [(ngModel)]="selectedTransfer"
+        optionLabel="description"
+
+      />
       <label for="transfer">Transfer</label>
     </p-floatLabel>
   </div>
@@ -60,13 +65,15 @@
       <p-dropdown
         id="rule"
         [options]="rules"
-        [(ngModel)]="selectedRule"/>
+        [(ngModel)]="selectedRule"
+        optionLabel="description"
+      />
       <label for="rule">Rule</label>
     </p-floatLabel>
   </div>
 
   <div class="input-group">
-    <p-button label="Submit"/>
+    <p-button label="Submit" (click)="onCreateSpending()"/>
   </div>
 
 </div>

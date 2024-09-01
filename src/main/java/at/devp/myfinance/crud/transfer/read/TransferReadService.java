@@ -1,7 +1,6 @@
 package at.devp.myfinance.crud.transfer.read;
 
 import at.devp.myfinance.converter.Converter;
-import at.devp.myfinance.dto.TransferDto;
 import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,6 @@ public class TransferReadService {
     private final Converter converter;
 
     public List<TransferDto> getTransferDtos() {
-        return transferRepository.findAll().stream().map(converter::createTransferDto).toList();
+        return transferRepository.findAll().stream().map(converter::convert2TransferDto).toList();
     }
 }

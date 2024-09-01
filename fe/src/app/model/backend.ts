@@ -54,9 +54,27 @@ export interface RuleCreationDto {
   toSpaceId: number;
 }
 
+export interface RuleDto {
+  id: number;
+  description: string;
+}
+
 export interface TransferCreationDto {
   description: string;
   dateOfExecution: string;
   fromBankId: number;
   toBankId: number;
+}
+
+export interface TransferDto {
+  id: number;
+  description: string;
+}
+
+export interface SpendingCreationDto {
+  categoryId: number;
+  description: string;
+  amount: number;
+  ruleId: number
+  transferId: number;
 }
