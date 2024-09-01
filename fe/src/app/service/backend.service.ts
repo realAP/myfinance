@@ -9,7 +9,8 @@ import {
   RuleCreationDto,
   SpaceCreationDto,
   SpaceDto,
-  SpendingCategoryBlockDto
+  SpendingCategoryBlockDto,
+  TransferCreationDto
 } from "../model/backend";
 
 
@@ -62,5 +63,9 @@ export class BackendService {
 
   createRule(ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
     return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules", ruleCreationDto);
+  }
+
+  createTransfer(transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
+    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers", transferCreationDto);
   }
 }

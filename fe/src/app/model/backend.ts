@@ -49,7 +49,14 @@ export interface BankDto {
 
 export interface RuleCreationDto {
   description: string;
-  dateOfExecution: String;
-  fromSpaceId?: number;
-  toSpaceId?: number;
+  dateOfExecution: string;
+  fromSpaceId: number;
+  toSpaceId: number;
+}
+
+export interface TransferCreationDto {
+  description: string;
+  dateOfExecution: string;
+  fromBankId: number;
+  toBankId: number;
 }
