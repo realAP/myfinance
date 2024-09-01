@@ -44,8 +44,8 @@ public class Converter {
     ruleDto.setDescription(rule.getDescription());
     ruleDto.setAmount(rule.getAmount());
     ruleDto.setOldAmount(rule.getOldAmount());
-    ruleDto.setFrom(rule.getFrom());
-    ruleDto.setTo(rule.getTo());
+    ruleDto.setFrom(rule.getFromSpace().getName());
+    ruleDto.setTo(rule.getToSpace().getName());
     ruleDto.setChange(rule.isChange());
     return ruleDto;
   }

@@ -52,6 +52,4 @@ export interface RuleCreationDto {
   dateOfExecution: String;
   fromSpaceId?: number;
   toSpaceId?: number;
-  fromSpaceName?: string;
-  toSpaceName?: string;
 }

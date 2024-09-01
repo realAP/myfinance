@@ -31,12 +31,6 @@ public class Rule {
     @OneToMany(mappedBy = "rule")
     private List<Spending> spendings = new ArrayList<>();
 
-    @Column
-    private String from;
-
-    @Column
-    private String to;
-
     @ManyToOne
     @JoinColumn(name = "from_space_id")
     private Space fromSpace;

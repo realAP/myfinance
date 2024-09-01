@@ -56,8 +56,6 @@ export class RuleCreationComponent implements OnInit {
       dateOfExecution: this.date.toISOString(),
       fromSpaceId: this.selectedFromSpace.id,
       toSpaceId: this.selectedTargetSpace.id,
-      fromSpaceName: this.selectedFromSpace.name,
-      toSpaceName: this.selectedTargetSpace.name,
     }
 
     this.backendService.createRule(ruleCreationDto).subscribe();

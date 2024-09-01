@@ -19,8 +19,6 @@ public class RuleCreationService {
     rule.setFromSpace(fromSpace);
     final var toSpace = spaceRepository.findById(ruleCreationDto.getToSpaceId()).orElseThrow(() -> new IllegalArgumentException("to space not found"));
     rule.setToSpace(toSpace);
-    rule.setTo(ruleCreationDto.getTo());
-    rule.setFrom(ruleCreationDto.getFrom());
     rule.setDescription(ruleCreationDto.getDescription());
     rule.setDateOfExecution(ruleCreationDto.getDateOfExecution());
 

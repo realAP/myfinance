@@ -65,12 +65,12 @@ class SpendingEditManagerServiceIntTest {
   @BeforeEach
   void setUp() {
     final var spendings = spendingRepository.findAll();
-    msciWorldSpending = spendings.stream().filter(s -> s.getDescription().equalsIgnoreCase("MSCI World")).findFirst().get();
-    langzeitinvest1Rule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("langzeitinvest1")).findFirst().get();
-    etfTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("ETF")).findFirst().get();
-    bitcoinTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("Bitcoin")).findFirst().get();
-    zockenRule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("zocken")).findFirst().get();
-    sportCategory = categoryRepository.findAll().stream().filter(c -> c.getName().equalsIgnoreCase("sport")).findFirst().get();
+    msciWorldSpending = spendings.stream().filter(s -> s.getDescription().equalsIgnoreCase("MSCI World")).findFirst().orElseThrow(() -> new RuntimeException("'MSCI World' not found"));
+    langzeitinvest1Rule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("langzeitinvest1")).findFirst().orElseThrow(() -> new RuntimeException("'langzeitinvest1' not found"));
+    etfTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("ETF")).findFirst().orElseThrow(() -> new RuntimeException("'ETF' not found"));
+    bitcoinTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("Bitcoin")).findFirst().orElseThrow(() -> new RuntimeException("'Bitcoin' not found"));
+    zockenRule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("zocken")).findFirst().orElseThrow(() -> new RuntimeException("'zocken' not found"));
+    sportCategory = categoryRepository.findAll().stream().filter(c -> c.getName().equalsIgnoreCase("sport")).findFirst().orElseThrow(() -> new RuntimeException("'sport' not found"));
   }
 
 
