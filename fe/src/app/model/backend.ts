@@ -46,3 +46,12 @@ export interface BankDto {
   id: number;
   name: string;
 }
+
+export interface RuleCreationDto {
+  description: string;
+  dateOfExecution: String;
+  fromSpaceId?: number;
+  toSpaceId?: number;
+  fromSpaceName?: string;
+  toSpaceName?: string;
+}

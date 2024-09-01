@@ -1,6 +1,6 @@
 package at.devp.myfinance.controller.read;
 
-import at.devp.myfinance.dto.RuleCreationDto;
+import at.devp.myfinance.crud.rule.create.RuleCreationDto;
 import at.devp.myfinance.dto.RuleOverviewDto;
 import at.devp.myfinance.services.rule.RuleOverviewService;
 import lombok.RequiredArgsConstructor;

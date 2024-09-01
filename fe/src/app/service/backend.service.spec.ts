@@ -18,6 +18,6 @@ describe('BackendServiceTsService', () => {
   it('getSpendingOverviewDto should return data from HttpClient', () => {
     underTest.getSpendingCategoryBlockDto();
 
-    expect(httpClientMock.get).toBeCalledWith('http://localhost:8080/fe/overview');
+    expect(httpClientMock.get).toHaveBeenCalledWith('http://localhost:8080/fe/overview');
   })
 });

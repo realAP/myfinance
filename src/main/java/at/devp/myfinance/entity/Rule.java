@@ -37,6 +37,14 @@ public class Rule {
     @Column
     private String to;
 
+    @ManyToOne
+    @JoinColumn(name = "from_space_id")
+    private Space fromSpace;
+
+    @ManyToOne
+    @JoinColumn(name = "to_space_id")
+    private Space toSpace;
+
     @Column
     private BigDecimal amount = new BigDecimal("0.00");
 

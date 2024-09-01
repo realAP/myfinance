@@ -4,12 +4,13 @@ import {Observable} from "rxjs";
 import {
   BankCreationDto,
   BankDto,
-  CategoryCreationDto, CategoryDto,
+  CategoryCreationDto,
+  CategoryDto,
+  RuleCreationDto,
   SpaceCreationDto,
   SpaceDto,
   SpendingCategoryBlockDto
 } from "../model/backend";
-
 
 
 @Injectable({
@@ -24,10 +25,13 @@ export class BackendService {
   constructor(private httpClient: HttpClient) {
   }
 
+  //
+  // TODO: add error handling
+  //
+
   getSpendingCategoryBlockDto(): Observable<SpendingCategoryBlockDto[]> {
     return this.httpClient.get<SpendingCategoryBlockDto[]>(this.TARGET + this.BASE_API + "/overview");
   }
-
 
   createSpace(name: string): void {
     const spaceCreationDto: SpaceCreationDto = {name: name};
@@ -54,5 +58,9 @@ export class BackendService {
 
   getCategories(): Observable<CategoryDto[]> {
     return this.httpClient.get<CategoryDto[]>(this.TARGET + this.BASE_API + "/crud/categories");
+  }
+
+  createRule(ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
+    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules", ruleCreationDto);
   }
 }

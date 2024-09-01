@@ -1,6 +1,7 @@
 package at.devp.myfinance.services.rule;
 
-import at.devp.myfinance.dto.RuleCreationDto;
+import at.devp.myfinance.crud.rule.create.RuleCreationDto;
+import at.devp.myfinance.crud.rule.create.RuleCreationService;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import org.junit.jupiter.api.Test;
@@ -18,10 +19,10 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-class RuleCreatorServiceIntTest {
+class RuleCreationServiceIntTest {
 
   @Autowired
-  private RuleCreatorService underTest;
+  private RuleCreationService underTest;
 
   @Autowired
   private RuleRepository ruleRepository;

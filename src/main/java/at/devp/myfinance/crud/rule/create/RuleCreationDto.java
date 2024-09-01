@@ -1,4 +1,4 @@
-package at.devp.myfinance.dto;
+package at.devp.myfinance.crud.rule.create;
 
 import lombok.Data;
 
@@ -10,4 +10,6 @@ public class RuleCreationDto {
   private LocalDate dateOfExecution;
   private String from;
   private String to;
+  private Long fromSpaceId;
+  private Long toSpaceId;
 }

@@ -9,7 +9,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
 import {BackendService} from "../../service/backend.service";
-import {SpaceDto} from "../../model/backend";
+import {RuleCreationDto, SpaceDto} from "../../model/backend";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-rule-creation',
@@ -33,21 +34,33 @@ export class RuleCreationComponent implements OnInit {
   spaces: SpaceDto[] = [];
   selectedFromSpace: SpaceDto = {} as SpaceDto;
   selectedTargetSpace: SpaceDto = {} as SpaceDto;
+  name: string = "";
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
-
     this.backendService.getSpaces().subscribe(spaceDtos => {
       this.spaces = spaceDtos;
     })
   }
 
   onClick() {
-    console.log("From Space: " + this.selectedFromSpace.id);
-    console.log("Target Space: " + this.selectedTargetSpace.id);
-    console.log("Date: " + this.date);
+    if (!this.selectedFromSpace.id || !this.selectedTargetSpace.id || !this.date || !this.name) {
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'Please fill in all fields'});
+      return;
+    }
+    const ruleCreationDto: RuleCreationDto = {
+      description: this.name,
+      dateOfExecution: this.date.toISOString(),
+      fromSpaceId: this.selectedFromSpace.id,
+      toSpaceId: this.selectedTargetSpace.id,
+      fromSpaceName: this.selectedFromSpace.name,
+      toSpaceName: this.selectedTargetSpace.name,
+    }
 
+    this.backendService.createRule(ruleCreationDto).subscribe();
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Created rule'});
   }
 }
