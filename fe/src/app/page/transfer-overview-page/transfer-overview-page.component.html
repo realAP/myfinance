@@ -3,7 +3,7 @@
   <p-table [value]="transferDtos"
            dataKey="id"
            [tableStyle]="{ 'min-width': '50rem' }"
-           [(contextMenuSelection)]="selectedTransfer"
+           (onContextMenuSelect)="updateContextMenu($event)"
            [contextMenu]="cm"
   >
     <ng-template pTemplate="header">
@@ -17,6 +17,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-transfer>
       <tr
+
         [pContextMenuRow]="transfer"
         [ngClass]="transfer.isChange ? 'red-background' : 'green-background'">
         <td>{{ transfer.description }}</td>

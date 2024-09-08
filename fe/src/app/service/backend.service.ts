@@ -10,7 +10,8 @@ import {
   RuleDto,
   SpaceCreationDto,
   SpaceDto,
-  SpendingCategoryBlockDto, SpendingCreationDto,
+  SpendingCategoryBlockDto,
+  SpendingCreationDto,
   TransferCreationDto,
   TransferDto
 } from "../model/backend";
@@ -81,5 +82,9 @@ export class BackendService {
 
   createSpending(spendingCreationDto: SpendingCreationDto) {
     this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).subscribe();
+  }
+
+  confirmChange(id: number) {
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {});
   }
 }

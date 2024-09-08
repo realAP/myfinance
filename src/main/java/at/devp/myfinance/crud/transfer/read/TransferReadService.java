@@ -5,6 +5,7 @@ import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -14,6 +15,6 @@ public class TransferReadService {
     private final Converter converter;
 
     public List<TransferDto> getTransferDtos() {
-        return transferRepository.findAll().stream().map(converter::convert2TransferDto).toList();
+        return transferRepository.findAll().stream().map(converter::convert2TransferDto).sorted(Comparator.comparing(TransferDto::getDescription)).toList();
     }
 }

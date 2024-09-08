@@ -44,8 +44,7 @@ public class TransferController {
   // i want the crud folders to be stupid and bound to entities
   @PostMapping("/{id}/confirmchange")
   public void confirmChangeTransfer(@PathVariable("id") Long id) {
-    throw new UnsupportedOperationException("This endpoint is not implemented yet.");
-    //transferChangeService.confirmAmountChangeForTransfer(id);
+    transferChangeService.confirmAmountChangeForTransfer(id);
   }
 
 }
