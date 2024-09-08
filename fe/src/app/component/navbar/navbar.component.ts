@@ -20,9 +20,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'Übersicht',
+        label: 'Ausgaben',
         icon: 'pi pi-home',
-        route: '/overview',
+        route: '/spendings',
+      },
+      {
+        label: 'Transfers',
+        icon: 'pi pi-building-columns',
+        route: '/transfers',
       },
       {
         label: 'Backoffice',

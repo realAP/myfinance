@@ -68,7 +68,13 @@ export interface TransferCreationDto {
 
 export interface TransferDto {
   id: number;
+  dateOfExecution: string;
   description: string;
+  fromBankName: string;
+  toBankName: string;
+  amount: number;
+  oldAmount: number;
+  isChange: boolean;
 }
 
 export interface SpendingCreationDto {

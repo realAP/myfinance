@@ -70,7 +70,13 @@ public class Converter {
     public TransferDto convert2TransferDto(final Transfer transfer) {
         final var transferDto = new TransferDto();
         transferDto.setId(transfer.getId());
+        transferDto.setDateOfExecution(transfer.getDateOfExecution());
         transferDto.setDescription(transfer.getDescription());
+        transferDto.setAmount(transfer.getAmount());
+        transferDto.setOldAmount(transfer.getOldAmount());
+        transferDto.setFromBankName(transfer.getFromBank().getName());
+        transferDto.setToBankName(transfer.getToBank().getName());
+        transferDto.setIsChange(transfer.isChange());
         return transferDto;
     }
 
