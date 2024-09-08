@@ -1,6 +1,6 @@
 package at.devp.myfinance.controller.write;
 
-import at.devp.myfinance.dto.TransferCreationDto;
+import at.devp.myfinance.crud.transfer.create.TransferCreationDto;
 import at.devp.myfinance.services.transfer.TransferChangeService;
 import at.devp.myfinance.crud.transfer.create.TransferCreationService;
 import at.devp.myfinance.services.transfer.TransferDeletionService;

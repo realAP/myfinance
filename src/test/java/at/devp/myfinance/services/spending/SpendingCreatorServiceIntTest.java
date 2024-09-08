@@ -1,5 +1,6 @@
 package at.devp.myfinance.services.spending;
 
+import at.devp.myfinance.crud.spending.create.SpendingCreatorService;
 import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;

@@ -1,6 +1,8 @@
 <p>backoffice-page works!</p>
 <p-card header="Transfer Creation">
-  <app-transfer-creation></app-transfer-creation>
+
+  <app-transfer-form (formSubmit)="onTransferCreate($event)"></app-transfer-form>
+
 </p-card>
 
 <p-card header="Spending Creation">

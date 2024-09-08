@@ -1,6 +1,5 @@
 package at.devp.myfinance.crud.transfer.create;
 
-import at.devp.myfinance.dto.TransferCreationDto;
 import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.BankRepository;
 import at.devp.myfinance.repositories.TransferRepository;

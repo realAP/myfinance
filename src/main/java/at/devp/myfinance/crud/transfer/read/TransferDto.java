@@ -11,7 +11,9 @@ public class TransferDto {
   private LocalDate dateOfExecution;
   private String description;
   private String fromBankName;
+  private Long fromBankNameId;
   private String toBankName;
+  private Long toBankNameId;
   private BigDecimal amount;
   private BigDecimal oldAmount;
   private Boolean isChange;

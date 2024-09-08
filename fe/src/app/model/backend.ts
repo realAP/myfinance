@@ -71,7 +71,9 @@ export interface TransferDto {
   dateOfExecution: string;
   description: string;
   fromBankName: string;
+  fromBankNameId: number;
   toBankName: string;
+  toBankNameId: number;
   amount: number;
   oldAmount: number;
   isChange: boolean;

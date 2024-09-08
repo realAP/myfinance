@@ -1,4 +1,4 @@
-package at.devp.myfinance.dto;
+package at.devp.myfinance.crud.transfer.create;
 
 import lombok.Data;
 

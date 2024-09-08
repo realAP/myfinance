@@ -1,6 +1,6 @@
 package at.devp.myfinance.controller.read;
 
-import at.devp.myfinance.dto.TransferCreationDto;
+import at.devp.myfinance.crud.transfer.create.TransferCreationDto;
 import at.devp.myfinance.crud.transfer.read.TransferDto;
 import at.devp.myfinance.services.transfer.TransferOverviewService;
 import lombok.RequiredArgsConstructor;

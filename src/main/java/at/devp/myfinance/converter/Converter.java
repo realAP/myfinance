@@ -75,7 +75,9 @@ public class Converter {
         transferDto.setAmount(transfer.getAmount());
         transferDto.setOldAmount(transfer.getOldAmount());
         transferDto.setFromBankName(transfer.getFromBank().getName());
+        transferDto.setFromBankNameId(transfer.getFromBank().getId());
         transferDto.setToBankName(transfer.getToBank().getName());
+        transferDto.setToBankNameId(transfer.getToBank().getId());
         transferDto.setIsChange(transfer.isChange());
         return transferDto;
     }

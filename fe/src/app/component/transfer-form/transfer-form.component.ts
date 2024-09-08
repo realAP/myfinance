@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Button} from "primeng/button";
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
@@ -9,8 +9,13 @@ import {BackendService} from "../../service/backend.service";
 import {BankDto, TransferCreationDto} from "../../model/backend";
 import {MessageService} from "primeng/api";
 
+export interface TransferFormDto {
+  transferCreationDto: TransferCreationDto;
+  isPreFilled: boolean;
+}
+
 @Component({
-  selector: 'app-transfer-creation',
+  selector: 'app-transfer-form',
   standalone: true,
   imports: [
     Button,
@@ -20,15 +25,18 @@ import {MessageService} from "primeng/api";
     InputTextModule,
     FormsModule
   ],
-  templateUrl: './transfer-creation.component.html',
-  styleUrl: './transfer-creation.component.scss'
+  templateUrl: './transfer-form.component.html',
+  styleUrl: './transfer-form.component.scss'
 })
-export class TransferCreationComponent implements OnInit {
+export class TransferFormComponent implements OnInit {
   date: any;
   banks: BankDto[] = [];
   selectedFromBank: BankDto = {} as BankDto;
   selectedTargetBank: BankDto = {} as BankDto;
   name: string = "";
+
+  @Input() preFilledTransferFormDto?: TransferFormDto;
+  @Output() formSubmit = new EventEmitter<TransferCreationDto>
 
   constructor(private backendService: BackendService,
               private messageService: MessageService) {
@@ -37,8 +45,14 @@ export class TransferCreationComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.getBanks().subscribe(bankDtos => {
       this.banks = bankDtos;
-    })
-
+      if (this.preFilledTransferFormDto?.isPreFilled) {
+        const preFilledData = this.preFilledTransferFormDto?.transferCreationDto;
+        this.selectedFromBank = this.banks.find(bank => bank.id === preFilledData.fromBankId)!;
+        this.selectedTargetBank = this.banks.find(bank => bank.id === preFilledData.toBankId)!;
+        this.date = new Date(preFilledData.dateOfExecution);
+        this.name = preFilledData.description
+      }
+    });
   }
 
   onClick() {
@@ -53,8 +67,6 @@ export class TransferCreationComponent implements OnInit {
       fromBankId: this.selectedFromBank.id,
       toBankId: this.selectedTargetBank.id,
     }
-
-    this.backendService.createTransfer(transferCreationDto).subscribe();
-    this.messageService.add({severity: 'success', summary: 'created Transfer:', detail: this.name});
+    this.formSubmit.emit(transferCreationDto);
   }
 }

@@ -76,6 +76,10 @@ export class BackendService {
     return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers", transferCreationDto);
   }
 
+  editTransfer(transferId: number, transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
+    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId , transferCreationDto);
+  }
+
   getTransfers(): Observable<TransferDto[]> {
     return this.httpClient.get<TransferDto[]>(this.TARGET + this.BASE_API + "/crud/transfers");
   }

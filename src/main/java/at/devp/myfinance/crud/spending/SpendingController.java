@@ -1,7 +1,7 @@
 package at.devp.myfinance.crud.spending;
 
 import at.devp.myfinance.dto.SpendingCreationDto;
-import at.devp.myfinance.services.spending.SpendingCreatorService;
+import at.devp.myfinance.crud.spending.create.SpendingCreatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
