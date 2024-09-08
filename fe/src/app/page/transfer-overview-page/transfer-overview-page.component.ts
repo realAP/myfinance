@@ -89,12 +89,17 @@ export class TransferOverviewPageComponent implements OnInit {
   }
 
   onEditTransfer(transferCreationDto: TransferCreationDto) {
-    this.backendService.editTransfer(this.selectedTransfer.id, transferCreationDto).subscribe();
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Edited Transfer:',
-      detail: transferCreationDto.description
-    });
-    this.isEditDialogOpen = false;
+    this.backendService.editTransfer(this.selectedTransfer.id, transferCreationDto).subscribe({
+        next: () => {
+          this.loadTransferDtos();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Edited Transfer:',
+            detail: transferCreationDto.description
+          });
+          this.isEditDialogOpen = false;
+        }
+      }
+    );
   }
 }

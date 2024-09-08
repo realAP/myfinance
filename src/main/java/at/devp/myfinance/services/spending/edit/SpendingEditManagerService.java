@@ -50,7 +50,7 @@ public class SpendingEditManagerService {
     }
 
     private boolean checkForCategoryChange(SpendingEditDto spendingEditDto, Spending spending) {
-        return !Objects.equals(spending.getCategory(), spendingEditDto.getCategoryId());
+        return !Objects.equals(spending.getCategory().getId(), spendingEditDto.getCategoryId());
     }
 
     private boolean checkForDescriptionChange(SpendingEditDto spendingEditDto, Spending spending) {
@@ -58,7 +58,7 @@ public class SpendingEditManagerService {
     }
 
     private boolean checkForAmountChange(SpendingEditDto spendingEditDto, Spending spending) {
-        return spending.getAmount() != spendingEditDto.getAmount();
+        return !Objects.equals(spending.getAmount(), spendingEditDto.getAmount());
     }
 
     private boolean checkForRuleChange(final Spending spending, final SpendingEditDto spendingEditDto) {
