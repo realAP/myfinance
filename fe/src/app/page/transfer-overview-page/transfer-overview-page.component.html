@@ -1,0 +1,36 @@
+<div class="card">
+  <p-contextMenu #cm [model]="items"/>
+  <p-table [value]="transferDtos"
+           dataKey="id"
+           [tableStyle]="{ 'min-width': '50rem' }"
+           [(contextMenuSelection)]="selectedTransfer"
+           [contextMenu]="cm"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Überweisungsdatum</th>
+        <th>Von Bank</th>
+        <th>Nach Bank</th>
+        <th>Betrag</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-transfer>
+      <tr
+        [pContextMenuRow]="transfer"
+        [ngClass]="transfer.isChange ? 'red-background' : 'green-background'">
+        <td>{{ transfer.description }}</td>
+        <td>{{ transfer.dateOfExecution }}</td>
+        <td>{{ transfer.fromBankName }}</td>
+        <td>{{ transfer.toBankName }}</td>
+        <td>
+          @if (transfer.isChange) {
+            change from {{ transfer.oldAmount }} to {{ transfer.amount }}
+          } @else {
+            {{ transfer.amount }}
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
