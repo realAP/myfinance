@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RuleCreationComponent } from './rule-creation.component';
+import { SpaceFormComponent } from './space-form.component';
 
-describe('RuleCreationComponent', () => {
-  let component: RuleCreationComponent;
-  let fixture: ComponentFixture<RuleCreationComponent>;
+describe('SpaceCreationComponent', () => {
+  let component: SpaceFormComponent;
+  let fixture: ComponentFixture<SpaceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RuleCreationComponent]
+      imports: [SpaceFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RuleCreationComponent);
+    fixture = TestBed.createComponent(SpaceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

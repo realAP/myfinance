@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Button} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {FloatLabelModule} from "primeng/floatlabel";
@@ -12,8 +12,13 @@ import {BackendService} from "../../service/backend.service";
 import {RuleCreationDto, SpaceDto} from "../../model/backend";
 import {MessageService} from "primeng/api";
 
+export interface RuleFormDto {
+  ruleCreationDto: RuleCreationDto;
+  isPreFilled: boolean;
+}
+
 @Component({
-  selector: 'app-rule-creation',
+  selector: 'app-rule-form',
   standalone: true,
   imports: [
     Button,
@@ -26,15 +31,18 @@ import {MessageService} from "primeng/api";
     CalendarModule,
     FormsModule
   ],
-  templateUrl: './rule-creation.component.html',
-  styleUrl: './rule-creation.component.scss'
+  templateUrl: './rule-form.component.html',
+  styleUrl: './rule-form.component.scss'
 })
-export class RuleCreationComponent implements OnInit {
+export class RuleFormComponent implements OnInit {
   date: any;
   spaces: SpaceDto[] = [];
   selectedFromSpace: SpaceDto = {} as SpaceDto;
   selectedTargetSpace: SpaceDto = {} as SpaceDto;
   name: string = "";
+
+  @Input() preFilledRuleFormDto?: RuleFormDto;
+  @Output() formSubmit = new EventEmitter<RuleCreationDto>
 
   constructor(private backendService: BackendService,
               private messageService: MessageService) {
@@ -43,7 +51,17 @@ export class RuleCreationComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.getSpaces().subscribe(spaceDtos => {
       this.spaces = spaceDtos;
-    })
+
+      if (this.preFilledRuleFormDto?.isPreFilled) {
+
+        const preFilledData = this.preFilledRuleFormDto?.ruleCreationDto;
+
+        this.selectedFromSpace = this.spaces.find(space => space.id === preFilledData?.fromSpaceId)!;
+        this.selectedTargetSpace = this.spaces.find(space => space.id === preFilledData?.toSpaceId)!;
+        this.date = new Date(preFilledData.dateOfExecution);
+        this.name = preFilledData.description;
+      }
+    });
   }
 
   onClick() {
@@ -58,7 +76,6 @@ export class RuleCreationComponent implements OnInit {
       toSpaceId: this.selectedTargetSpace.id,
     }
 
-    this.backendService.createRule(ruleCreationDto).subscribe();
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Created rule'});
+    this.formSubmit.emit(ruleCreationDto);
   }
 }

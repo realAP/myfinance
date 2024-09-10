@@ -116,10 +116,18 @@ public class Converter {
                 .toList();
     }
 
-    private RuleDto convert2RuleDto(final Rule rule) {
+    public RuleDto convert2RuleDto(final Rule rule) {
         final var ruleDto = new RuleDto();
         ruleDto.setId(rule.getId());
         ruleDto.setDescription(rule.getDescription());
+        ruleDto.setAmount(rule.getAmount());
+        ruleDto.setOldAmount(rule.getOldAmount());
+        ruleDto.setFromSpaceName(rule.getFromSpace().getName());
+        ruleDto.setToSpaceName(rule.getToSpace().getName());
+        ruleDto.setIsChange(rule.isChange());
+        ruleDto.setFromSpaceId(rule.getFromSpace().getId());
+        ruleDto.setToSpaceId(rule.getToSpace().getId());
+        ruleDto.setDateOfExecution(rule.getDateOfExecution());
         return ruleDto;
     }
 }

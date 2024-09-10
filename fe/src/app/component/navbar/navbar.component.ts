@@ -30,6 +30,11 @@ export class NavbarComponent implements OnInit {
         route: '/transfers',
       },
       {
+        label: 'Rules',
+        icon: 'pi pi-hammer',
+        route: '/rules',
+      },
+      {
         label: 'Backoffice',
         icon: 'pi pi-list',
         route: '/backoffice'

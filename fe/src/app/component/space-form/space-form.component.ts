@@ -15,10 +15,10 @@ import {MessageService} from "primeng/api";
     InputTextModule,
     FormsModule
   ],
-  templateUrl: './space-creation.component.html',
-  styleUrl: './space-creation.component.scss'
+  templateUrl: './space-form.component.html',
+  styleUrl: './space-form.component.scss'
 })
-export class SpaceCreationComponent {
+export class SpaceFormComponent {
 
   name: string = "";
 

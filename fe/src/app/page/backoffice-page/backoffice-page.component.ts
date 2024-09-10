@@ -2,14 +2,14 @@ import {Component} from '@angular/core';
 import {CardModule} from "primeng/card";
 import {BankCreationComponent} from "../../component/bank-creation/bank-creation.component";
 import {CategoryCreationComponent} from "../../component/category-creation/category-creation.component";
-import {RuleCreationComponent} from "../../component/rule-creation/rule-creation.component";
+import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {TransferFormComponent} from "../../component/transfer-form/transfer-form.component";
-import {SpaceCreationComponent} from "../../component/space-creation/space-creation.component";
+import {SpaceFormComponent} from "../../component/space-form/space-form.component";
 import {SpendingCreationComponent} from "../../component/spending-creation/spending-creation.component";
 import {ConnectedSquaresComponent} from "../../component/connected-squares/connected-squares.component";
 import {BackendService} from "../../service/backend.service";
 import {MessageService} from "primeng/api";
-import {TransferCreationDto} from "../../model/backend";
+import {RuleCreationDto, TransferCreationDto} from "../../model/backend";
 
 @Component({
   selector: 'app-backoffice-page',
@@ -17,9 +17,9 @@ import {TransferCreationDto} from "../../model/backend";
   imports: [
     BankCreationComponent,
     CategoryCreationComponent,
-    RuleCreationComponent,
+    RuleFormComponent,
     TransferFormComponent,
-    SpaceCreationComponent,
+    SpaceFormComponent,
     SpendingCreationComponent,
     CardModule,
     ConnectedSquaresComponent
@@ -39,4 +39,8 @@ export class BackofficePageComponent {
     this.messageService.add({severity: 'success', summary: 'created Transfer:', detail: transferCreationDto.description});
   }
 
+  onRuleCreate(ruleCreationDto: RuleCreationDto) {
+    this.backendService.createRule(ruleCreationDto).subscribe();
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Created rule'});
+  }
 }

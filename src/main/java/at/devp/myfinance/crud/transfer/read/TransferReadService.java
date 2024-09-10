@@ -15,6 +15,11 @@ public class TransferReadService {
     private final Converter converter;
 
     public List<TransferDto> getTransferDtos() {
-        return transferRepository.findAll().stream().map(converter::convert2TransferDto).sorted(Comparator.comparing(TransferDto::getDescription)).toList();
+        return transferRepository
+                .findAll()
+                .stream()
+                .map(converter::convert2TransferDto)
+                .sorted(Comparator.comparing(TransferDto::getDescription))
+                .toList();
     }
 }

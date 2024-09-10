@@ -57,6 +57,14 @@ export interface RuleCreationDto {
 export interface RuleDto {
   id: number;
   description: string;
+  dateOfExecution: string;
+  fromSpaceName: string;
+  toSpaceName: string;
+  fromSpaceId: number;
+  toSpaceId: number;
+  amount: number;
+  oldAmount: number;
+  isChange: boolean;
 }
 
 export interface TransferCreationDto {

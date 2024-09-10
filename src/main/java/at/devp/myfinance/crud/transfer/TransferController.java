@@ -48,8 +48,6 @@ public class TransferController {
         //transferDeletionService.deleteById(id);
     }
 
-    // this is business logic has nothing todo with simple not intelligent crud... move this to special place
-    // i want the crud folders to be stupid and bound to entities
     @PostMapping("/{id}/confirmchange")
     public void confirmChangeTransfer(@PathVariable("id") Long id) {
         transferChangeService.confirmAmountChangeForTransfer(id);

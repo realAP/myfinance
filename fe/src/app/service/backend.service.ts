@@ -80,6 +80,10 @@ export class BackendService {
     return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId , transferCreationDto);
   }
 
+  editRule(ruleId: number, ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
+    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules/" + ruleId, ruleCreationDto);
+  }
+
   getTransfers(): Observable<TransferDto[]> {
     return this.httpClient.get<TransferDto[]>(this.TARGET + this.BASE_API + "/crud/transfers");
   }
@@ -88,7 +92,10 @@ export class BackendService {
     this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).subscribe();
   }
 
-  confirmChange(id: number) {
+  confirmTransferChange(id: number) {
     return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {});
+  }
+  confirmRuleChange(id: number) {
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/rules/" + id + "/confirmchange", {});
   }
 }

@@ -63,7 +63,7 @@ export class TransferOverviewPageComponent implements OnInit {
   }
 
   approveChange(transferDto: TransferDto) {
-    this.backendService.confirmChange(transferDto.id).subscribe({
+    this.backendService.confirmTransferChange(transferDto.id).subscribe({
         next: () => {
           this.loadTransferDtos();
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Approved Changes'});

@@ -16,6 +16,10 @@ export const routes: Routes = [
     loadComponent: () => import('./page/transfer-overview-page/transfer-overview-page.component').then(m => m.TransferOverviewPageComponent)
   },
   {
+    path: 'rules',
+    loadComponent: () => import('./page/rule-overview-page/rule-overview-page.component').then(m => m.RuleOverviewPageComponent)
+  },
+  {
     path: 'backoffice',
     loadComponent: () => import('./page/backoffice-page/backoffice-page.component').then(m => m.BackofficePageComponent)
   }

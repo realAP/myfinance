@@ -17,8 +17,7 @@ public class TransferEditService2 {
 
     @Transactional
     public void editTransfer(final Long transferId, final TransferCreationDto transferCreationDto) {
-
-        final var transfer = transferRepository.findById(transferId).orElseThrow(() -> new IllegalArgumentException("Transfer  with id " + transferId + " not found"));
+        final var transfer = transferRepository.findById(transferId).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + transferId + " not found"));
 
         if (!Objects.equals(transfer.getDescription(), transferCreationDto.getDescription())) {
             transfer.setDescription(transferCreationDto.getDescription());

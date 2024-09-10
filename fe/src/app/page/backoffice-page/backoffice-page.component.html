@@ -10,7 +10,7 @@
 </p-card>
 
 <p-card header="Rule Creation">
-  <app-rule-creation></app-rule-creation>
+  <app-rule-form (formSubmit)="onRuleCreate($event)"></app-rule-form>
 </p-card>
 
 <p-card header="Category Creation">
