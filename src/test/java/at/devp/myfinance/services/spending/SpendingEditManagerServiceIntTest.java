@@ -9,7 +9,7 @@ import at.devp.myfinance.repositories.CategoryRepository;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
+import at.devp.myfinance.crud.spending.edit.SpendingEditManagerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

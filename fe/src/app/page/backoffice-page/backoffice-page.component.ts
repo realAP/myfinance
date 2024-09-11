@@ -5,7 +5,7 @@ import {CategoryCreationComponent} from "../../component/category-creation/categ
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {TransferFormComponent} from "../../component/transfer-form/transfer-form.component";
 import {SpaceFormComponent} from "../../component/space-form/space-form.component";
-import {SpendingCreationComponent} from "../../component/spending-creation/spending-creation.component";
+import {SpendingFormComponent} from "../../component/spending-form/spending-form.component";
 import {ConnectedSquaresComponent} from "../../component/connected-squares/connected-squares.component";
 import {BackendService} from "../../service/backend.service";
 import {MessageService} from "primeng/api";
@@ -20,7 +20,7 @@ import {RuleCreationDto, TransferCreationDto} from "../../model/backend";
     RuleFormComponent,
     TransferFormComponent,
     SpaceFormComponent,
-    SpendingCreationComponent,
+    SpendingFormComponent,
     CardModule,
     ConnectedSquaresComponent
   ],

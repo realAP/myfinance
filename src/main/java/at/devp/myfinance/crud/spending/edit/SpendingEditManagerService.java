@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.spending.edit;
+package at.devp.myfinance.crud.spending.edit;
 
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.entity.Spending;
@@ -21,6 +21,7 @@ public class SpendingEditManagerService {
 
     @Transactional
     public void editSpending(final SpendingEditDto spendingEditDto) {
+        System.out.println(spendingEditDto);
         final var spending = spendingRepository.findById(spendingEditDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingEditDto.getId() + " not found"));
 
         if (checkForDescriptionChange(spendingEditDto, spending)) {

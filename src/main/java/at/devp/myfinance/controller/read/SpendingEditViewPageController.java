@@ -3,7 +3,7 @@ package at.devp.myfinance.controller.read;
 import at.devp.myfinance.dto.RuleDropDownDto;
 import at.devp.myfinance.dto.TransferDropDownDto;
 import at.devp.myfinance.services.rule.RuleDropDownService;
-import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
+import at.devp.myfinance.crud.spending.edit.SpendingEditManagerService;
 import at.devp.myfinance.services.transfer.TransferDropDownService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

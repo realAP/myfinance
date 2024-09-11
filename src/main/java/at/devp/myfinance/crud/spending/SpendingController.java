@@ -1,7 +1,9 @@
 package at.devp.myfinance.crud.spending;
 
-import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.crud.spending.create.SpendingCreatorService;
+import at.devp.myfinance.crud.spending.edit.SpendingEditManagerService;
+import at.devp.myfinance.dto.SpendingCreationDto;
+import at.devp.myfinance.dto.SpendingEditDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class SpendingController {
 
     private final SpendingCreatorService spendingCreatorService;
+    private final SpendingEditManagerService spendingEditManagerService;
 
     @PostMapping
     public ResponseEntity<?> createSpending(@RequestBody SpendingCreationDto spendingCreationDto) {
         spendingCreatorService.createSpending(spendingCreationDto);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}")
+    public void editSpending(@PathVariable Long id, @RequestBody SpendingEditDto spendingEditDto) {
+        System.out.println(spendingEditDto);
+        spendingEditDto.setId(id);
+        spendingEditManagerService.editSpending(spendingEditDto);
     }
 }

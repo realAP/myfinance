@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.spending.edit;
+package at.devp.myfinance.crud.spending.edit;
 
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.entity.Spending;

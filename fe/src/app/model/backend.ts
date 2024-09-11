@@ -24,9 +24,12 @@ export interface SpendingRowDto {
   id: number; // Use appropriate numeric type (e.g., number, bigint, etc.)
   description: string;
   ruleDescription: string;
+  ruleId: number
   transferDescription: string;
+  transferId: number;
   amount: number; // Use appropriate numeric type (e.g., number, BigDecimal, etc.)
   category: string;
+  categoryId: number;
 }
 
 export interface SpaceCreationDto {
@@ -88,6 +91,16 @@ export interface TransferDto {
 }
 
 export interface SpendingCreationDto {
+  id?: number;
+  categoryId: number;
+  description: string;
+  amount: number;
+  ruleId: number
+  transferId: number;
+}
+
+export interface SpendingEditDto {
+  id: number;
   categoryId: number;
   description: string;
   amount: number;

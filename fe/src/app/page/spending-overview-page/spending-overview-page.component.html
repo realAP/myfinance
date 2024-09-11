@@ -6,6 +6,8 @@
     [scrollable]="true"
     rowGroupMode="subheader"
     groupRowsBy="category"
+    (onContextMenuSelect)="updateContextMenu($event)"
+    [contextMenu]="cm"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -30,9 +32,14 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-spendingCategoryBlockDto let-rowIndex="rowIndex">
+    <ng-template pTemplate="body"
+                 let-spendingCategoryBlockDto
+                 let-rowIndex="rowIndex"
+    >
       @for (spendingRow of spendingCategoryBlockDto.spendingRowDtos; track spendingRow.id) {
-        <tr>
+        <tr
+          [pContextMenuRow]="spendingRow"
+        >
           <td>
           </td>
           <td>
@@ -47,4 +54,16 @@
       }
     </ng-template>
   </p-table>
+
+  <div class="card flex justify-content-center">
+    <p-dialog header="Edit Spending" [modal]="true" [(visible)]="isEditDialogOpen" [style]="{ width: '25rem' }">
+      @if(isEditDialogOpen) {
+        <app-spending-form
+          (formSubmit)="onEditSpending($event)"
+          [preFilledSpendingFormDto]="spendingFormDto"
+        />
+      }
+    </p-dialog>
+  </div>
+  <p-contextMenu #cm [model]="items"/>
 </div>

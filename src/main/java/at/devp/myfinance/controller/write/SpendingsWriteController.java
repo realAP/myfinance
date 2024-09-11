@@ -2,7 +2,7 @@ package at.devp.myfinance.controller.write;
 
 import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.services.spending.SpendingDeletionService;
-import at.devp.myfinance.services.spending.edit.SpendingEditManagerService;
+import at.devp.myfinance.crud.spending.edit.SpendingEditManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

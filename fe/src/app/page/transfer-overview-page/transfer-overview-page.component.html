@@ -16,7 +16,6 @@
     </ng-template>
     <ng-template pTemplate="body" let-transfer>
       <tr
-
         [pContextMenuRow]="transfer"
         [ngClass]="transfer.isChange ? 'red-background' : 'green-background'">
         <td>{{ transfer.description }}</td>
@@ -24,10 +23,10 @@
         <td>{{ transfer.fromBankName }}</td>
         <td>{{ transfer.toBankName }}</td>
         <td>
-          @if(transfer.isChange) {
-          change from {{ transfer.oldAmount }} to {{ transfer.amount }}
+          @if (transfer.isChange) {
+            change from {{ transfer.oldAmount }} to {{ transfer.amount }}
           } @else {
-          {{ transfer.amount }}
+            {{ transfer.amount }}
           }
         </td>
       </tr>
@@ -35,11 +34,11 @@
   </p-table>
   <div class="card flex justify-content-center">
     <p-dialog header="Edit Profile" [modal]="true" [(visible)]="isEditDialogOpen" [style]="{ width: '25rem' }">
-      @if(isEditDialogOpen) {
-      <app-transfer-form
-        (formSubmit)="onEditTransfer($event)"
-        [preFilledTransferFormDto]="transferFormDto"
-      />
+      @if (isEditDialogOpen) {
+        <app-transfer-form
+          (formSubmit)="onEditTransfer($event)"
+          [preFilledTransferFormDto]="transferFormDto"
+        />
       }
     </p-dialog>
   </div>

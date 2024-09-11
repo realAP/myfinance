@@ -92,6 +92,10 @@ export class BackendService {
     this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).subscribe();
   }
 
+  editSpending(id: number, spendingCreationDto: SpendingCreationDto) {
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings/" + id, spendingCreationDto);
+  }
+
   confirmTransferChange(id: number) {
     return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {});
   }

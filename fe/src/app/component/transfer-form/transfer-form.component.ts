@@ -60,7 +60,6 @@ export class TransferFormComponent implements OnInit {
       this.messageService.add({severity: 'error', summary: 'Error', detail: 'Please fill in all fields'});
       return;
     }
-
     const transferCreationDto: TransferCreationDto = {
       description: this.name,
       dateOfExecution: this.date.toISOString(),
