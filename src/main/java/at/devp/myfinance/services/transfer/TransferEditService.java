@@ -1,5 +1,6 @@
 package at.devp.myfinance.services.transfer;
 
+import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
 import jakarta.transaction.Transactional;

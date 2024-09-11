@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.transfer;
+package at.devp.myfinance.crud.transfer.delete;
 
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;

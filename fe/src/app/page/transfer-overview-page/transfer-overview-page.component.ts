@@ -52,6 +52,17 @@ export class TransferOverviewPageComponent implements OnInit {
           console.log("openEditDialog")
           this.isEditDialogOpen = true;
         }
+      },
+      {
+        label: 'Löschen', icon: 'pi pi-trash', command: () => {
+          this.backendService.deleteTransfer(this.selectedTransfer.id).subscribe({
+              next: () => {
+                this.loadTransferDtos();
+                this.messageService.add({severity: 'success', summary: 'Success', detail: 'Transfer deleted'});
+              }
+            }
+          )
+        }
       }
     ];
   }

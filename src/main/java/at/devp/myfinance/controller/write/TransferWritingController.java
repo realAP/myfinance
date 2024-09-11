@@ -3,7 +3,7 @@ package at.devp.myfinance.controller.write;
 import at.devp.myfinance.crud.transfer.create.TransferCreationDto;
 import at.devp.myfinance.services.transfer.TransferChangeService;
 import at.devp.myfinance.crud.transfer.create.TransferCreationService;
-import at.devp.myfinance.services.transfer.TransferDeletionService;
+import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

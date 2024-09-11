@@ -6,7 +6,7 @@ import at.devp.myfinance.crud.transfer.edit.TransferEditService2;
 import at.devp.myfinance.crud.transfer.read.TransferDto;
 import at.devp.myfinance.crud.transfer.read.TransferReadService;
 import at.devp.myfinance.services.transfer.TransferChangeService;
-import at.devp.myfinance.services.transfer.TransferDeletionService;
+import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +44,7 @@ public class TransferController {
 
     @DeleteMapping("/{id}")
     public void deleteTransfer(@PathVariable("id") Long id) {
-        throw new UnsupportedOperationException("This endpoint is not implemented yet.");
-        //transferDeletionService.deleteById(id);
+        transferDeletionService.deleteById(id);
     }
 
     @PostMapping("/{id}/confirmchange")

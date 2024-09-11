@@ -77,7 +77,7 @@ export class BackendService {
   }
 
   editTransfer(transferId: number, transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
-    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId , transferCreationDto);
+    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId, transferCreationDto);
   }
 
   editRule(ruleId: number, ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
@@ -95,7 +95,16 @@ export class BackendService {
   confirmTransferChange(id: number) {
     return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {});
   }
+
   confirmRuleChange(id: number) {
     return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/rules/" + id + "/confirmchange", {});
+  }
+
+  deleteTransfer(id: number) {
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/transfers/" + id);
+  }
+
+  deleteRule(id: number) {
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/rules/" + id);
   }
 }

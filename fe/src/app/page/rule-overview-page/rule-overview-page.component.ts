@@ -47,9 +47,20 @@ export class RuleOverviewPageComponent implements OnInit {
       {
         label: 'Bearbeiten', icon: 'pi pi-file-edit', command: () => {
           this.isEditDialogOpen = true;
-        }
+        },
+      },
+      {
+        label: 'Löschen', icon: 'pi pi-trash', command: () => {
+          this.backendService.deleteRule(this.selectedRule.id).subscribe({
+            next: () => {
+              this.loadRuleDtos();
+              this.messageService.add({severity: 'success', summary: 'Success', detail: 'Rule deleted'});
+            }
+          })
+        },
       }
-    ];
+    ]
+    ;
   }
 
   private loadRuleDtos() {
