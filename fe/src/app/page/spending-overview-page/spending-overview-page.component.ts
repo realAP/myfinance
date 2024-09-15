@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../../service/backend.service";
-import {RuleCreationDto, SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
+import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgForOf} from "@angular/common";
 import {ContextMenuModule} from "primeng/contextmenu";
@@ -8,6 +8,7 @@ import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {SpendingFormComponent, SpendingFormDto} from "../../component/spending-form/spending-form.component";
+import {subscribeOn} from "rxjs";
 
 @Component({
   selector: 'app-spending-overview-page',
@@ -25,6 +26,7 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/spending-f
 })
 export class SpendingOverviewPageComponent implements OnInit {
 
+  spendingSum: number = 0;
   spendingCategoryBlockDtos: SpendingCategoryBlockDto[] = [];
   items!: MenuItem[];
   selectedSpendingRowDto!: SpendingRowDto;
@@ -48,15 +50,13 @@ export class SpendingOverviewPageComponent implements OnInit {
       },
       {
         label: 'Löschen', icon: 'pi pi-trash', command: () => {
-          /*
-                    this.backendService.deleteTransfer(this.selectedTransfer.id).subscribe({
-                        next: () => {
-                          this.loadTransferDtos();
-                          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Transfer deleted'});
-                        }
-                      }
-                    )
-          */
+          this.backendService.deleteSpending(this.selectedSpendingRowDto.id).subscribe({
+              next: () => {
+                this.loadData();
+                this.messageService.add({severity: 'success', summary: 'Success', detail: 'Spending deleted'});
+              }
+            }
+          )
         }
       }
     ];
@@ -65,6 +65,9 @@ export class SpendingOverviewPageComponent implements OnInit {
   private loadData() {
     this.backendService.getSpendingCategoryBlockDto().subscribe((res) => {
       this.spendingCategoryBlockDtos = res;
+    })
+    this.backendService.getSpendingSum().subscribe((res) => {
+      this.spendingSum = res;
     })
   }
 
@@ -96,4 +99,6 @@ export class SpendingOverviewPageComponent implements OnInit {
     )
     this.isEditDialogOpen = false;
   }
+
+  protected readonly subscribeOn = subscribeOn;
 }

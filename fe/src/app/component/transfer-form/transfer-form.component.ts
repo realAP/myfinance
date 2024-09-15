@@ -62,7 +62,7 @@ export class TransferFormComponent implements OnInit {
     }
     const transferCreationDto: TransferCreationDto = {
       description: this.name,
-      dateOfExecution: this.date.toISOString(),
+      dateOfExecution: this.date.toLocaleDateString("en-CA"),
       fromBankId: this.selectedFromBank.id,
       toBankId: this.selectedTargetBank.id,
     }

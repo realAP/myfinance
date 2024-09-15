@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,42 +16,47 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SpendingOverviewService {
 
-  private final SpendingRepository spendingRepository;
-  private final Converter converter;
+    private final SpendingRepository spendingRepository;
+    private final Converter converter;
 
-  @Transactional
-  public List<SpendingCategoryBlockDto> createOverview() {
-    final var spendings = spendingRepository.findAll();
+    @Transactional
+    public List<SpendingCategoryBlockDto> createOverview() {
+        final var spendings = spendingRepository.findAll();
 
-    final var spendingsByCategory = spendings.stream().collect(Collectors.groupingBy(Spending::getCategory, Collectors.toList()));
-    return spendingsByCategory.entrySet().stream().map(entry -> {
-      final var spendingTableDto = new SpendingCategoryBlockDto();
-      spendingTableDto.setCategory(entry.getKey().getName());
-      spendingTableDto.setSpendingRowDtos(convert2SpendingRowDtos(entry.getValue()));
-      spendingTableDto.setSpendingSumPerCategory(entry.getValue().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
-      return spendingTableDto;
-    }).toList();
-  }
+        final var spendingsByCategory = spendings.stream().collect(Collectors.groupingBy(Spending::getCategory, Collectors.toList()));
+        return spendingsByCategory.entrySet().stream().map(entry -> {
+            final var spendingTableDto = new SpendingCategoryBlockDto();
+            spendingTableDto.setCategory(entry.getKey().getName());
+            spendingTableDto.setSpendingRowDtos(convert2SortedSpendingRowDtos(entry.getValue()));
+            spendingTableDto.setSpendingSumPerCategory(entry.getValue().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
+            return spendingTableDto;
+        }).toList();
+    }
 
-  private List<SpendingRowDto> convert2SpendingRowDtos(final List<Spending> spendings) {
-    return spendings.stream().map(this::convert2SpendingTableDto).toList();
-  }
+    public BigDecimal calculateSum() {
+        final var spendings = spendingRepository.findAll();
+        return spendings.stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
-  private SpendingRowDto convert2SpendingTableDto(final Spending spending) {
-    final var spendingRowDto = new SpendingRowDto();
-    spendingRowDto.setId(spending.getId());
-    spendingRowDto.setAmount(spending.getAmount());
-    spendingRowDto.setDescription(spending.getDescription());
-    spendingRowDto.setCategory(spending.getCategory().toString());
-    spendingRowDto.setRuleDescription(spending.getRule().getDescription());
-    spendingRowDto.setTransferDescription(spending.getTransfer().getDescription());
-    spendingRowDto.setRuleId(spending.getRule().getId());
-    spendingRowDto.setTransferId(spending.getTransfer().getId());
-    spendingRowDto.setCategoryId(spending.getCategory().getId());
-    return spendingRowDto;
-  }
+    private List<SpendingRowDto> convert2SortedSpendingRowDtos(final List<Spending> spendings) {
+        return spendings
+                .stream()
+                .map(this::convert2SpendingTableDto)
+                .sorted(Comparator.comparing(SpendingRowDto::getAmount))
+                .toList();
+    }
 
-  public BigDecimal calculateSum() {
-    return spendingRepository.findAll().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-  }
+    private SpendingRowDto convert2SpendingTableDto(final Spending spending) {
+        final var spendingRowDto = new SpendingRowDto();
+        spendingRowDto.setId(spending.getId());
+        spendingRowDto.setAmount(spending.getAmount());
+        spendingRowDto.setDescription(spending.getDescription());
+        spendingRowDto.setCategory(spending.getCategory().toString());
+        spendingRowDto.setRuleDescription(spending.getRule().getDescription());
+        spendingRowDto.setTransferDescription(spending.getTransfer().getDescription());
+        spendingRowDto.setRuleId(spending.getRule().getId());
+        spendingRowDto.setTransferId(spending.getTransfer().getId());
+        spendingRowDto.setCategoryId(spending.getCategory().getId());
+        return spendingRowDto;
+    }
 }

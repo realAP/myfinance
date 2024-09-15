@@ -89,7 +89,7 @@ export class BackendService {
   }
 
   createSpending(spendingCreationDto: SpendingCreationDto) {
-    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).subscribe();
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto);
   }
 
   editSpending(id: number, spendingCreationDto: SpendingCreationDto) {
@@ -110,5 +110,13 @@ export class BackendService {
 
   deleteRule(id: number) {
     return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/rules/" + id);
+  }
+
+  deleteSpending(id: number) {
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/spendings/" + id);
+  }
+
+  getSpendingSum(): Observable<number> {
+    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/sum");
   }
 }

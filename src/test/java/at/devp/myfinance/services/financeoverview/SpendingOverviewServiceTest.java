@@ -8,6 +8,7 @@ import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.feature.financeoverview.SpendingCategoryBlockDto;
 import at.devp.myfinance.feature.financeoverview.SpendingOverviewService;
 import at.devp.myfinance.repositories.SpendingRepository;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,14 +56,14 @@ class SpendingOverviewServiceTest {
     vergneugenCategory.setName("Vergüngen");
 
     investmentSpending1.setAmount(new BigDecimal("100.00"));
-    investmentSpending1.setDescription("MSCI World");
+    investmentSpending1.setDescription("1MSCI World");
     investmentSpending1.setCategory(investmentCategory);
     investmentSpending1.setRule(rule1);
     investmentSpending1.setTransfer(transfer1);
     investmentSpending1.setId(1L);
 
     investmentSpending2.setAmount(new BigDecimal("200.00"));
-    investmentSpending2.setDescription("MSCI EM");
+    investmentSpending2.setDescription("2MSCI EM");
     investmentSpending2.setCategory(investmentCategory);
     investmentSpending2.setRule(rule1);
     investmentSpending2.setTransfer(transfer1);
@@ -76,7 +77,7 @@ class SpendingOverviewServiceTest {
     vergnuegenSpending1.setId(3L);
 
     vergnuegenSpending2.setAmount(new BigDecimal("20.00"));
-    vergnuegenSpending2.setDescription("Konzert");
+    vergnuegenSpending2.setDescription("Zoo");
     vergnuegenSpending2.setCategory(vergneugenCategory);
     vergnuegenSpending2.setRule(rule1);
     vergnuegenSpending2.setTransfer(transfer1);
@@ -119,14 +120,14 @@ class SpendingOverviewServiceTest {
     assertThat(resultInvestment.getSpendingRowDtos().size(), is(2));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getId(), is(1L));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getAmount(), is(new BigDecimal("100.00")));
-    assertThat(resultInvestment.getSpendingRowDtos().get(0).getDescription(), is("MSCI World"));
+    assertThat(resultInvestment.getSpendingRowDtos().get(0).getDescription(), is("1MSCI World"));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getCategory(), is(investmentCategory.toString()));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getRuleDescription(), is("Rule1"));
     assertThat(resultInvestment.getSpendingRowDtos().get(0).getTransferDescription(), is("Transfer1"));
 
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getId(), is(2L));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getAmount(), is(new BigDecimal("200.00")));
-    assertThat(resultInvestment.getSpendingRowDtos().get(1).getDescription(), is("MSCI EM"));
+    assertThat(resultInvestment.getSpendingRowDtos().get(1).getDescription(), is("2MSCI EM"));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getCategory(), is(investmentCategory.toString()));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getRuleDescription(), is("Rule1"));
     assertThat(resultInvestment.getSpendingRowDtos().get(1).getTransferDescription(), is("Transfer1"));
@@ -141,13 +142,42 @@ class SpendingOverviewServiceTest {
 
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getId(), is(4L));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getAmount(), is(new BigDecimal("20.00")));
-    assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getDescription(), is("Konzert"));
+    assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getDescription(), is("Zoo"));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getCategory(), is(vergneugenCategory.toString()));
     assertThat(resultVergnuegen.getSpendingRowDtos().get(1).getRuleDescription(), is("Rule1"));
   }
 
+
+  @Test
+  void whenCreateOverviewGivenSpendingsSortedAfterCategoryThenReturnItSortedAscendingInCategory() {
+    when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, vergnuegenSpending2, investmentSpending2, vergnuegenSpending1));
+
+    final var result = underTest.createOverview();
+
+    assertThat(result.get(0).getCategory(),is(investmentCategory.getName()));
+    assertThat(result.get(0).getSpendingRowDtos().get(0).getAmount(),is(new BigDecimal("100.00")));
+    assertThat(result.get(0).getSpendingRowDtos().get(1).getAmount(),is(new BigDecimal("200.00")));
+
+    assertThat(result.get(1).getCategory(),is(vergneugenCategory.getName()));
+    assertThat(result.get(1).getSpendingRowDtos().get(0).getAmount(),is(new BigDecimal("10.00")));
+    assertThat(result.get(1).getSpendingRowDtos().get(1).getAmount(),is(new BigDecimal("20.00")));
+  }
+
   private SpendingCategoryBlockDto findSpendingTableDtoByCategory(List<SpendingCategoryBlockDto> spendingCategoryBlockDtos, Category category) {
     return spendingCategoryBlockDtos.stream().filter(spendingCategoryBlockDto -> spendingCategoryBlockDto.getCategory().equals(category.getName())).findFirst().orElse(null);
+  }
+
+  @Test
+  void whenCalculateSumGivenSpendingsThenReturnItsSum() {
+    investmentSpending1.setAmount(new BigDecimal("33.33"));
+    investmentSpending2.setAmount(new BigDecimal("31.41"));
+    vergnuegenSpending1.setAmount(new BigDecimal("0.01"));
+    vergnuegenSpending2.setAmount(new BigDecimal("999.99"));
+    when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, investmentSpending2, vergnuegenSpending1, vergnuegenSpending2));
+
+    final var result = underTest.calculateSum();
+
+    assertThat(result, is(new BigDecimal("1064.74")));
   }
 
 }

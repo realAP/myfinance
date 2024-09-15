@@ -9,7 +9,7 @@ import {SpendingFormComponent} from "../../component/spending-form/spending-form
 import {ConnectedSquaresComponent} from "../../component/connected-squares/connected-squares.component";
 import {BackendService} from "../../service/backend.service";
 import {MessageService} from "primeng/api";
-import {RuleCreationDto, TransferCreationDto} from "../../model/backend";
+import {RuleCreationDto, SpendingCreationDto, TransferCreationDto} from "../../model/backend";
 
 @Component({
   selector: 'app-backoffice-page',
@@ -42,5 +42,11 @@ export class BackofficePageComponent {
   onRuleCreate(ruleCreationDto: RuleCreationDto) {
     this.backendService.createRule(ruleCreationDto).subscribe();
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Created rule'});
+  }
+
+  onSpendingCreate(spendingCreationDto: SpendingCreationDto) {
+    this.backendService.createSpending(spendingCreationDto).subscribe();
+    this.messageService.add({severity: 'success', summary: 'created Spending:', detail: spendingCreationDto.description});
+
   }
 }

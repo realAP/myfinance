@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.spending;
+package at.devp.myfinance.crud.spending.delete;
 
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.services.rule.RuleDeletionService;

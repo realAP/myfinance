@@ -71,7 +71,7 @@ export class RuleFormComponent implements OnInit {
     }
     const ruleCreationDto: RuleCreationDto = {
       description: this.name,
-      dateOfExecution: this.date.toISOString(),
+      dateOfExecution: this.date.toLocaleDateString("en-CA"),
       fromSpaceId: this.selectedFromSpace.id,
       toSpaceId: this.selectedTargetSpace.id,
     }

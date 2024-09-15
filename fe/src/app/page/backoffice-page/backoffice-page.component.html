@@ -6,7 +6,7 @@
 </p-card>
 
 <p-card header="Spending Creation">
-  <app-spending-form></app-spending-form>
+  <app-spending-form (formSubmit)="onSpendingCreate($event)"></app-spending-form>
 </p-card>
 
 <p-card header="Rule Creation">

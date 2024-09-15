@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -17,5 +18,10 @@ public class SpendingOverviewController {
     @GetMapping("/fe/overview")
     public List<SpendingCategoryBlockDto> getFinanceOverview() {
         return spendingOverviewService.createOverview();
+    }
+
+    @GetMapping("/fe/overview/sum")
+    public BigDecimal calculateTotalSpending() {
+        return spendingOverviewService.calculateSum();
     }
 }
