@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/fe/crud/transfers")
 public class TransferController {
     private final TransferCreationService transferCreationService;

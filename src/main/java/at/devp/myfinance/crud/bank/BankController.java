@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/fe/crud/banks")
 public class BankController {
 

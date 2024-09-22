@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/fe/crud/rules")
 public class RuleController {
     private final RuleCreationService ruleCreationService;
