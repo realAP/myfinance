@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {TransferCreationDto, TransferDto} from "../../model/backend";
-import {BackendService} from "../../service/backend.service";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass, NgIf} from "@angular/common";
 import {MenuItem, MessageService} from "primeng/api";
@@ -8,6 +7,7 @@ import {ContextMenuModule} from "primeng/contextmenu";
 import {DialogModule} from "primeng/dialog";
 import {Button} from "primeng/button";
 import {TransferFormComponent, TransferFormDto} from "../../component/transfer-form/transfer-form.component";
+import {BackendService} from "../../service/backend/backend.service";
 
 @Component({
   selector: 'app-transfer-overview-page',

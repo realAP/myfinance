@@ -4,10 +4,10 @@ import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
-import {BackendService} from "../../service/backend.service";
 import {FormsModule} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import {BackendService} from "../../service/backend/backend.service";
 
 
 @Component({
@@ -35,9 +35,17 @@ export class BankCreationComponent {
   }
 
   onCreateBank() {
-    this.backendService.createBank(this.name);
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bank: ' + this.name + ' created!' });
-    this.name = "";
+    this.backendService.createBank(this.name).subscribe(
+      {
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Bank: ' + this.name + ' created!'
+          });
+          this.name = "";
+        }
+      }
+    );
   }
-
 }

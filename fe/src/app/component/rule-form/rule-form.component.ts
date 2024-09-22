@@ -8,9 +8,9 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {InputTextModule} from "primeng/inputtext";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
-import {BackendService} from "../../service/backend.service";
 import {RuleCreationDto, SpaceDto} from "../../model/backend";
 import {MessageService} from "primeng/api";
+import {BackendService} from "../../service/backend/backend.service";
 
 export interface RuleFormDto {
   ruleCreationDto: RuleCreationDto;

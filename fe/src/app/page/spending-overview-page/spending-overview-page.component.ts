@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from "../../service/backend.service";
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgForOf} from "@angular/common";
@@ -9,6 +8,7 @@ import {DialogModule} from "primeng/dialog";
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {SpendingFormComponent, SpendingFormDto} from "../../component/spending-form/spending-form.component";
 import {subscribeOn} from "rxjs";
+import {BackendService} from "../../service/backend/backend.service";
 
 @Component({
   selector: 'app-spending-overview-page',

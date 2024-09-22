@@ -7,9 +7,9 @@ import {TransferFormComponent} from "../../component/transfer-form/transfer-form
 import {SpaceFormComponent} from "../../component/space-form/space-form.component";
 import {SpendingFormComponent} from "../../component/spending-form/spending-form.component";
 import {ConnectedSquaresComponent} from "../../component/connected-squares/connected-squares.component";
-import {BackendService} from "../../service/backend.service";
 import {MessageService} from "primeng/api";
 import {RuleCreationDto, SpendingCreationDto, TransferCreationDto} from "../../model/backend";
+import {BackendService} from "../../service/backend/backend.service";
 
 @Component({
   selector: 'app-backoffice-page',

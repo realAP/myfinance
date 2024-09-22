@@ -3,8 +3,8 @@ import {Button} from "primeng/button";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
-import {BackendService} from "../../service/backend.service";
 import {MessageService} from "primeng/api";
+import {BackendService} from "../../service/backend/backend.service";
 
 @Component({
   selector: 'app-category-creation',
@@ -28,7 +28,7 @@ export class CategoryCreationComponent {
   }
 
   onCreateCategory() {
-    this.backendService.createCategory(this.name);
+    this.backendService.createCategory(this.name).subscribe();
     this.messageService.add({severity:'success', summary:'Category', detail: this.name});
     this.name = "";
   }

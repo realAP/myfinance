@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {RuleCreationDto, RuleDto} from "../../model/backend";
 import {MenuItem, MessageService} from "primeng/api";
-import {BackendService} from "../../service/backend.service";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {ContextMenuModule} from "primeng/contextmenu";
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
+import {BackendService} from "../../service/backend/backend.service";
 
 @Component({
   selector: 'app-rule-overview-page',

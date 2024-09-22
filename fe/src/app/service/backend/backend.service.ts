@@ -14,7 +14,7 @@ import {
   SpendingCreationDto,
   TransferCreationDto,
   TransferDto
-} from "../model/backend";
+} from "../../model/backend";
 
 
 @Injectable({
@@ -37,27 +37,27 @@ export class BackendService {
     return this.httpClient.get<SpendingCategoryBlockDto[]>(this.TARGET + this.BASE_API + "/overview");
   }
 
-  createSpace(name: string): void {
+  createSpace(name: string): Observable<Object> {
     const spaceCreationDto: SpaceCreationDto = {name: name};
-    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spaces", spaceCreationDto).subscribe();
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spaces", spaceCreationDto);
   }
 
   getSpaces(): Observable<SpaceDto[]> {
     return this.httpClient.get<SpaceDto[]>(this.TARGET + this.BASE_API + "/crud/spaces");
   }
 
-  createBank(name: string): void {
+  createBank(name: string): Observable<Object> {
     const bankCreationDto: BankCreationDto = {name: name};
-    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/banks", bankCreationDto).subscribe();
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/banks", bankCreationDto);
   }
 
   getBanks(): Observable<BankDto[]> {
     return this.httpClient.get<BankDto[]>(this.TARGET + this.BASE_API + "/crud/banks");
   }
 
-  createCategory(name: string) {
+  createCategory(name: string): Observable<Object> {
     const categoryCreationDto: CategoryCreationDto = {name: name};
-    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/categories", categoryCreationDto).subscribe();
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/categories", categoryCreationDto);
   }
 
   getCategories(): Observable<CategoryDto[]> {
