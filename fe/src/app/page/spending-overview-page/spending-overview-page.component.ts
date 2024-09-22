@@ -63,25 +63,12 @@ export class SpendingOverviewPageComponent implements OnInit {
   }
 
   private loadData() {
-    this.backendService.getSpendingCategoryBlockDto().subscribe(
-      {
-        next: (res) => {
-          this.spendingCategoryBlockDtos = res;
-        },
-        error: (error) => {
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to load spending data'});
-        }
-      }
-    )
-    this.backendService.getSpendingSum().subscribe(
-      {
-        next: (res) => {
-          this.spendingSum = res;
-        },
-        error: (error) => {
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to load spending sum'});
-        }
-      })
+    this.backendService.getSpendingCategoryBlockDto().subscribe((res) => {
+      this.spendingCategoryBlockDtos = res;
+    })
+    this.backendService.getSpendingSum().subscribe((res) => {
+      this.spendingSum = res;
+    })
   }
 
   updateContextMenu($event: TableContextMenuSelectEvent) {
@@ -107,9 +94,6 @@ export class SpendingOverviewPageComponent implements OnInit {
         next: () => {
           this.loadData();
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Transfer updated'});
-        },
-        error: (error) => {
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to update spending'});
         }
       }
     )

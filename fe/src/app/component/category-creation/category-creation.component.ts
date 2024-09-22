@@ -28,11 +28,7 @@ export class CategoryCreationComponent {
   }
 
   onCreateCategory() {
-    this.backendService.createCategory(this.name).subscribe({
-      error: (error) => {
-        this.messageService.add({severity:'error', summary:'Fehler: Konnte create Category nicht erstellen', detail: error.message});
-      }
-    })
+    this.backendService.createCategory(this.name);
     this.messageService.add({severity:'success', summary:'Category', detail: this.name});
     this.name = "";
   }

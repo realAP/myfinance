@@ -43,23 +43,16 @@ export class TransferFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService.getBanks().subscribe(
-      {
-        next: (bankDtos: BankDto[]) => {
-
-          this.banks = bankDtos;
-          if (this.preFilledTransferFormDto?.isPreFilled) {
-            const preFilledData = this.preFilledTransferFormDto?.transferCreationDto;
-            this.selectedFromBank = this.banks.find(bank => bank.id === preFilledData.fromBankId)!;
-            this.selectedTargetBank = this.banks.find(bank => bank.id === preFilledData.toBankId)!;
-            this.date = new Date(preFilledData.dateOfExecution);
-            this.name = preFilledData.description
-          }
-        },
-        error: (error) => {
-          this.messageService.add({severity: 'error', summary: 'Konnte die Banken nicht laden.', detail: error.message});
-        }
-      });
+    this.backendService.getBanks().subscribe(bankDtos => {
+      this.banks = bankDtos;
+      if (this.preFilledTransferFormDto?.isPreFilled) {
+        const preFilledData = this.preFilledTransferFormDto?.transferCreationDto;
+        this.selectedFromBank = this.banks.find(bank => bank.id === preFilledData.fromBankId)!;
+        this.selectedTargetBank = this.banks.find(bank => bank.id === preFilledData.toBankId)!;
+        this.date = new Date(preFilledData.dateOfExecution);
+        this.name = preFilledData.description
+      }
+    });
   }
 
   onClick() {

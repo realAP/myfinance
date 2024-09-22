@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {
   BankCreationDto,
   BankDto,
@@ -33,109 +33,90 @@ export class BackendService {
   // TODO: add error handling
   //
 
-  // Error handling function
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // Backend error
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // Throw an observable with a user-facing error message
-    return throwError(() => new Error('Something went wrong. Please try again later.'));
-  }
-
   getSpendingCategoryBlockDto(): Observable<SpendingCategoryBlockDto[]> {
-    return this.httpClient.get<SpendingCategoryBlockDto[]>(this.TARGET + this.BASE_API + "/overview")
-      .pipe(catchError(this.handleError));
-
+    return this.httpClient.get<SpendingCategoryBlockDto[]>(this.TARGET + this.BASE_API + "/overview");
   }
 
-  createSpace(name: string): Observable<Object> {
+  createSpace(name: string): void {
     const spaceCreationDto: SpaceCreationDto = {name: name};
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spaces", spaceCreationDto)
-      .pipe(catchError(this.handleError))
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spaces", spaceCreationDto).subscribe();
   }
 
   getSpaces(): Observable<SpaceDto[]> {
-    return this.httpClient.get<SpaceDto[]>(this.TARGET + this.BASE_API + "/crud/spaces")
-      .pipe(catchError(this.handleError));
+    return this.httpClient.get<SpaceDto[]>(this.TARGET + this.BASE_API + "/crud/spaces");
   }
 
-  createBank(name: string): Observable<Object> {
+  createBank(name: string): void {
     const bankCreationDto: BankCreationDto = {name: name};
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/banks", bankCreationDto).pipe(catchError(this.handleError));
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/banks", bankCreationDto).subscribe();
   }
 
   getBanks(): Observable<BankDto[]> {
-    return this.httpClient.get<BankDto[]>(this.TARGET + this.BASE_API + "/crud/banks").pipe(catchError(this.handleError));
+    return this.httpClient.get<BankDto[]>(this.TARGET + this.BASE_API + "/crud/banks");
   }
 
   createCategory(name: string) {
     const categoryCreationDto: CategoryCreationDto = {name: name};
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/categories", categoryCreationDto).pipe(catchError(this.handleError));
+    this.httpClient.post(this.TARGET + this.BASE_API + "/crud/categories", categoryCreationDto).subscribe();
   }
 
   getCategories(): Observable<CategoryDto[]> {
-    return this.httpClient.get<CategoryDto[]>(this.TARGET + this.BASE_API + "/crud/categories").pipe(catchError(this.handleError));
+    return this.httpClient.get<CategoryDto[]>(this.TARGET + this.BASE_API + "/crud/categories");
   }
 
   createRule(ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
-    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules", ruleCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules", ruleCreationDto);
   }
 
   getRules(): Observable<RuleDto[]> {
-    return this.httpClient.get<RuleDto[]>(this.TARGET + this.BASE_API + "/crud/rules").pipe(catchError(this.handleError));
+    return this.httpClient.get<RuleDto[]>(this.TARGET + this.BASE_API + "/crud/rules");
   }
 
   createTransfer(transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
-    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers", transferCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers", transferCreationDto);
   }
 
   editTransfer(transferId: number, transferCreationDto: TransferCreationDto): Observable<TransferCreationDto> {
-    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId, transferCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post<TransferCreationDto>(this.TARGET + this.BASE_API + "/crud/transfers/" + transferId, transferCreationDto);
   }
 
   editRule(ruleId: number, ruleCreationDto: RuleCreationDto): Observable<RuleCreationDto> {
-    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules/" + ruleId, ruleCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post<RuleCreationDto>(this.TARGET + this.BASE_API + "/crud/rules/" + ruleId, ruleCreationDto);
   }
 
   getTransfers(): Observable<TransferDto[]> {
-    return this.httpClient.get<TransferDto[]>(this.TARGET + this.BASE_API + "/crud/transfers").pipe(catchError(this.handleError));
+    return this.httpClient.get<TransferDto[]>(this.TARGET + this.BASE_API + "/crud/transfers");
   }
 
   createSpending(spendingCreationDto: SpendingCreationDto) {
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings", spendingCreationDto);
   }
 
   editSpending(id: number, spendingCreationDto: SpendingCreationDto) {
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings/" + id, spendingCreationDto).pipe(catchError(this.handleError));
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/spendings/" + id, spendingCreationDto);
   }
 
   confirmTransferChange(id: number) {
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {}).pipe(catchError(this.handleError));
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/transfers/" + id + "/confirmchange", {});
   }
 
   confirmRuleChange(id: number) {
-    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/rules/" + id + "/confirmchange", {}).pipe(catchError(this.handleError));
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/rules/" + id + "/confirmchange", {});
   }
 
   deleteTransfer(id: number) {
-    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/transfers/" + id).pipe(catchError(this.handleError));
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/transfers/" + id);
   }
 
   deleteRule(id: number) {
-    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/rules/" + id).pipe(catchError(this.handleError));
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/rules/" + id);
   }
 
   deleteSpending(id: number) {
-    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/spendings/" + id).pipe(catchError(this.handleError));
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/spendings/" + id);
   }
 
   getSpendingSum(): Observable<number> {
-    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/sum").pipe(catchError(this.handleError));
+    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/sum");
   }
 }

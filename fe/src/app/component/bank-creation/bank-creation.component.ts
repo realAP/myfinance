@@ -35,14 +35,8 @@ export class BankCreationComponent {
   }
 
   onCreateBank() {
-    this.backendService.createBank(this.name).subscribe({
-      error: (error) => this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: error.message
-      })
-    });
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Bank: ' + this.name + ' created!'});
+    this.backendService.createBank(this.name);
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bank: ' + this.name + ' created!' });
     this.name = "";
   }
 
