@@ -27,7 +27,13 @@ export class SpaceFormComponent {
   }
 
   onCreateSpace() {
-    this.backendService.createSpace(this.name);
+    this.backendService.createSpace(this.name).subscribe(
+      {
+        error: (error) => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Could not create space.'});
+        }
+      }
+    );
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Space: ' + this.name + ' created!'});
     this.name = "";
   }

@@ -48,7 +48,8 @@ export class SpendingFormComponent implements OnInit {
       categories: this.backendService.getCategories(),
       transfers: this.backendService.getTransfers(),
       rules: this.backendService.getRules()
-    }).subscribe(({categories, transfers, rules}) => {
+    }).subscribe((
+      {categories, transfers, rules}) => {
       this.categories = categories;
       this.transfers = transfers;
       this.rules = rules;

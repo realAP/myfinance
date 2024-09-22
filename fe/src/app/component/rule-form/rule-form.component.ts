@@ -49,19 +49,24 @@ export class RuleFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService.getSpaces().subscribe(spaceDtos => {
-      this.spaces = spaceDtos;
+    this.backendService.getSpaces().subscribe(
+      {
+        next: (spaceDtos: SpaceDto[]) => {
+          this.spaces = spaceDtos;
+          if (this.preFilledRuleFormDto?.isPreFilled) {
+            const preFilledData = this.preFilledRuleFormDto?.ruleCreationDto;
+            this.selectedFromSpace = this.spaces.find(space => space.id === preFilledData?.fromSpaceId)!;
+            this.selectedTargetSpace = this.spaces.find(space => space.id === preFilledData?.toSpaceId)!;
+            this.date = new Date(preFilledData.dateOfExecution);
+            this.name = preFilledData.description;
 
-      if (this.preFilledRuleFormDto?.isPreFilled) {
-
-        const preFilledData = this.preFilledRuleFormDto?.ruleCreationDto;
-
-        this.selectedFromSpace = this.spaces.find(space => space.id === preFilledData?.fromSpaceId)!;
-        this.selectedTargetSpace = this.spaces.find(space => space.id === preFilledData?.toSpaceId)!;
-        this.date = new Date(preFilledData.dateOfExecution);
-        this.name = preFilledData.description;
+          }
+        },
+        error: (error: any) => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to fetch spaces'});
+        }
       }
-    });
+    );
   }
 
   onClick() {
