@@ -15,6 +15,7 @@ import {
   TransferCreationDto,
   TransferDto
 } from "../../model/backend";
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -23,7 +24,7 @@ import {
 export class BackendService {
 
   private BASE_API = "/fe"
-  private TARGET = "http://localhost:8080"
+  private TARGET = environment.apiUrl;
 
 
   constructor(private httpClient: HttpClient) {
