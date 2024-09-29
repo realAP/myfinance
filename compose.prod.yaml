@@ -1,7 +1,6 @@
 # Use postgres/example user/password credentials
 # make two compose files, one for local testing and one for production
 # use .env file for production
-version: '3.1'
 services:
   db:
     image: postgres:16
@@ -10,18 +9,33 @@ services:
       POSTGRES_PASSWORD: example
       POSTGRES_USER: example
       POSTGRES_DB: example
-    ports:
-      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - internal
 
-  myfinance:
+  be:
     image: devp1337/myfinance:latest
     restart: always
-    ports:
-      - "8080:8080"
+    networks:
+      - caddy
+      - internal
     depends_on:
       - db
 
+  fe:
+    image: devp1337/myfinance:fe-latest
+    restart: always
+    networks:
+      - caddy
+    depends_on:
+      - be
+
 volumes:
   db_data:
+
+networks:
+  caddy:
+    external: true
+  internal:
+    driver: bridge
