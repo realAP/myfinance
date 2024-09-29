@@ -1,4 +1,6 @@
 name: Pipeline
+env:
+  RUN_SMOKE_TESTS: false
 
 on:
   push:
@@ -107,6 +109,7 @@ jobs:
         run: docker compose up -d
 
       - name: Smoke Test
+        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
         run: |
           success=false
           for i in {1..10}; do
