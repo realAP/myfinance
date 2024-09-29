@@ -7,8 +7,10 @@ import at.devp.myfinance.crud.bank.read.BankReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.Authenticator;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,9 @@ public class BankController {
     private final BankReadService bankReadService;
 
     @PostMapping()
-    public ResponseEntity<?> createBank(@RequestBody final BankCreationDto bankCreationDto) {
+    public ResponseEntity<?> createBank(@RequestBody final BankCreationDto bankCreationDto, Authentication authentication) {
+        System.out.println("Authenticated user: " + authentication.getName());
+        System.out.println("Authorities: " + authentication.getAuthorities());
         bankCreationService.createBank(bankCreationDto);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
