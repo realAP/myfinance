@@ -87,7 +87,7 @@ jobs:
       - build
       - test
     runs-on: ubuntu-latest
-    if: contains('refs/heads/master', github.ref)
+    #if: contains('refs/heads/master', github.ref)
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -150,7 +150,7 @@ jobs:
       - buildfe
       - testfe
     runs-on: ubuntu-latest
-    if: contains('refs/heads/master', github.ref)
+    #if: contains('refs/heads/master', github.ref)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
