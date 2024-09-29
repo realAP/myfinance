@@ -25,9 +25,7 @@ jobs:
       - name: Test frontend
         run: |
           cd fe
-          echo "currently disabled"
-#          npm run test
-
+          echo "npm run test | currently disabled"
 
   test:
     runs-on: ubuntu-latest
@@ -43,13 +41,11 @@ jobs:
 
       - name: Tests
         run: |
-#         mvn test
-          echo "currently disabled"
+          echo "mvn test | currently disabled"
 
       - name: SonarCloud
         run: |
-#          mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io
-          echo "currently disabled"
+          echo "mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io | currently disabled"
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
