@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {TabMenuModule} from "primeng/tabmenu";
 import {MenuItem} from "primeng/api";
+import {AuthService} from "../../service/authentication/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ import {MenuItem} from "primeng/api";
 export class NavbarComponent implements OnInit {
   items: MenuItem[] | undefined;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -39,6 +40,14 @@ export class NavbarComponent implements OnInit {
         icon: 'pi pi-list',
         route: '/backoffice'
       },
+      {
+        label: 'Logout',
+        icon: 'pi pi-power-off',
+        command: () => {
+          this.authService.logout();
+
+        }
+      }
     ];
   }
 

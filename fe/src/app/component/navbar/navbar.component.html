@@ -9,6 +9,14 @@
           </a>
         </ng-container>
       }
+      @if(item.command) {
+        <ng-container>
+          <a class="p-menuitem-link" (click)="item.command()">
+            <span [class]="item.icon"></span>
+            <span class="ml-2"> {{ item.label }} </span>
+          </a>
+        </ng-container>
+      }
     </ng-template>
   </p-tabMenu>
 </div>
