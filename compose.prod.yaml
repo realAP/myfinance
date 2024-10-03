@@ -1,14 +1,11 @@
-# Use postgres/example user/password credentials
-# make two compose files, one for local testing and one for production
-# use .env file for production
 services:
   db:
     image: postgres:16
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_USER: example
-      POSTGRES_DB: example
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
@@ -17,6 +14,12 @@ services:
   be:
     image: devp1337/myfinance:latest
     restart: always
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      APP_USER: ${APP_USER}
+      APP_PASSWORD: ${APP_PASSWORD}
     networks:
       - caddy
       - internal
