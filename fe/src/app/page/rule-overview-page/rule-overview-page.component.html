@@ -17,6 +17,8 @@
     <ng-template pTemplate="body" let-rule>
       <tr
         [pContextMenuRow]="rule"
+        (touchstart)="onTouchStart($event,rule)"
+        (touchend)="onTouchEnd()"
         [ngClass]="rule.isChange ? 'red-background' : 'green-background'">
         <td>{{ rule.description }}</td>
         <td>{{ rule.dateOfExecution }}</td>

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {RuleCreationDto, RuleDto} from "../../model/backend";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {RuleCreationDto, RuleDto, SpendingRowDto} from "../../model/backend";
 import {MenuItem, MessageService} from "primeng/api";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
-import {ContextMenuModule} from "primeng/contextmenu";
+import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {BackendService} from "../../service/backend/backend.service";
 
@@ -28,6 +28,9 @@ export class RuleOverviewPageComponent implements OnInit {
   selectedRule!: RuleDto;
   isEditDialogOpen: boolean = false;
   ruleFormDto?: any;
+
+  @ViewChild('cm') cm!: ContextMenu;
+  longPressTimeout: any;
 
   constructor(private backendService: BackendService,
               private messageService: MessageService
@@ -61,6 +64,17 @@ export class RuleOverviewPageComponent implements OnInit {
       }
     ]
     ;
+  }
+
+  onTouchStart(event: TouchEvent, ruleDto: RuleDto) {
+    this.updateContextMenu({data: ruleDto} as TableContextMenuSelectEvent)
+    this.longPressTimeout = setTimeout(() => {
+      this.cm.show(event);
+    }, 500);
+  }
+
+  onTouchEnd() {
+    clearTimeout(this.longPressTimeout);
   }
 
   private loadRuleDtos() {
