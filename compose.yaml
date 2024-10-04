@@ -6,6 +6,8 @@ services:
       POSTGRES_PASSWORD: example
       POSTGRES_USER: example
       POSTGRES_DB: example
+    ports:
+      - "5432:5432"
     volumes:
       - db_data_local:/var/lib/postgresql/data
 

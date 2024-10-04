@@ -1,6 +1,6 @@
 {
   "/fe": {
-    "target": "http://localhost:8080",
+    "target": "http://10.20.30.56:8080",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
