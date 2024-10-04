@@ -17,6 +17,8 @@
     <ng-template pTemplate="body" let-transfer>
       <tr
         [pContextMenuRow]="transfer"
+        (touchstart)="onTouchStart($event,transfer)"
+        (touchend)="onTouchEnd()"
         [ngClass]="transfer.isChange ? 'red-background' : 'green-background'">
         <td>{{ transfer.description }}</td>
         <td>{{ transfer.dateOfExecution }}</td>

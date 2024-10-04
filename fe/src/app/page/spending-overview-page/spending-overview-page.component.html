@@ -39,6 +39,8 @@
       @for (spendingRow of spendingCategoryBlockDto.spendingRowDtos; track spendingRow.id) {
         <tr
           [pContextMenuRow]="spendingRow"
+          (touchstart)="onTouchStart($event,spendingRow)"
+          (touchend)="onTouchEnd()"
         >
           <td>
           </td>

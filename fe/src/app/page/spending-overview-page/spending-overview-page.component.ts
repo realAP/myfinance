@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgForOf} from "@angular/common";
-import {ContextMenuModule} from "primeng/contextmenu";
+import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
 import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
@@ -33,6 +33,9 @@ export class SpendingOverviewPageComponent implements OnInit {
 
   isEditDialogOpen: boolean = false;
   spendingFormDto?: SpendingFormDto;
+  longPressTimeout: any;
+
+  @ViewChild('cm') cm!: ContextMenu;
 
   constructor(private backendService: BackendService,
               private messageService: MessageService
@@ -61,6 +64,18 @@ export class SpendingOverviewPageComponent implements OnInit {
       }
     ];
   }
+
+  onTouchStart(event: TouchEvent, spendingRow: SpendingRowDto) {
+    this.updateContextMenu({data: spendingRow} as TableContextMenuSelectEvent)
+    this.longPressTimeout = setTimeout(() => {
+      this.cm.show(event);
+    }, 500);
+  }
+
+  onTouchEnd() {
+    clearTimeout(this.longPressTimeout);
+  }
+
 
   private loadData() {
     this.backendService.getSpendingCategoryBlockDto().subscribe((res) => {
