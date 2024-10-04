@@ -37,9 +37,7 @@ export class SpendingFormComponent implements OnInit {
   @Input() preFilledSpendingFormDto?: SpendingFormDto;
   @Output() formSubmit = new EventEmitter<SpendingCreationDto>;
 
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
+  constructor(private backendService: BackendService) {
   }
 
   ngOnInit(): void {
@@ -75,5 +73,14 @@ export class SpendingFormComponent implements OnInit {
       };
       this.formSubmit.emit(spendingCreationDto);
     }
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.name = "";
+    this.amount = 0;
+    this.selectedCategory = undefined;
+    this.selectedTransfer = undefined;
+    this.selectedRule = undefined;
   }
 }
