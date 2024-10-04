@@ -93,12 +93,10 @@ export class SpendingOverviewPageComponent implements OnInit {
     this.backendService.editSpending(this.selectedSpendingRowDto.id, spendingCreationDto).subscribe({
         next: () => {
           this.loadData();
-          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Transfer updated'});
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Spending ' + spendingCreationDto.description + ' updated'});
         }
       }
     )
     this.isEditDialogOpen = false;
   }
-
-  protected readonly subscribeOn = subscribeOn;
 }
