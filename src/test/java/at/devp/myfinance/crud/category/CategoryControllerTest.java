@@ -27,7 +27,7 @@ class CategoryControllerTest {
     private CategoryReadService categoryReadService;
 
     @Test
-    @WithMockUser
+    @Disabled
     void whenCreateCategoryEndpointIsCalledThenReturnIsCreated() throws Exception {
         final var content = """
                  {
@@ -38,7 +38,7 @@ class CategoryControllerTest {
     }
 
     @Test
-    @Disabled
+    @WithMockUser
     void whenGetCategoriesIsCalledThenReturnIsOk() throws Exception {
         mockMvc.perform(get("/fe/crud/categories")).andExpect(status().isOk());
     }

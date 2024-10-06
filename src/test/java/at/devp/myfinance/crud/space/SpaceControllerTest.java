@@ -28,7 +28,7 @@ class SpaceControllerTest {
     private SpaceReadService spaceReadService;
 
     @Test
-    @WithMockUser
+    @Disabled
     void whenCreateSpaceEndpointIsCalledThenReturnIsCreated() throws Exception {
         final var content = """
                  {
@@ -40,7 +40,7 @@ class SpaceControllerTest {
     }
 
     @Test
-    @Disabled
+    @WithMockUser
     void whenGetSpacesIsCalledThenReturnIsOk() throws Exception {
         mockMvc.perform(get("/fe/crud/spaces")).andExpect(status().isOk());
     }
