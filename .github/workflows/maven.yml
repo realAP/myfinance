@@ -43,7 +43,7 @@ jobs:
 
       - name: Tests
         run: |
-          echo "mvn test | currently disabled"
+          mvn test
 
       - name: SonarCloud
         run: |
