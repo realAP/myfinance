@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from "./component/navbar/navbar.component";
 import {ToastModule} from "primeng/toast";
 
@@ -12,4 +12,11 @@ import {ToastModule} from "primeng/toast";
 })
 export class AppComponent {
   title = 'fe';
+
+  constructor(private router: Router) {}
+
+  isLoginPage(): boolean {
+    return this.router.url === '/login';
+  }
+
 }

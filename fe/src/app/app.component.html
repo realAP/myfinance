@@ -1,5 +1,7 @@
-<app-navbar>
-</app-navbar>
+@if (!isLoginPage()) {
+  <app-navbar>
+  </app-navbar>
+}
 <p-toast></p-toast>
 
 <div class="wrapper">
