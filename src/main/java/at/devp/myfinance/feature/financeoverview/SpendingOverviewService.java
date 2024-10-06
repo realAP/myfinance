@@ -30,7 +30,7 @@ public class SpendingOverviewService {
             spendingTableDto.setSpendingRowDtos(convert2SortedSpendingRowDtos(entry.getValue()));
             spendingTableDto.setSpendingSumPerCategory(entry.getValue().stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
             return spendingTableDto;
-        }).toList();
+        }).sorted(Comparator.comparing(SpendingCategoryBlockDto::getCategory)).toList();
     }
 
     public BigDecimal calculateSum() {
