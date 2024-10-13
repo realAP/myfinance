@@ -6,6 +6,6 @@ import java.math.BigDecimal;
 
 @Data
 public class IncomeCreationDto {
-  private String description;
-  private BigDecimal amount;
+    private String description;
+    private BigDecimal amount;
 }

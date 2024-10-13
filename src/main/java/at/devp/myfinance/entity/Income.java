@@ -12,13 +12,13 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class Income {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column
-  private BigDecimal amount;
+    @Column
+    private BigDecimal amount;
 
-  @Column
-  private String description;
+    @Column
+    private String description;
 }

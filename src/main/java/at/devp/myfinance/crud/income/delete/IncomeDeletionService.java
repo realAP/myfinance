@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class IncomeDeletionService {
-  private final IncomeRepository incomeRepository;
+    private final IncomeRepository incomeRepository;
 
-  public void deleteById(Long id) {
-    incomeRepository.deleteById(id);
-  }
+    public void deleteById(Long id) {
+        incomeRepository.deleteById(id);
+    }
 }

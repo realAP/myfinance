@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RuleCreationService {
-  private final RuleRepository ruleRepository;
-  private final SpaceRepository spaceRepository;
+    private final RuleRepository ruleRepository;
+    private final SpaceRepository spaceRepository;
 
-  public void createRule(final RuleCreationDto ruleCreationDto) {
-    final Rule rule = new Rule();
+    public void createRule(final RuleCreationDto ruleCreationDto) {
+        final Rule rule = new Rule();
 
-    final var fromSpace = spaceRepository.findById(ruleCreationDto.getFromSpaceId()).orElseThrow(() -> new IllegalArgumentException("from space not found"));
-    rule.setFromSpace(fromSpace);
-    final var toSpace = spaceRepository.findById(ruleCreationDto.getToSpaceId()).orElseThrow(() -> new IllegalArgumentException("to space not found"));
-    rule.setToSpace(toSpace);
-    rule.setDescription(ruleCreationDto.getDescription());
-    rule.setDateOfExecution(ruleCreationDto.getDateOfExecution());
+        final var fromSpace = spaceRepository.findById(ruleCreationDto.getFromSpaceId()).orElseThrow(() -> new IllegalArgumentException("from space not found"));
+        rule.setFromSpace(fromSpace);
+        final var toSpace = spaceRepository.findById(ruleCreationDto.getToSpaceId()).orElseThrow(() -> new IllegalArgumentException("to space not found"));
+        rule.setToSpace(toSpace);
+        rule.setDescription(ruleCreationDto.getDescription());
+        rule.setDateOfExecution(ruleCreationDto.getDateOfExecution());
 
-    ruleRepository.save(rule);
-  }
+        ruleRepository.save(rule);
+    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class SpendingCategoryBlockDto {
-  private String category;
-  private List<SpendingRowDto> spendingRowDtos;
-  private BigDecimal spendingSumPerCategory;
+    private String category;
+    private List<SpendingRowDto> spendingRowDtos;
+    private BigDecimal spendingSumPerCategory;
 }

@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 @Data
 public class RuleCreationDto {
-  private String description;
-  private LocalDate dateOfExecution;
-  private Long fromSpaceId;
-  private Long toSpaceId;
+    private String description;
+    private LocalDate dateOfExecution;
+    private Long fromSpaceId;
+    private Long toSpaceId;
 }

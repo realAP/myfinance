@@ -12,21 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SpendingTransferAssignmentService {
-  private final TransferRepository transferRepository;
-  private final TransferDeletionService transferDeletionService;
-  private final TransferUpdateService transferUpdateService;
+    private final TransferRepository transferRepository;
+    private final TransferDeletionService transferDeletionService;
+    private final TransferUpdateService transferUpdateService;
 
-  @Transactional
-  public void setTransfer(SpendingEditDto spendingEditDto, Spending spending) {
-    final var selectedTransfer = transferRepository.findById(spendingEditDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingEditDto.getTransferId() + " not found"));
-    final var oldTransfer = spending.getTransfer();
-    spending.setTransfer(selectedTransfer);
-    editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
-  }
+    @Transactional
+    public void setTransfer(SpendingEditDto spendingEditDto, Spending spending) {
+        final var selectedTransfer = transferRepository.findById(spendingEditDto.getTransferId()).orElseThrow(() -> new IllegalArgumentException("Transfer with id " + spendingEditDto.getTransferId() + " not found"));
+        final var oldTransfer = spending.getTransfer();
+        spending.setTransfer(selectedTransfer);
+        editTransferAndUpdate(oldTransfer, selectedTransfer, spending);
+    }
 
 
-  private void editTransferAndUpdate(final Transfer oldTransfer, final Transfer selectedTransfer, final Spending spending) {
-    transferDeletionService.removeSpendingAndUpdate(oldTransfer, spending);
-    transferUpdateService.addSpendingAndUpdate(selectedTransfer, spending);
-  }
+    private void editTransferAndUpdate(final Transfer oldTransfer, final Transfer selectedTransfer, final Spending spending) {
+        transferDeletionService.removeSpendingAndUpdate(oldTransfer, spending);
+        transferUpdateService.addSpendingAndUpdate(selectedTransfer, spending);
+    }
 }

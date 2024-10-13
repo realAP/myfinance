@@ -27,54 +27,54 @@ import static org.hamcrest.Matchers.nullValue;
 @Sql("classpath:data_test.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class SpendingDeletionServiceTest {
-  @Autowired
-  private SpendingDeletionService underTest;
+    @Autowired
+    private SpendingDeletionService underTest;
 
-  @Autowired
-  private SpendingRepository spendingRepository;
+    @Autowired
+    private SpendingRepository spendingRepository;
 
-  @Autowired
-  private TestEntityManager testEntityManager;
-
-
-  @Autowired
-  private RuleRepository ruleRepository;
-
-  @Autowired
-  private TransferRepository transferRepository;
-
-  private Spending msciWorldSpending;
-
-  private Rule langzeitinvest1Rule;
-
-  private Transfer etfTransfer;
+    @Autowired
+    private TestEntityManager testEntityManager;
 
 
-  @BeforeEach
-  void setUp() {
-    final var spendings = spendingRepository.findAll();
-    msciWorldSpending = spendings.stream().filter(s -> s.getDescription().equalsIgnoreCase("MSCI World")).findFirst().get();
-    langzeitinvest1Rule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("langzeitinvest1")).findFirst().get();
-    etfTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("ETF")).findFirst().get();
-  }
+    @Autowired
+    private RuleRepository ruleRepository;
 
-  @Test
-  @Transactional
-  void whenDeleteByIdGivenIdOfSpendingThenDeleteItAndAdjustRuleAndTransferAmounts() {
-    final var spendingBeforeDeletion = testEntityManager.find(Spending.class, msciWorldSpending.getId()).getAmount();
-    final var ruleBeforeDeletion = testEntityManager.find(Rule.class, langzeitinvest1Rule.getId()).getAmount();
-    final var transferBeforeDeletion = testEntityManager.find(Transfer.class, etfTransfer.getId()).getAmount();
+    @Autowired
+    private TransferRepository transferRepository;
 
-    underTest.deleteById(msciWorldSpending.getId());
-    testEntityManager.flush();
+    private Spending msciWorldSpending;
 
-    assertThat(testEntityManager.find(Spending.class, msciWorldSpending.getId()), nullValue());
+    private Rule langzeitinvest1Rule;
 
-    final var ruleAfterDeletion = testEntityManager.find(Rule.class, langzeitinvest1Rule.getId()).getAmount();
-    assertThat(ruleAfterDeletion, is(ruleBeforeDeletion.subtract(spendingBeforeDeletion)));
+    private Transfer etfTransfer;
 
 
-    final var transferAfterDeletion = testEntityManager.find(Transfer.class, etfTransfer.getId()).getAmount();
-    assertThat(transferAfterDeletion, is(transferBeforeDeletion.subtract(spendingBeforeDeletion)));
-  }
+    @BeforeEach
+    void setUp() {
+        final var spendings = spendingRepository.findAll();
+        msciWorldSpending = spendings.stream().filter(s -> s.getDescription().equalsIgnoreCase("MSCI World")).findFirst().get();
+        langzeitinvest1Rule = ruleRepository.findAll().stream().filter(t -> t.getDescription().equalsIgnoreCase("langzeitinvest1")).findFirst().get();
+        etfTransfer = transferRepository.findAll().stream().filter(r -> r.getDescription().equalsIgnoreCase("ETF")).findFirst().get();
+    }
+
+    @Test
+    @Transactional
+    void whenDeleteByIdGivenIdOfSpendingThenDeleteItAndAdjustRuleAndTransferAmounts() {
+        final var spendingBeforeDeletion = testEntityManager.find(Spending.class, msciWorldSpending.getId()).getAmount();
+        final var ruleBeforeDeletion = testEntityManager.find(Rule.class, langzeitinvest1Rule.getId()).getAmount();
+        final var transferBeforeDeletion = testEntityManager.find(Transfer.class, etfTransfer.getId()).getAmount();
+
+        underTest.deleteById(msciWorldSpending.getId());
+        testEntityManager.flush();
+
+        assertThat(testEntityManager.find(Spending.class, msciWorldSpending.getId()), nullValue());
+
+        final var ruleAfterDeletion = testEntityManager.find(Rule.class, langzeitinvest1Rule.getId()).getAmount();
+        assertThat(ruleAfterDeletion, is(ruleBeforeDeletion.subtract(spendingBeforeDeletion)));
+
+
+        final var transferAfterDeletion = testEntityManager.find(Transfer.class, etfTransfer.getId()).getAmount();
+        assertThat(transferAfterDeletion, is(transferBeforeDeletion.subtract(spendingBeforeDeletion)));
+    }
 }

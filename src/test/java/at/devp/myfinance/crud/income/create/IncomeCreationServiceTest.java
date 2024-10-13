@@ -19,25 +19,25 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class IncomeCreationServiceTest {
 
-  @Mock
-  private IncomeRepository incomeRepository;
+    @Mock
+    private IncomeRepository incomeRepository;
 
-  @InjectMocks
-  private IncomeCreationService underTest;
+    @InjectMocks
+    private IncomeCreationService underTest;
 
-  @Test
-  void whenCreateEarningGivenCreateIncomeDtoThenStoreDatabaseEntry() {
-    final var earningCreationDto = new IncomeCreationDto();
-    earningCreationDto.setAmount(new BigDecimal("100"));
-    earningCreationDto.setDescription("test");
+    @Test
+    void whenCreateEarningGivenCreateIncomeDtoThenStoreDatabaseEntry() {
+        final var earningCreationDto = new IncomeCreationDto();
+        earningCreationDto.setAmount(new BigDecimal("100"));
+        earningCreationDto.setDescription("test");
 
-    underTest.createIncome(earningCreationDto);
+        underTest.createIncome(earningCreationDto);
 
-    final var earningCaptor = ArgumentCaptor.forClass(Income.class);
+        final var earningCaptor = ArgumentCaptor.forClass(Income.class);
 
-    verify(incomeRepository).save(earningCaptor.capture());
-    assertThat(earningCaptor.getValue().getAmount(), is(new BigDecimal("100")));
-    assertThat(earningCaptor.getValue().getDescription(), is("test"));
-  }
+        verify(incomeRepository).save(earningCaptor.capture());
+        assertThat(earningCaptor.getValue().getAmount(), is(new BigDecimal("100")));
+        assertThat(earningCaptor.getValue().getDescription(), is("test"));
+    }
 
 }

@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SpendingAmountAssignmentService {
 
-  private final RuleUpdateService ruleUpdateService;
-  private final TransferUpdateService transferUpdateService;
+    private final RuleUpdateService ruleUpdateService;
+    private final TransferUpdateService transferUpdateService;
 
-  @Transactional
-  public void setAmount(SpendingEditDto spendingEditDto, Spending spending) {
-    spending.setAmount(spendingEditDto.getAmount());
-    ruleUpdateService.updateStatus(spending.getRule());
-    transferUpdateService.updateStatus(spending.getTransfer());
-  }
+    @Transactional
+    public void setAmount(SpendingEditDto spendingEditDto, Spending spending) {
+        spending.setAmount(spendingEditDto.getAmount());
+        ruleUpdateService.updateStatus(spending.getRule());
+        transferUpdateService.updateStatus(spending.getTransfer());
+    }
 }

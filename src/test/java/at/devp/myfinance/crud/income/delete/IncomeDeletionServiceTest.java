@@ -12,19 +12,19 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class IncomeDeletionServiceTest {
 
-  @Mock
-  private IncomeRepository incomeRepository;
+    @Mock
+    private IncomeRepository incomeRepository;
 
-  @InjectMocks
-  private IncomeDeletionService underTest;
+    @InjectMocks
+    private IncomeDeletionService underTest;
 
 
-  @Test
-  void whenDeleteByIdGivenIdOfEarningToDeleteThenDeleteIt() {
-    underTest.deleteById(5L);
+    @Test
+    void whenDeleteByIdGivenIdOfEarningToDeleteThenDeleteIt() {
+        underTest.deleteById(5L);
 
-    verify(incomeRepository).deleteById(5L);
-  }
+        verify(incomeRepository).deleteById(5L);
+    }
 
 
 }

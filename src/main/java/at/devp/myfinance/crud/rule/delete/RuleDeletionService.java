@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RuleDeletionService {
-  private final RuleRepository ruleRepository;
+    private final RuleRepository ruleRepository;
 
-  public void removeSpendingAndUpdate(final Rule rule, final Spending spending) {
-    rule.getSpendings().remove(spending);
-    rule.updateAmountAndChange();
-    ruleRepository.save(rule);
-  }
-  public void deleteRule(final Long id) {
-    ruleRepository.deleteById(id);
-  }
+    public void removeSpendingAndUpdate(final Rule rule, final Spending spending) {
+        rule.getSpendings().remove(spending);
+        rule.updateAmountAndChange();
+        ruleRepository.save(rule);
+    }
+
+    public void deleteRule(final Long id) {
+        ruleRepository.deleteById(id);
+    }
 }

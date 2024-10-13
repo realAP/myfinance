@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TransferDeletionService {
 
-  private final TransferRepository transferRepository;
+    private final TransferRepository transferRepository;
 
-  public void deleteById(final Long transferId) {
-    transferRepository.deleteById(transferId);
-  }
+    public void deleteById(final Long transferId) {
+        transferRepository.deleteById(transferId);
+    }
 
-  public void removeSpendingAndUpdate(final Transfer transfer, final Spending spending) {
-    transfer.getSpendings().remove(spending);
-    transfer.updateAmountAndChange();
-    transferRepository.save(transfer);
-  }
+    public void removeSpendingAndUpdate(final Transfer transfer, final Spending spending) {
+        transfer.getSpendings().remove(spending);
+        transfer.updateAmountAndChange();
+        transferRepository.save(transfer);
+    }
 }
