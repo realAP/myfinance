@@ -21,6 +21,5 @@ public class TransferUpdateService {
   public void updateStatus(final Transfer transfer) {
     transfer.updateAmountAndChange();
     transferRepository.save(transfer);
-
   }
 }

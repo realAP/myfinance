@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SpendingCreatorService {
 
-    private final Converter converter;
     private final RuleRepository ruleRepository;
     private final RuleUpdateService ruleUpdateService;
     private final SpendingRepository spendingRepository;
@@ -47,10 +46,10 @@ public class SpendingCreatorService {
                         + spendingCreationDto.getRuleId()));
 
         spending.setRule(rule);
-        transferUpdateService.addSpendingAndUpdate(transfer, spending);
+        ruleUpdateService.addSpendingAndUpdate(rule, spending);
 
         spending.setTransfer(transfer);
-        ruleUpdateService.addSpendingAndUpdate(rule, spending);
+        transferUpdateService.addSpendingAndUpdate(transfer, spending);
 
         spendingRepository.save(spending);
     }

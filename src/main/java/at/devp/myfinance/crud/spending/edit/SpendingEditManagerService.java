@@ -14,14 +14,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class SpendingEditManagerService {
     private final SpendingRepository spendingRepository;
-    private final SpendingAmountService spendingAmountService;
-    private final SpendingRuleService spendingRuleService;
-    private final SpendingTransferService spendingTransferService;
+    private final SpendingAmountAssignmentService spendingAmountAssignmentService;
+    private final SpendingRuleAssignmentService spendingRuleAssignmentService;
+    private final SpendingTransferAssignmentService spendingTransferAssignmentService;
     private final CategoryRepository categoryRepository;
 
     @Transactional
     public void editSpending(final SpendingEditDto spendingEditDto) {
-        System.out.println(spendingEditDto);
         final var spending = spendingRepository.findById(spendingEditDto.getId()).orElseThrow(() -> new IllegalArgumentException("Spending with id " + spendingEditDto.getId() + " not found"));
 
         if (checkForDescriptionChange(spendingEditDto, spending)) {
@@ -36,15 +35,15 @@ public class SpendingEditManagerService {
         }
 
         if (checkForAmountChange(spendingEditDto, spending)) {
-            spendingAmountService.setAmount(spendingEditDto, spending);
+            spendingAmountAssignmentService.setAmount(spendingEditDto, spending);
         }
 
         if (checkForRuleChange(spending, spendingEditDto)) {
-            spendingRuleService.setRule(spendingEditDto, spending);
+            spendingRuleAssignmentService.setRule(spendingEditDto, spending);
         }
 
         if (checkForTransferChange(spending, spendingEditDto)) {
-            spendingTransferService.setTransfer(spendingEditDto, spending);
+            spendingTransferAssignmentService.setTransfer(spendingEditDto, spending);
         }
 
         spendingRepository.save(spending);

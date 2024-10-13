@@ -2,7 +2,7 @@ package at.devp.myfinance.crud.rule;
 
 import at.devp.myfinance.crud.rule.create.RuleCreationDto;
 import at.devp.myfinance.crud.rule.create.RuleCreationService;
-import at.devp.myfinance.crud.rule.edit.RuleEditService2;
+import at.devp.myfinance.crud.rule.edit.RuleEditService;
 import at.devp.myfinance.crud.rule.read.RuleDto;
 import at.devp.myfinance.crud.rule.read.RuleReadService;
 import at.devp.myfinance.services.rule.RuleChangeService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class RuleController {
     private final RuleCreationService ruleCreationService;
     private final RuleReadService ruleReadService;
-    private final RuleEditService2 ruleEditService;
+    private final RuleEditService ruleEditService;
     private final RuleChangeService ruleChangeService;
     private final RuleDeletionService ruleDeletionService;
 

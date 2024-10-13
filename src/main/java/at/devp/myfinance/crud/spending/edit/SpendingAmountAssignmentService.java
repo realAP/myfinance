@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SpendingAmountService {
+public class SpendingAmountAssignmentService {
 
   private final RuleUpdateService ruleUpdateService;
   private final TransferUpdateService transferUpdateService;

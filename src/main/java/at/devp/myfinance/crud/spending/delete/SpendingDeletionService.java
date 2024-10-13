@@ -1,8 +1,8 @@
 package at.devp.myfinance.crud.spending.delete;
 
+import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.services.rule.RuleDeletionService;
-import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

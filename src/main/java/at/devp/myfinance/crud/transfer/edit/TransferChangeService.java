@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.transfer;
+package at.devp.myfinance.crud.transfer.edit;
 
 import at.devp.myfinance.repositories.TransferRepository;
 import lombok.RequiredArgsConstructor;

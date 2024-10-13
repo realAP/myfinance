@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class RuleEditService2 {
+public class RuleEditService {
 
 
     private final RuleRepository ruleRepository;

@@ -34,10 +34,10 @@ class SpendingOverviewServiceTest {
   @InjectMocks
   private SpendingOverviewService underTest;
 
-  private Spending investmentSpending1 = new Spending();
-  private Spending investmentSpending2 = new Spending();
-  private Spending vergnuegenSpending1 = new Spending();
-  private Spending vergnuegenSpending2 = new Spending();
+  private final Spending investmentSpending1 = new Spending();
+  private final Spending investmentSpending2 = new Spending();
+  private final Spending vergnuegenSpending1 = new Spending();
+  private final Spending vergnuegenSpending2 = new Spending();
 
   private final Rule rule1 = new Rule();
 

@@ -2,7 +2,10 @@ package at.devp.myfinance.entity;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 

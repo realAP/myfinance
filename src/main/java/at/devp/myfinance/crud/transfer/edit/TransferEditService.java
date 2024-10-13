@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class TransferEditService2 {
+public class TransferEditService {
     private final TransferRepository transferRepository;
     private final BankRepository bankRepository;
 
