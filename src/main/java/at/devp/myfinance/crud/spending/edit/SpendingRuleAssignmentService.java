@@ -1,9 +1,9 @@
 package at.devp.myfinance.crud.spending.edit;
 
+import at.devp.myfinance.crud.rule.delete.RuleDeletionService;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.RuleRepository;
-import at.devp.myfinance.crud.rule.delete.RuleDeletionService;
 import at.devp.myfinance.services.rule.RuleUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

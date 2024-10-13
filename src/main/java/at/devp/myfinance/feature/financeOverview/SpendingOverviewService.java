@@ -1,9 +1,9 @@
 package at.devp.myfinance.feature.financeOverview;
 
+import at.devp.myfinance.crud.income.read.IncomeReadService;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.feature.sumOfIncome.SumOfIncomeService;
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.crud.income.read.IncomeReadService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
