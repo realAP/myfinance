@@ -36,6 +36,11 @@ export class NavbarComponent implements OnInit {
         route: '/rules',
       },
       {
+        label: 'Einnahmen',
+        icon: 'pi pi-plus',
+        route: '/incomes'
+      },
+      {
         label: 'Backoffice',
         icon: 'pi pi-list',
         route: '/backoffice'

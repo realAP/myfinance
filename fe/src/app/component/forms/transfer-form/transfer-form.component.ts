@@ -5,9 +5,9 @@ import {DropdownModule} from "primeng/dropdown";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
-import {BankDto, TransferCreationDto} from "../../model/backend";
 import {MessageService} from "primeng/api";
-import {BackendService} from "../../service/backend/backend.service";
+import {BankDto, TransferCreationDto} from "../../../model/backend";
+import {BackendService} from "../../../service/backend/backend.service";
 
 export interface TransferFormDto {
   transferCreationDto: TransferCreationDto;

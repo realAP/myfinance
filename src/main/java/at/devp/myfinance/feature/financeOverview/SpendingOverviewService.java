@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class SpendingOverviewService {
 
     private final SpendingRepository spendingRepository;
-    private final IncomeReadService incomeReadService;
     private final SumOfIncomeService sumOfIncomeService;
 
     @Transactional

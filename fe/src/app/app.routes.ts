@@ -28,6 +28,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'incomes',
+    loadComponent: () => import('./page/income-overview-page/income-overview-page.component').then(m => m.IncomeOverviewPageComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'backoffice',
     loadComponent: () => import('./page/backoffice-page/backoffice-page.component').then(m => m.BackofficePageComponent),
     canActivate: [authGuard]

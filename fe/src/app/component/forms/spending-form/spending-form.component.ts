@@ -7,10 +7,9 @@ import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FloatLabelModule} from "primeng/floatlabel";
-import {CategoryDto, RuleDto, SpendingCreationDto, TransferDto} from "../../model/backend";
-import {MessageService} from "primeng/api";
 import {forkJoin} from "rxjs";
-import {BackendService} from "../../service/backend/backend.service";
+import {CategoryDto, RuleDto, SpendingCreationDto, TransferDto} from "../../../model/backend";
+import {BackendService} from "../../../service/backend/backend.service";
 
 export interface SpendingFormDto {
   spendingCreationDto: SpendingCreationDto;
@@ -78,7 +77,7 @@ export class SpendingFormComponent implements OnInit {
 
   resetForm() {
     this.name = "";
-    this.amount = 0;
+    this.amount = undefined;
     this.selectedCategory = undefined;
     this.selectedTransfer = undefined;
     this.selectedRule = undefined;

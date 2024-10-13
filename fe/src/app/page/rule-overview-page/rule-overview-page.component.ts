@@ -5,8 +5,8 @@ import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
-import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
 import {BackendService} from "../../service/backend/backend.service";
+import {RuleFormComponent} from "../../component/forms/rule-form/rule-form.component";
 
 @Component({
   selector: 'app-rule-overview-page',

@@ -5,7 +5,7 @@ import {
   BankCreationDto,
   BankDto,
   CategoryCreationDto,
-  CategoryDto,
+  CategoryDto, IncomeCreationDto, IncomeDto,
   RuleCreationDto,
   RuleDto,
   SpaceCreationDto,
@@ -123,5 +123,25 @@ export class BackendService {
 
   getDiffBetweenInAndOut(): Observable<number> {
     return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/diff");
+  }
+
+  createIncome(incomeCreationDto: IncomeCreationDto) {
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/incomes", incomeCreationDto);
+  }
+
+  getIncomes():Observable<IncomeDto[]> {
+    return this.httpClient.get<IncomeDto[]>(this.TARGET + this.BASE_API + "/crud/incomes");
+  }
+
+  deleteIncome(id:number) {
+    return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/incomes/" + id);
+  }
+
+  editIncome(id: number, incomeCreationDto: IncomeCreationDto) {
+    return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/incomes/" + id, incomeCreationDto);
+  }
+
+  getIncomeSum() {
+    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/features/sumofincome");
   }
 }

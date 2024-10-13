@@ -6,8 +6,8 @@ import {MenuItem, MessageService} from "primeng/api";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {DialogModule} from "primeng/dialog";
 import {Button} from "primeng/button";
-import {TransferFormComponent, TransferFormDto} from "../../component/transfer-form/transfer-form.component";
 import {BackendService} from "../../service/backend/backend.service";
+import {TransferFormComponent, TransferFormDto} from "../../component/forms/transfer-form/transfer-form.component";
 
 @Component({
   selector: 'app-transfer-overview-page',

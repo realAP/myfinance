@@ -1,8 +1,6 @@
 <p>backoffice-page works!</p>
 <p-card header="Transfer Creation">
-
   <app-transfer-form (formSubmit)="onTransferCreate($event)"></app-transfer-form>
-
 </p-card>
 
 <p-card header="Spending Creation">
@@ -25,5 +23,6 @@
   <app-space-creation></app-space-creation>
 </p-card>
 
-
-<app-connected-squares></app-connected-squares>
+<p-card header="Einnahmen Creation">
+  <app-income-form (formSubmit)="onIncomeCreate($event)"></app-income-form>
+</p-card>

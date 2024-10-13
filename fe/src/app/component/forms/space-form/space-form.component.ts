@@ -4,7 +4,7 @@ import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {MessageService} from "primeng/api";
-import {BackendService} from "../../service/backend/backend.service";
+import {BackendService} from "../../../service/backend/backend.service";
 
 @Component({
   selector: 'app-space-creation',

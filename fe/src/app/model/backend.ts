@@ -107,3 +107,14 @@ export interface SpendingEditDto {
   ruleId: number
   transferId: number;
 }
+
+export interface IncomeCreationDto {
+  description: string;
+  amount: number;
+}
+
+export interface IncomeDto {
+  id: number;
+  description: string;
+  amount: number;
+}

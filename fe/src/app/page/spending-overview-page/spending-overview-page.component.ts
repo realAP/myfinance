@@ -5,10 +5,9 @@ import {NgForOf} from "@angular/common";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
-import {RuleFormComponent} from "../../component/rule-form/rule-form.component";
-import {SpendingFormComponent, SpendingFormDto} from "../../component/spending-form/spending-form.component";
-import {subscribeOn} from "rxjs";
 import {BackendService} from "../../service/backend/backend.service";
+import {RuleFormComponent} from "../../component/forms/rule-form/rule-form.component";
+import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spending-form/spending-form.component";
 
 @Component({
   selector: 'app-spending-overview-page',
