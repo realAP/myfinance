@@ -82,4 +82,10 @@ export class SpendingFormComponent implements OnInit {
     this.selectedTransfer = undefined;
     this.selectedRule = undefined;
   }
+
+  onEvenizeSpending(id: number | undefined) {
+    this.backendService.evenizeSpending(id).subscribe((next) => {
+      this.amount = next;
+    })
+  }
 }

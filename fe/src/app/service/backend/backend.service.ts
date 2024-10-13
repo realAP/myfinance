@@ -5,7 +5,9 @@ import {
   BankCreationDto,
   BankDto,
   CategoryCreationDto,
-  CategoryDto, IncomeCreationDto, IncomeDto,
+  CategoryDto,
+  IncomeCreationDto,
+  IncomeDto,
   RuleCreationDto,
   RuleDto,
   SpaceCreationDto,
@@ -129,11 +131,11 @@ export class BackendService {
     return this.httpClient.post(this.TARGET + this.BASE_API + "/crud/incomes", incomeCreationDto);
   }
 
-  getIncomes():Observable<IncomeDto[]> {
+  getIncomes(): Observable<IncomeDto[]> {
     return this.httpClient.get<IncomeDto[]>(this.TARGET + this.BASE_API + "/crud/incomes");
   }
 
-  deleteIncome(id:number) {
+  deleteIncome(id: number) {
     return this.httpClient.delete(this.TARGET + this.BASE_API + "/crud/incomes/" + id);
   }
 
@@ -143,5 +145,9 @@ export class BackendService {
 
   getIncomeSum() {
     return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/features/sumofincome");
+  }
+
+  evenizeSpending(id: number | undefined): Observable<number> {
+    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/features/evenize/" + id);
   }
 }

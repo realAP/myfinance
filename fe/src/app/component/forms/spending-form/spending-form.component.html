@@ -24,16 +24,12 @@
       </p-floatLabel>
       <p-inputGroupAddon>€</p-inputGroupAddon>
     </p-inputGroup>
+    @if (preFilledSpendingFormDto?.isPreFilled) {
+    <p-inputGroupAddon>
+      <button pButton type="button" (click)="onEvenizeSpending(preFilledSpendingFormDto?.spendingCreationDto?.id)">Evenize</button>
+    </p-inputGroupAddon>
+    }
   </div>
-
-  <!--
-    <div class="input-group">
-      <p-floatLabel>
-        <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
-        <label for="date">Datum</label>
-      </p-floatLabel>
-    </div>
-  -->
 
   <div class="input-group">
     <p-floatLabel>
