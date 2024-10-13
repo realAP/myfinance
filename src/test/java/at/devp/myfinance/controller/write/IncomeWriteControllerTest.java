@@ -1,8 +1,8 @@
 package at.devp.myfinance.controller.write;
 
-import at.devp.myfinance.services.income.EarningDeletionService;
-import at.devp.myfinance.services.income.create.EarningCreationDto;
-import at.devp.myfinance.services.income.create.EarningCreationService;
+import at.devp.myfinance.crud.income.delete.IncomeDeletionService;
+import at.devp.myfinance.crud.income.create.IncomeCreationDto;
+import at.devp.myfinance.crud.income.create.IncomeCreationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,20 +13,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
-class EarningWriteControllerTest {
+class IncomeWriteControllerTest {
 
   @Mock
-  private EarningCreationService earningCreationService;
+  private IncomeCreationService incomeCreationService;
 
   @Mock
-  private EarningDeletionService earningDeletionService;
+  private IncomeDeletionService incomeDeletionService;
 
   @InjectMocks
   private EarningWriteController underTest;
 
   @Test
   void whenCreateEarningIsCalledThenRedirectToIncome() {
-    final var result = underTest.createEarning(new EarningCreationDto());
+    final var result = underTest.createEarning(new IncomeCreationDto());
 
     assertThat(result, is("redirect:/income"));
   }

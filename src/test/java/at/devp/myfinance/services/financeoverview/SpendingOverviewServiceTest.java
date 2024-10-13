@@ -8,7 +8,6 @@ import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.feature.financeoverview.SpendingCategoryBlockDto;
 import at.devp.myfinance.feature.financeoverview.SpendingOverviewService;
 import at.devp.myfinance.repositories.SpendingRepository;
-import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -168,14 +167,14 @@ class SpendingOverviewServiceTest {
   }
 
   @Test
-  void whenCalculateSumGivenSpendingsThenReturnItsSum() {
+  void whenCalculateSumGivenSpendingsThenReturnItsSumOfSpendings() {
     investmentSpending1.setAmount(new BigDecimal("33.33"));
     investmentSpending2.setAmount(new BigDecimal("31.41"));
     vergnuegenSpending1.setAmount(new BigDecimal("0.01"));
     vergnuegenSpending2.setAmount(new BigDecimal("999.99"));
     when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, investmentSpending2, vergnuegenSpending1, vergnuegenSpending2));
 
-    final var result = underTest.calculateSum();
+    final var result = underTest.calculateSumOfSpendings();
 
     assertThat(result, is(new BigDecimal("1064.74")));
   }

@@ -3,6 +3,7 @@ package at.devp.myfinance.feature.financeoverview;
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.SpendingRepository;
+import at.devp.myfinance.services.income.IncomeService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class SpendingOverviewService {
 
     private final SpendingRepository spendingRepository;
+    private final IncomeService incomeService;
     private final Converter converter;
 
     @Transactional
@@ -33,7 +35,7 @@ public class SpendingOverviewService {
         }).sorted(Comparator.comparing(SpendingCategoryBlockDto::getCategory)).toList();
     }
 
-    public BigDecimal calculateSum() {
+    public BigDecimal calculateSumOfSpendings() {
         final var spendings = spendingRepository.findAll();
         return spendings.stream().map(Spending::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -58,5 +60,9 @@ public class SpendingOverviewService {
         spendingRowDto.setTransferId(spending.getTransfer().getId());
         spendingRowDto.setCategoryId(spending.getCategory().getId());
         return spendingRowDto;
+    }
+
+    public BigDecimal calculateDifferenceBetweenIncomesAndSpendings() {
+        return incomeService.sumOfEarnings().subtract(calculateSumOfSpendings());
     }
 }

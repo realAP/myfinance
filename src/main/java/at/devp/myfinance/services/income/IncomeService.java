@@ -1,7 +1,7 @@
 package at.devp.myfinance.services.income;
 
-import at.devp.myfinance.entity.Earning;
-import at.devp.myfinance.repositories.EarningRepository;
+import at.devp.myfinance.entity.Income;
+import at.devp.myfinance.repositories.IncomeRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,29 +14,32 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class IncomeService {
 
-  private final EarningRepository incomeRepository;
+    private final IncomeRepository incomeRepository;
 
-  @NonNull
-  public IncomeDto createIncomeOverview() {
-    final var earnings = incomeRepository.findAll();
-    final var earningDtos = convert2EarningDtos(earnings);
-    final var incomeDto = new IncomeDto();
-    incomeDto.getEarningDtos().addAll(earningDtos);
+    @NonNull
+    public IncomeDto createIncomeOverview() {
+        final var earnings = incomeRepository.findAll();
+        final var earningDtos = convert2EarningDtos(earnings);
+        final var incomeDto = new IncomeDto();
+        incomeDto.getEarningDtos().addAll(earningDtos);
+        incomeDto.setSumOfEarnings(sumOfEarnings());
+        return incomeDto;
+    }
 
-    final var sumOfEarnings = earnings.stream().map(Earning::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
-    incomeDto.setSumOfEarnings(sumOfEarnings);
+    @NonNull
+    public BigDecimal sumOfEarnings() {
+        final var earnings = incomeRepository.findAll();
+        return earnings.stream().map(Income::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
-    return incomeDto;
-  }
-
-  private List<EarningDto> convert2EarningDtos(List<Earning> earnings) {
-    return earnings.stream()
-        .map(earning -> {
-          final var earningDto = new EarningDto();
-          earningDto.setId(earning.getId());
-          earningDto.setDescription(earning.getDescription());
-          earningDto.setAmount(earning.getAmount());
-          return earningDto;
-        }).toList();
-  }
+    private List<EarningDto> convert2EarningDtos(List<Income> incomes) {
+        return incomes.stream()
+                .map(earning -> {
+                    final var earningDto = new EarningDto();
+                    earningDto.setId(earning.getId());
+                    earningDto.setDescription(earning.getDescription());
+                    earningDto.setAmount(earning.getAmount());
+                    return earningDto;
+                }).toList();
+    }
 }

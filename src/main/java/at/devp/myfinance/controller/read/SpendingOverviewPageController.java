@@ -30,7 +30,7 @@ public class SpendingOverviewPageController {
     model.addAttribute("spendingRowDto", new SpendingRowDto());
     model.addAttribute("spendingCreationDto", new SpendingCreationDto());
 
-    final var sumOfSpendings = spendingOverviewService.calculateSum();
+    final var sumOfSpendings = spendingOverviewService.calculateSumOfSpendings();
     model.addAttribute("sumOfSpendings", sumOfSpendings);
 
 

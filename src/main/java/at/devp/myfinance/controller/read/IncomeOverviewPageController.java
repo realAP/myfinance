@@ -2,7 +2,7 @@ package at.devp.myfinance.controller.read;
 
 import at.devp.myfinance.services.income.EarningDto;
 import at.devp.myfinance.services.income.IncomeService;
-import at.devp.myfinance.services.income.create.EarningCreationDto;
+import at.devp.myfinance.crud.income.create.IncomeCreationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,7 @@ public class IncomeOverviewPageController {
     model.addAttribute("incomeDto", incomeDto);
     model.addAttribute("earningDto", new EarningDto());
 
-    model.addAttribute("earningCreationDto", new EarningCreationDto());
+    model.addAttribute("earningCreationDto", new IncomeCreationDto());
 
     return "income";
   }

@@ -20,6 +20,11 @@ public class SpendingOverviewController {
 
     @GetMapping("/fe/overview/sum")
     public BigDecimal calculateTotalSpending() {
-        return spendingOverviewService.calculateSum();
+        return spendingOverviewService.calculateSumOfSpendings();
+    }
+
+    @GetMapping("fe/overview/diff")
+    public BigDecimal calculateDifference() {
+        return spendingOverviewService.calculateDifferenceBetweenIncomesAndSpendings();
     }
 }

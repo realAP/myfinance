@@ -1,7 +1,7 @@
 package at.devp.myfinance.services.income;
 
-import at.devp.myfinance.entity.Earning;
-import at.devp.myfinance.repositories.EarningRepository;
+import at.devp.myfinance.entity.Income;
+import at.devp.myfinance.repositories.IncomeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,22 +16,22 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EarningServiceTest {
+class IncomeServiceTest {
 
   @Mock
-  private EarningRepository incomeRepository;
+  private IncomeRepository incomeRepository;
   @InjectMocks
   private IncomeService underTest;
 
 
   @Test
   void whenCreateIncomeOverviewGivenTwoEarningsThenReturnIncomeDto() {
-    final var job = new Earning();
+    final var job = new Income();
     job.setId(1L);
     job.setDescription("job");
     job.setAmount(new BigDecimal("100.02"));
 
-    final var stock = new Earning();
+    final var stock = new Income();
     stock.setId(2L);
     stock.setDescription("stock");
     stock.setAmount(new BigDecimal("200.01"));

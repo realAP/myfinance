@@ -120,4 +120,8 @@ export class BackendService {
   getSpendingSum(): Observable<number> {
     return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/sum");
   }
+
+  getDiffBetweenInAndOut(): Observable<number> {
+    return this.httpClient.get<number>(this.TARGET + this.BASE_API + "/overview/diff");
+  }
 }

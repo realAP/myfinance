@@ -26,6 +26,7 @@ import {BackendService} from "../../service/backend/backend.service";
 })
 export class SpendingOverviewPageComponent implements OnInit {
 
+  diffBetweenInAndOut: number = 0;
   spendingSum: number = 0;
   spendingCategoryBlockDtos: SpendingCategoryBlockDto[] = [];
   items!: MenuItem[];
@@ -83,6 +84,9 @@ export class SpendingOverviewPageComponent implements OnInit {
     })
     this.backendService.getSpendingSum().subscribe((res) => {
       this.spendingSum = res;
+    })
+    this.backendService.getDiffBetweenInAndOut().subscribe((res) => {
+      this.diffBetweenInAndOut = res;
     })
   }
 

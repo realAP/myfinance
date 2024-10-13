@@ -21,10 +21,10 @@
         <td th:text="${earningDto.description}">Description</td>
         <td th:text="${earningDto.amount}">Amount</td>
         <td>
-            <form th:action="@{/earnings/{id}/delete(id=${earningDto.id})}" method="get">
+            <form th:action="@{/incomes/{id}/delete(id=${earningDto.id})}" method="get">
                 <input type="submit" value="Delete"/>
             </form>
-            <form th:action="@{/earnings/{id}/edit(id=${earningDto.id})}" method="get">
+            <form th:action="@{/incomes/{id}/edit(id=${earningDto.id})}" method="get">
                 <input type="submit" value="Edit"/>
             </form>
         </td>
@@ -42,7 +42,7 @@
 <!--
 &lt;!&ndash; Form to Add New Data &ndash;&gt;
 -->
-<form action="#" th:action="@{/earnings}" th:object="${earningCreationDto}" method="post">
+<form action="#" th:action="@{/incomes}" th:object="${incomeCreationDto}" method="post">
     <input type="text" th:field="*{description}" placeholder="Description"/>
     <br>
     <br>
