@@ -1,7 +1,8 @@
 export interface SpendingCategoryBlockDto {
-  category: Category;
+  category: string;
   spendingRowDtos: SpendingRowDto[];
   spendingSumPerCategory: number; // Use appropriate numeric type (e.g., number, BigDecimal, etc.)
+  percentageToIncome: number;
 }
 
 export interface CategoryCreationDto {
@@ -11,13 +12,6 @@ export interface CategoryCreationDto {
 export interface CategoryDto {
   id: number;
   name: string;
-}
-
-export enum Category {
-  VERGNUEGEN = 'VERGNUEGEN',
-  SPORT = 'SPORT',
-  BANK = 'BANK',
-  INVESTITIONEN = 'INVESTITIONEN',
 }
 
 export interface SpendingRowDto {

@@ -5,6 +5,7 @@ import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
+import at.devp.myfinance.feature.sumOfIncome.SumOfIncomeService;
 import at.devp.myfinance.repositories.SpendingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SpendingOverviewServiceTest {
+
+    @Mock
+    private SumOfIncomeService sumOfIncomeService;
 
     @Mock
     private SpendingRepository spendingRepository;
@@ -43,6 +47,8 @@ class SpendingOverviewServiceTest {
 
     private final Category investmentCategory = new Category();
     private final Category vergneugenCategory = new Category();
+
+    private BigDecimal sumOfIncome;
 
     @BeforeEach
     void setUp() {
@@ -79,21 +85,26 @@ class SpendingOverviewServiceTest {
         vergnuegenSpending2.setRule(rule1);
         vergnuegenSpending2.setTransfer(transfer1);
         vergnuegenSpending2.setId(4L);
+
+        sumOfIncome = new BigDecimal("330.00");
     }
 
     @Test
-    void whenGivenTwoInvestmentAndTwoVergnuegenSpendingsThenReturnSpendingTableDto() {
+    void whenGivenTwoInvestmentAndTwoVergnuegenSpendingsThenReturnListOfSpendingCategoryBlockDto() {
         when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, investmentSpending2, vergnuegenSpending1, vergnuegenSpending2));
+        when(sumOfIncomeService.getSum()).thenReturn(sumOfIncome);
 
         final var result = underTest.createOverview();
 
         final var resultInvestment = findSpendingTableDtoByCategory(result, investmentCategory);
         assertThat(resultInvestment.getCategory(), is(investmentCategory.getName()));
+        assertThat(resultInvestment.getPercentageToIncome(), is(new BigDecimal("90.91")));
         assertThat(resultInvestment.getSpendingSumPerCategory(), is(investmentSpending1.getAmount().add(investmentSpending2.getAmount())));
         assertThat(resultInvestment.getSpendingRowDtos().size(), is(2));
 
         final var resultVergnuegen = findSpendingTableDtoByCategory(result, vergneugenCategory);
         assertThat(resultVergnuegen.getCategory(), is(vergneugenCategory.getName()));
+        assertThat(resultVergnuegen.getPercentageToIncome(), is(new BigDecimal("9.09")));
         assertThat(resultVergnuegen.getSpendingSumPerCategory(), is(vergnuegenSpending1.getAmount().add(vergnuegenSpending2.getAmount())));
         assertThat(resultVergnuegen.getSpendingRowDtos().size(), is(2));
     }
@@ -176,5 +187,4 @@ class SpendingOverviewServiceTest {
 
         assertThat(result, is(new BigDecimal("1064.74")));
     }
-
 }

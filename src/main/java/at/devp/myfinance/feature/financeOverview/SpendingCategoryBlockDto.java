@@ -10,4 +10,5 @@ public class SpendingCategoryBlockDto {
     private String category;
     private List<SpendingRowDto> spendingRowDtos;
     private BigDecimal spendingSumPerCategory;
+    private BigDecimal percentageToIncome;
 }
