@@ -1,7 +1,7 @@
 package at.devp.myfinance.controller_fe.read;
 
-import at.devp.myfinance.feature.financeoverview.SpendingOverviewController;
-import at.devp.myfinance.feature.financeoverview.SpendingOverviewService;
+import at.devp.myfinance.feature.financeOverview.SpendingOverviewController;
+import at.devp.myfinance.feature.financeOverview.SpendingOverviewService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

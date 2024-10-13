@@ -1,7 +1,5 @@
 package at.devp.myfinance.crud.spending.create;
 
-import at.devp.myfinance.converter.Converter;
-import at.devp.myfinance.dto.SpendingCreationDto;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.repositories.CategoryRepository;
 import at.devp.myfinance.repositories.RuleRepository;

@@ -1,6 +1,6 @@
 package at.devp.myfinance.services.spending;
 
-import at.devp.myfinance.dto.SpendingEditDto;
+import at.devp.myfinance.crud.spending.edit.SpendingEditDto;
 import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;

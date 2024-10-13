@@ -1,11 +1,11 @@
-package at.devp.myfinance.dto;
+package at.devp.myfinance.crud.spending.edit;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class SpendingCreationDto {
+public class SpendingEditDto {
   private Long id;
   private Long categoryId;
   private String description;

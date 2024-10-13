@@ -1,7 +1,6 @@
 package at.devp.myfinance.crud.spending.edit;
 
 import at.devp.myfinance.crud.transfer.delete.TransferDeletionService;
-import at.devp.myfinance.dto.SpendingEditDto;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
 import at.devp.myfinance.repositories.TransferRepository;

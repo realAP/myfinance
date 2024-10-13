@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.rule;
+package at.devp.myfinance.crud.rule.edit;
 
 import at.devp.myfinance.repositories.RuleRepository;
 import lombok.RequiredArgsConstructor;

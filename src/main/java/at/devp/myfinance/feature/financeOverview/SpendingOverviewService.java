@@ -1,9 +1,9 @@
-package at.devp.myfinance.feature.financeoverview;
+package at.devp.myfinance.feature.financeOverview;
 
-import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.entity.Spending;
+import at.devp.myfinance.feature.sumOfIncome.SumOfIncomeService;
 import at.devp.myfinance.repositories.SpendingRepository;
-import at.devp.myfinance.services.income.IncomeService;
+import at.devp.myfinance.crud.income.read.IncomeReadService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public class SpendingOverviewService {
 
     private final SpendingRepository spendingRepository;
-    private final IncomeService incomeService;
-    private final Converter converter;
+    private final IncomeReadService incomeReadService;
+    private final SumOfIncomeService sumOfIncomeService;
 
     @Transactional
     public List<SpendingCategoryBlockDto> createOverview() {
@@ -63,6 +63,7 @@ public class SpendingOverviewService {
     }
 
     public BigDecimal calculateDifferenceBetweenIncomesAndSpendings() {
-        return incomeService.sumOfEarnings().subtract(calculateSumOfSpendings());
+        return sumOfIncomeService.getSum().subtract(calculateSumOfSpendings());
+
     }
 }

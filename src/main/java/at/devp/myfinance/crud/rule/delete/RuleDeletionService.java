@@ -1,4 +1,4 @@
-package at.devp.myfinance.services.rule;
+package at.devp.myfinance.crud.rule.delete;
 
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;

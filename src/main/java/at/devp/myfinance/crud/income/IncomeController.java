@@ -3,27 +3,36 @@ package at.devp.myfinance.crud.income;
 import at.devp.myfinance.crud.income.create.IncomeCreationDto;
 import at.devp.myfinance.crud.income.create.IncomeCreationService;
 import at.devp.myfinance.crud.income.delete.IncomeDeletionService;
+import at.devp.myfinance.crud.income.read.IncomeDto;
+import at.devp.myfinance.crud.income.read.IncomeReadService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/earnings")
+@RequestMapping("/fe/crud/incomes")
 public class IncomeController {
-  private final IncomeCreationService incomeCreationService;
-  private final IncomeDeletionService incomeDeletionService;
+    private final IncomeCreationService incomeCreationService;
+    private final IncomeDeletionService incomeDeletionService;
+    private final IncomeReadService incomeReadService;
 
-  @PostMapping
-  public String createIncome(@RequestParam IncomeCreationDto incomeCreationDto) {
-    incomeCreationService.createIncome(incomeCreationDto);
-    return "redirect:/income";
-  }
+    @PostMapping
+    public ResponseEntity<?> createIncome(@RequestParam IncomeCreationDto incomeCreationDto) {
+        incomeCreationService.createIncome(incomeCreationDto);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
 
-  @GetMapping("/{id}/delete")
-  public String deleteIncome(@PathVariable("id") Long id) {
-    incomeDeletionService.deleteById(id);
-    return "redirect:/income";
-  }
+    @GetMapping("/{id}/delete")
+    public void deleteIncome(@PathVariable("id") Long id) {
+        incomeDeletionService.deleteById(id);
+    }
 
+    @GetMapping()
+    public List<IncomeDto> getIncomes() {
+        return incomeReadService.getIncomes();
+    }
 }
