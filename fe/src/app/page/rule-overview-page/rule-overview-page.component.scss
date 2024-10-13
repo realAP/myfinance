@@ -5,3 +5,23 @@
 .green-background {
   background-color: #48c4487d;
 }
+::ng-deep .p-datatable-tbody > tr > td {
+  padding: 0.1rem !important; /* Verringere das Padding */
+  line-height: 1.4 !important;  /* Verringere die Zeilenhöhe */
+}
+
+::ng-deep .p-datatable-tbody > tr {
+  height: auto !important;    /* Erlaube den Zeilen, weniger Platz einzunehmen */
+}
+
+::ng-deep .p-datatable-tbody > tr > td span {
+  margin: 0 !important;       /* Entferne unnötige Abstände */
+}
+
+::ng-deep .p-datatable-tbody > tr > td {
+  margin: 0 !important;       /* Verringere den Abstand innerhalb der Zellen */
+}
+
+::ng-deep .p-datatable-thead > tr > th {
+  padding: 0.1rem !important; /* Auch für die Header */
+}
