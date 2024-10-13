@@ -121,6 +121,7 @@ class SpendingOverviewServiceTest {
     @Test
     void whenGivenSpendingsThenReturnSpendingRowDtos() {
         when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, investmentSpending2, vergnuegenSpending1, vergnuegenSpending2));
+        when(sumOfIncomeService.getSum()).thenReturn(sumOfIncome);
 
         final var result = underTest.createOverview();
 
@@ -159,6 +160,7 @@ class SpendingOverviewServiceTest {
     @Test
     void whenCreateOverviewGivenSpendingsSortedAfterCategoryThenReturnItSortedAscendingInCategory() {
         when(spendingRepository.findAll()).thenReturn(List.of(investmentSpending1, vergnuegenSpending2, investmentSpending2, vergnuegenSpending1));
+        when(sumOfIncomeService.getSum()).thenReturn(sumOfIncome);
 
         final var result = underTest.createOverview();
 
