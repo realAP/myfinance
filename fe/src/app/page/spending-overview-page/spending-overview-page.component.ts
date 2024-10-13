@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf} from "@angular/common";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
@@ -18,7 +18,8 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spen
     ContextMenuModule,
     DialogModule,
     RuleFormComponent,
-    SpendingFormComponent
+    SpendingFormComponent,
+    NgClass
   ],
   templateUrl: './spending-overview-page.component.html',
   styleUrl: './spending-overview-page.component.scss'
