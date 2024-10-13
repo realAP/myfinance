@@ -1,12 +1,10 @@
-package at.devp.myfinance.services.financeoverview;
+package at.devp.myfinance.feature.financeOverview;
 
 import at.devp.myfinance.converter.Converter;
 import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;
-import at.devp.myfinance.feature.financeOverview.SpendingCategoryBlockDto;
-import at.devp.myfinance.feature.financeOverview.SpendingOverviewService;
 import at.devp.myfinance.repositories.SpendingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

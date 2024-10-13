@@ -1,6 +1,5 @@
-package at.devp.myfinance.services.spending;
+package at.devp.myfinance.crud.spending.delete;
 
-import at.devp.myfinance.crud.spending.delete.SpendingDeletionService;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
 import at.devp.myfinance.entity.Transfer;

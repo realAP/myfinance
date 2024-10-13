@@ -1,7 +1,6 @@
-package at.devp.myfinance.services.income;
+package at.devp.myfinance.crud.income.read;
 
 import at.devp.myfinance.converter.Converter;
-import at.devp.myfinance.crud.income.read.IncomeReadService;
 import at.devp.myfinance.entity.Income;
 import at.devp.myfinance.repositories.IncomeRepository;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;

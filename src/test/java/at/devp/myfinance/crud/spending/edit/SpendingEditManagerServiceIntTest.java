@@ -1,6 +1,5 @@
-package at.devp.myfinance.services.spending;
+package at.devp.myfinance.crud.spending.edit;
 
-import at.devp.myfinance.crud.spending.edit.SpendingEditDto;
 import at.devp.myfinance.entity.Category;
 import at.devp.myfinance.entity.Rule;
 import at.devp.myfinance.entity.Spending;
@@ -9,7 +8,6 @@ import at.devp.myfinance.repositories.CategoryRepository;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpendingRepository;
 import at.devp.myfinance.repositories.TransferRepository;
-import at.devp.myfinance.crud.spending.edit.SpendingEditManagerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

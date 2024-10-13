@@ -1,7 +1,5 @@
-package at.devp.myfinance.services.income.create;
+package at.devp.myfinance.crud.income.create;
 
-import at.devp.myfinance.crud.income.create.IncomeCreationDto;
-import at.devp.myfinance.crud.income.create.IncomeCreationService;
 import at.devp.myfinance.entity.Income;
 import at.devp.myfinance.repositories.IncomeRepository;
 import org.junit.jupiter.api.Test;

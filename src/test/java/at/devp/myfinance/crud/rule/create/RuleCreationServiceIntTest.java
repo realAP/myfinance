@@ -1,7 +1,5 @@
-package at.devp.myfinance.services.rule;
+package at.devp.myfinance.crud.rule.create;
 
-import at.devp.myfinance.crud.rule.create.RuleCreationDto;
-import at.devp.myfinance.crud.rule.create.RuleCreationService;
 import at.devp.myfinance.entity.Space;
 import at.devp.myfinance.repositories.RuleRepository;
 import at.devp.myfinance.repositories.SpaceRepository;

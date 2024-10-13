@@ -1,6 +1,5 @@
-package at.devp.myfinance.services.income;
+package at.devp.myfinance.crud.income.delete;
 
-import at.devp.myfinance.crud.income.delete.IncomeDeletionService;
 import at.devp.myfinance.repositories.IncomeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
