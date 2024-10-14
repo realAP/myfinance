@@ -1,0 +1,15 @@
+<p>space-creation works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText [(ngModel)]="name" (keydown.enter)="onCreateSpace()" />
+      <label for="name">Space</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Speichern" (click)="onCreateSpace()"/>
+  </div>
+
+</div>

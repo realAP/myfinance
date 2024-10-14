@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RuleUpdateService {
 
-  private final RuleRepository ruleRepository;
+    private final RuleRepository ruleRepository;
 
-  public void updateStatus(final Rule rule) {
-    rule.updateAmountAndChange();
-    ruleRepository.save(rule);
-  }
+    public void updateStatus(final Rule rule) {
+        rule.updateAmountAndChange();
+        ruleRepository.save(rule);
+    }
 
-  public void addSpendingAndUpdate(final Rule selectedRule, final Spending spending) {
-    selectedRule.getSpendings().add(spending);
-    selectedRule.updateAmountAndChange();
-    ruleRepository.save(selectedRule);
-  }
+    public void addSpendingAndUpdate(final Rule selectedRule, final Spending spending) {
+        selectedRule.getSpendings().add(spending);
+        selectedRule.updateAmountAndChange();
+        ruleRepository.save(selectedRule);
+    }
 }

@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: example
+      POSTGRES_DB: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data_local:/var/lib/postgresql/data
+
+  be:
+    image: devp1337/myfinance:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  fe:
+    image: devp1337/myfinance:fe-latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - be
+
+volumes:
+  db_data_local:

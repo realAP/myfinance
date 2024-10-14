@@ -1,0 +1,33 @@
+<p>income-form works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText
+             [(ngModel)]="description"
+      />
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-inputGroup>
+      <p-floatLabel>
+        <p-inputNumber
+          [(ngModel)]="amount"
+          id="minmaxfraction"
+          mode="decimal"
+          [allowEmpty]="true"
+          [minFractionDigits]="2"
+        />
+        <label for="minmaxfraction">Betrag</label>
+      </p-floatLabel>
+      <p-inputGroupAddon>€</p-inputGroupAddon>
+    </p-inputGroup>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Submit" (click)="onClick()"/>
+  </div>
+
+</div>

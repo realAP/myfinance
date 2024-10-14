@@ -31,11 +31,13 @@ public class Rule {
     @OneToMany(mappedBy = "rule")
     private List<Spending> spendings = new ArrayList<>();
 
-    @Column
-    private String from;
+    @ManyToOne
+    @JoinColumn(name = "from_space_id")
+    private Space fromSpace;
 
-    @Column
-    private String to;
+    @ManyToOne
+    @JoinColumn(name = "to_space_id")
+    private Space toSpace;
 
     @Column
     private BigDecimal amount = new BigDecimal("0.00");

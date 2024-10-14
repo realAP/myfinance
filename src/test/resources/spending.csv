@@ -1,4 +1,4 @@
-amount,category,id,rule_id,transfer_id,description
+amount,category_id,id,rule_id,transfer_id,description
 11,3,29,9,5,Bitcoin
 12,0,30,9,6,GCE
 123.46,3,22,5,4,MSCI World

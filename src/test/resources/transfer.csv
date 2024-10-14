@@ -1,5 +1,5 @@
-amount,date_of_execution,is_change,old_amount,id,description,from,to
-11,2024-08-24,false,11,5,Bitcoin,Main,Volksbank
-12,2024-08-24,false,12,6,GCE,Main,Scalable Capital
-136.84,2024-08-24,false,136.84,4,ETF,Main,ING
-100.01,2024-08-24,false,100.01,7,Lebensversicherung,Main,VOBA
+amount,date_of_execution,is_change,old_amount,from_bank_id,id,to_bank_id,description
+11,2024-08-24,false,11,1,5,2,Bitcoin
+12,2024-08-24,false,12,1,6,3,GCE
+136.84,2024-08-24,false,136.84,1,4,4,ETF
+100.01,2024-08-24,false,100.01,1,7,5,Lebensversicherung

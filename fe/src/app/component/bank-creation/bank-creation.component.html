@@ -1,0 +1,15 @@
+<p>bank-creation works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText [(ngModel)]="name" (keydown.enter)="onCreateBank()"/>
+      <label for="name">Bank</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Submit" (click)="onCreateBank()"/>
+  </div>
+
+</div>

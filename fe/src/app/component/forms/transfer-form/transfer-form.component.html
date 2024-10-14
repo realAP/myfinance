@@ -1,0 +1,46 @@
+<p>transfer-creation works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" [(ngModel)]="name" pInputText/>
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
+      <label for="date">Datum</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="from-space"
+        [options]="banks"
+        [(ngModel)]="selectedFromBank"
+        optionLabel="name"
+      />
+      <label for="from-space">Von Bank</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-floatLabel>
+      <p-dropdown
+        id="target-space"
+        [options]="banks"
+        [(ngModel)]="selectedTargetBank"
+        optionLabel="name"
+      />
+      <label for="target-space">Nach Bank</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Submit" (click)="onClick()"/>
+  </div>
+
+</div>

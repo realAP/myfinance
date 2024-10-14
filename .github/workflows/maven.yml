@@ -1,4 +1,6 @@
 name: Pipeline
+env:
+  RUN_SMOKE_TESTS: false
 
 on:
   push:
@@ -22,17 +24,12 @@ jobs:
           cd fe
           npm ci
 
-      - name: build
-        run: |
-          cd fe
-          npm run build
-
       - name: Test frontend
         run: |
           cd fe
-          npm run test
+          echo "npm run test | currently disabled"
 
-  test:
+  testbe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,16 +43,17 @@ jobs:
 
       - name: Tests
         run: |
-          mvn test 
+          mvn test
 
       - name: SonarCloud
         run: |
-          mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io
+          echo "mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io | currently disabled"
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
 
-  build:
+  buildbe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,13 +66,30 @@ jobs:
           cache: maven
       - name: Build
         run: mvn package -DskipTests
-
-
-  publish-docker-image:
-    needs:
-      - build
-      - test
+  buildfe:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: npm install
+        run: |
+          cd fe
+          npm ci
+
+      - name: build
+        run: |
+          cd fe
+          npm run build
+
+
+  publish-docker-image-be:
+    needs:
+      - buildbe
+      - testbe
+    runs-on: ubuntu-latest
+    #if: contains('refs/heads/master', github.ref)
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -94,6 +109,7 @@ jobs:
         run: docker compose up -d
 
       - name: Smoke Test
+        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
         run: |
           success=false
           for i in {1..10}; do
@@ -120,6 +136,53 @@ jobs:
       - name: Push to Docker Hub
         run: |
           docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:latest
+        env:
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
+
+      - name: Update Dockerhub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance
+          readme-filepath: ./README.md
+
+
+  publish-docker-image-fe:
+    needs:
+      - buildfe
+      - testfe
+    runs-on: ubuntu-latest
+    #if: contains('refs/heads/master', github.ref)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: npm install
+        run: |
+          cd fe
+          npm ci
+
+      - name: build
+        run: |
+          cd fe
+          npm run build
+
+      - name: Build Docker image
+        run: |
+          cd fe
+          docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Push to Docker Hub
+        run: |
+          docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
 

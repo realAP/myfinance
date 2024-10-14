@@ -1,0 +1,15 @@
+<p>category-creation works!</p>
+
+<div class="card flex flex-column md:flex-row gap-3">
+  <div class="input-group">
+    <p-floatLabel>
+      <input id="name" type="text" pInputText [(ngModel)]="name" (keydown.enter)="onCreateCategory()"/>
+      <label for="name">Category</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="input-group">
+    <p-button label="Submit" (click)="onCreateCategory()"/>
+  </div>
+
+</div>

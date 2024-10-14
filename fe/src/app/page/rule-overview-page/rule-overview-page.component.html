@@ -1,0 +1,48 @@
+<div class="card">
+  <p-table [value]="ruleDtos"
+           dataKey="id"
+           [tableStyle]="{ 'min-width': '50rem' }"
+           (onContextMenuSelect)="updateContextMenu($event)"
+           [contextMenu]="cm"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Ausführungsdatum</th>
+        <th>Von Space</th>
+        <th>Nach Space</th>
+        <th>Betrag</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rule>
+      <tr
+        [pContextMenuRow]="rule"
+        (touchstart)="onTouchStart($event,rule)"
+        (touchend)="onTouchEnd()"
+        [ngClass]="rule.isChange ? 'red-background' : 'green-background'">
+        <td>{{ rule.description }}</td>
+        <td>{{ rule.dateOfExecution }}</td>
+        <td>{{ rule.fromSpaceName }}</td>
+        <td>{{ rule.toSpaceName }}</td>
+        <td>
+          @if(rule.isChange) {
+          change from {{ rule.oldAmount }} to {{ rule.amount }}
+          } @else {
+          {{ rule.amount }}
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="card flex justify-content-center">
+    <p-dialog header="Edit Rule" [modal]="true" [(visible)]="isEditDialogOpen" [style]="{ width: '25rem' }">
+      @if(isEditDialogOpen) {
+      <app-rule-form
+        (formSubmit)="onEditRule($event)"
+        [preFilledRuleFormDto]="ruleFormDto"
+      />
+      }
+    </p-dialog>
+  </div>
+  <p-contextMenu #cm [model]="items"/>
+</div>
