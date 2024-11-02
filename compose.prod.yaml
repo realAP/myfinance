@@ -12,7 +12,7 @@ services:
       - internal
 
   be:
-    image: devp1337/myfinance:latest
+    image: devp1337/myfinance:be-latest
     restart: always
     environment:
       DATABASE_URL: ${DATABASE_URL}

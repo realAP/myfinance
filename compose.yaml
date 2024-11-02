@@ -12,7 +12,7 @@ services:
       - db_data_local:/var/lib/postgresql/data
 
   be:
-    image: devp1337/myfinance:latest
+    image: devp1337/myfinance:be-latest
     restart: always
     ports:
       - "8080:8080"
