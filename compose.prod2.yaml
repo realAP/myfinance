@@ -8,8 +8,6 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
-    networks:
-      - internal
 
   be:
     image: devp1337/myfinance:latest
@@ -21,8 +19,6 @@ services:
       APP_USER: ${APP_USER}
       APP_PASSWORD: ${APP_PASSWORD}
       SPRING_PROFILE: ${SPRING_PROFILE}
-    networks:
-      - internal
     depends_on:
       - db
 
@@ -34,7 +30,3 @@ services:
 
 volumes:
   db_data:
-
-networks:
-  internal:
-    driver: bridge
