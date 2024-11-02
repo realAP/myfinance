@@ -19,7 +19,7 @@ services:
       APP_USER: ${APP_USER}
       APP_PASSWORD: ${APP_PASSWORD}
       SPRING_PROFILE: ${SPRING_PROFILE}
-      SERVICE_FQDN_BE_80:
+      SERVICE_FQDN_BE_8080:
     depends_on:
       - db
 
