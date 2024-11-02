@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  testfe:
+  test-fe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +29,7 @@ jobs:
           cd fe
           echo "npm run test | currently disabled"
 
-  testbe:
+  test-be:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,22 +51,9 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  buildbe:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'corretto'
-          cache: maven
-      - name: Build
-        run: mvn package -DskipTests
-  buildfe:
+  build-fe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -83,11 +70,24 @@ jobs:
           cd fe
           npm run build
 
+  build-be:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+      - name: Build
+        run: mvn package -DskipTests
 
   publish-docker-image-be:
     needs:
-      - buildbe
-      - testbe
+      - build-be
+      - test-be
     runs-on: ubuntu-latest
     #if: contains('refs/heads/master', github.ref)
     steps:
@@ -103,7 +103,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:latest
+          docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
 
       - name: Start image
         run: docker compose up -d
@@ -135,23 +135,14 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:latest
+          docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
 
-      - name: Update Dockerhub description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ vars.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance
-          readme-filepath: ./README.md
-
-
   publish-docker-image-fe:
     needs:
-      - buildfe
-      - testfe
+      - build-fe
+      - test-fe
     runs-on: ubuntu-latest
     #if: contains('refs/heads/master', github.ref)
     steps:
@@ -186,6 +177,14 @@ jobs:
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
 
+
+  publish-dockerhub-description:
+    needs:
+      - publish-docker-image-be
+      - publish-docker-image-fe
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Update Dockerhub description
         uses: peter-evans/dockerhub-description@v4
         with:
