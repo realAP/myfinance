@@ -14,6 +14,13 @@ services:
   be:
     image: devp1337/myfinance:be-latest
     restart: always
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/example
+      DATABASE_USER: example
+      DATABASE_PASSWORD: example
+      APP_USER: test
+      APP_PASSWORD: test
+      SPRING_PROFILE: prod
     ports:
       - "8080:8080"
     depends_on:
