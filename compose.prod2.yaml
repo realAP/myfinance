@@ -19,11 +19,14 @@ services:
       APP_USER: ${APP_USER}
       APP_PASSWORD: ${APP_PASSWORD}
       SPRING_PROFILE: ${SPRING_PROFILE}
+      SERVICE_FQDN_BE_80:
     depends_on:
       - db
 
   fe:
     image: devp1337/myfinance:fe-latest
+    environment:
+      - SERVICE_FQDN_FE_80
     restart: always
     depends_on:
       - be
