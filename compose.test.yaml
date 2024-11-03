@@ -1,4 +1,14 @@
 services:
+  db:
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER} || exit 1"
+      ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   be:
     image: devp1337/myfinance:be-latest
     healthcheck:
