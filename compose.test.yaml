@@ -1,8 +1,6 @@
 services:
   be:
     image: devp1337/myfinance:be-latest
-    environment:
-      SPRING_PROFILE: test
     healthcheck:
       test: [
         "CMD-SHELL",
