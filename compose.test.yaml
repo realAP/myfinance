@@ -32,7 +32,7 @@ services:
     healthcheck:
       test: [
         "CMD-SHELL",
-        "/usr/bin/curl -u ${APP_USER}:${APP_PASSWORD} -s http://127.0.0.1:8080/actuator/health | grep '\"status\":\"UP\"' || exit 1"
+        "wget --user=${APP_USER} --password=${APP_PASSWORD} -qO- http://127.0.0.1:8080/actuator/health | grep '\"status\":\"UP\"' || exit 1"
       ]
       interval: 10s
       timeout: 20s
