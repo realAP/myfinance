@@ -1,9 +1,17 @@
 services:
   db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
     healthcheck:
       test: [
         "CMD-SHELL",
-        "pg_isready -d ${POSTGRES_DB} -U noPassword || exit 1"
+        "pg_isready -d ${DATABASE_NAME} -U ${DATABASE_USER} || exit 1"
       ]
       interval: 10s
       timeout: 5s
@@ -11,10 +19,20 @@ services:
 
   be:
     image: devp1337/myfinance:be-latest
+    restart: always
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      APP_USER: ${APP_USER}
+      APP_PASSWORD: ${APP_PASSWORD}
+      SPRING_PROFILE: ${SPRING_PROFILE}
+    depends_on:
+      - db
     healthcheck:
       test: [
         "CMD-SHELL",
-        "exit 1"
+        "curl -u ${APP_USER}:${APP_PASSWORD} -s http://127.0.0.1:80/actuator/health | grep '\"status\":\"DOWN\"' || exit 1"
       ]
       interval: 10s
       timeout: 20s
@@ -22,6 +40,9 @@ services:
 
   fe:
     image: devp1337/myfinance:fe-latest
+    restart: always
+    depends_on:
+      - be
     healthcheck:
       test: [
         "CMD-SHELL",
@@ -30,3 +51,6 @@ services:
       interval: 10s
       timeout: 20s
       retries: 3
+
+volumes:
+  db_data:
