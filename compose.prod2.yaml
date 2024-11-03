@@ -21,12 +21,28 @@ services:
       SPRING_PROFILE: ${SPRING_PROFILE}
     depends_on:
       - db
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "curl -u ${APP_USER}:${APP_PASSWORD} -s http://127.0.0.1:80/actuator/health | grep '\"status\":\"UP\"' || exit 1"
+      ]
+      interval: 5s
+      timeout: 20s
+      retries: 10
 
   fe:
     image: devp1337/myfinance:fe-latest
     restart: always
     depends_on:
       - be
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "wget -qO- http://127.0.0.1:80/"
+      ]
+      interval: 5s
+      timeout: 20s
+      retries: 10
 
 volumes:
   db_data:

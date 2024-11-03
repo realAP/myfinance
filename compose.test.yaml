@@ -1,0 +1,24 @@
+services:
+  be:
+    image: devp1337/myfinance:be-latest
+    environment:
+      SPRING_PROFILE: test
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "curl -u ${APP_USER}:${APP_PASSWORD} -s http://127.0.0.1:80/actuator/health | grep '\"status\":\"UP\"' || exit 1"
+      ]
+      interval: 10s
+      timeout: 20s
+      retries: 3
+
+  fe:
+    image: devp1337/myfinance:fe-latest
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "wget -qO- http://127.0.0.1:80/ || exit 1"
+      ]
+      interval: 10s
+      timeout: 20s
+      retries: 3
