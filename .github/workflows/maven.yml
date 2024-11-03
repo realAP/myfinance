@@ -106,6 +106,7 @@ jobs:
           docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
 
       - name: Start image
+        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
         run: docker compose up -d
 
       - name: Smoke Test
