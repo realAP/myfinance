@@ -1,4 +1,30 @@
 services:
+  backup:
+    image: devp1337/backup:1.1.0
+    restart: always
+    environment:
+      TARGET_DOMAIN: ${ENV_TARGET_DOMAIN}
+      TARGET_DOMAIN_USER: ${ENV_TARGET_DOMAIN_USER}
+      SSH_PRIVATE_KEY: ${ENV_SSH_PRIVATE_KEY}
+      RESTIC_REPOSITORY_NAME: ${ENV_RESTIC_REPOSITORY_NAME}
+      RESTIC_PASSWORD: ${ENV_RESTIC_PASSWORD}
+      PROVISION_MODE: ${ENV_PROVISION_MODE}
+      POSTGRES_USER: ${ENV_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${ENV_POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${ENV_POSTGRES_DATABASE}
+      POSTGRES_HOST: db
+      TELEGRAM_TOKEN: ${ENV_TELEGRAM_TOKEN}
+      TELEGRAM_CHAT_ID: ${ENV_TELEGRAM_CHAT_ID}
+      CRON: ${ENV_CRON}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h db > /dev/null || exit 1" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
   db:
     image: postgres:16
     restart: always
