@@ -137,11 +137,9 @@ jobs:
       - name: Push to Docker Hub
         run: |
           if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            TAG=myfinance:be-latest
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
           else
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
+            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
           fi
         env:
@@ -182,11 +180,9 @@ jobs:
       - name: Push to Docker Hub
         run: |
           if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            TAG=myfinance:be-latest
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
           else
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
+            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
           fi
         env:
