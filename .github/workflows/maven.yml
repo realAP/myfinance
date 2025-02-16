@@ -106,6 +106,7 @@ jobs:
           docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
 
       - name: Start image
+        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
         run: docker compose up -d
 
       - name: Smoke Test
@@ -135,7 +136,12 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
+          else
+            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
+            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
+          fi
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
 
@@ -173,7 +179,12 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
+          else
+            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
+            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
+          fi
         env:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
 
