@@ -65,10 +65,14 @@ jobs:
           cd fe
           npm ci
 
-      - name: build
+      - name: build prod
         run: |
           cd fe
           npm run build
+      - name: build test
+        run: |
+          cd fe
+          npm run build-test
 
   build-be:
     runs-on: ubuntu-latest
@@ -161,10 +165,14 @@ jobs:
           cd fe
           npm ci
 
-      - name: build
+      - name: build for stage
         run: |
           cd fe
-          npm run build
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+            npm run build
+          else
+            npm run build-test
+          fi
 
       - name: Build Docker image
         run: |

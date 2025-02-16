@@ -33,7 +33,7 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-      - myfinance_db_data:/var/lib/postgresql/data
+      - myfinance_db_data_test:/var/lib/postgresql/data
     healthcheck:
       test: [
         "CMD-SHELL",
@@ -77,7 +77,3 @@ services:
       interval: 10s
       timeout: 20s
       retries: 3
-
-volumes:
-  db_data:
-    external: true
