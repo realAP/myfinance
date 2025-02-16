@@ -136,7 +136,7 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          if [ "${GITHUB_REF#refs/heads/}" = "main" ]; then
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
           else
             docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
@@ -179,7 +179,7 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          if [ "${GITHUB_REF#refs/heads/}" = "main" ]; then
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
             docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
           else
             docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
