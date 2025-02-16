@@ -77,7 +77,3 @@ services:
       interval: 10s
       timeout: 20s
       retries: 3
-
-volumes:
-  myfinance_db_data_prod:
-    external: true
