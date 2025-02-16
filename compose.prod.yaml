@@ -32,8 +32,6 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-    volumes:
-      - myfinance_db_data_prod:/var/lib/postgresql/data
     healthcheck:
       test: [
         "CMD-SHELL",
