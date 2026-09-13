@@ -1,5 +1,8 @@
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-  - lmdb
-  - msgpackr-extract
+# esbuild braucht sein Installationsskript, sonst fehlt die Binaerdatei und
+# Angular baut nicht. Die uebrigen gehoeren zu Angulars Build-Cache und
+# Dateibeobachtung.
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
