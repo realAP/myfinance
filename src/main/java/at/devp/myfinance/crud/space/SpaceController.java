@@ -22,7 +22,7 @@ public class SpaceController {
     @PostMapping()
     public ResponseEntity<?> createSpace(@RequestBody final SpaceCreationDto spaceCreationDto) {
         spaceCreationService.createSpace(spaceCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping()

@@ -27,7 +27,7 @@ public class TransferController {
     @PostMapping
     public ResponseEntity<?> createTransfer(@RequestBody TransferCreationDto transferCreationDto) {
         transferCreationService.createTransfer(transferCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -38,7 +38,7 @@ public class TransferController {
     @PostMapping("/{id}")
     public ResponseEntity<?> editTransfer(@PathVariable Long id, @RequestBody TransferCreationDto transferEditDto) {
         transferEditService.editTransfer(id, transferEditDto);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
