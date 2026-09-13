@@ -16,18 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: npm install
+          node-version: '24'
+          cache: 'pnpm'
+          cache-dependency-path: fe/pnpm-lock.yaml
+      - name: install
         run: |
           cd fe
-          npm ci
+          pnpm install --frozen-lockfile
 
       - name: Test frontend
         run: |
           cd fe
-          echo "npm run test | currently disabled"
+          pnpm test
 
   test-be:
     runs-on: ubuntu-latest
@@ -57,22 +62,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: npm install
+          node-version: '24'
+          cache: 'pnpm'
+          cache-dependency-path: fe/pnpm-lock.yaml
+      - name: install
         run: |
           cd fe
-          npm ci
+          pnpm install --frozen-lockfile
 
       - name: build prod
         run: |
           cd fe
-          npm run build
+          pnpm run build
       - name: build test
         run: |
           cd fe
-          npm run build-test
+          pnpm run build-test
 
   build-be:
     runs-on: ubuntu-latest
@@ -157,21 +167,26 @@ jobs:
     #if: contains('refs/heads/master', github.ref)
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: npm install
+          node-version: '24'
+          cache: 'pnpm'
+          cache-dependency-path: fe/pnpm-lock.yaml
+      - name: install
         run: |
           cd fe
-          npm ci
+          pnpm install --frozen-lockfile
 
       - name: build for stage
         run: |
           cd fe
           if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            npm run build
+            pnpm run build
           else
-            npm run build-test
+            pnpm run build-test
           fi
 
       - name: Build Docker image
