@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, viewChild } from '@angular/core';
 import {TransferCreationDto, TransferDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
@@ -24,6 +24,9 @@ import {TransferFormComponent, TransferFormDto} from "../../component/forms/tran
   styleUrl: './transfer-overview-page.component.scss'
 })
 export class TransferOverviewPageComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   transferDtos: TransferDto[] = [];
   items!: MenuItem[];
@@ -32,12 +35,7 @@ export class TransferOverviewPageComponent implements OnInit {
   transferFormDto?: TransferFormDto;
   longPressTimeout: any;
 
-  @ViewChild('cm') cm!: ContextMenu;
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
-  }
+  readonly cm = viewChild.required<ContextMenu>('cm');
 
   ngOnInit(): void {
     this.loadTransferDtos();
@@ -72,7 +70,7 @@ export class TransferOverviewPageComponent implements OnInit {
   onTouchStart(event: TouchEvent, transferRow: TransferDto) {
     this.updateContextMenu({data: transferRow} as TableContextMenuSelectEvent)
     this.longPressTimeout = setTimeout(() => {
-      this.cm.show(event);
+      this.cm().show(event);
     }, 500);
   }
 

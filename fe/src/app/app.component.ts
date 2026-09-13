@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from "./component/navbar/navbar.component";
 import {ToastModule} from "primeng/toast";
@@ -11,9 +11,9 @@ import {ToastModule} from "primeng/toast";
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'fe';
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  title = 'fe';
 
   isLoginPage(): boolean {
     return this.router.url === '/login';

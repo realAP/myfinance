@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {Button} from "primeng/button";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
@@ -20,12 +20,11 @@ import {BackendService} from "../../../service/backend/backend.service";
   styleUrl: './space-form.component.scss'
 })
 export class SpaceFormComponent {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   name: string = "";
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService) {
-  }
 
   onCreateSpace() {
     this.backendService.createSpace(this.name).subscribe();

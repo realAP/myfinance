@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {Button} from "primeng/button";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
@@ -20,13 +20,11 @@ import {BackendService} from "../../service/backend/backend.service";
   styleUrl: './category-creation.component.scss'
 })
 export class CategoryCreationComponent {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   name: string = "";
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
-  }
 
   onCreateCategory() {
     this.backendService.createCategory(this.name).subscribe();

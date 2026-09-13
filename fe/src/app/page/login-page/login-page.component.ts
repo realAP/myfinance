@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {AuthService} from "../../service/authentication/auth.service";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -14,11 +14,11 @@ import {Router} from "@angular/router";
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   username: string = '';
   password: string = '';
-
-  constructor(private authService: AuthService, private router: Router) {
-  }
 
   onSubmit() {
     this.authService.login(this.username, this.password);

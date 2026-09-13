@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, viewChild } from '@angular/core';
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
@@ -24,6 +24,9 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spen
   styleUrl: './spending-overview-page.component.scss'
 })
 export class SpendingOverviewPageComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   diffBetweenInAndOut: number = 0;
   spendingSum: number = 0;
@@ -35,12 +38,7 @@ export class SpendingOverviewPageComponent implements OnInit {
   spendingFormDto?: SpendingFormDto;
   longPressTimeout: any;
 
-  @ViewChild('cm') cm!: ContextMenu;
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
-  }
+  readonly cm = viewChild.required<ContextMenu>('cm');
 
   ngOnInit(): void {
     this.loadData();
@@ -68,7 +66,7 @@ export class SpendingOverviewPageComponent implements OnInit {
   onTouchStart(event: TouchEvent, spendingRow: SpendingRowDto) {
     this.updateContextMenu({data: spendingRow} as TableContextMenuSelectEvent)
     this.longPressTimeout = setTimeout(() => {
-      this.cm.show(event);
+      this.cm().show(event);
     }, 500);
   }
 

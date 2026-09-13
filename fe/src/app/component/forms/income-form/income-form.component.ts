@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -36,20 +36,20 @@ export interface IncomeFormDto {
   styleUrl: './income-form.component.scss'
 })
 export class IncomeFormComponent implements OnInit {
+  private backendService = inject(BackendService);
+
   description: string = "";
   amount: number | undefined;
 
 
-  @Input() preFilledIncomeFormDto?: IncomeFormDto;
-  @Output() formSubmit = new EventEmitter<IncomeCreationDto>;
-
-  constructor(private backendService: BackendService) {
-  }
+  readonly preFilledIncomeFormDto = input<IncomeFormDto>();
+  readonly formSubmit = output<IncomeCreationDto>();
 
   ngOnInit(): void {
-    if (this.preFilledIncomeFormDto?.isPreFilled) {
-      this.description = this.preFilledIncomeFormDto.incomeCreationDto.description;
-      this.amount = this.preFilledIncomeFormDto.incomeCreationDto.amount;
+    const preFilledIncomeFormDto = this.preFilledIncomeFormDto();
+    if (preFilledIncomeFormDto?.isPreFilled) {
+      this.description = preFilledIncomeFormDto.incomeCreationDto.description;
+      this.amount = preFilledIncomeFormDto.incomeCreationDto.amount;
     }
   }
 

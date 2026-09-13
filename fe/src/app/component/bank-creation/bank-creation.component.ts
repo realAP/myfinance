@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -27,13 +27,11 @@ import {BackendService} from "../../service/backend/backend.service";
   styleUrl: './bank-creation.component.scss'
 })
 export class BankCreationComponent {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   name: string = "";
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
-  }
 
   onCreateBank() {
     this.backendService.createBank(this.name).subscribe(

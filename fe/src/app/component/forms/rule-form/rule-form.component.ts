@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
 import {Button} from "primeng/button";
 import {SelectModule} from "primeng/select";
 import {FloatLabelModule} from "primeng/floatlabel";
@@ -36,26 +36,26 @@ export interface RuleFormDto {
   styleUrl: './rule-form.component.scss'
 })
 export class RuleFormComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
   date: any;
   spaces: SpaceDto[] = [];
   selectedFromSpace: SpaceDto = {} as SpaceDto;
   selectedTargetSpace: SpaceDto = {} as SpaceDto;
   name: string = "";
 
-  @Input() preFilledRuleFormDto?: RuleFormDto;
-  @Output() formSubmit = new EventEmitter<RuleCreationDto>
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService) {
-  }
+  readonly preFilledRuleFormDto = input<RuleFormDto>();
+  readonly formSubmit = output<RuleCreationDto>();
 
   ngOnInit(): void {
     this.backendService.getSpaces().subscribe(spaceDtos => {
       this.spaces = spaceDtos;
 
-      if (this.preFilledRuleFormDto?.isPreFilled) {
+      const preFilledRuleFormDto = this.preFilledRuleFormDto();
+      if (preFilledRuleFormDto?.isPreFilled) {
 
-        const preFilledData = this.preFilledRuleFormDto?.ruleCreationDto;
+        const preFilledData = preFilledRuleFormDto?.ruleCreationDto;
 
         this.selectedFromSpace = this.spaces.find(space => space.id === preFilledData?.fromSpaceId)!;
         this.selectedTargetSpace = this.spaces.find(space => space.id === preFilledData?.toSpaceId)!;

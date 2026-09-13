@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -30,24 +30,24 @@ export interface TransferFormDto {
   styleUrl: './transfer-form.component.scss'
 })
 export class TransferFormComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
   date: any;
   banks: BankDto[] = [];
   selectedFromBank: BankDto = {} as BankDto;
   selectedTargetBank: BankDto = {} as BankDto;
   name: string = "";
 
-  @Input() preFilledTransferFormDto?: TransferFormDto;
-  @Output() formSubmit = new EventEmitter<TransferCreationDto>
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService) {
-  }
+  readonly preFilledTransferFormDto = input<TransferFormDto>();
+  readonly formSubmit = output<TransferCreationDto>();
 
   ngOnInit(): void {
     this.backendService.getBanks().subscribe(bankDtos => {
       this.banks = bankDtos;
-      if (this.preFilledTransferFormDto?.isPreFilled) {
-        const preFilledData = this.preFilledTransferFormDto?.transferCreationDto;
+      const preFilledTransferFormDto = this.preFilledTransferFormDto();
+      if (preFilledTransferFormDto?.isPreFilled) {
+        const preFilledData = preFilledTransferFormDto?.transferCreationDto;
         this.selectedFromBank = this.banks.find(bank => bank.id === preFilledData.fromBankId)!;
         this.selectedTargetBank = this.banks.find(bank => bank.id === preFilledData.toBankId)!;
         this.date = new Date(preFilledData.dateOfExecution);

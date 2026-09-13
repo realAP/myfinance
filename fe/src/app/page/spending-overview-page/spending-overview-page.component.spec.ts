@@ -1,7 +1,9 @@
+import {TestBed} from '@angular/core/testing';
+import {of} from "rxjs";
+import {MessageService} from "primeng/api";
+
 import {SpendingOverviewPageComponent} from "./spending-overview-page.component";
 import {BackendService} from "../../service/backend/backend.service";
-import {MessageService} from "primeng/api";
-import {of} from "rxjs";
 import {SpendingCategoryBlockDto} from "../../model/backend";
 
 describe('SpendingOverviewPageComponent', () => {
@@ -18,10 +20,13 @@ describe('SpendingOverviewPageComponent', () => {
       getSpendingSum: vi.fn().mockReturnValue(of(100)),
       getDiffBetweenInAndOut: vi.fn().mockReturnValue(of(20)),
     };
-    underTest = new SpendingOverviewPageComponent(
-      backendService as unknown as BackendService,
-      {add: vi.fn()} as unknown as MessageService
-    );
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: BackendService, useValue: backendService},
+        {provide: MessageService, useValue: {add: vi.fn()}},
+      ]
+    });
+    underTest = TestBed.runInInjectionContext(() => new SpendingOverviewPageComponent());
   })
 
   it('onInit should take data from backend and store it into spendingCategoryBlockDtos', () => {

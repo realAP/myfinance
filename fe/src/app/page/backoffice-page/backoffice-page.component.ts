@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {CardModule} from "primeng/card";
 import {BankCreationComponent} from "../../component/bank-creation/bank-creation.component";
 import {CategoryCreationComponent} from "../../component/category-creation/category-creation.component";
@@ -30,11 +30,9 @@ import {IncomeFormComponent} from "../../component/forms/income-form/income-form
   styleUrl: './backoffice-page.component.scss'
 })
 export class BackofficePageComponent {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
 
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService) {
-  }
 
   onTransferCreate(transferCreationDto: TransferCreationDto) {
     this.backendService.createTransfer(transferCreationDto).subscribe();

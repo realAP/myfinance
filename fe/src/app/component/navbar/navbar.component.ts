@@ -24,10 +24,9 @@ export interface NavItem {
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  items: NavItem[] = [];
+  private authService = inject(AuthService);
 
-  constructor(private authService: AuthService) {
-  }
+  items: NavItem[] = [];
 
   ngOnInit() {
     this.items = [

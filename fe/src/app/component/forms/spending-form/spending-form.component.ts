@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, inject, output } from '@angular/core';
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {FormsModule} from "@angular/forms";
@@ -26,6 +26,8 @@ export interface SpendingFormDto {
   styleUrl: './spending-form.component.scss'
 })
 export class SpendingFormComponent implements OnInit {
+  private backendService = inject(BackendService);
+
   name: string = "";
   amount: number | undefined;
   categories: CategoryDto[] = [];
@@ -36,10 +38,7 @@ export class SpendingFormComponent implements OnInit {
   selectedRule: RuleDto | undefined;
 
   @Input() preFilledSpendingFormDto?: SpendingFormDto;
-  @Output() formSubmit = new EventEmitter<SpendingCreationDto>;
-
-  constructor(private backendService: BackendService) {
-  }
+  readonly formSubmit = output<SpendingCreationDto>();
 
   ngOnInit(): void {
 

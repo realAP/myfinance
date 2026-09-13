@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private router = inject(Router);
+
 
   private storageKey = 'authCredentials';  // Define a storage key
   private credentials: string | null = null;
 
-  constructor(private router: Router) {
+  constructor() {
     const storedCredentials = localStorage.getItem(this.storageKey);
     if (storedCredentials) {
       this.credentials = storedCredentials;

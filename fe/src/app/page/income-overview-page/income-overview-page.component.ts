@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, viewChild } from '@angular/core';
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {BackendService} from "../../service/backend/backend.service";
 import {MenuItem, MessageService} from "primeng/api";
@@ -21,6 +21,9 @@ import {DialogModule} from "primeng/dialog";
   styleUrl: './income-overview-page.component.scss'
 })
 export class IncomeOverviewPageComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private messageService = inject(MessageService);
+
 
   incomeDtos: IncomeDto[] = [];
   items!: MenuItem[];
@@ -28,14 +31,9 @@ export class IncomeOverviewPageComponent implements OnInit {
   isEditDialogOpen: boolean = false;
   incomeFormDto?: IncomeFormDto;
 
-  @ViewChild('cm') cm!: ContextMenu;
+  readonly cm = viewChild.required<ContextMenu>('cm');
   longPressTimeout: any;
   incomeSum?: number;
-
-  constructor(private backendService: BackendService,
-              private messageService: MessageService
-  ) {
-  }
 
   ngOnInit(): void {
     this.loadData();
@@ -66,7 +64,7 @@ export class IncomeOverviewPageComponent implements OnInit {
   onTouchStart(event: TouchEvent, incomeDto: IncomeDto) {
     this.updateContextMenu({data: incomeDto} as TableContextMenuSelectEvent)
     this.longPressTimeout = setTimeout(() => {
-      this.cm.show(event);
+      this.cm().show(event);
     }, 500);
   }
 

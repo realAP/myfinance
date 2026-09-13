@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {
@@ -24,13 +24,11 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class BackendService {
+  private httpClient = inject(HttpClient);
+
 
   private BASE_API = "/fe"
   private TARGET = environment.apiUrl;
-
-
-  constructor(private httpClient: HttpClient) {
-  }
 
   //
   // TODO: add error handling
