@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpaceFormComponent } from './space-form.component';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {provideRouter} from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 describe('SpaceCreationComponent', () => {
   let component: SpaceFormComponent;
@@ -8,7 +12,8 @@ describe('SpaceCreationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SpaceFormComponent]
+      imports: [SpaceFormComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 

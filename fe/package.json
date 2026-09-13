@@ -45,6 +45,9 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/dist/"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/*.spec.ts"
     ]
   }
 }

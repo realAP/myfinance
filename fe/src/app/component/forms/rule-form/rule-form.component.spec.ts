@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RuleFormComponent } from './rule-form.component';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {provideRouter} from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 describe('RuleCreationComponent', () => {
   let component: RuleFormComponent;
@@ -8,7 +12,8 @@ describe('RuleCreationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RuleFormComponent]
+      imports: [RuleFormComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
