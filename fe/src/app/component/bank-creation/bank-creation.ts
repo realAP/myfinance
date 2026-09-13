@@ -26,7 +26,7 @@ import {BackendService} from "../../service/backend/backend";
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './bank-creation.scss'
 })
-export class BankCreationComponent {
+export class BankCreation {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

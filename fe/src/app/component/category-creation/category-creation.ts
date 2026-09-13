@@ -19,7 +19,7 @@ import {BackendService} from "../../service/backend/backend";
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-creation.scss'
 })
-export class CategoryCreationComponent {
+export class CategoryCreation {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

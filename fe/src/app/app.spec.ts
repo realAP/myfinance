@@ -3,20 +3,20 @@ import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 
-import {AppComponent} from './app';
+import {App} from './app';
 import {MessageService} from 'primeng/api';
 
-describe('AppComponent', () => {
-  let fixture: ComponentFixture<AppComponent>;
-  let underTest: AppComponent;
+describe('App', () => {
+  let fixture: ComponentFixture<App>;
+  let underTest: App;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [App],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(App);
     underTest = fixture.componentInstance;
   });
 

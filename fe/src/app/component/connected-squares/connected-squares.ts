@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './connected-squares.html',
   styleUrl: './connected-squares.scss'
 })
-export class ConnectedSquaresComponent {
+export class ConnectedSquares {
 
 }

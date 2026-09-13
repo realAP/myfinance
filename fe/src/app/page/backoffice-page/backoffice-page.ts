@@ -1,35 +1,35 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import {CardModule} from "primeng/card";
-import {BankCreationComponent} from "../../component/bank-creation/bank-creation";
-import {CategoryCreationComponent} from "../../component/category-creation/category-creation";
+import {BankCreation} from "../../component/bank-creation/bank-creation";
+import {CategoryCreation} from "../../component/category-creation/category-creation";
 
 import {MessageService} from "primeng/api";
 import {IncomeCreationDto, RuleCreationDto, SpendingCreationDto, TransferCreationDto} from "../../model/backend";
 import {BackendService} from "../../service/backend/backend";
-import {RuleFormComponent} from "../../component/forms/rule-form/rule-form";
-import {TransferFormComponent} from "../../component/forms/transfer-form/transfer-form";
-import {SpaceFormComponent} from "../../component/forms/space-form/space-form";
-import {SpendingFormComponent} from "../../component/forms/spending-form/spending-form";
-import {IncomeFormComponent} from "../../component/forms/income-form/income-form";
+import {RuleForm} from "../../component/forms/rule-form/rule-form";
+import {TransferForm} from "../../component/forms/transfer-form/transfer-form";
+import {SpaceForm} from "../../component/forms/space-form/space-form";
+import {SpendingForm} from "../../component/forms/spending-form/spending-form";
+import {IncomeForm} from "../../component/forms/income-form/income-form";
 
 @Component({
   selector: 'app-backoffice-page',
   standalone: true,
   imports: [
-    BankCreationComponent,
-    CategoryCreationComponent,
-    RuleFormComponent,
-    TransferFormComponent,
-    SpaceFormComponent,
-    SpendingFormComponent,
+    BankCreation,
+    CategoryCreation,
+    RuleForm,
+    TransferForm,
+    SpaceForm,
+    SpendingForm,
     CardModule,
-    IncomeFormComponent
+    IncomeForm
   ],
   templateUrl: './backoffice-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './backoffice-page.scss'
 })
-export class BackofficePageComponent {
+export class BackofficePage {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

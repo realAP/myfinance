@@ -19,7 +19,7 @@ import {BackendService} from "../../../service/backend/backend";
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './space-form.scss'
 })
-export class SpaceFormComponent {
+export class SpaceForm {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

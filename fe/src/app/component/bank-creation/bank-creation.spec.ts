@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BankCreationComponent } from './bank-creation';
+import { BankCreation } from './bank-creation';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
-describe('BankCreationComponent', () => {
-  let underTest: BankCreationComponent;
-  let fixture: ComponentFixture<BankCreationComponent>;
+describe('BankCreation', () => {
+  let underTest: BankCreation;
+  let fixture: ComponentFixture<BankCreation>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BankCreationComponent],
+      imports: [BankCreation],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BankCreationComponent);
+    fixture = TestBed.createComponent(BankCreation);
     underTest = fixture.componentInstance;
     fixture.detectChanges();
   });

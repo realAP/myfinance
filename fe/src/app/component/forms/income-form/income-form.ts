@@ -35,7 +35,7 @@ export interface IncomeFormDto {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './income-form.scss'
 })
-export class IncomeFormComponent implements OnInit {
+export class IncomeForm implements OnInit {
   private backendService = inject(BackendService);
 
   description: string = "";

@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpaceFormComponent } from './space-form';
+import { SpaceForm } from './space-form';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('SpaceCreationComponent', () => {
-  let underTest: SpaceFormComponent;
-  let fixture: ComponentFixture<SpaceFormComponent>;
+  let underTest: SpaceForm;
+  let fixture: ComponentFixture<SpaceForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SpaceFormComponent],
+      imports: [SpaceForm],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SpaceFormComponent);
+    fixture = TestBed.createComponent(SpaceForm);
     underTest = fixture.componentInstance;
     fixture.detectChanges();
   });

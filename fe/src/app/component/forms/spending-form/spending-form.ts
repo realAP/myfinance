@@ -25,7 +25,7 @@ export interface SpendingFormDto {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spending-form.scss'
 })
-export class SpendingFormComponent implements OnInit {
+export class SpendingForm implements OnInit {
   private backendService = inject(BackendService);
 
   name: string = "";

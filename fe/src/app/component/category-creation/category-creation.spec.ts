@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryCreationComponent } from './category-creation';
+import { CategoryCreation } from './category-creation';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
-describe('CategoryCreationComponent', () => {
-  let underTest: CategoryCreationComponent;
-  let fixture: ComponentFixture<CategoryCreationComponent>;
+describe('CategoryCreation', () => {
+  let underTest: CategoryCreation;
+  let fixture: ComponentFixture<CategoryCreation>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryCreationComponent],
+      imports: [CategoryCreation],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CategoryCreationComponent);
+    fixture = TestBed.createComponent(CategoryCreation);
     underTest = fixture.componentInstance;
     fixture.detectChanges();
   });

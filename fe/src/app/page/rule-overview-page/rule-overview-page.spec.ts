@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RuleOverviewPageComponent } from './rule-overview-page';
+import { RuleOverviewPage } from './rule-overview-page';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
-describe('RuleOverviewPageComponent', () => {
-  let underTest: RuleOverviewPageComponent;
-  let fixture: ComponentFixture<RuleOverviewPageComponent>;
+describe('RuleOverviewPage', () => {
+  let underTest: RuleOverviewPage;
+  let fixture: ComponentFixture<RuleOverviewPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RuleOverviewPageComponent],
+      imports: [RuleOverviewPage],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RuleOverviewPageComponent);
+    fixture = TestBed.createComponent(RuleOverviewPage);
     underTest = fixture.componentInstance;
     fixture.detectChanges();
   });

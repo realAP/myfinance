@@ -7,7 +7,7 @@ import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
 import {BackendService} from "../../service/backend/backend";
 
-import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spending-form/spending-form";
+import {SpendingForm, SpendingFormDto} from "../../component/forms/spending-form/spending-form";
 
 @Component({
   selector: 'app-spending-overview-page',
@@ -16,14 +16,14 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spen
     TableModule,
     ContextMenuModule,
     DialogModule,
-    SpendingFormComponent,
+    SpendingForm,
     NgClass
   ],
   templateUrl: './spending-overview-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spending-overview-page.scss'
 })
-export class SpendingOverviewPageComponent implements OnInit {
+export class SpendingOverviewPage implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

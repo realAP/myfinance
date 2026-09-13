@@ -35,7 +35,7 @@ export interface RuleFormDto {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './rule-form.scss'
 })
-export class RuleFormComponent implements OnInit {
+export class RuleForm implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

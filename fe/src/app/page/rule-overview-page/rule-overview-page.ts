@@ -6,7 +6,7 @@ import {NgClass} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {BackendService} from "../../service/backend/backend";
-import {RuleFormComponent} from "../../component/forms/rule-form/rule-form";
+import {RuleForm} from "../../component/forms/rule-form/rule-form";
 
 @Component({
   selector: 'app-rule-overview-page',
@@ -16,13 +16,13 @@ import {RuleFormComponent} from "../../component/forms/rule-form/rule-form";
     NgClass,
     DialogModule,
     ContextMenuModule,
-    RuleFormComponent
+    RuleForm
   ],
   templateUrl: './rule-overview-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './rule-overview-page.scss'
 })
-export class RuleOverviewPageComponent implements OnInit {
+export class RuleOverviewPage implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

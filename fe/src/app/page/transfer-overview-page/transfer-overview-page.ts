@@ -7,7 +7,7 @@ import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {DialogModule} from "primeng/dialog";
 
 import {BackendService} from "../../service/backend/backend";
-import {TransferFormComponent, TransferFormDto} from "../../component/forms/transfer-form/transfer-form";
+import {TransferForm, TransferFormDto} from "../../component/forms/transfer-form/transfer-form";
 
 @Component({
   selector: 'app-transfer-overview-page',
@@ -17,13 +17,13 @@ import {TransferFormComponent, TransferFormDto} from "../../component/forms/tran
     NgClass,
     ContextMenuModule,
     DialogModule,
-    TransferFormComponent,
+    TransferForm,
     ],
   templateUrl: './transfer-overview-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transfer-overview-page.scss'
 })
-export class TransferOverviewPageComponent implements OnInit {
+export class TransferOverviewPage implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

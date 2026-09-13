@@ -29,7 +29,7 @@ export interface TransferFormDto {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transfer-form.scss'
 })
-export class TransferFormComponent implements OnInit {
+export class TransferForm implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

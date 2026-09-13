@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TransferOverviewPageComponent } from './transfer-overview-page';
+import { TransferOverviewPage } from './transfer-overview-page';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
-describe('TransferOverviewPageComponent', () => {
-  let underTest: TransferOverviewPageComponent;
-  let fixture: ComponentFixture<TransferOverviewPageComponent>;
+describe('TransferOverviewPage', () => {
+  let underTest: TransferOverviewPage;
+  let fixture: ComponentFixture<TransferOverviewPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransferOverviewPageComponent],
+      imports: [TransferOverviewPage],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), MessageService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TransferOverviewPageComponent);
+    fixture = TestBed.createComponent(TransferOverviewPage);
     underTest = fixture.componentInstance;
     fixture.detectChanges();
   });

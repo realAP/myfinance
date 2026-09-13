@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login-page.scss'
 })
-export class LoginPageComponent {
+export class LoginPage {
   private authService = inject(AuthService);
   private router = inject(Router);
 

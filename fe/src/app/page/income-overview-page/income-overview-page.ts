@@ -4,7 +4,7 @@ import {BackendService} from "../../service/backend/backend";
 import {MenuItem, MessageService} from "primeng/api";
 import {IncomeCreationDto, IncomeDto} from "../../model/backend";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
-import {IncomeFormComponent, IncomeFormDto} from "../../component/forms/income-form/income-form";
+import {IncomeForm, IncomeFormDto} from "../../component/forms/income-form/income-form";
 import {DialogModule} from "primeng/dialog";
 
 @Component({
@@ -13,14 +13,14 @@ import {DialogModule} from "primeng/dialog";
   imports: [
     TableModule,
     DialogModule,
-    IncomeFormComponent,
+    IncomeForm,
     ContextMenuModule
   ],
   templateUrl: './income-overview-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './income-overview-page.scss'
 })
-export class IncomeOverviewPageComponent implements OnInit {
+export class IncomeOverviewPage implements OnInit {
   private backendService = inject(BackendService);
   private messageService = inject(MessageService);
 

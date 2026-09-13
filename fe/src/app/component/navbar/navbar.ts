@@ -23,7 +23,7 @@ export interface NavItem {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './navbar.scss'
 })
-export class NavbarComponent implements OnInit {
+export class Navbar implements OnInit {
   private authService = inject(AuthService);
 
   items: NavItem[] = [];
