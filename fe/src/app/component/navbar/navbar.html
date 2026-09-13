@@ -1,0 +1,22 @@
+<div class="card">
+  <p-tabs [value]="0">
+    <p-tablist>
+      @for (item of items; track item.label; let i = $index) {
+        <p-tab [value]="i">
+          @if (item.route) {
+            <a [routerLink]="item.route" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2"> {{ item.label }} </span>
+            </a>
+          }
+          @if (item.command) {
+            <a class="p-menuitem-link" (click)="item.command!()">
+              <span [class]="item.icon"></span>
+              <span class="ml-2"> {{ item.label }} </span>
+            </a>
+          }
+        </p-tab>
+      }
+    </p-tablist>
+  </p-tabs>
+</div>

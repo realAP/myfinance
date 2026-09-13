@@ -19,9 +19,17 @@ compose.prod.yaml / compose.test.yaml
 |---|---|
 | Java | 25 (Standard), daneben liegen 21 und 17 unter `/usr/lib/jvm/` |
 | Maven | 3.9.16 |
-| Node | 22 |
+| Node | 24 (Angular 22 verlangt `^22.22.3 \|\| ^24.15 \|\| >=26`) |
+| Paketmanager | pnpm 11 |
 | Spring Boot | 4.1.1 |
-| Angular | 18.1 |
+| Angular | 22.1 |
+| PrimeNG | 22.1 |
+
+Node 24 liegt unter `/opt/node24/bin` und steht ueber `/etc/sandbox-persistent.sh`
+im PATH. Es wurde als npm-Paket `node-linux-x64` bezogen, weil `nodejs.org`,
+Adoptium und sdkman von der Netzwerk-Policy gesperrt sind und `apt` nur 22.22.1
+anbietet - zwei Patch-Versionen zu wenig fuer Angular 22. Die Installation lebt
+nur in dieser Sandbox.
 
 Eine andere JDK-Version waehlt man ueber `JAVA_HOME`, ohne etwas umzustellen:
 
@@ -37,8 +45,9 @@ sdkman ist nicht verfuegbar, die Domains sind gesperrt.
 ```bash
 mvn test                    # Backend-Tests (aktuell 41, davon 3 @Disabled)
 mvn package -DskipTests     # Jar bauen
-cd fe && npm ci && npm test  # Frontend (Jest)
-cd fe && npm run build      # Frontend-Build
+cd fe && pnpm install       # Frontend-Abhaengigkeiten
+cd fe && pnpm test          # Frontend-Tests (Vitest ueber ng test)
+cd fe && pnpm run build     # Frontend-Build
 ```
 
 Der Backend-Build ist gruen, wenn 41 Tests laufen, 0 fehlschlagen und 3
@@ -85,6 +94,51 @@ Weitere Punkte:
 * Testdatenbank ist H2, Produktion PostgreSQL. Beide behandeln unquotierte
   Bezeichner unterschiedlich: H2 bildet auf Grossschreibung ab, PostgreSQL auf
   Kleinschreibung. Deshalb stehen in `data_test.sql` keine Anfuehrungszeichen.
+
+## Konventionen im Frontend
+
+Das Projekt folgt der suffixlosen Schreibweise des Angular-v20-Stilhandbuchs:
+Dateien heissen `rule-overview-page.ts`, nicht `rule-overview-page.component.ts`,
+und Komponentenklassen heissen `RuleOverviewPage`, nicht `RuleOverviewPageComponent`.
+Der Ordner sagt, worum es sich handelt.
+
+Serviceklassen behalten ihr Suffix (`AuthService`, `BackendService`) - so sieht es
+das Stilhandbuch vor.
+
+Beide Schreibweisen innerhalb eines Ordners zu mischen ist ausdruecklich die
+schlechteste Variante. Entweder alles oder nichts.
+
+Tests laufen ueber Vitest, eingebunden ueber Angulars eigenen `unit-test`-Builder
+(`ng test`). `src/setup-tests.ts` enthaelt nur, was jsdom fehlt: Attrappen fuer
+`matchMedia` und `ResizeObserver`, die PrimeNG braucht.
+
+Komponentenbibliothek ist PrimeNG. In v2.2 Titan wird sie durch Google Material
+UI ersetzt.
+
+## Tests
+
+In beiden Teilen des Projekts heisst das Pruefobjekt in Tests `underTest`:
+
+```java
+private IncomeCreationService underTest;
+```
+
+```ts
+let underTest: RuleOverviewPageComponent;
+let fixture: ComponentFixture<RuleOverviewPageComponent>;
+```
+
+Gruen heisst derzeit:
+
+| | |
+|---|---|
+| Backend | 41 Tests, 3 uebersprungen |
+| Frontend | 19 Testdateien, 20 Tests |
+
+Die Frontend-Tests sind bewusst flach - die meisten pruefen nur, dass sich eine
+Komponente erzeugen laesst. Das genuegt als Netz fuer Versionsspruenge, weil
+genau daran Dependency Injection, Template-Kompilierung und Provider-APIs
+haengen. Inhaltlich sinnvolle Tests entstehen mit dem Neubau in Titan.
 
 ## Datenbank
 

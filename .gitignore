@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### pnpm ###
+.pnpm-store/
+node_modules/
