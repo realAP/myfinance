@@ -25,7 +25,7 @@ public class BankController {
         System.out.println("Authenticated user: " + authentication.getName());
         System.out.println("Authorities: " + authentication.getAuthorities());
         bankCreationService.createBank(bankCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping()

@@ -22,7 +22,7 @@ public class SpendingController {
     @PostMapping
     public ResponseEntity<?> createSpending(@RequestBody SpendingCreationDto spendingCreationDto) {
         spendingCreatorService.createSpending(spendingCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")

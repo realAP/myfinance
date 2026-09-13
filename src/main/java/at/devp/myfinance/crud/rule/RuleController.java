@@ -27,13 +27,13 @@ public class RuleController {
     @PostMapping
     public ResponseEntity<?> createRule(@RequestBody RuleCreationDto ruleCreationDto) {
         ruleCreationService.createRule(ruleCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<?> editRule(@PathVariable Long id, @RequestBody RuleCreationDto ruleCreationDto) {
         ruleEditService.editRule(id, ruleCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

@@ -25,13 +25,13 @@ public class IncomeController {
     @PostMapping
     public ResponseEntity<?> createIncome(@RequestBody IncomeCreationDto incomeCreationDto) {
         incomeCreationService.createIncome(incomeCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<?> editIncome(@PathVariable Long id, @RequestBody IncomeCreationDto incomeCreationDto) {
         incomeEditService.editIncome(id, incomeCreationDto);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}/delete")
