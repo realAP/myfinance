@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('RuleOverviewPageComponent', () => {
-  let component: RuleOverviewPageComponent;
+  let underTest: RuleOverviewPageComponent;
   let fixture: ComponentFixture<RuleOverviewPageComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('RuleOverviewPageComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(RuleOverviewPageComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

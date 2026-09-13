@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('TransferCreationComponent', () => {
-  let component: TransferFormComponent;
+  let underTest: TransferFormComponent;
   let fixture: ComponentFixture<TransferFormComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('TransferCreationComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(TransferFormComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

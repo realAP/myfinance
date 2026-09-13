@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('IncomeOverviewPageComponent', () => {
-  let component: IncomeOverviewPageComponent;
+  let underTest: IncomeOverviewPageComponent;
   let fixture: ComponentFixture<IncomeOverviewPageComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('IncomeOverviewPageComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(IncomeOverviewPageComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

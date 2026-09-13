@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('SpaceCreationComponent', () => {
-  let component: SpaceFormComponent;
+  let underTest: SpaceFormComponent;
   let fixture: ComponentFixture<SpaceFormComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('SpaceCreationComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(SpaceFormComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

@@ -86,6 +86,41 @@ Weitere Punkte:
   Bezeichner unterschiedlich: H2 bildet auf Grossschreibung ab, PostgreSQL auf
   Kleinschreibung. Deshalb stehen in `data_test.sql` keine Anfuehrungszeichen.
 
+## Konventionen im Frontend
+
+Das Projekt benutzt die klassischen Rollensuffixe (`*.component.ts`, `*.service.ts`).
+Die suffixlose Schreibweise aus dem Angular-v20-Stilhandbuch wird hier **nicht**
+angewendet - dessen eigene erste Regel lautet, bestehende Projektkonventionen
+vorrangig zu behandeln.
+
+Komponentenbibliothek ist PrimeNG. In v2.2 Titan wird sie durch Google Material
+UI ersetzt.
+
+## Tests
+
+In beiden Teilen des Projekts heisst das Pruefobjekt in Tests `underTest`:
+
+```java
+private IncomeCreationService underTest;
+```
+
+```ts
+let underTest: RuleOverviewPageComponent;
+let fixture: ComponentFixture<RuleOverviewPageComponent>;
+```
+
+Gruen heisst derzeit:
+
+| | |
+|---|---|
+| Backend | 41 Tests, 3 uebersprungen |
+| Frontend | 19 Suiten, 20 Tests |
+
+Die Frontend-Tests sind bewusst flach - die meisten pruefen nur, dass sich eine
+Komponente erzeugen laesst. Das genuegt als Netz fuer Versionsspruenge, weil
+genau daran Dependency Injection, Template-Kompilierung und Provider-APIs
+haengen. Inhaltlich sinnvolle Tests entstehen mit dem Neubau in Titan.
+
 ## Datenbank
 
 `spring.jpa.hibernate.ddl-auto=update` - es gibt noch kein

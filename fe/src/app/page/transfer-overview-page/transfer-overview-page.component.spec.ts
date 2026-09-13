@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('TransferOverviewPageComponent', () => {
-  let component: TransferOverviewPageComponent;
+  let underTest: TransferOverviewPageComponent;
   let fixture: ComponentFixture<TransferOverviewPageComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('TransferOverviewPageComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(TransferOverviewPageComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('NavbarComponent', () => {
-  let component: NavbarComponent;
+  let underTest: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('NavbarComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

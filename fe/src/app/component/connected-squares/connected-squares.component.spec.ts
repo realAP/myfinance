@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('ConnectedSquaresComponent', () => {
-  let component: ConnectedSquaresComponent;
+  let underTest: ConnectedSquaresComponent;
   let fixture: ComponentFixture<ConnectedSquaresComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('ConnectedSquaresComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(ConnectedSquaresComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

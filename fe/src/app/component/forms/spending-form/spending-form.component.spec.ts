@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('SpendingCreationComponent', () => {
-  let component: SpendingFormComponent;
+  let underTest: SpendingFormComponent;
   let fixture: ComponentFixture<SpendingFormComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('SpendingCreationComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(SpendingFormComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

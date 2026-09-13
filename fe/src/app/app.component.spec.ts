@@ -8,7 +8,7 @@ import {MessageService} from 'primeng/api';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
-  let component: AppComponent;
+  let underTest: AppComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,10 +17,10 @@ describe('AppComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
   });
 
   it('should create the app', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

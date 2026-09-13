@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('RuleCreationComponent', () => {
-  let component: RuleFormComponent;
+  let underTest: RuleFormComponent;
   let fixture: ComponentFixture<RuleFormComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('RuleCreationComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(RuleFormComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });

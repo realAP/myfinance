@@ -7,7 +7,7 @@ import {provideRouter} from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 describe('BackofficePageComponent', () => {
-  let component: BackofficePageComponent;
+  let underTest: BackofficePageComponent;
   let fixture: ComponentFixture<BackofficePageComponent>;
 
   beforeEach(async () => {
@@ -18,11 +18,11 @@ describe('BackofficePageComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(BackofficePageComponent);
-    component = fixture.componentInstance;
+    underTest = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(underTest).toBeTruthy();
   });
 });
