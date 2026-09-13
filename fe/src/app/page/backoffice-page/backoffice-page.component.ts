@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {CardModule} from "primeng/card";
 import {BankCreationComponent} from "../../component/bank-creation/bank-creation.component";
 import {CategoryCreationComponent} from "../../component/category-creation/category-creation.component";
-import {ConnectedSquaresComponent} from "../../component/connected-squares/connected-squares.component";
+
 import {MessageService} from "primeng/api";
 import {IncomeCreationDto, RuleCreationDto, SpendingCreationDto, TransferCreationDto} from "../../model/backend";
 import {BackendService} from "../../service/backend/backend.service";
@@ -23,7 +23,6 @@ import {IncomeFormComponent} from "../../component/forms/income-form/income-form
     SpaceFormComponent,
     SpendingFormComponent,
     CardModule,
-    ConnectedSquaresComponent,
     IncomeFormComponent
   ],
   templateUrl: './backoffice-page.component.html',

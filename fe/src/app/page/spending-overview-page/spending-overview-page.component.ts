@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
-import {NgClass, NgForOf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {ContextMenu, ContextMenuModule} from "primeng/contextmenu";
 import {MenuItem, MessageService} from "primeng/api";
 import {DialogModule} from "primeng/dialog";
 import {BackendService} from "../../service/backend/backend.service";
-import {RuleFormComponent} from "../../component/forms/rule-form/rule-form.component";
+
 import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spending-form/spending-form.component";
 
 @Component({
@@ -14,10 +14,8 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spen
   standalone: true,
   imports: [
     TableModule,
-    NgForOf,
     ContextMenuModule,
     DialogModule,
-    RuleFormComponent,
     SpendingFormComponent,
     NgClass
   ],
