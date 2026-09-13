@@ -1,8 +1,5 @@
-import {setupZoneTestEnv} from 'jest-preset-angular/setup-env/zone';
-
-setupZoneTestEnv();
-
-// jsdom kennt matchMedia nicht, PrimeNG benutzt es (z. B. im Kontextmenue).
+// jsdom kennt weder matchMedia noch ResizeObserver; PrimeNG benutzt beides
+// (Kontextmenue und Tabs).
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
@@ -17,7 +14,6 @@ Object.defineProperty(window, 'matchMedia', {
   }),
 });
 
-// Ebenso fehlt jsdom der ResizeObserver, den PrimeNGs Tabs benutzen.
 Object.defineProperty(window, 'ResizeObserver', {
   writable: true,
   value: class {
