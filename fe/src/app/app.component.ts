@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from "./component/navbar/navbar.component";
 import {ToastModule} from "primeng/toast";
@@ -7,6 +7,7 @@ import {ToastModule} from "primeng/toast";
     selector: 'app-root',
     imports: [RouterOutlet, NavbarComponent, ToastModule],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.scss'
 })
 export class AppComponent {

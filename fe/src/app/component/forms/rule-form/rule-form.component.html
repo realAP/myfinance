@@ -2,39 +2,39 @@
 
 <div class="card flex flex-column md:flex-row gap-3">
   <div class="input-group">
-    <p-floatLabel>
+    <p-floatlabel>
       <input id="name" type="text" [(ngModel)]="name" pInputText/>
       <label for="name">Name</label>
-    </p-floatLabel>
+    </p-floatlabel>
   </div>
 
   <div class="input-group">
-    <p-floatLabel>
+    <p-floatlabel>
       <p-datepicker id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
       <label for="date">Datum</label>
-    </p-floatLabel>
+    </p-floatlabel>
   </div>
 
   <div class="input-group">
-    <p-floatLabel>
+    <p-floatlabel>
       <p-select
         id="from-space"
         [options]="spaces"
         optionLabel="name"
         [(ngModel)]="selectedFromSpace"/>
       <label for="from-space">Von Space</label>
-    </p-floatLabel>
+    </p-floatlabel>
   </div>
 
   <div class="input-group">
-    <p-floatLabel>
+    <p-floatlabel>
       <p-select
         id="target-space"
         [options]="spaces"
         optionLabel="name"
         [(ngModel)]="selectedTargetSpace"/>
       <label for="target-space">Nach Space</label>
-    </p-floatLabel>
+    </p-floatlabel>
   </div>
 
   <div class="input-group">

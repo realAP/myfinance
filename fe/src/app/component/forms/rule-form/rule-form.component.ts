@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Button} from "primeng/button";
 import {SelectModule} from "primeng/select";
 import {FloatLabelModule} from "primeng/floatlabel";
@@ -32,6 +32,7 @@ export interface RuleFormDto {
     FormsModule
   ],
   templateUrl: './rule-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './rule-form.component.scss'
 })
 export class RuleFormComponent implements OnInit {

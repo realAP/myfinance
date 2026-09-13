@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {TabsModule} from "primeng/tabs";
 import {RouterLink} from "@angular/router";
 import {AuthService} from "../../service/authentication/auth.service";
@@ -20,6 +20,7 @@ export interface NavItem {
     TabsModule
   ],
   templateUrl: './navbar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {

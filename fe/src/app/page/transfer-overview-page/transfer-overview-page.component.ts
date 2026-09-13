@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {TransferCreationDto, TransferDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
@@ -20,6 +20,7 @@ import {TransferFormComponent, TransferFormDto} from "../../component/forms/tran
     TransferFormComponent,
     ],
   templateUrl: './transfer-overview-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transfer-overview-page.component.scss'
 })
 export class TransferOverviewPageComponent implements OnInit {

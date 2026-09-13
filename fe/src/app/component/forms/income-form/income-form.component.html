@@ -2,18 +2,18 @@
 
 <div class="card flex flex-column md:flex-row gap-3">
   <div class="input-group">
-    <p-floatLabel>
+    <p-floatlabel>
       <input id="name" type="text" pInputText
              [(ngModel)]="description"
       />
       <label for="name">Name</label>
-    </p-floatLabel>
+    </p-floatlabel>
   </div>
 
   <div class="input-group">
-    <p-inputGroup>
-      <p-floatLabel>
-        <p-inputNumber
+    <p-inputgroup>
+      <p-floatlabel>
+        <p-inputnumber
           [(ngModel)]="amount"
           id="minmaxfraction"
           mode="decimal"
@@ -21,9 +21,9 @@
           [minFractionDigits]="2"
         />
         <label for="minmaxfraction">Betrag</label>
-      </p-floatLabel>
-      <p-inputGroupAddon>€</p-inputGroupAddon>
-    </p-inputGroup>
+      </p-floatlabel>
+      <p-inputgroup-addon>€</p-inputgroup-addon>
+    </p-inputgroup>
   </div>
 
   <div class="input-group">

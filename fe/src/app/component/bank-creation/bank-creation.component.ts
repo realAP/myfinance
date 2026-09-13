@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -23,6 +23,7 @@ import {BackendService} from "../../service/backend/backend.service";
     ToastModule
   ],
   templateUrl: './bank-creation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './bank-creation.component.scss'
 })
 export class BankCreationComponent {

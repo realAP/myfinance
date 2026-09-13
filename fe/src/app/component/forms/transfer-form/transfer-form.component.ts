@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -26,6 +26,7 @@ export interface TransferFormDto {
     FormsModule
   ],
   templateUrl: './transfer-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './transfer-form.component.scss'
 })
 export class TransferFormComponent implements OnInit {

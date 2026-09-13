@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Button} from "primeng/button";
 import {DatePickerModule} from "primeng/datepicker";
 import {SelectModule} from "primeng/select";
@@ -32,6 +32,7 @@ export interface IncomeFormDto {
     FormsModule
   ],
   templateUrl: './income-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './income-form.component.scss'
 })
 export class IncomeFormComponent implements OnInit {

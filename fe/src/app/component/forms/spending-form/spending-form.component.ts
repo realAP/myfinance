@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {FormsModule} from "@angular/forms";
@@ -22,6 +22,7 @@ export interface SpendingFormDto {
   standalone: true,
   imports: [Button, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, DatePickerModule, SelectModule, InputNumberModule, FloatLabelModule],
   templateUrl: './spending-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spending-form.component.scss'
 })
 export class SpendingFormComponent implements OnInit {

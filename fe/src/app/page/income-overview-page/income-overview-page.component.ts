@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {BackendService} from "../../service/backend/backend.service";
 import {MenuItem, MessageService} from "primeng/api";
@@ -17,6 +17,7 @@ import {DialogModule} from "primeng/dialog";
     ContextMenuModule
   ],
   templateUrl: './income-overview-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './income-overview-page.component.scss'
 })
 export class IncomeOverviewPageComponent implements OnInit {

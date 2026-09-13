@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {SpendingCategoryBlockDto, SpendingCreationDto, SpendingRowDto} from "../../model/backend";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
 import {NgClass} from "@angular/common";
@@ -20,6 +20,7 @@ import {SpendingFormComponent, SpendingFormDto} from "../../component/forms/spen
     NgClass
   ],
   templateUrl: './spending-overview-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spending-overview-page.component.scss'
 })
 export class SpendingOverviewPageComponent implements OnInit {

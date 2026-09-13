@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {Button} from "primeng/button";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
@@ -16,6 +16,7 @@ import {BackendService} from "../../service/backend/backend.service";
     FormsModule
   ],
   templateUrl: './category-creation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-creation.component.scss'
 })
 export class CategoryCreationComponent {

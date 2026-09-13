@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {CardModule} from "primeng/card";
 import {BankCreationComponent} from "../../component/bank-creation/bank-creation.component";
 import {CategoryCreationComponent} from "../../component/category-creation/category-creation.component";
@@ -26,6 +26,7 @@ import {IncomeFormComponent} from "../../component/forms/income-form/income-form
     IncomeFormComponent
   ],
   templateUrl: './backoffice-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './backoffice-page.component.scss'
 })
 export class BackofficePageComponent {

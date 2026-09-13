@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {RuleCreationDto, RuleDto, SpendingRowDto} from "../../model/backend";
 import {MenuItem, MessageService} from "primeng/api";
 import {TableContextMenuSelectEvent, TableModule} from "primeng/table";
@@ -19,6 +19,7 @@ import {RuleFormComponent} from "../../component/forms/rule-form/rule-form.compo
     RuleFormComponent
   ],
   templateUrl: './rule-overview-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './rule-overview-page.component.scss'
 })
 export class RuleOverviewPageComponent implements OnInit {
