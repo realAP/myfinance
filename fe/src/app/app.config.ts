@@ -7,8 +7,8 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {MessageService} from "primeng/api";
 import {providePrimeNG} from "primeng/config";
 import Aura from "@primeuix/themes/aura";
-import {httpErrorInterceptorInterceptor} from "./service/http-error-interceptor/http-error-interceptor.interceptor";
-import {authInterceptor} from "./service/authentication-interceptor/authentication-interceptor.service";
+import {httpErrorInterceptorInterceptor} from "./service/http-error-interceptor/http-error-interceptor";
+import {authInterceptor} from "./service/authentication-interceptor/authentication-interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
