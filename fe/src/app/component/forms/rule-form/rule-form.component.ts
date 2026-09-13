@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Button} from "primeng/button";
-import {DropdownModule} from "primeng/dropdown";
+import {SelectModule} from "primeng/select";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputTextModule} from "primeng/inputtext";
-import {CalendarModule} from "primeng/calendar";
+import {DatePickerModule} from "primeng/datepicker";
 import {FormsModule} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {RuleCreationDto, SpaceDto} from "../../../model/backend";
@@ -22,13 +22,13 @@ export interface RuleFormDto {
   standalone: true,
   imports: [
     Button,
-    DropdownModule,
+    SelectModule,
     FloatLabelModule,
     InputGroupAddonModule,
     InputGroupModule,
     InputNumberModule,
     InputTextModule,
-    CalendarModule,
+    DatePickerModule,
     FormsModule
   ],
   templateUrl: './rule-form.component.html',

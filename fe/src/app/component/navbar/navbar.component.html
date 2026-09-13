@@ -1,22 +1,22 @@
 <div class="card">
-  <p-tabMenu [model]="items">
-    <ng-template pTemplate="item" let-item>
-      @if (item.route) {
-        <ng-container>
-          <a [routerLink]="item.route" class="p-menuitem-link">
-            <span [class]="item.icon"></span>
-            <span class="ml-2"> {{ item.label }} </span>
-          </a>
-        </ng-container>
+  <p-tabs [value]="0">
+    <p-tablist>
+      @for (item of items; track item.label; let i = $index) {
+        <p-tab [value]="i">
+          @if (item.route) {
+            <a [routerLink]="item.route" class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2"> {{ item.label }} </span>
+            </a>
+          }
+          @if (item.command) {
+            <a class="p-menuitem-link" (click)="item.command!()">
+              <span [class]="item.icon"></span>
+              <span class="ml-2"> {{ item.label }} </span>
+            </a>
+          }
+        </p-tab>
       }
-      @if(item.command) {
-        <ng-container>
-          <a class="p-menuitem-link" (click)="item.command()">
-            <span [class]="item.icon"></span>
-            <span class="ml-2"> {{ item.label }} </span>
-          </a>
-        </ng-container>
-      }
-    </ng-template>
-  </p-tabMenu>
+    </p-tablist>
+  </p-tabs>
 </div>

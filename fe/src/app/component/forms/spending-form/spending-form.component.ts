@@ -4,8 +4,8 @@ import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {FormsModule} from "@angular/forms";
 import {Button} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
-import {CalendarModule} from "primeng/calendar";
-import {DropdownModule} from "primeng/dropdown";
+import {DatePickerModule} from "primeng/datepicker";
+import {SelectModule} from "primeng/select";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {forkJoin} from "rxjs";
@@ -20,7 +20,7 @@ export interface SpendingFormDto {
 @Component({
   selector: 'app-spending-form',
   standalone: true,
-  imports: [Button, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, CalendarModule, DropdownModule, InputNumberModule, FloatLabelModule],
+  imports: [Button, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, DatePickerModule, SelectModule, InputNumberModule, FloatLabelModule],
   templateUrl: './spending-form.component.html',
   styleUrl: './spending-form.component.scss'
 })

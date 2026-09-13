@@ -1,21 +1,29 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {TabMenuModule} from "primeng/tabmenu";
-import {MenuItem} from "primeng/api";
+import {TabsModule} from "primeng/tabs";
 import {RouterLink} from "@angular/router";
 import {AuthService} from "../../service/authentication/auth.service";
+
+/** Eigenes Navigationsmodell statt PrimeNGs MenuItem: route und command sind
+ *  dort nur ueber eine Indexsignatur erreichbar, was im Template nicht typsicher ist. */
+export interface NavItem {
+  label: string;
+  icon: string;
+  route?: string;
+  command?: () => void;
+}
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     RouterLink,
-        TabMenuModule
+    TabsModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  items: MenuItem[] | undefined;
+  items: NavItem[] = [];
 
   constructor(private authService: AuthService) {
   }

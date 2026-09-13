@@ -16,3 +16,13 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: () => false,
   }),
 });
+
+// Ebenso fehlt jsdom der ResizeObserver, den PrimeNGs Tabs benutzen.
+Object.defineProperty(window, 'ResizeObserver', {
+  writable: true,
+  value: class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  },
+});

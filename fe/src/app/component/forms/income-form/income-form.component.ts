@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Button} from "primeng/button";
-import {CalendarModule} from "primeng/calendar";
-import {DropdownModule} from "primeng/dropdown";
+import {DatePickerModule} from "primeng/datepicker";
+import {SelectModule} from "primeng/select";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -21,8 +21,8 @@ export interface IncomeFormDto {
   standalone: true,
   imports: [
     Button,
-    CalendarModule,
-    DropdownModule,
+    DatePickerModule,
+    SelectModule,
     FloatLabelModule,
     InputTextModule,
     ReactiveFormsModule,

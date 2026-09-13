@@ -10,14 +10,14 @@
 
   <div class="input-group">
     <p-floatLabel>
-      <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
+      <p-datepicker id="date" dateFormat="dd.mm.yy" [showIcon]="true" [(ngModel)]="date"/>
       <label for="date">Datum</label>
     </p-floatLabel>
   </div>
 
   <div class="input-group">
     <p-floatLabel>
-      <p-dropdown
+      <p-select
         id="from-space"
         [options]="spaces"
         optionLabel="name"
@@ -28,7 +28,7 @@
 
   <div class="input-group">
     <p-floatLabel>
-      <p-dropdown
+      <p-select
         id="target-space"
         [options]="spaces"
         optionLabel="name"
