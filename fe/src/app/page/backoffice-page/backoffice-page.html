@@ -1,0 +1,28 @@
+<p>backoffice-page works!</p>
+<p-card header="Transfer Creation">
+  <app-transfer-form (formSubmit)="onTransferCreate($event)" />
+</p-card>
+
+<p-card header="Spending Creation">
+  <app-spending-form (formSubmit)="onSpendingCreate($event)" />
+</p-card>
+
+<p-card header="Rule Creation">
+  <app-rule-form (formSubmit)="onRuleCreate($event)" />
+</p-card>
+
+<p-card header="Category Creation">
+  <app-category-creation />
+</p-card>
+
+<p-card header="Bank Creation">
+  <app-bank-creation />
+</p-card>
+
+<p-card header="Space Creation">
+  <app-space-creation />
+</p-card>
+
+<p-card header="Einnahmen Creation">
+  <app-income-form (formSubmit)="onIncomeCreate($event)" />
+</p-card>

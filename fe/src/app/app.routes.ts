@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {authGuard} from "./service/auth-guard/auth-guard.service";
+import {authGuard} from "./service/auth-guard/auth-guard";
 
 export const routes: Routes = [
 
@@ -10,31 +10,31 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./page/login-page/login-page.component').then(m => m.LoginPageComponent),
+    loadComponent: () => import('./page/login-page/login-page').then(m => m.LoginPage),
   },
   {
     path: 'spendings',
-    loadComponent: () => import('./page/spending-overview-page/spending-overview-page.component').then(m => m.SpendingOverviewPageComponent),
+    loadComponent: () => import('./page/spending-overview-page/spending-overview-page').then(m => m.SpendingOverviewPage),
     canActivate: [authGuard]
   },
   {
     path: 'transfers',
-    loadComponent: () => import('./page/transfer-overview-page/transfer-overview-page.component').then(m => m.TransferOverviewPageComponent),
+    loadComponent: () => import('./page/transfer-overview-page/transfer-overview-page').then(m => m.TransferOverviewPage),
     canActivate: [authGuard]
   },
   {
     path: 'rules',
-    loadComponent: () => import('./page/rule-overview-page/rule-overview-page.component').then(m => m.RuleOverviewPageComponent),
+    loadComponent: () => import('./page/rule-overview-page/rule-overview-page').then(m => m.RuleOverviewPage),
     canActivate: [authGuard]
   },
   {
     path: 'incomes',
-    loadComponent: () => import('./page/income-overview-page/income-overview-page.component').then(m => m.IncomeOverviewPageComponent),
+    loadComponent: () => import('./page/income-overview-page/income-overview-page').then(m => m.IncomeOverviewPage),
     canActivate: [authGuard]
   },
   {
     path: 'backoffice',
-    loadComponent: () => import('./page/backoffice-page/backoffice-page.component').then(m => m.BackofficePageComponent),
+    loadComponent: () => import('./page/backoffice-page/backoffice-page').then(m => m.BackofficePage),
     canActivate: [authGuard]
   },
   {
