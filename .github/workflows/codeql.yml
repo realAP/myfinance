@@ -1,0 +1,60 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+  schedule:
+    # Montags frueh. Neue Regeln finden Fehler in altem Code, ohne dass
+    # jemand etwas aendern muss - dafuer braucht es einen Lauf ohne Anlass.
+    - cron: '17 4 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: java-kotlin
+            build-mode: manual
+          - language: javascript-typescript
+            build-mode: none
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - if: matrix.language == 'java-kotlin'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: corretto
+          cache: maven
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      # Autobuild findet das Projekt in be/ nicht zuverlaessig, weil in der
+      # Wurzel seit Luna/35 kein Pom mehr liegt. Der Aufruf von Hand ist
+      # kuerzer als die Erklaerung, warum Autobuild scheitert.
+      - if: matrix.build-mode == 'manual'
+        run: |
+          cd be
+          mvn -B package -DskipTests
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}
