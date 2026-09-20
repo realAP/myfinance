@@ -35,3 +35,8 @@ build/
 ### pnpm ###
 .pnpm-store/
 node_modules/
+
+### Claude Code ###
+# Maschinenlokal - Skills und CLAUDE.md gehoeren dagegen ins Repo.
+.claude/settings.local.json
+.claude/.headroom_*
