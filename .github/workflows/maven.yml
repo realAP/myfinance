@@ -48,6 +48,7 @@ jobs:
 
       - name: Tests
         run: |
+          cd be
           mvn test
 
       - name: SonarCloud
@@ -96,7 +97,9 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build
-        run: mvn package -DskipTests
+        run: |
+          cd be
+          mvn package -DskipTests
 
   publish-docker-image-be:
     needs:
@@ -113,11 +116,13 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build
-        run: mvn package -DskipTests
+        run: |
+          cd be
+          mvn package -DskipTests
 
       - name: Build Docker image
         run: |
-          docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
+          docker build be -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
 
       - name: Start image
         if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs

@@ -6,12 +6,16 @@ diesem Repository.
 ## Aufbau
 
 ```
-src/        Backend (Spring Boot, Paket at.devp.myfinance)
-fe/         Frontend (Angular)
-Dockerfile  Backend-Image
+be/            Backend (Spring Boot, Paket at.devp.myfinance)
+be/Dockerfile  Backend-Image
+fe/            Frontend (Angular)
 fe/Dockerfile  Frontend-Image (nginx)
 compose.prod.yaml / compose.test.yaml
 ```
+
+Die Wurzel kennt keine Technologie mehr: sie enthaelt nur die beiden
+Anwendungsteile, die Compose-Dateien und die Doku. Maven laeuft in `be/`,
+pnpm in `fe/` - es gibt kein Root-Pom.
 
 ## Toolchain
 
@@ -34,7 +38,7 @@ nur in dieser Sandbox.
 Eine andere JDK-Version waehlt man ueber `JAVA_HOME`, ohne etwas umzustellen:
 
 ```bash
-JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 mvn test
+cd be && JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 mvn test
 ```
 
 Die JDKs 17 und 21 sind per `apt` installiert und leben nur in der Sandbox.
@@ -43,11 +47,11 @@ sdkman ist nicht verfuegbar, die Domains sind gesperrt.
 ## Bauen und Testen
 
 ```bash
-mvn test                    # Backend-Tests (aktuell 41, davon 3 @Disabled)
-mvn package -DskipTests     # Jar bauen
-cd fe && pnpm install       # Frontend-Abhaengigkeiten
-cd fe && pnpm test          # Frontend-Tests (Vitest ueber ng test)
-cd fe && pnpm run build     # Frontend-Build
+cd be && mvn test               # Backend-Tests (aktuell 41, davon 3 @Disabled)
+cd be && mvn package -DskipTests  # Jar bauen
+cd fe && pnpm install           # Frontend-Abhaengigkeiten
+cd fe && pnpm test              # Frontend-Tests (Vitest ueber ng test)
+cd fe && pnpm run build         # Frontend-Build
 ```
 
 Der Backend-Build ist gruen, wenn 41 Tests laufen, 0 fehlschlagen und 3
@@ -58,7 +62,8 @@ Aenderung.
 
 Der Code ist nach Anwendungsfall geschnitten, nicht nach Schicht. Unter
 `crud/` bekommt jede Entitaet ein eigenes Paket, darunter je ein Paket pro
-Operation:
+Operation. Alle Pfade hier sind relativ zu
+`be/src/main/java/at/devp/myfinance/`:
 
 ```
 crud/transfer/TransferController.java
