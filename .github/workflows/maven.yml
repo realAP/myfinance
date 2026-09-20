@@ -1,147 +1,128 @@
 name: Pipeline
-env:
-  RUN_SMOKE_TESTS: false
 
 on:
+  # Nur die beiden Stage-Zweige loesen ueber push aus. Alles andere laeuft
+  # ueber pull_request - sonst liefe jeder PR doppelt, einmal fuer den Push
+  # auf den Branch und einmal fuer den PR selbst.
   push:
-    branches: '**'
+    branches: [master, dev]
   pull_request:
-    types: [opened, synchronize, reopened]
   workflow_dispatch:
-    branches: '**'
 
+# Schiebt jemand zweimal kurz hintereinander, wird der erste Lauf abgebrochen.
+# Bisher liefen beide zu Ende und das Ergebnis des aelteren kam zuletzt an.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  JAVA_VERSION: '25'
+  JAVA_DISTRIBUTION: corretto
+  NODE_VERSION: '24'
+  PNPM_VERSION: '11'
+  IMAGE: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance
 
 jobs:
-  test-fe:
+  be:
+    name: Backend bauen und testen
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      # verify testet und paketiert in einem Lauf. Vorher liefen dafuer zwei
+      # Jobs, die beide von vorn gebaut haben.
+      - name: Test und Paket
+        run: |
+          cd be
+          mvn -B verify
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: be-jar
+          path: be/target/*.jar
+          retention-days: 1
+
+  fe:
+    name: Frontend bauen und testen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
       - uses: pnpm/action-setup@v4
         with:
-          version: 11
+          version: ${{ env.PNPM_VERSION }}
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          cache: 'pnpm'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
           cache-dependency-path: fe/pnpm-lock.yaml
-      - name: install
+
+      - name: Abhaengigkeiten
         run: |
           cd fe
           pnpm install --frozen-lockfile
 
-      - name: Test frontend
+      - name: Tests
         run: |
           cd fe
           pnpm test
 
-  test-be:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '25'
-          distribution: 'corretto'
-          cache: maven
-
-      - name: Tests
-        run: |
-          cd be
-          mvn test
-
-      - name: SonarCloud
-        run: |
-          echo "mvn sonar:sonar -Pcoverage -Dsonar.projectKey=realAP_myfinance -Dsonar.host.url=https://sonarcloud.io | currently disabled"
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  build-fe:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-          cache-dependency-path: fe/pnpm-lock.yaml
-      - name: install
-        run: |
-          cd fe
-          pnpm install --frozen-lockfile
-
-      - name: build
+      # Ein Build fuer alle Stages - die Domain steckt seit Luna/41 nicht mehr
+      # im Artefakt.
+      - name: Build
         run: |
           cd fe
           pnpm run build
 
-  build-be:
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fe-dist
+          path: fe/dist
+          retention-days: 1
+
+  publish:
+    name: Images veroeffentlichen
+    needs: [be, fe]
+    # Nur die Stage-Zweige erzeugen Images. Vorher schob jeder beliebige
+    # Branch sein Ergebnis nach :be-test und ueberschrieb damit den Stand,
+    # auf dem dev gerade lief.
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/download-artifact@v4
         with:
-          java-version: '25'
-          distribution: 'corretto'
-          cache: maven
-      - name: Build
-        run: |
-          cd be
-          mvn package -DskipTests
+          name: be-jar
+          path: be/target
 
-  publish-docker-image-be:
-    needs:
-      - build-be
-      - test-be
-    runs-on: ubuntu-latest
-    #if: contains('refs/heads/master', github.ref)
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/download-artifact@v4
         with:
-          java-version: '25'
-          distribution: 'corretto'
-          cache: maven
-      - name: Build
-        run: |
-          cd be
-          mvn package -DskipTests
+          name: fe-dist
+          path: fe/dist
 
-      - name: Build Docker image
+      # Die SHA ist die Wahrheit, der Zeiger ist bequem. :latest zeigt auf
+      # prod, :dev auf die Integrationsstage.
+      - name: Tags bestimmen
+        id: tags
         run: |
-          docker build be -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
-
-      - name: Start image
-        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
-        run: docker compose up -d
-
-      - name: Smoke Test
-        if: ${{ env.RUN_SMOKE_TESTS == 'true' }}  # Condition to control if the step runs
-        run: |
-          success=false
-          for i in {1..10}; do
-            if  curl -s http://localhost:8080/actuator/health | grep -q '{"status":"UP"}'; then
-              echo "Application is up and running."
-              success=true
-              break
-            fi
-            echo "Application is not up yet after $i retries. Retrying in 5 seconds..."
-            sleep 5
-          done
-          
-          if [[ "$success" == "false" ]]; then
-            echo "Failed to start application after $i retries."
-            exit 1
+          sha="${GITHUB_SHA::12}"
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+            pointer="latest"
+          else
+            pointer="dev"
           fi
+          echo "sha=$sha"         >> "$GITHUB_OUTPUT"
+          echo "pointer=$pointer" >> "$GITHUB_OUTPUT"
+          echo "Unveraenderlich: $IMAGE:be-$sha / $IMAGE:fe-$sha"
+          echo "Zeiger:          $IMAGE:be-$pointer / $IMAGE:fe-$pointer"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -149,77 +130,32 @@ jobs:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Push to Docker Hub
+      - name: Backend-Image
         run: |
-          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest
-          else
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
-            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:be-test
-          fi
-        env:
-          username: ${{ vars.DOCKER_HUB_USERNAME }}
+          docker build be \
+            -t "$IMAGE:be-${{ steps.tags.outputs.sha }}" \
+            -t "$IMAGE:be-${{ steps.tags.outputs.pointer }}"
+          docker push "$IMAGE:be-${{ steps.tags.outputs.sha }}"
+          docker push "$IMAGE:be-${{ steps.tags.outputs.pointer }}"
 
-  publish-docker-image-fe:
-    needs:
-      - build-fe
-      - test-fe
-    runs-on: ubuntu-latest
-    #if: contains('refs/heads/master', github.ref)
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-          cache-dependency-path: fe/pnpm-lock.yaml
-      - name: install
+      - name: Frontend-Image
         run: |
-          cd fe
-          pnpm install --frozen-lockfile
+          docker build fe \
+            -t "$IMAGE:fe-${{ steps.tags.outputs.sha }}" \
+            -t "$IMAGE:fe-${{ steps.tags.outputs.pointer }}"
+          docker push "$IMAGE:fe-${{ steps.tags.outputs.sha }}"
+          docker push "$IMAGE:fe-${{ steps.tags.outputs.pointer }}"
 
-      - name: build
-        run: |
-          cd fe
-          pnpm run build
-
-      - name: Build Docker image
-        run: |
-          cd fe
-          docker build . -t ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
-      - name: Push to Docker Hub
-        run: |
-          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest
-          else
-            docker tag ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-latest ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
-            docker push ${{ vars.DOCKER_HUB_USERNAME }}/myfinance:fe-test
-          fi
-        env:
-          username: ${{ vars.DOCKER_HUB_USERNAME }}
-
-
-  publish-dockerhub-description:
-    needs:
-      - publish-docker-image-be
-      - publish-docker-image-fe
+  dockerhub-description:
+    name: Dockerhub-Beschreibung
+    needs: publish
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update Dockerhub description
-        uses: peter-evans/dockerhub-description@v4
+      - uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: ${{ vars.DOCKER_HUB_USERNAME }}/myfinance
+          repository: ${{ env.IMAGE }}
           readme-filepath: ./README.md
