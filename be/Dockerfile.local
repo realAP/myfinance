@@ -1,0 +1,21 @@
+# Nur fuer die lokale Entwicklung: baut aus dem Quellcode, damit
+# "docker compose -f compose.local.yaml up" ohne Vorarbeit laeuft.
+#
+# Die Stages bekommen ihr Image weiterhin ueber be/Dockerfile, das das in
+# der Pipeline getestete Jar hineinkopiert. Genau dieses Artefakt soll
+# ausgeliefert werden - nicht eines, das im Image noch einmal neu entsteht.
+
+FROM maven:3.9-amazoncorretto-25 AS build
+WORKDIR /src
+# Erst die Abhaengigkeiten, damit die Schicht beim Aendern von Quellcode
+# im Cache bleibt.
+COPY pom.xml .
+RUN mvn -B -q dependency:go-offline
+COPY lombok.config .
+COPY src ./src
+RUN mvn -B -q package -DskipTests
+
+FROM amazoncorretto:25-al2023-headless
+COPY --from=build --chown=1001:0 /src/target/myfinance*.jar /app.jar
+USER 1001
+CMD ["java", "-jar", "/app.jar"]
