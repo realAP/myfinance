@@ -1,0 +1,61 @@
+# Lokale Entwicklung. Baut aus dem Quellcode, statt Images aus der Registry
+# zu ziehen - ein grundsaetzlich anderer Service-Block als compose.yaml,
+# deshalb eine eigene Datei.
+#
+#   docker compose -f compose.local.yaml up --build
+#
+# Es braucht keine .env: alle Werte stehen hier, es sind Wegwerf-Zugangsdaten
+# fuer eine Wegwerf-Datenbank.
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: myfinance
+      POSTGRES_USER: myfinance
+      POSTGRES_PASSWORD: myfinance
+    ports:
+      # Offen, damit ein SQL-Werkzeug vom Host drankommt.
+      - "5432:5432"
+    volumes:
+      - myfinance_db_data_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d myfinance -U myfinance || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  be:
+    build:
+      context: ./be
+      dockerfile: Dockerfile.local
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILE: prod
+      DATABASE_URL: jdbc:postgresql://db:5432/myfinance
+      DATABASE_USER: myfinance
+      DATABASE_PASSWORD: myfinance
+      APP_USER: user
+      APP_PASSWORD: password
+    ports:
+      # Offen, damit man das Backend auch ohne Frontend ansprechen kann.
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  fe:
+    build:
+      context: ./fe
+      dockerfile: Dockerfile.local
+    restart: unless-stopped
+    environment:
+      BACKEND_URL: http://be:8080
+    ports:
+      - "8081:80"
+    depends_on:
+      - be
+
+volumes:
+  myfinance_db_data_local:

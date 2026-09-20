@@ -1,0 +1,10 @@
+# Ohne diese Liste zieht "COPY . ." die node_modules vom Host ins Image.
+# pnpm haelt sie dann fuer veraltet, will sie loeschen und bricht ohne TTY ab.
+node_modules
+.angular
+.pnpm-store
+Dockerfile*
+.dockerignore
+
+# dist steht bewusst NICHT hier: fe/Dockerfile kopiert genau daraus das
+# fertige Frontend in das Stage-Image.
