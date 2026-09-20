@@ -47,5 +47,5 @@ Telegram.
 ### Lokale Entwicklung
 
 Lokal werden diese Variablen nicht gebraucht. Das Profil `local` in
-`src/main/resources/application-local.properties` bringt eigene Werte mit und
+`be/src/main/resources/application-local.properties` bringt eigene Werte mit und
 erwartet eine PostgreSQL-Instanz auf `localhost:5432`.
