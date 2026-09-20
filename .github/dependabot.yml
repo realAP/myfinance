@@ -1,0 +1,63 @@
+version: 2
+
+updates:
+  # Backend. Das Verzeichnis ist seit Luna/35 be/, nicht mehr die Wurzel.
+  - package-ecosystem: maven
+    directory: /be
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [chore, be]
+    commit-message:
+      prefix: "chore(be)"
+    groups:
+      # Spring Boot hebt seine Module im Gleichschritt. Einzeln waere das
+      # ein halbes Dutzend PRs, die nur zusammen gruen werden.
+      spring-boot:
+        patterns:
+          - "org.springframework.boot:*"
+          - "org.springframework:*"
+
+  - package-ecosystem: npm
+    directory: /fe
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [chore, fe]
+    commit-message:
+      prefix: "chore(fe)"
+    groups:
+      # Dasselbe Argument wie bei Spring: Angular-Pakete gehoeren zusammen.
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@schematics/*"
+      primeng:
+        patterns:
+          - "primeng"
+          - "@primeuix/*"
+          - "primeicons"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [infra]
+    commit-message:
+      prefix: "chore(ci)"
+
+  # Die Basis-Images in den vier Dockerfiles.
+  - package-ecosystem: docker
+    directories:
+      - /be
+      - /fe
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [infra]
+    commit-message:
+      prefix: "chore(docker)"
