@@ -79,6 +79,28 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <!-- Seit Spring Boot 4 liegen die Autokonfigurationen in eigenen
+             Modulen. flyway-core allein bringt nur die Bibliothek mit, nicht
+             die Verdrahtung - ohne spring-boot-flyway startet die Anwendung
+             ohne jede Migration und ddl-auto=validate scheitert an der
+             leeren Datenbank. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-flyway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!-- Seit Flyway 10 liegt die PostgreSQL-Unterstuetzung in einem
+             eigenen Modul und nicht mehr im Kern. -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
