@@ -1,0 +1,25 @@
+# Wird von nginx:alpine beim Start durch envsubst geschickt: ${BACKEND_URL}
+# wird durch die Umgebungsvariable ersetzt, bevor nginx die Datei liest.
+# Nginx-eigene Variablen wie $uri bleiben stehen - envsubst ersetzt nur, was
+# in der Umgebung auch definiert ist.
+server {
+    listen 80;
+    server_name localhost;
+
+    # Alle API-Aufrufe laufen ueber dieselbe Origin wie die Anwendung. Damit
+    # steht keine Backend-Domain mehr im Image und es gibt kein CORS.
+    location /fe/ {
+        proxy_pass ${BACKEND_URL};
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    error_page 404 /index.html;
+}
