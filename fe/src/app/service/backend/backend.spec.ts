@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
 
 import {BackendService} from './backend';
-import {environment} from "../../../environments/environment";
 
 describe('BackendService', () => {
   let httpClientMock: { get: ReturnType<typeof vi.fn> };
@@ -24,6 +23,6 @@ describe('BackendService', () => {
   it('getSpendingOverviewDto should return data from HttpClient', () => {
     underTest.getSpendingCategoryBlockDto();
 
-    expect(httpClientMock.get).toHaveBeenCalledWith(`${environment.apiUrl}/fe/overview`);
+    expect(httpClientMock.get).toHaveBeenCalledWith("/fe/overview");
   })
 });

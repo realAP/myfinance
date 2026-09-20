@@ -76,14 +76,10 @@ jobs:
           cd fe
           pnpm install --frozen-lockfile
 
-      - name: build prod
+      - name: build
         run: |
           cd fe
           pnpm run build
-      - name: build test
-        run: |
-          cd fe
-          pnpm run build-test
 
   build-be:
     runs-on: ubuntu-latest
@@ -185,14 +181,10 @@ jobs:
           cd fe
           pnpm install --frozen-lockfile
 
-      - name: build for stage
+      - name: build
         run: |
           cd fe
-          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            pnpm run build
-          else
-            pnpm run build-test
-          fi
+          pnpm run build
 
       - name: Build Docker image
         run: |
